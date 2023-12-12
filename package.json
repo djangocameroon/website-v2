@@ -10,8 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
+    "@reduxjs/toolkit": "^2.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
