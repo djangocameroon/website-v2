@@ -1,7 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
+body{
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+*{
+    scroll-behavior: smooth;
+}
+
+.font-family{
+    font-family: 'Poppins', sans-serif;
+}
+
 .dark-bg{
     background: linear-gradient(180deg, #2A2C38 0%, rgba(42, 44, 56, 0.00) 100%);
+}
+.red-bg {
+    background: linear-gradient(115deg, #C20102 0%, #7B0100 100%);
+}
+.header-bg{
+    background: url('/public/images/home/Group\ 131.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+.about-bg{
+    background: url('/images/home/greenbg.svg');
+}
+.green-backbg{
+    background: url('/public/images/home/greenbackbg.svg');
+}
+
+.btn-outline {
+    @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
+}
+.btn-white {
+    @apply bg-white text-primary
+}
+.bg-image-styles {
+    @apply bg-no-repeat bg-center bg-cover w-full h-screen;
 }
