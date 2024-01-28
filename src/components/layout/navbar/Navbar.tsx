@@ -25,7 +25,7 @@ const Navbar = () => {
         {/* linke items */}
         <ul
           className={`md:flex md:items-center top-20 h-screen md:h-auto md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-[80%] md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? 'left-0' : 'left-[-890px]'
+            open ? 'left-0' : 'left-[-990px]'
           }`}
         >
           <li className='md:ml-8 md:my-0 my-7 font-semibold '>

@@ -42,6 +42,24 @@ p,a,span,h1,h2,h3,h4,h5,h6,li,ol,button{
     height: 100%;
     width: 100%;
 }
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-track {
+    background: rgba(16, 62, 46, 1);
+    border-radius: 5px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+    background: #c9c7c7;
+    border-radius: 5px;
+}
+ 
+body::-webkit-scrollbar-thumb:hover {
+    background: #dddddd;
+}
+
+
 .about-bg{
     background: url('/images/home/greenbg.svg');
 }

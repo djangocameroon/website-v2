@@ -1,4 +1,12 @@
-import { BecomeMember, Collaboration, ProjectsSection, YoutubeSection, Header } from '../components/pages/Home';
+import {
+  BecomeMember,
+  Collaboration,
+  ProjectsSection,
+  YoutubeSection,
+  Header,
+  EventsSection,
+  Newsletter,
+} from '../components/pages/Home';
 
 const Home = () => {
   return (
@@ -9,8 +17,8 @@ const Home = () => {
          <YoutubeSection />
         <Collaboration />
         <ProjectsSection />
-        {/* <EventsSection/>  */}
-         {/* <Newsletter/>  */}
+        <EventsSection/> 
+         <Newsletter/> 
       </div>
       
     </>
