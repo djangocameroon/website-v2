@@ -12,25 +12,25 @@ import {
 
 const EventCard = () => {
   return (
-    <div className='max-w-[80%] w-[80%] shadow-outline shadow-xl rounded-lg px-4 py-5'>
-      <div className='flex justify-between items-start gap-4'>
+    <div className='w-full md:max-w-[80%] md:w-[80%] shadow-outline shadow-xl rounded-lg px-4 py-5'>
+      <div className='flex justify-between items-start '>
         <div className='w-3/6'>
           <div className='flex mb-12 justify-start items-center gap-4'>
             <Badge>architecture</Badge>
             <Badge>mvt</Badge>
             <Badge>web</Badge>
           </div>
-          <h3 className='text-primary font-semibold text-xl md:text-2xl'>
+          <h3 className='text-primary font-semibold text-lg sm:text-xl md:text-2xl'>
             Model-View-Template Harmony: Django Workshop for Comprehensive Web
             Development
           </h3>
-          <p className='font-light py-4 md:text-lg'>
+          <p className='font-light py-4 text-sm md:text-lg'>
             Explore the synergy of Django's Model-View-Template architecture in
             this comprehensive workshop, perfect for developers aiming for
             full-stack expertise.
           </p>
 
-          <div className='flex flex-wrap gap-4 items-center pb-4 mt-3'>
+          <div className='flex flex-wrap gap-3 items-center pb-4 mt-3'>
             <Badge>
               <div className='flex items-center gap-2'>
                 <MdOutlineLocationOn className='text-secondary' />
@@ -53,7 +53,7 @@ const EventCard = () => {
           <Button backgroundColor='bg-primary' outline={false}>
             RSVP and get a ticket
           </Button>
-          <span className='ml-3'>(1 day left)</span>
+          <span className='ml-3 whitespace-nowrap'>(1 day left)</span>
 
           <div className='flex justify-start items-center gap-3 mt-5'>
             <p className='text-text-color/80 text-sm font-bold'>Read More</p>
@@ -61,20 +61,20 @@ const EventCard = () => {
           </div>
         </div>
         <div className='flex flex-col items-center gap-6 cursor-pointer'>
-          <div className='w-72 rounded-lg h-16 relative  flex justify-center items-center overflow-hidden'>
+          <div className='w-60 md:w-72  rounded-lg h-10 lg:h-16 relative  flex justify-center items-center overflow-hidden'>
             <img
               src={HomeImages.projectBg}
               alt='projectbg'
               className='absolute object-contain'
             />
           </div>
-          <img src={HomeImages.mankaa} alt='' className='w-80' />
-          <div className='flex justify-center items-center gap-3'>
+          <img src={HomeImages.mankaa} alt='' className='w-40 md:w-60 lg:w-80' />
+          <div className='flex justify-start w-full lg:justify-center flex-col lg:flex-row items-center gap-3'>
             <Badge outline={true}>
               <div className='flex items-center gap-2'>
-                <FaRegUserCircle className='text-secondary' size='28' />
+                <FaRegUserCircle className='text-secondary' size='20' />
                 <div>
-                  <p className='text-base'>MankaaChe</p>
+                  <p className='text-sm lg:text-base'>MankaaChe</p>
                   <p className='text-sm'>@ManeBa_cnm</p>
                 </div>
               </div>
