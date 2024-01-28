@@ -2,12 +2,10 @@ import { useState } from 'react';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HomeImages } from '../../../assets';
-import { Button } from '../../layout'
+import { Button } from '../../layout';
 import { ToggleSwitch } from '../../../components';
 
 const Navbar = () => {
-
-
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,12 +20,12 @@ const Navbar = () => {
           onClick={() => setOpen(!open)}
           className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'
         >
-          {open ? <AiOutlineClose /> : <HiMenuAlt3 />}
+          {open ? <AiOutlineClose size='27' /> : <HiMenuAlt3 size='27' />}
         </div>
         {/* linke items */}
         <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-transparent md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? 'top-12' : 'top-[-490px]'
+          className={`md:flex md:items-center top-20 h-screen md:h-auto md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-[80%] md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? 'left-0' : 'left-[-890px]'
           }`}
         >
           <li className='md:ml-8 md:my-0 my-7 font-semibold '>
@@ -78,8 +76,11 @@ const Navbar = () => {
               Chapter
             </a>
           </li>
-          <li className='mx-4 flex items-center justify-between gap-3'>
-            <Button outline={false} backgroundColor='bg-primary'>
+          <li className=' flex items-start justify-between flex-col gap-3 md:hidden '>
+            <Button
+              outline={false}
+              backgroundColor='bg-primary whitespace-nowrap'
+            >
               Sign Up
             </Button>
             <div className='mt-1'>
@@ -87,11 +88,18 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-
+        <div className='mx-4 items-center justify-between gap-3 hidden md:flex'>
+          <Button outline={false} backgroundColor='bg-primary'>
+            Sign Up
+          </Button>
+          <div className='mt-1'>
+            <ToggleSwitch />
+          </div>
+        </div>
         {/* button */}
       </div>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
