@@ -6,7 +6,7 @@ import Home from './pages/Home'
 const App = () => {
   return (
     <Router >
-      <div className='relative'>
+      <div >
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />

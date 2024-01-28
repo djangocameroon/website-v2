@@ -14,6 +14,13 @@ body{
 }
 *{
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+p,a,span,h1,h2,h3,h4,h5,h6,li,ol,button{
+    overflow:hidden;
 }
 
 .font-family{
@@ -27,7 +34,7 @@ body{
     background: linear-gradient(115deg, #C20102 0%, #7B0100 100%);
 }
 .header-bg{
-    background: url('/public/images/home/Group\ 131.svg');
+    background: url('/images/home/Group\ 131.svg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -39,9 +46,11 @@ body{
     background: url('/images/home/greenbg.svg');
 }
 .green-backbg{
-    background: url('/public/images/home/greenbackbg.svg');
+    background: url('/images/home/greenbackbg.svg');
 }
-
+.get-started{
+    background: url('/images/home/get-started.svg');
+}
 .btn-outline {
     @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
 }
@@ -49,5 +58,8 @@ body{
     @apply bg-white text-primary
 }
 .bg-image-styles {
-    @apply bg-no-repeat bg-center bg-cover w-full h-screen;
+    @apply bg-no-repeat bg-center w-full h-full;
+}
+.nav-hover-link{
+    @apply hover:border-b-4 border-primary ;
 }
