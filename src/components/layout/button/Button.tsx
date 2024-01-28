@@ -12,7 +12,7 @@ const Button = ({ outline, children,backgroundColor }: ButtonProps) => {
     <button
       className={` ${
         outline === true ? 'btn-outline' : ''
-      } capitalize  py-2 px-5 rounded-lg  text-white text-lg font-semibold ${backgroundColor} `}
+      } capitalize  py-2 px-5 rounded-lg whitespace-nowrap  text-white md:text-lg font-semibold ${backgroundColor} `}
     >
       {children}
     </button>

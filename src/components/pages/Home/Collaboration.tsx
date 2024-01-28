@@ -3,9 +3,9 @@ import { HomeImages } from '../../../assets';
 
 const Collaboration = () => {
   return (
-    <div className='w-[85%] mx-auto flex justify-start items-center'>
-      <div className='w-[60%]'>
-        <h2 className='text-primary text-4xl font-semibold'>
+    <div className=' flex justify-center lg:justify-start md:flex-row flex-col items-center '>
+      <div className='w-full lg:w-[60%] mt-7 lg:mt-0'>
+        <h2 className='text-primary text-3xl md:text-4xl font-semibold'>
           Start Your Journey of Collaboration and Innovation
         </h2>
         <p className='text-lg mt-5 mb-4'>
@@ -20,7 +20,7 @@ const Collaboration = () => {
           experiences! ✨🪄
         </blockquote>
       </div>
-      <div className=''>
+      <div className='hidden lg:block'>
         <img src={HomeImages.spaceShip} alt='' />
       </div>
     </div>

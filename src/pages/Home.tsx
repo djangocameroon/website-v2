@@ -1,14 +1,18 @@
-import { BecomeMember, Collaboration, ProjectsSection, YoutubeSection, Header, EventsSection } from '../components/pages/Home';
+import { BecomeMember, Collaboration, ProjectsSection, YoutubeSection, Header } from '../components/pages/Home';
 
 const Home = () => {
   return (
     <>
       <Header/>
       <BecomeMember />
-      <YoutubeSection />
-      <Collaboration />
-      <ProjectsSection />
-      <EventsSection/>
+      <div className='w-[90%] mx-auto'>
+         <YoutubeSection />
+        <Collaboration />
+        <ProjectsSection />
+        {/* <EventsSection/>  */}
+         {/* <Newsletter/>  */}
+      </div>
+      
     </>
   );
 };

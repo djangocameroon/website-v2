@@ -4,7 +4,7 @@ import { EventCard } from '../../../components';
 const EventsSection = () => {
   const next = 'next'
   return (
-    <div className='w-[85%] mx-auto'>
+    <div className='mt-24'>
       <div>
         <p className='text-center text-text-color/70 mb-2 text-xl'>
           {' '}
@@ -34,8 +34,8 @@ const EventsSection = () => {
         </div>
       </div>
 
-      <div>
-        <EventCard/>
+      <div className='mt-6 flex justify-start flex-wrap items-center gap-4'>
+        <EventCard />
       </div>
     </div>
   );
