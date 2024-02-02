@@ -67,7 +67,6 @@ const ForgotPassword = () => {
                   placeholder='enter email'
                   className='mt-2 w-full border-[1px] py-3 px-3 border-gray-500 placeholder:text-lg rounded-lg focus:outline-none focus:border-secondary'
                   {...register('email')}
-                 
                 />
               </div>
               <label className='label'>
@@ -121,7 +120,10 @@ const ForgotPassword = () => {
                   </span>
                 )}
               </label>
-              <div className='flex justify-center items-center mt-8'>
+              <div className='flex justify-center items-center gap-7 mt-10'>
+                <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
+                  Cancel
+                </button>
                 <Button outline={false} backgroundColor='bg-secondary'>
                   <p className='px-10'>Proceed</p>
                 </Button>

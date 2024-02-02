@@ -76,7 +76,6 @@ const Login = () => {
               id='email'
               placeholder='enter email'
               className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-            
               {...register('email')}
             />
           </div>
@@ -106,7 +105,6 @@ const Login = () => {
               id='password'
               placeholder='enter password'
               className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-              
               {...register('password')}
             />
           </div>
@@ -131,10 +129,11 @@ const Login = () => {
           </Link>
         </div>
 
-        <div className='flex justify-center items-center mt-10'>
+        <div className='flex justify-center items-center gap-7 mt-10'>
+          <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>Cancel</button>
           <Button outline={false} backgroundColor='bg-secondary'>
             {' '}
-            <p className='w-full px-20'>Login</p>{' '}
+            <p className='w-full px-10'>Login</p>{' '}
           </Button>
         </div>
       </form>

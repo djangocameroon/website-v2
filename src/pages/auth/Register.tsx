@@ -218,10 +218,13 @@ const Register = () => {
           </div>
         </div>
 
-        <div className='flex justify-center items-center mt-10'>
+        <div className='flex justify-center items-center gap-7 mt-10'>
+          <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
+            Cancel
+          </button>
           <Button outline={false} backgroundColor='bg-secondary'>
             {' '}
-            <p className='w-full px-20'>Register</p>{' '}
+            <p className='w-full px-10'>Register</p>{' '}
           </Button>
         </div>
       </form>
