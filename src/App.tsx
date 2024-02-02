@@ -1,18 +1,33 @@
 import { Footer, Navbar } from './components/layout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home'
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Auth from './pages/auth/Auth';
+
+
 
 
 const App = () => {
-  return (
-    <Router >
-      <div >
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-          </Routes>
 
-        <div>
+
+
+  return (
+    <Router>
+      <div className='relative h-full'>
+        <div className='fixed top-0 z-30 w-full mb-20'>
+          <Navbar />
+        </div>
+        <Routes>
+          <Route path='/auth' element={<Auth />}>
+            <Route path='login' element={<Login />} />
+            <Route path='/auth/register' element={<Register />} />
+          </Route>
+          <Route path='/' element={<Home />} />
+          
+        </Routes>
+
+        <div className='bg-transparent'>
           <Footer />
         </div>
       </div>
