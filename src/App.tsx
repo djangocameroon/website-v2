@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Auth from './pages/auth/Auth';
+import { ForgotPassword, ResetPassword } from './pages/auth/forgot-password';
 
 
 
@@ -23,7 +24,10 @@ const App = () => {
             <Route path='login' element={<Login />} />
             <Route path='/auth/register' element={<Register />} />
           </Route>
+          <Route path='/auth/forgot-password' element={<ForgotPassword />} />
+          <Route path='/auth/reset-password' element={<ResetPassword />} />
           <Route path='/' element={<Home />} />
+
           
         </Routes>
 

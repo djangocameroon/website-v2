@@ -10,7 +10,7 @@ const Auth = () => {
       <Link to={'/'} className='pb-4 w-40'>
         <img src={AuthImages.whiteLogo} alt="" />
       </Link>
-      <div className=''>
+      <div className='overflow-hidden'>
         <TogglePage/>
       </div>
       <Outlet/>

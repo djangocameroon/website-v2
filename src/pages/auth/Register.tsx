@@ -5,10 +5,12 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/layout';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { useState } from 'react';
 
 const Register = () => {
-  const RegisterFormSchema = () => {
-    return yup.object().shape({
+  const [showPassword, setShowPassword] = useState(false);
+  const RegisterFormSchema = yup.object().shape({
       name: yup.string().required('this is required'),
       email: yup
         .string()
@@ -23,7 +25,7 @@ const Register = () => {
         .min(8, 'Password must be atleast 8 characters long')
         .matches(
           /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-          `${'Enter a correct password'}`
+          `${'Enter a password with numbers, letters and special characters'}`
         ),
 
       passwordConfirmation: yup
@@ -34,14 +36,13 @@ const Register = () => {
           return this.parent.password === value;
         }),
     });
-  };
+  
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<IRegisterForm>({
-    //@ts-expect-error noerror
     resolver: yupResolver(RegisterFormSchema),
   });
 
@@ -50,15 +51,14 @@ const Register = () => {
   };
 
   const onSubmit = async (data: IRegisterForm) => {
-    console.log(data);
+    console.log(data)
   };
 
   return (
-    <div className='flex mt-8 justify-center items-center gap-5 w-full'>
-
+    <div className='flex mt-8 justify-center items-center gap-5 w-full overflow-hidden'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='border-secondary bg-white/10 border rounded-2xl  py-2 pb-4 px-7 w-full md:w-[50%]'
+        className='border-secondary bg-white/10 border rounded-2xl  py-2 pb-4 px-7 w-full lg:w-[50%]'
       >
         <div className='flex text-white justify-center items-center flex-col gap-1 py-5'>
           <h2 className='text-lg font-semibold md:text-2xl'>
@@ -88,7 +88,6 @@ const Register = () => {
                 id='name'
                 placeholder='enter your name'
                 className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                required
                 {...register('name')}
               />
             </div>
@@ -118,7 +117,6 @@ const Register = () => {
                 id='email'
                 placeholder='enter your email'
                 className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                required
                 {...register('email')}
               />
             </div>
@@ -133,7 +131,7 @@ const Register = () => {
         </div>
         <div className='mt-4 w-full flex-col sm:flex-row flex gap-3 justify-between items-center'>
           <div>
-            <div>
+            <div className='relative'>
               <label
                 htmlFor='password'
                 className={` mb-2 ${
@@ -146,24 +144,37 @@ const Register = () => {
                 <span className='text-red-600 text-lg my-0'>*</span>{' '}
               </label>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 id='password'
                 placeholder='enter a password'
-                className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                required
+                className='mt-2 w-full border-[1px] py-3 px-5 border-white  placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
                 {...register('password')}
               />
+              <div className='absolute right-2 top-[50px]'>
+                {showPassword ? (
+                  <AiOutlineEye
+                    className=''
+                    size={27}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    size={27}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+              </div>
             </div>
             <label className='label'>
               {errors['password'] && (
-                <span className='label-text-alt text-red-500'>
+                <span className='label-text-alt text-sm text-red-500'>
                   {errors['password']?.message}
                 </span>
               )}
             </label>
           </div>
           <div className=''>
-            <div>
+            <div className='relative'>
               <label
                 htmlFor='password-2'
                 className={` mb-2 ${
@@ -176,17 +187,30 @@ const Register = () => {
                 <span className='text-red-600 text-lg my-0'>*</span>{' '}
               </label>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 id='password-2'
                 placeholder='enter your password again'
                 className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                required
                 {...register('password')}
               />
+              <div className='absolute right-2 top-[50px]'>
+                {showPassword ? (
+                  <AiOutlineEye
+                    className=''
+                    size={27}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    size={27}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+              </div>
             </div>
             <label className='label'>
               {errors['password'] && (
-                <span className='label-text-alt text-red-500'>
+                <span className='label-text-alt text-sm text-red-500'>
                   {errors['password']?.message}
                 </span>
               )}
