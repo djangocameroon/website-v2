@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Router>
       <div className='relative h-full'>
-        <div className='fixed top-0 z-30 w-full mb-20'>
+        <div className='fixed top-0 z-30 w-full h-full overflow-hidden'>
           <Navbar />
         </div>
         <Routes>
