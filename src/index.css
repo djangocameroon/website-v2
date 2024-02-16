@@ -60,12 +60,27 @@ body::-webkit-scrollbar-thumb:hover {
 
 .about-bg{
     background: url('/images/home/greenbg.svg');
+     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
 }
 .green-backbg{
     background: url('/images/home/greenbackbg.svg');
+     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
 }
 .get-started{
     background: url('/images/home/get-started.svg');
+     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
 }
 .btn-outline {
     @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
@@ -73,9 +88,7 @@ body::-webkit-scrollbar-thumb:hover {
 .btn-white {
     @apply bg-white text-primary
 }
-.bg-image-styles {
-    @apply bg-no-repeat bg-center w-full h-full;
-}
+
 .nav-hover-link{
     @apply hover:border-b-4 border-primary ;
 }

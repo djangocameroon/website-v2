@@ -44,34 +44,34 @@ const Navbar = () => {
               {open ? <AiOutlineClose size='25' /> : <HiMenuAlt3 size='25' />}
             </div>
           </div>
-          <ul className='md:flex hidden capitalise items-center overflow-hidden gap-5 font-[Poppins]'>
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+          <ul className='md:flex hidden capitalise items-center overflow-hidden gap-5'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold  transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Home
               </Link>
             </li>
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 About
               </Link>
             </li>
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Event
               </Link>
             </li>
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Project
               </Link>
             </li>
 
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Contact
               </Link>
             </li>
-            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Chapter
               </Link>

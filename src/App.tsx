@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className='relative h-full'>
+      <div className='relative h-full  max-w-[4000px] '>
         <div className='fixed top-0 z-30 w-full overflow-hidden'>
           <Navbar />
         </div>
@@ -27,8 +27,6 @@ const App = () => {
           <Route path='/auth/forgot-password' element={<ForgotPassword />} />
           <Route path='/auth/reset-password' element={<ResetPassword />} />
           <Route path='/' element={<Home />} />
-
-          
         </Routes>
 
         <div className='bg-transparent'>

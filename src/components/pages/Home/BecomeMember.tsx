@@ -4,7 +4,7 @@ import { Button } from '../../layout';
 const BecomeMember = () => {
   return (
     <div>
-      <div id='#about' className='about-bg bg-image-styles'>
+      <div id='#about' className='about-bg bg-image-styles w-full'>
         <div className='flex px-4 sm:px-10 md:px-0 bg-cover justify-center flex-wrap md:flex-nowrap gap-12 py-6 items-center w-full h-full'>
           <div className='hidden md:block md:w-[350px]'>
             <img
