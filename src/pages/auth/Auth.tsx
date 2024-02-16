@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Auth = () => {
   return (
-    <div className='green-backbg px-5 py-10 bg-no-repeat bg-cover h-screen bg-center flex flex-col justify-center items-center'>
+    <div className='green-backbg px-5 py-10 bg-no-repeat bg-cover h-screen bg-center flex flex-col justify-start items-center'>
       <Link to={'/'} className='pb-4 w-40'>
         <img src={AuthImages.whiteLogo} alt="" />
       </Link>
