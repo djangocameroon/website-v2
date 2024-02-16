@@ -2,8 +2,8 @@ import { Avatars } from '../assets';
 
 const AvatarUsers = () => {
   return (
-    <div>
-      <div className='flex items-center relative'>
+    <div className=''>
+      <div className='-z-10 flex items-center relative'>
         <img
           src={Avatars.avatar1}
           className='z-[100] rounded-full w-9 h-9 bg-purple-500 border border-primary2'
