@@ -1,112 +1,166 @@
-
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HomeImages } from '../../../assets';
 import { ToggleSwitch } from '../../../components';
-import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [navBg, setNavBg] = useState(false);
+  // const [nav, setNav] = useState(false)
+
   const { pathname } = useLocation();
-   const isAuthRoute= pathname.includes('/auth')
+  const isAuthRoute = pathname.includes('/auth');
+
+  const changeNavColor = () => {
+    window.scrollY >= 200 ? setNavBg(true) : setNavBg(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeNavColor);
+    return () => {
+      window.removeEventListener('scroll', changeNavColor);
+    };
+  }, []);
 
   return (
-    
+    <>
       <nav
-        className={` ${
-          isAuthRoute ? 'hidden' : 'block'
-        } w-full bg-white flex items-center justify-center `}
+        className={` ${isAuthRoute ? 'hidden' : 'block'} transition-all ${
+          navBg === true
+            ? 'bg-white md:shadow-lg'
+            : 'bg-white sm:bg-transparent'
+        }`}
       >
-        <div className='md:flex w-[95%] lg:w-[90%] mx-auto items-center justify-between bg-transparent py-4'>
-          {/* logo section */}
-          <div className='cursor-pointer flex items-start'>
-            <img src={HomeImages.Logo} alt='logo image' className='w-32 h-16' />
-          </div>
-          {/* Menu icon */}
-          <div
-            onClick={() => setOpen(!open)}
-            className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'
-          >
-            {open ? <AiOutlineClose size='27' /> : <HiMenuAlt3 size='27' />}
-          </div>
-          {/* linke items */}
-          <ul
-            className={`md:flex md:items-center md:justify-between lg:w-[67%] top-20 h-screen md:h-auto md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-[80%] md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-              open ? 'left-0' : 'left-[-990px]'
-            }`}
-          >
-            <div className='md:flex md:items-center gap-3'>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/about'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  About
-                </NavLink>
-              </li>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/event'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  Event
-                </NavLink>
-              </li>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/project'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  Projects
-                </NavLink>
-              </li>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/contact'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  Contact
-                </NavLink>
-              </li>
-              <li className=' md:my-0 my-7 font-medium '>
-                <NavLink
-                  to='/chapter'
-                  className='text-gray-800 text-[1.3rem] md:text-base lg:text-xl capitalize hover:text-blue-400 duration-500'
-                >
-                  Chapter
-                </NavLink>
-              </li>
+        <div className='flex items-center font-medium justify-around lg:justify-between lg:w-[90%] lg:mx-auto'>
+          <div className='z-50 p-5 md:w-auto w-full flex justify-between'>
+            <img
+              src={HomeImages.Logo}
+              alt='logo'
+              className='md:cursor-pointer h-[3.3rem]'
+            />
+            <div className='text-3xl md:hidden' onClick={() => setOpen(!open)}>
+              {open ? <AiOutlineClose size='25' /> : <HiMenuAlt3 size='25' />}
             </div>
-            <li className='md:mx-4 flex md:flex-row flex-col items-start md:items-center justify-between gap-3'>
-              <NavLink
+          </div>
+          <ul className='md:flex hidden capitalise items-center overflow-hidden gap-5 font-[Poppins]'>
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                Home
+              </Link>
+            </li>
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                About
+              </Link>
+            </li>
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                Event
+              </Link>
+            </li>
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                Project
+              </Link>
+            </li>
+
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                Contact
+              </Link>
+            </li>
+            <li className='hover:scale-105 hover:text-primary hover:font-semibold  transition-all'>
+              <Link to='/' className='py-7 text-lg  inline-block'>
+                Chapter
+              </Link>
+            </li>
+          </ul>
+          <div className='md:flex hidden  flex-row items-center justify-between gap-4 lg:gap-6'>
+            <Link
+              to='/auth/login'
+              className='text-lg capitalize ml-1 bg-primary px-5 py-1 text-white hover:scale-90 transition-all rounded-md duration-500'
+            >
+              Login
+            </Link>
+            <div className='mt-1'>
+              <ToggleSwitch />
+            </div>
+          </div>
+          {/* Mobile nav */}
+          <ul
+            className={`
+        md:hidden bg-white fixed w-[70%] top-0 overflow-hidden bottom-0 py-24
+        duration-500 ${open ? 'left-0' : 'left-[-100%]'}
+        `}
+          >
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                Home
+              </Link>
+            </li>
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                About
+              </Link>
+            </li>
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                Event
+              </Link>
+            </li>
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                Project
+              </Link>
+            </li>
+
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                Contact
+              </Link>
+            </li>
+            <li className='w-full hover:bg-primary hover:text-white'>
+              <Link
+                to='/'
+                className='py-5 capitalise text-xl inline-block px-10'
+              >
+                Chapter
+              </Link>
+            </li>
+
+            <div className='py-5 flex flex-col gap-7 items-start justify-start px-10'>
+              <Link
                 to='/auth/login'
-                className='text-xl capitalize bg-primary px-4 py-2 text-white hover:scale-90 transition-all rounded-md duration-500'
+                className='text-xl capitalize bg-primary px-10 py-2 text-white hover:scale-90 transition-all rounded-md duration-500'
               >
                 Login
-              </NavLink>
+              </Link>
               <div className='mt-1'>
                 <ToggleSwitch />
               </div>
-            </li>
+            </div>
           </ul>
-
-          {/* button */}
         </div>
       </nav>
+    </>
   );
 };
 
 export default Navbar;
-
-
-
-
