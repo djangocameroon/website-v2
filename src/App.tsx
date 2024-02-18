@@ -5,6 +5,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Auth from './pages/auth/Auth';
 import { ForgotPassword, ResetPassword } from './pages/auth/forgot-password';
+import About from './pages/About';
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/auth/forgot-password' element={<ForgotPassword />} />
           <Route path='/auth/reset-password' element={<ResetPassword />} />
           <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
         </Routes>
 
         <div className='bg-transparent'>
