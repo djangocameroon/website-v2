@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthImages, HomeImages } from '../../../assets'
 import { Button } from '../../../components/layout';
+import { IoIosCheckmark } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
 import { ForgotPasswordForm } from '../../../models';
 
@@ -79,7 +80,9 @@ const ForgotPassword = () => {
               <div>
                 <div className='w-2 h-8 ml-5 bg-transparent border-l border-dashed border-gray-500'></div>
                 <div className='flex gap-2 ml-3 items-start justify-start relative b'>
-                  <div className='w-5 h-5 rounded-full border border-gray-500 bg-transparent'></div>
+                  <div className='w-5 h-5 rounded-full border flex justify-center items-center border-gray-500 bg-transparent'>
+                    <IoIosCheckmark />
+                  </div>
                   <span className='text-gray-400 text-base'>
                     Verifying email...
                   </span>
@@ -88,7 +91,9 @@ const ForgotPassword = () => {
               <div>
                 <div className='w-2 h-8 ml-5 bg-transparent border-l border-dashed border-gray-500'></div>
                 <div className='flex gap-2 ml-3 items-start justify-start relative b'>
-                  <div className='w-5 h-5 rounded-full border border-gray-500 bg-transparent'></div>
+                  <div className='w-5 h-5 rounded-full border flex justify-center items-center border-gray-500 bg-transparent'>
+                    <IoIosCheckmark />
+                  </div>
                   <span className='text-gray-400 text-base'>
                     Sending verification code...
                   </span>
@@ -121,7 +126,7 @@ const ForgotPassword = () => {
                 )}
               </label>
               <div className='flex justify-center items-center gap-7 mt-10'>
-                <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
+                <button className='text-red-500 bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
                   Cancel
                 </button>
                 <Button outline={false} backgroundColor='bg-secondary'>
