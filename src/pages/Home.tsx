@@ -6,21 +6,20 @@ import {
   Header,
   EventsSection,
   Newsletter,
-} from '../components/pages/Home';
+} from '../components/pages/Home-Page-Components';
 
 const Home = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <BecomeMember />
       <div className='w-[90%] mx-auto'>
-         <YoutubeSection />
+        <YoutubeSection />
         <Collaboration />
         <ProjectsSection />
-        <EventsSection/> 
-         <Newsletter/> 
+        <EventsSection />
+        <Newsletter />
       </div>
-      
     </>
   );
 };

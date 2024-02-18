@@ -1,12 +1,10 @@
-import ProjectsSection from '../components/pages/Home/ProjectsSection'
-
 
 const Project = () => {
   return (
     <div id='project'>
-        <ProjectsSection/>
+      projects page
     </div>
-  )
-}
+  );
+};
 
-export default Project
+export default Project;
