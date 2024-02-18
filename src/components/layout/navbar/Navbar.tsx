@@ -51,7 +51,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
-              <Link to='/' className='py-7 text-lg  inline-block'>
+              <Link to='/about' className='py-7 text-lg  inline-block'>
                 About
               </Link>
             </li>
@@ -62,7 +62,7 @@ const Navbar = () => {
             </li>
             <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
-                Project
+                Projects
               </Link>
             </li>
 
