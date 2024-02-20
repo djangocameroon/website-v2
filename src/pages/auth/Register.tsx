@@ -70,12 +70,12 @@ const Register = () => {
           </p>
         </div>
         <div className='mt-4 w-full flex-col sm:flex-row flex gap-3 justify-between items-center'>
-          <div>
+          <div className=''>
             <div>
               <label
                 htmlFor='name'
                 className={` mb-2 ${
-                  fieldHasErrors('email')
+                  fieldHasErrors('name')
                     ? 'text-red-500'
                     : 'text-white text-lg font-medium'
                 } `}
@@ -86,7 +86,7 @@ const Register = () => {
               <input
                 type='text'
                 id='name'
-                placeholder='enter your name'
+                placeholder='Enter your name'
                 className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
                 {...register('name')}
               />
@@ -109,13 +109,13 @@ const Register = () => {
                     : 'text-white text-lg font-medium'
                 } `}
               >
-                Enter you email
+                Enter you name
                 <span className='text-red-600 text-lg my-0'>*</span>{' '}
               </label>
               <input
                 type='email'
                 id='email'
-                placeholder='enter your email'
+                placeholder='Enter your email'
                 className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
                 {...register('email')}
               />
@@ -130,91 +130,91 @@ const Register = () => {
           </div>
         </div>
         <div className='mt-4 w-full flex-col sm:flex-row flex gap-3 justify-between items-center'>
-          <div>
-            <div className='relative'>
-              <label
-                htmlFor='password'
-                className={` mb-2 ${
-                  fieldHasErrors('password')
-                    ? 'text-red-500'
-                    : 'text-white text-lg font-medium'
-                } `}
-              >
-                Enter you password
-                <span className='text-red-600 text-lg my-0'>*</span>{' '}
-              </label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id='password'
-                placeholder='enter a password'
-                className='mt-2 w-full border-[1px] py-3 px-5 border-white  placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                {...register('password')}
-              />
-              <div className='absolute right-2 top-[50px]'>
-                {showPassword ? (
-                  <AiOutlineEye
-                    className=''
-                    size={27}
-                    onClick={() => setShowPassword(!showPassword)}
-                  />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    size={27}
-                    onClick={() => setShowPassword(!showPassword)}
-                  />
-                )}
-              </div>
-            </div>
-            <label className='label'>
-              {errors['password'] && (
-                <span className='label-text-alt text-sm text-red-500'>
-                  {errors['password']?.message}
-                </span>
-              )}
-            </label>
-          </div>
+        <div className='relative'>
           <div className=''>
-            <div className='relative'>
-              <label
-                htmlFor='password-2'
-                className={` mb-2 ${
-                  fieldHasErrors('password')
-                    ? 'text-red-500'
-                    : 'text-white text-lg font-medium'
-                } `}
-              >
-                Enter you Password again
-                <span className='text-red-600 text-lg my-0'>*</span>{' '}
-              </label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id='password-2'
-                placeholder='enter your password again'
-                className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-                {...register('password')}
-              />
-              <div className='absolute right-2 top-[50px]'>
+            <label
+              htmlFor='password'
+              className={` mb-2 ${
+                fieldHasErrors('password')
+                  ? 'text-red-500'
+                  : 'text-white text-lg font-medium'
+              } `}
+            >
+              Enter a password
+              <span className='text-red-600 text-lg my-0'>*</span>{' '}
+            </label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id='password'
+              placeholder='******'
+              className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
+              {...register('password')}
+            />
+          </div>
+          <label className='label'>
+            {errors['password'] && (
+              <span className='label-text-alt text-red-500'>
+                {errors['password']?.message}
+              </span>
+            )}
+          </label>
+          <div className='absolute right-2 top-[50px]'>
                 {showPassword ? (
                   <AiOutlineEye
                     className=''
-                    size={27}
+                    size={23}
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
                   <AiOutlineEyeInvisible
-                    size={27}
+                    size={23}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+          </div>
+        </div>
+           <div className='relative'>
+            <div>
+              <label
+                htmlFor='password2'
+                className={` mb-2 ${
+                  fieldHasErrors('passwordConfirmation')
+                    ? 'text-red-500'
+                    : 'text-white text-lg font-medium'
+                } `}
+              >
+                confirm you password
+                <span className='text-red-600 text-lg my-0'>*</span>{' '}
+              </label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id='password2'
+                placeholder='******'
+                className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
+                {...register('passwordConfirmation')}
+              />
+            </div>
+            <label className='label'>
+              {errors['passwordConfirmation'] && (
+                <span className='label-text-alt text-red-500'>
+                  {errors['passwordConfirmation']?.message}
+                </span>
+              )}
+            </label>
+            <div className='absolute right-2 top-[50px]'>
+                {showPassword ? (
+                  <AiOutlineEye
+                    className=''
+                    size={23}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    size={23}
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 )}
               </div>
-            </div>
-            <label className='label'>
-              {errors['password'] && (
-                <span className='label-text-alt text-sm text-red-500'>
-                  {errors['password']?.message}
-                </span>
-              )}
-            </label>
           </div>
         </div>
 

@@ -6,9 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form"
 import { Button } from '../../components/layout';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 
 const Login = () => {
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginFormSchema = yup.object().shape({
       email: yup
@@ -61,7 +65,7 @@ const Login = () => {
         <div>
           <div>
             <label
-              htmlFor='name'
+              htmlFor='email'
               className={` mb-2 ${
                 fieldHasErrors('email')
                   ? 'text-red-500'
@@ -87,10 +91,10 @@ const Login = () => {
             )}
           </label>
         </div>
-        <div className='mt-4'>
+        <div className='mt-4 relative'>
           <div>
             <label
-              htmlFor='name'
+              htmlFor='password'
               className={` mb-2 ${
                 fieldHasErrors('password')
                   ? 'text-red-500'
@@ -101,7 +105,7 @@ const Login = () => {
               <span className='text-red-600 text-lg my-0'>*</span>{' '}
             </label>
             <input
-              type='text'
+              type={showPassword ? 'text' : 'password'}
               id='password'
               placeholder='enter password'
               className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
@@ -115,6 +119,20 @@ const Login = () => {
               </span>
             )}
           </label>
+          <div className='absolute right-2 top-[50px]'>
+                {showPassword ? (
+                  <AiOutlineEye
+                    className=''
+                    size={23}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    size={23}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+              </div>
         </div>
         <div className='flex justify-between items-center mt-2'>
           <div>
