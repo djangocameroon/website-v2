@@ -23,7 +23,7 @@ const AboutHeader = () => {
       <div className='hidden lg:block absolute bottom-0 left-[7.3rem]'>
         <div className='flex  pl-10 border-l-2 border-gray-200 ml-3 '>
           <div className='w-[35%] '>
-            <div className='absolute z-40  left-0 bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
+            <div className='absolute  left-0 bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
             <span className='text-base text-secondary font-semibold'>
               Welcome to the verse of
             </span>

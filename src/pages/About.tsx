@@ -11,7 +11,7 @@ const About = () => {
     <div className='relative'>
       <AboutHeader/>
       <div className='w-full md:w-[85%] mx-auto'>
-        <div className='my-10 w-full ml-auto flex flex-col gap-10'>
+        <div className='my-10 w-full ml-auto flex flex-col'>
             <WhereITStarted />
             <MissionVission />
             <Organisers />

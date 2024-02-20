@@ -14,7 +14,7 @@ const JoinUsNow = () => {
         nunc sed. Nulla faucibus pellentesque condimentum consequat diam.
       </p>
 
-      <div className='get-started bg-image-styles h-full bg-contain my-10 py-40 md:py-80 pb-20 px-5  sm:px-10 rounded-lg'>
+      <div className='get-started bg-image-styles h-full bg-contain my-10 py-40 pb-20 px-5 sm:px-10 rounded-lg'>
         <p className='text-xl md:text-3xl w-[80%] md:px-0 md:w-[40%] font-semibold text-white'>
           Not that it’s now or never but don’t miss such opportunity
         </p>

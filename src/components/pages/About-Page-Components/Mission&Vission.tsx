@@ -3,9 +3,9 @@ import { AboutImages } from '../../../assets';
 
 const MissionVission = () => {
   return (
-    <section className='flex items-start justify-between gap-10 lg:gap-40 px-4 sm:pl-10 border-none sm:border-solid  border-l-2 border-gray-200 ml-3 py-16'>
+    <section className='flex items-start justify-between gap-10 lg:gap-32 px-4 sm:pl-10 border-none sm:border-solid  border-l-2 border-gray-200 ml-3 py-16'>
       <div className='w-[30%]  hidden sm:block  '>
-        <div className='absolute z-40 left-[0%] md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
+        <div className='absolute left-[0%] md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
         <span className='text-sm text-secondary font-semibold '>
           As a community we have
         </span>
@@ -14,7 +14,7 @@ const MissionVission = () => {
         </h2>
       </div>
       <div className='w-full'>
-        <article className='flex w-full flex-wrap  pb-8 items-center justify-start gap-10'>
+        <article className='flex w-full flex-wrap   pb-8 items-center justify-start gap-10'>
           <div className='max-w-[25rem] p-4  border-4 border-dotted transition-all border-secondary hover:bg-secondary/10 hover:border-4 hover:border-solid hover:border-transparent'>
             <h3 className='font-semibold text-xl md:text-2xl py-3'>
               A community with a <br />{' '}

@@ -2,9 +2,9 @@ import { AboutImages } from '../../../assets';
 
 const WhereITStarted = () => {
   return (
-    <section className='flex items-start justify-between gap-10 lg:gap-40 px-4 sm:px-0 sm:pl-10 border-none sm:border-solid border-l-2 border-gray-200 ml-3 py-16'>
+    <section className='flex items-start justify-between gap-10 lg:gap-32 px-4 sm:px-0 sm:pl-10 border-none sm:border-solid border-l-2 border-gray-200 ml-3 py-8'>
       <div className='w-[35%] hidden sm:block '>
-        <div className='absolute z-40 left-0 md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
+        <div className='absolute left-0 md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
         <span className='text-sm text-secondary font-semibold'>
           Lorem ipsum subtitle
         </span>
