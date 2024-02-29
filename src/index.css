@@ -9,13 +9,13 @@ body{
     width: 100%;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 *{
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 p,span,h1,h2,h3,h4,h5,h6,ol,a{
     overflow:hidden;
