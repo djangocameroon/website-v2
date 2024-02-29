@@ -4,7 +4,6 @@ import {
   ProjectsSection,
   YoutubeSection,
   Header,
-  EventsSection,
   Newsletter,
 } from '../components/pages/Home-Page-Components';
 
@@ -17,7 +16,7 @@ const Home = () => {
         <YoutubeSection />
         <Collaboration />
         <ProjectsSection />
-        <EventsSection />
+        {/*<EventsSection />*/}
         <Newsletter />
       </div>
     </>

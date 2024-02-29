@@ -105,7 +105,7 @@ const Navbar = () => {
             </li>
             <li className='w-full hover:bg-primary hover:text-white'>
               <Link
-                to='/'
+                to='/about'
                 className='py-5 capitalise text-xl inline-block px-10'
               >
                 About
