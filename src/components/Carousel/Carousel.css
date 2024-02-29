@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+.carousel {
+    position: relative;
+    width: calc(min(90rem, 90%));
+    min-height: 100vh;
+}
+
+@media screen and (min-width: 48rem) {
+    .carousel {
+        display: flex;
+        align-items: flex-start;
+    }
+}
+
+.carousel-content span {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    color: #717171;
+}
+
+.carousel-content h1 {
+    text-transform: capitalize;
+    letter-spacing: 0.8px;
+    font-size: 4rem;
+    line-height: 1.1;
+    background-color: #00a4aa;
+    background-image: linear-gradient(45deg, #00a4aa, #000);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.carousel-content hr {
+    display: block;
+    background: #00a4aa;
+    height: 0.25rem;
+    width: 6.25rem;
+    border: none;
+    margin: 1.125rem 0 1.875rem 0;
+}
+
+.carousel-content p {
+    line-height: 1.6;
+}
+
+.slider-btn {
+    display: inline-block;
+    color: #717171;
+    background: #fff;
+    padding: 0.625rem 1.875rem;
+    margin-top: 2.125rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid #c2c2c2;
+    border-radius: 3.125rem;
+    transition: 0.3s ease-in-out;
+}
+
+.slider-btn:hover {
+    border: 0.125rem solid #00a4aa;
+    color: #00a4aa;
+}
+
+
+.myswiper {
+    width: 100%;
+}
+
+.myswiper-slider {
+    width: 18.75rem;
+    height: 28.125rem;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.swiper-slide-active div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.swiper-slide-active div a {
+    align-self: flex-start;
+}
+
+.myswiper-slider h2 {
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin-bottom: 0.625rem;
+    padding: 0 0 0 1.563rem;
+    text-transform: uppercase;
+}
+
+.myswiper-slider p {
+    color: #dadada;
+    padding: 0 1.563rem;
+    line-height: 1.6;
+    font-size: 0.75rem;
+}
+
+.myswiper-slider a {
+    margin: 1.25rem 1.5rem 3.5rem;
+}
+
+.myswiper-slider a:hover {
+    color: #00a4aa;
+}
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+    background: #fff;
+}
