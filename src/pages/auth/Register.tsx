@@ -225,7 +225,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className='flex justify-center items-center gap-7 mt-10'>
+          <div className='flex justify-center flex-col sm:flex-row items-center gap-7 mt-10'>
             <button onClick={()=>{
               navigate('/')
             }}

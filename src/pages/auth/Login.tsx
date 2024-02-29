@@ -54,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <div className='flex justify-center items-start gap-5 md:gap-10 w-full'>
+    <div className='flex h-full justify-center items-start gap-5 md:gap-10 w-full'>
       <div className={'w-[30%] hidden md:block'}>
         <Carousel/>
       </div>
