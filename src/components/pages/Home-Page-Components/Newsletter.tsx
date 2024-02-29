@@ -1,4 +1,3 @@
-import { HomeImages } from '../../../assets';
 import { Badge, Button } from '../../layout'
 import { AiOutlineSend } from 'react-icons/ai';
 
