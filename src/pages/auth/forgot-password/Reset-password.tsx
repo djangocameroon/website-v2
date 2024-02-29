@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AuthImages, HomeImages } from '../../../assets';
 import { Button } from '../../../components/layout';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const ResetPassword = () => {
+    const navigate = useNavigate();
 
      const ResetPasswordSchema = yup.object().shape({
           password: yup
@@ -107,7 +108,9 @@ const ResetPassword = () => {
                 )}
               </label>
               <div className='flex justify-center items-center gap-7 mt-10'>
-                <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
+                <button onClick={()=>{
+                    navigate('/auth/login')
+                }} className='text-red-500 bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
                   Cancel
                 </button>
                 <Button outline={false} backgroundColor='bg-secondary'>
