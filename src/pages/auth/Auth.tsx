@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 
 const Auth = () => {
   return (
-    <div className='green-backbg-auth px-5 py-10 bg-no-repeat bg-cover h-screen bg-center flex flex-col justify-start items-center'>
-      <Link to={'/'} className='pb-4 w-40'>
+    <div className='bg-primary px-5 h-screen md:h-full flex flex-col md:gap-2 justify-start items-center'>
+      <Link to={'/'} className='mt-6 md:mt-16 w-40'>
         <img src={AuthImages.whiteLogo} alt="" />
       </Link>
-      <div className='overflow-hidden'>
+      <div className='mt-5 md:mb-10'>
         <TogglePage/>
       </div>
+
       <Outlet/>
 
     </div>
