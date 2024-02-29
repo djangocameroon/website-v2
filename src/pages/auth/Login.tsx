@@ -8,9 +8,12 @@ import { Button } from '../../components/layout';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import {Carousel} from "../../components";
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -51,10 +54,13 @@ const Login = () => {
   };
 
   return (
-    <div className='flex mt-8 justify-center items-center gap-5 w-full overflow-hidden'>
+    <div className='flex justify-center items-start gap-5 md:gap-10 w-full'>
+      <div className={'w-[30%] hidden md:block'}>
+        <Carousel/>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='border-secondary bg-white/10 border rounded-2xl py-2 pb-4 px-7'
+        className='border-secondary md:bg-white/10 md:border rounded-2xl px-7'
       >
         <div className='flex text-white justify-center items-center flex-col gap-1 py-5'>
           <h2 className='text-lg font-semibold md:text-2xl'>
@@ -148,7 +154,9 @@ const Login = () => {
         </div>
 
         <div className='flex justify-center items-center gap-7 mt-10'>
-          <button className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>Cancel</button>
+          <button onClick={()=>{
+              navigate('/')
+          }} className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>Cancel</button>
           <Button outline={false} backgroundColor='bg-secondary'>
             {' '}
             <p className='w-full px-10'>Login</p>{' '}
