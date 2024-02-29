@@ -4,6 +4,7 @@ import ToggleSwitch from './ToggleSwitch'
 import PageNotFound from './PageNotFound'
 import EventCard from './EventCard'
 import LanguageSwitcher from './LanguageSwitcher'
+import Carousel from './Carousel/Carousel.tsx'
 
 export {
     AvatarUsers,
@@ -11,5 +12,6 @@ export {
     ToggleSwitch,
     PageNotFound,
     EventCard,
-    LanguageSwitcher
+    LanguageSwitcher,
+    Carousel
 }
