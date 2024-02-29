@@ -6,19 +6,15 @@ import { AiOutlineSend } from 'react-icons/ai';
 const Newsletter = () => {
   return (
     <>
-      <div className='get-started bg-image-styles bg-contain mt-10 py-5 pb-8 px-10 rounded-lg'>
-        <p className='text-xl md:text-3xl w-full px-2 md:px-0 md:w-[40%] font-semibold text-white'>
+      <div className='bg-secondary mt-10 py-5 px-10 rounded-lg'>
+        <p className='text-xl md:text-3xl w-full px-2 md:px-0 md:w-[60%] text-center mx-auto font-semibold text-white'>
           Not that it’s now or never but don’t miss such opportunity.
         </p>
-        <div className='flex md:flex-row flex-col items-start md:items-center gap-10 mt-8 '>
+        <div className='flex md:flex-row flex-col items-center justify-center gap-10 mt-8  '>
           <Button outline={false} backgroundColor='bg-white'>
             <p className='text-primary py-1'>Get Started</p>
           </Button>
-          <img
-            src={HomeImages.arrow}
-            alt='design arrow pointing to the right'
-            className='hidden lg:block  h-7'
-          />
+
         </div>
       </div>
       <div className='flex items-start pb-20  md:w-[90%] mx-auto flex-wrap gap-3 sm:flex-nowrap w-full mt-8'>
