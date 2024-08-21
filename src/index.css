@@ -1,8 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nova+Script&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Nohemi";
+    src: url("/fonts/Nohemi-ExtraBold.ttf") format("truetype");
+    font-weight: 800; /* Black weight is typically 900 */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nohemi";
+    src: url("/fonts/Nohemi-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nohemi";
+    src: url("/fonts/Nohemi-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nohemi";
+    src: url("/fonts/Nohemi-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+.nohemi-font {
+    font-family: "Nohemi", sans-serif;
+}
+
+.urbanist-font {
+    font-family: "urbanist";
+}
+
+/* Rectangle 122
+
+position: absolute;
+width: 1858px;
+height: 338px;
+left: -65.08px;
+top: 2903px;
+
+/* Plain-White */
+/* background: #FFFFFF; */
+/* filter: blur(75px);  */
+
 
 body{
     min-height: 100vh;
@@ -32,7 +82,7 @@ p,span,h1,h2,h3,h4,h5,h6,ol{
     background: linear-gradient(115deg, #C20102 0%, #7B0100 100%);
 }
 .header-bg{
-    background: url('/images/home/Group\ 131.svg');
+    background: url('/images/home/curlygrid.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -57,6 +107,11 @@ body::-webkit-scrollbar-thumb:hover {
     background: #dddddd;
 }
 
+.header-number-stats {
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
 
 .about-bg{
     background: url('/images/home/greenbg.svg');
@@ -68,11 +123,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .green-backbg{
     background: url('/images/home/greenbackbg.svg');
-     background-position: center;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
 }
 .green-backbg-auth{
     background: url('/images/home/greenbackbg.svg');

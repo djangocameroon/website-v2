@@ -1,18 +1,30 @@
 import { ReactNode } from 'react';
+import { cn } from '../../../utils/constants';
 
 interface ButtonProps {
   backgroundColor?: string;
   children: ReactNode;
   onClick?: () => void;
-  outline: boolean;
+  outline?: boolean;
+  spacing?: boolean;
+  className?: string;
 }
 
-const Button = ({ outline, children,backgroundColor }: ButtonProps) => {
+const Button = ({ outline=false, children, backgroundColor="bg-primary", spacing=true, className="" }: ButtonProps) => {
   return (
     <button
-      className={` ${
-        outline === true ? 'btn-outline' : ''
-      } capitalize  py-2 my-4 px-5 rounded-lg whitespace-nowrap transition-all hover:-translate-y-2  text-white md:text-lg font-semibold ${backgroundColor} `}
+      // className={` ${
+      //   outline === true ? 'btn-outline' : ''
+      // } capitalize py-5 my-4 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] leading-[18px] font-medium nohemi-font ${backgroundColor} `}
+      className={
+        cn("capitalize py-5 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] leading-[18px] font-medium nohemi-font",
+          backgroundColor,
+          className,
+          {
+            "btn-outline": outline,
+            "my-4": spacing
+          }
+      )}
     >
       {children}
     </button>

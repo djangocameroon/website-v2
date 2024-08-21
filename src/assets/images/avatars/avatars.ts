@@ -12,6 +12,7 @@ import avatar11 from '/images/home/avatars/Rectangle 75.svg';
 import avatar12 from '/images/home/avatars/Rectangle 76.svg';
 import avatar13 from '/images/home/avatars/Rectangle 77.svg';
 import avatar14 from '/images/home/avatars/Rectangle 78.svg';
+import avatarList from '/images/home/avatars/avatarlist.svg';
 
 
 export {
@@ -28,6 +29,7 @@ export {
     avatar11,
     avatar12,
     avatar13,
-    avatar14
+    avatar14,
+    avatarList
 }
 

@@ -1,93 +1,46 @@
 import { Badge, Button } from './layout';
-import { HomeImages } from '../assets';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { FaRegUserCircle } from 'react-icons/fa';
-import { FiTwitter } from 'react-icons/fi';
-import { SlSocialLinkedin } from 'react-icons/sl';
-import {
-  MdOutlineLocationOn,
-  MdCalendarMonth,
-  MdAccessTime,
-} from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import { GoArrowUpRight } from 'react-icons/go';
+import { cn } from '../utils/constants';
 
-const EventCard = () => {
+interface EventCardProps {
+  discoverMore?: boolean;
+}
+const EventCard = ({ discoverMore=false }: EventCardProps) => {
   return (
-    <div className='w-full md:max-w-[80%] md:w-[80%] shadow-outline shadow-xl rounded-lg px-4 py-5'>
-      <div className='flex justify-between items-start '>
-        <div className='w-3/6'>
-          <div className='flex mb-12 justify-start items-center gap-4'>
-            <Badge>architecture</Badge>
-            <Badge>mvt</Badge>
-            <Badge>web</Badge>
+    <div className={cn('max-w-96 h-[350px] w-full shadow-outline shadow-xl rounded-[30px] px-5 py-5 flex flex-col justify-between border-[1.5px] border-primary shrink-0',
+      {
+        "green-backbg justify-center items-center": discoverMore
+      }
+    )}>
+      {!discoverMore ? (
+        <>
+          <div className='flex flex-col gap-y-2'>
+            <h1 className='text-primary nohemi-font font-semibold text-2xl'>Model-View-Template Harmony: Django Workshop for Comprehensive Web Development</h1>
+            <div className='flex justify-start items-center gap-x-2.5'>
+              <Badge backgroundColor='bg-[#D6ECE2]' className='text-primary rounded-[10px] py-1'>architecture</Badge>
+              <Badge backgroundColor='bg-[#D6ECE2]' className='text-primary rounded-[10px] py-1'>mvt</Badge>
+              <Badge backgroundColor='bg-[#D6ECE2]' className='text-primary rounded-[10px] py-1'>web</Badge>
+            </div>
           </div>
-          <h3 className='text-primary font-semibold text-lg sm:text-xl md:text-2xl'>
-            Model-View-Template Harmony: Django Workshop for Comprehensive Web
-            Development
-          </h3>
-          <p className='font-light py-4 text-sm md:text-lg'>
-            Explore the synergy of Django's Model-View-Template architecture in
-            this comprehensive workshop, perfect for developers aiming for
-            full-stack expertise.
-          </p>
-
-          <div className='flex flex-wrap gap-3 items-center pb-4 mt-3'>
-            <Badge>
-              <div className='flex items-center gap-2'>
-                <MdOutlineLocationOn className='text-secondary' />
-                <p className='text-sm'>Hilton hotel, Central post, Yaounde</p>
-              </div>
-            </Badge>
-            <Badge>
-              <div className='flex items-center gap-2'>
-                <MdAccessTime className='text-secondary' />
-                <p className='text-sm'>3:00 pm WAT, (GMT+1)</p>
-              </div>
-            </Badge>
-            <Badge>
-              <div className='flex items-center gap-2'>
-                <MdCalendarMonth className='text-secondary' />
-                <p className='text-sm'>Sept. 20 2023</p>
-              </div>
-            </Badge>
+          <Link to="#" className='w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 font-medium'>
+              View Event
+              <GoArrowUpRight className='w-6 h-6' />
+          </Link>
+        </>
+      ) : (
+        <>
+          <div className='space-y-12'>
+            <h1 className="text-center text-white nohemi-font font-semibold text-2xl">Discover more events from the community</h1>
+            <Link to="#" className='block w-full'>
+              <Button backgroundColor='bg-white' className='py-4 flex justify-center items-center gap-x-2.5 text-primary w-full'>
+                View More
+                <GoArrowUpRight className='w-6 h-6' />
+              </Button>
+            </Link>
           </div>
-          <Button backgroundColor='bg-primary' outline={false}>
-            RSVP and get a ticket
-          </Button>
-          <span className='ml-3 whitespace-nowrap'>(1 day left)</span>
-
-          <div className='flex justify-start items-center gap-3 mt-5'>
-            <p className='text-text-color/80 text-sm font-bold'>Read More</p>
-            <FaArrowRightLong className='text-sm text-text-color' />
-          </div>
-        </div>
-        <div className='flex flex-col items-center gap-6 cursor-pointer'>
-          <div className='w-60 md:w-72  rounded-lg h-10 lg:h-16 relative  flex justify-center items-center overflow-hidden'>
-            <img
-              src={HomeImages.projectBg}
-              alt='projectbg'
-              className='absolute object-contain'
-            />
-          </div>
-          <img src={HomeImages.mankaa} alt='' className='w-40 md:w-60 lg:w-80' />
-          <div className='flex justify-start w-full lg:justify-center flex-col lg:flex-row items-center gap-3'>
-            <Badge outline={true}>
-              <div className='flex items-center gap-2'>
-                <FaRegUserCircle className='text-secondary' size='20' />
-                <div>
-                  <p className='text-sm lg:text-base'>MankaaChe</p>
-                  <p className='text-sm'>@ManeBa_cnm</p>
-                </div>
-              </div>
-            </Badge>
-            <Badge outline={true}>
-              <FiTwitter className='text-secondary' />
-            </Badge>
-            <Badge outline={true}>
-              <SlSocialLinkedin className='text-secondary' />
-            </Badge>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
