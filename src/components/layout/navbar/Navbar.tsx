@@ -4,6 +4,9 @@ import { HomeImages } from '../../../assets';
 import { ToggleSwitch } from '../../../components';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { navLinks } from '../../../utils/constants';
+import { Button } from '../button';
+import { VscAccount } from "react-icons/vsc";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -27,7 +30,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={` ${isAuthRoute ? 'hidden' : 'block'} transition-all ${
+        className={` ${isAuthRoute ? 'hidden' : 'block'} h-20 transition-all ${
           navBg === true
             ? 'bg-white md:shadow-lg'
             : 'bg-white sm:bg-transparent'
@@ -44,8 +47,17 @@ const Navbar = () => {
               {open ? <AiOutlineClose size='25' /> : <HiMenuAlt3 size='25' />}
             </div>
           </div>
-          <ul className='md:flex hidden capitalise items-center overflow-hidden gap-5'>
-            <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold  transition-all'>
+          <ul className='md:flex hidden capitalise items-center overflow-hidden gap-12'>
+            {
+              navLinks.map((navLink, id) => (
+                <li key={id} className='hover:scale-105 hover:text-primary font-medium hover:font-bold transition-all urbanist-font text-xl'>
+                  <Link to={navLink.link} className='py-7 text-lg inline-block'>
+                    {navLink.label}
+                  </Link>
+                </li>
+              ))
+            }
+            {/* <li className='hover:scale-105 hover:text-primary font-semibold hover:font-bold  transition-all'>
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Home
               </Link>
@@ -75,18 +87,18 @@ const Navbar = () => {
               <Link to='/' className='py-7 text-lg  inline-block'>
                 Chapter
               </Link>
-            </li>
+            </li> */}
           </ul>
           <div className='md:flex hidden  flex-row items-center justify-between gap-4 lg:gap-6'>
-            <Link
-              to='/auth/login'
-              className='text-lg flex items-center gap-1 capitalize ml-1 bg-primary px-5 py-2 text-white hover:scale-90 transition-all rounded-md duration-500'
-            >
-              Login
+            <Link to='/auth/login'>
+                <Button outline={false} spacing={false} className="duration-500 hover:scale-90 font-medium text-xl transition-all py-2.5 px-5 urbanist-font flex gap-x-2.5 items-center">
+                  <VscAccount className='w-6 h-6' />
+                  Sign In
+                </Button>
             </Link>
-            <div className='mt-1'>
+            {/* <div className='mt-1'>
               <ToggleSwitch />
-            </div>
+            </div> */}
           </div>
           {/* Mobile nav */}
           <ul
@@ -146,11 +158,10 @@ const Navbar = () => {
             </li>
 
             <div className='py-5 flex flex-col gap-7 items-start justify-start px-10'>
-              <Link
-                to='/auth/login'
-                className='text-xl capitalize bg-primary px-10 py-2 text-white hover:scale-90 transition-all rounded-md duration-500'
-              >
-                Login
+              <Link to='/auth/login'>
+                <Button outline={false} spacing={false} className="duration-500 hover:scale-90 transition-all">
+                  Sign Up
+                </Button>
               </Link>
               <div className='mt-1'>
                 <ToggleSwitch />
