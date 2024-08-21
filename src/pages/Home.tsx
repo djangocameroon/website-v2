@@ -1,6 +1,7 @@
 import {
   BecomeMember,
   Collaboration,
+  EventsSection,
   ProjectsSection,
   YoutubeSection,
   Header,
@@ -15,8 +16,8 @@ const Home = () => {
       <div className='w-[90%] mx-auto'>
         <YoutubeSection />
         <Collaboration />
-        <ProjectsSection />
-        {/*<EventsSection />*/}
+        {/* <ProjectsSection /> */}
+        <EventsSection />
         <Newsletter />
       </div>
     </>
