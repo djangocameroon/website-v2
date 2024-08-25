@@ -102,8 +102,31 @@ body::-webkit-scrollbar-thumb {
     background: #c9c7c7;
     border-radius: 5px;
 }
- 
+
 body::-webkit-scrollbar-thumb:hover {
+    background: #dddddd;
+}
+
+/* .projects-slider {
+    scrollb
+} */
+
+.projects-slider::-webkit-scrollbar {
+    height: 5px;
+    /* height: 90%; */
+}
+.projects-slider::-webkit-scrollbar-track {
+    background: rgba(18, 18, 18, 0.05);;
+    border-radius: 5px;
+}
+ 
+.projects-slider::-webkit-scrollbar-thumb {
+    background-color: rgba(66, 133, 244, 1);
+    border-radius: 5px;
+    /* width: 0px; */
+}
+
+.projects-slider::-webkit-scrollbar-thumb:hover {
     background: #dddddd;
 }
 
@@ -142,6 +165,13 @@ body::-webkit-scrollbar-thumb:hover {
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
+}
+
+.bluelightbg{
+    background: url('/images/home/bluelightbg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .grid-container{

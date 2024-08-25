@@ -130,22 +130,23 @@ const YoutubeSection = () => {
             <GoArrowUpRight className='w-6 h-6' />
           </Link>
         </div>
-        <div className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] gap-5">
-          {Array.from({ length: 6 }, (_, index) => (
-            <div key={index} className={`border rounded-[28px] h-[300px] ${index%2 === 0 ? "border-secondary bg-secondary-light" : "border-primary bg-primary-light"}`}></div>
-          ))}
-        </div>
-        <div className="h-[300px] transform -translate-y-[80%] relative">
-          {/* <div className="blur-[75px] z-0 bg-white inset-0 absolute"/> */}
-          <div className="w-full bg-gradient-to-b absolute bottom-0 left-0 from-transparent to-white via-white   inset-0 z-0" />
-          <Button
-            outline={false}
-            backgroundColor='bg-secondary'
-            spacing={false}
-            className='mt-[167px] z-20 absolute left-1/2 transform -translate-x-1/2'
-          >
-            View videos catalogue
-          </Button>
+        <div className='relative'>
+          <div className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] gap-5">
+            {Array.from({ length: 6 }, (_, index) => (
+              <div key={index} className={`border rounded-[28px] h-[300px] ${index%2 === 0 ? "border-secondary bg-secondary-light" : "border-primary bg-primary-light"}`}></div>
+            ))}
+          </div>
+          <div className="h-[300px] absolute bottom-0 inset-x-0">
+            <div className="w-full bg-gradient-to-b absolute bottom-0 left-0 from-transparent to-white via-white   inset-0 z-0" />
+            <Button
+              outline={false}
+              backgroundColor='bg-secondary'
+              spacing={false}
+              className='mt-[167px] z-20 absolute left-1/2 transform -translate-x-1/2'
+            >
+              View videos catalogue
+            </Button>
+          </div>
         </div>
       </div>
     </div>

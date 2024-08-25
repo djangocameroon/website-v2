@@ -13,10 +13,13 @@ const Home = () => {
     <>
       <Header />
       <BecomeMember />
-      <div className='w-[90%] mx-auto'>
+      <div className='px-[6.25rem] mb-20'>
         <YoutubeSection />
         <Collaboration />
-        {/* <ProjectsSection /> */}
+      </div>
+
+      <ProjectsSection />
+      <div className='px-[6.25rem]'>
         <EventsSection />
         <Newsletter />
       </div>

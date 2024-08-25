@@ -5,12 +5,12 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 
 const ProjectCard = () => {
   return (
-    <div className='cursor-pointer bg-white px-4 py-2 max-w-[20em] border border-gray-400 rounded-lg shadow-xl'>
+    <div className='cursor-pointer bg-white px-6 pt-6 w-[625px] h-[700px] border border-gray-400 rounded-[55px] shadow-xl shrink-0'>
       <div>
-        <img src={HomeImages.projectBg} alt='' className='rounded-lg' />
+        <img src={HomeImages.projectBg} alt='' className='rounded-[30px]' />
       </div>
       <div>
-        <p className='text-primary text-base mt-3 mb-3'>
+        <p className='text-primary text-2xl mt-3 mb-3 urbanist-font font-bold'>
           Doing something more interesting and funny with Django rather than
           just python manage.py runserver
         </p>

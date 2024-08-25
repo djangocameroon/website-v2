@@ -1,12 +1,22 @@
 import { Badge, Button } from '../../layout'
 import { AiOutlineSend } from 'react-icons/ai';
+import { HomeImages } from '../../../assets';
 
 
 const Newsletter = () => {
+  const { blueBgInitials } = HomeImages;
   return (
     <>
-      <div className='bg-secondary mt-10 py-5 px-10 rounded-lg'>
-        <p className='text-xl md:text-3xl w-full px-2 md:px-0 md:w-[60%] text-center mx-auto font-semibold text-white'>
+      <div className='bg-secondary mt-20 rounded-[3.125rem] bluelightbg h-[500px] relative'>
+        <img src={blueBgInitials} alt="" className='' />
+        <div className='absolute inset-0 pr-[100px] flex justify-end items-center'>
+          <div className='text-white w-[750px] text-right'>
+            <h1 className='nohemi-font font-bold text-5xl text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
+            <Button className='w-fit bg-secondary mt-7' spacing={false}>Join the community</Button>
+          </div>
+          
+        </div>
+        {/* <p className='text-xl md:text-3xl w-full px-2 md:px-0 md:w-[60%] text-center mx-auto font-semibold text-white'>
           Not that it’s now or never but don’t miss such opportunity.
         </p>
         <div className='flex md:flex-row flex-col items-center justify-center gap-10 mt-8  '>
@@ -14,7 +24,7 @@ const Newsletter = () => {
             <p className='text-primary py-1'>Get Started</p>
           </Button>
 
-        </div>
+        </div> */}
       </div>
       <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12'>
         <div className='max-w-2xl w-full space-y-1.5'>

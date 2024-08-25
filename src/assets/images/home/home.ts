@@ -1,6 +1,7 @@
 import arrow from '/images/home/arrow.svg';
 import bird from '/images/home/bird.svg';
 import blueDjango from '/images/home/bluedjango.svg';
+import blueBgInitials from '/images/home/bluebginitials.png';
 import blueMap from '/images/home/bluemap.svg';
 import channel from '/images/home/channel.png';
 import connect from '/images/home/connect.svg';
@@ -23,4 +24,27 @@ import youtubeThumbnail from '/images/home/youtube-thumbnail.svg';
 
 
 
-export { arrow, bird, blueDjango, blueMap, connect, curlArrow, curlyGrid, getStarted, greenBackBg, greenBg, Group, HeaderImage, Logo, mankaa, map, projectBg, spaceShip, teamGoals, whyJoin, youtubeThumbnail, channel };
+export {
+    arrow,
+    bird,
+    blueDjango,
+    blueBgInitials,
+    blueMap,
+    connect,
+    channel,
+    curlArrow,
+    curlyGrid,
+    getStarted,
+    greenBackBg,
+    greenBg,
+    Group,
+    HeaderImage,
+    Logo,
+    mankaa,
+    map,
+    projectBg,
+    spaceShip,
+    teamGoals,
+    whyJoin,
+    youtubeThumbnail
+ };
