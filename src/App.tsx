@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className='relative h-full  max-w-[4000px] '>
+      <div className='relative h-full max-w-[4000px] '>
         <div className='fixed top-0 z-30 w-full overflow-hidden'>
           <Navbar />
         </div>
@@ -39,4 +39,4 @@ const App = () => {
   );
 }
 
-export default App
+export default App;

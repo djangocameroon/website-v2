@@ -19,7 +19,7 @@ const EventsSection = () => {
         </Link>
       </div>
 
-      <div className='mt-6 flex justify-start flex-wrap items-center gap-5'>
+      <div className='mt-6 flex justify-center flex-wrap items-center gap-5'>
         {Array.from({ length: 8 }, (_, index) => (
           <EventCard key={index} discoverMore={index===7} />
         ))}
