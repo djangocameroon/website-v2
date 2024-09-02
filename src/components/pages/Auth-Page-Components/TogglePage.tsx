@@ -3,15 +3,15 @@ import { NavLink, useLocation } from 'react-router-dom';
 const TogglePage = () => {
      const { pathname } = useLocation();
   return (
-    <div className='bg-white/10 px-2 py-2 rounded-full overflow-hidden shadow-xl'>
-      <div className='flex items-center rounded-full '>
+    <div className='bg-white/10 p-2.5 rounded-full overflow-hidden shadow-xl'>
+      <div className='flex items-center rounded-full'>
         <NavLink
           to={'/auth/login'}
           className={`${
             pathname === '/auth/login'
-              ? 'bg-white text-primary'
-              : 'bg-transparent  text-white/50 '
-          } py-2 rounded-full px-6 text-center  font-medium text-lg`}
+              ? 'bg-white text-primary border-secondary border-[1.5px]'
+              : 'bg-transparent text-white/50'
+          } py-2 rounded-full px-5 text-center  font-medium text-xl urbanist-font`}
         >
           Sign in
         </NavLink>
@@ -19,9 +19,9 @@ const TogglePage = () => {
           to={'/auth/register'}
           className={`${
             pathname === '/auth/register'
-              ? 'bg-white text-primary'
+              ? 'bg-white text-primary border-secondary border-[1.5px]'
               : 'bg-transparent  text-white/50 '
-          } py-2 rounded-full px-6 text-center font-medium text-lg`}
+          } py-2 rounded-full px-5 text-center font-medium text-xl urbanist-font`}
         >
           Sign up
         </NavLink>
