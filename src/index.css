@@ -158,6 +158,20 @@ body::-webkit-scrollbar-thumb:hover {
     height: 100vh;
     width: 100%;
 }
+.stevebg-auth{
+    background: url('/images/auth/yokwejuste.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.joelfahbg-auth{
+    background: url('/images/auth/joelfah.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .get-started{
     background: url('/images/home/get-started.svg');
      background-position: center;

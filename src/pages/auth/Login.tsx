@@ -8,12 +8,14 @@ import { Button } from '../../components/layout';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import {Carousel} from "../../components";
-import { useNavigate } from 'react-router-dom';
+// import {Carousel} from "../../components";
+// import { useNavigate } from 'react-router-dom';
+import { GoArrowUpRight } from 'react-icons/go';
+import AuthQuote from '../../components/pages/Auth-Page-Components/AuthQuote';
 
 
 const Login = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,38 +56,35 @@ const Login = () => {
   };
 
   return (
-    <div className='flex h-full justify-center items-start gap-5 md:gap-10 w-full'>
-      <div className={'w-[30%] hidden md:block'}>
-        <Carousel/>
-      </div>
+    <div className='flex h-full justify-center gap-5 md:gap-10 w-full items-stretch'>
+      <AuthQuote />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='border-secondary md:bg-white/10 md:border rounded-2xl px-7'
+        className='md:border-secondary md:border-[3px] md:bg-white/10 rounded-[3.125rem] p-5 md:p-10 w-full max-w-3xl'
       >
-        <div className='flex text-white justify-center items-center flex-col gap-1 py-5'>
-          <h2 className='text-lg font-semibold md:text-2xl'>
+        <div className='text-white text-center md:p-2.5 md:mb-[3.75rem] mb-12'>
+          <h2 className='text-2xl max-md:text-xl font-semibold md:text-2xl nohemi-font'>
             Welcome Back Buddy!
           </h2>
-          <p>Login to continue</p>
+          <p className='urbanist-font font-medium text-xl max-md:text-lg'>It&apos;s been a while here since you were gone.</p>
         </div>
-        <div>
-          <div>
+        <div className='md:px-2.5'>
+          <div className='space-y-2'>
             <label
               htmlFor='email'
-              className={` mb-2 ${
+              className={`${
                 fieldHasErrors('email')
                   ? 'text-red-500'
-                  : 'text-white text-lg font-medium'
+                  : 'text-white urbanist-font'
               } `}
             >
-              Enter you email
-              <span className='text-red-600 text-lg my-0'>*</span>{' '}
+              Hey, remind us your email
             </label>
             <input
               type='email'
               id='email'
-              placeholder='enter email'
-              className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
+              placeholder='Your email address'
+              className='w-full border-[1.5px] py-3.5 px-5 text-base border-white placeholder:text-lg bg-white/10 rounded-2xl focus:outline-none urbanist-font text-white'
               {...register('email')}
             />
           </div>
@@ -97,71 +96,72 @@ const Login = () => {
             )}
           </label>
         </div>
-        <div className='mt-4 relative'>
-          <div>
+        <div className='mt-7 md:px-2.5'>
+          <div className='space-y-2'>
             <label
               htmlFor='password'
               className={` mb-2 ${
                 fieldHasErrors('password')
                   ? 'text-red-500'
-                  : 'text-white text-lg font-medium'
+                  : 'text-white urbanist-font'
               } `}
             >
-              Enter you Password
-              <span className='text-red-600 text-lg my-0'>*</span>{' '}
+              And your Password
             </label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              id='password'
-              placeholder='enter password'
-              className='mt-2 w-full border-[1px] py-3 px-5 border-white placeholder:text-lg bg-white/10 rounded-lg focus:outline-none'
-              {...register('password')}
-            />
-          </div>
-          <label className='label'>
-            {errors['password'] && (
-              <span className='label-text-alt text-red-500'>
-                {errors['password']?.message}
-              </span>
-            )}
-          </label>
-          <div className='absolute right-2 top-[50px]'>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id='password'
+                placeholder='Your password'
+                className='w-full border-[1.5px] py-3.5 px-5 border-white placeholder:text-lg bg-white/10 rounded-2xl focus:outline-none urbanist-font text-white'
+                {...register('password')}
+              />
+              <div className='absolute right-5 inset-y-0 top-[50%] transform -translate-y-[50%]'>
                 {showPassword ? (
                   <AiOutlineEye
-                    className=''
-                    size={23}
+                    className='w-6 h-6'
+                    color='white'
+                    // size={23}
                     onClick={() => setShowPassword(!showPassword)}
                   />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    size={23}
-                    onClick={() => setShowPassword(!showPassword)}
-                  />
-                )}
+                  ) : (
+                    <AiOutlineEyeInvisible
+                    className='w-6 h-6'
+                    color='white'
+                      // size={23}
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  )
+                }
               </div>
+            </div>
+          </div>
+            
         </div>
-        <div className='flex justify-between items-center mt-2'>
+        <label className='label'>
+          {errors['password'] && (
+            <span className='label-text-alt text-red-500'>
+              {errors['password']?.message}
+            </span>
+          )}
+        </label>
+        <div className='flex md:justify-between md:items-center mt-2 px-2.5 md:mb-20 mb-5 max-md:flex-col-reverse gap-y-7'>
           <div>
-            <input type='checkbox' />
-            <span className='text-white font-light ml-2'>Remember me</span>
+            <input type='checkbox' className='md:w-[1.17rem] md:h-[1.17rem] w-4 h-4 rounded-md border-secondary border-1' />
+            <span className='text-white urbanist-font ml-2.5'>Keep me logged in next time</span>
           </div>
           <Link
             to='/auth/forgot-password'
-            className='underline text-white font-medium mt-1 text-sm flex justify-end items-end'
+            className='text-white mt-1 flex justify-end items-end urbanist-font gap-x-2'
           >
             Forgot password?
+            <GoArrowUpRight className='md:w-6 md:h-6 w-5 h-5 ' />
           </Link>
         </div>
 
-        <div className='flex justify-center items-center gap-7 mt-10'>
-          <button onClick={()=>{
-              navigate('/')
-          }} className='text-white bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>Cancel</button>
-          <Button outline={false} backgroundColor='bg-secondary'>
-            {' '}
-            <p className='w-full px-10'>Login</p>{' '}
-          </Button>
-        </div>
+        <Button outline={false} backgroundColor='bg-secondary' className='w-full'>
+          Login into account
+        </Button>
       </form>
     </div>
   );
