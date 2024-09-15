@@ -17,7 +17,7 @@ const Button = ({ outline=false, children, backgroundColor="bg-primary", spacing
       //   outline === true ? 'btn-outline' : ''
       // } capitalize py-5 my-4 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] leading-[18px] font-medium nohemi-font ${backgroundColor} `}
       className={
-        cn("capitalize py-5 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] leading-[18px] font-medium nohemi-font",
+        cn("capitalize py-5 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] max-md:text-base leading-[18px] font-medium nohemi-font",
           backgroundColor,
           className,
           {
