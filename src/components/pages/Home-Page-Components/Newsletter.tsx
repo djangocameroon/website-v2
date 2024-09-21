@@ -7,26 +7,17 @@ const Newsletter = () => {
   const { blueBgInitials } = HomeImages;
   return (
     <>
-      <div className='bg-secondary mt-20 rounded-[3.125rem] bluelightbg h-[500px] relative'>
-        <img src={blueBgInitials} alt="" className='' />
-        <div className='absolute inset-0 pr-[100px] flex justify-end items-center'>
-          <div className='text-white w-[750px] text-right'>
-            <h1 className='nohemi-font font-bold text-5xl text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
-            <Button className='w-fit bg-secondary mt-7' spacing={false}>Join the community</Button>
+      <div className='bg-secondary rounded-[3.125rem] bluelightbg h-[500px] relative'>
+        <img src={blueBgInitials} alt="" className='max-md:hidden' />
+        <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
+          <div className='text-white w-full max-w-[750px] md:text-right text-center'>
+            <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
+            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false}>Join the community</Button>
           </div>
           
         </div>
-        {/* <p className='text-xl md:text-3xl w-full px-2 md:px-0 md:w-[60%] text-center mx-auto font-semibold text-white'>
-          Not that it’s now or never but don’t miss such opportunity.
-        </p>
-        <div className='flex md:flex-row flex-col items-center justify-center gap-10 mt-8  '>
-          <Button outline={false} backgroundColor='bg-white'>
-            <p className='text-primary py-1'>Get Started</p>
-          </Button>
-
-        </div> */}
       </div>
-      <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12'>
+      <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12 gap-y-5'>
         <div className='max-w-2xl w-full space-y-1.5'>
           <p className='nohemi-font font-semibold text-2xl'>
             And also make sure to join our newsletter to remain updated about

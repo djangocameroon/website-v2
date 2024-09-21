@@ -5,10 +5,12 @@ import { cn } from '../utils/constants';
 
 interface EventCardProps {
   discoverMore?: boolean;
+  className?: string;
 }
-const EventCard = ({ discoverMore=false }: EventCardProps) => {
+const EventCard = ({ discoverMore=false, className }: EventCardProps) => {
   return (
     <div className={cn('max-w-96 h-[350px] w-full shadow-outline shadow-xl rounded-[30px] px-5 py-5 flex flex-col justify-between border-[1.5px] border-primary shrink-0',
+      className,
       {
         "green-backbg justify-center items-center": discoverMore
       }

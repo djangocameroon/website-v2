@@ -20,9 +20,17 @@ const EventsSection = () => {
       </div>
 
       <div className='mt-6 flex justify-center flex-wrap items-center gap-5'>
-        {Array.from({ length: 8 }, (_, index) => (
+        {/* {Array.from({ length: 8 }, (_, index) => (
           <EventCard key={index} discoverMore={index===7} />
-        ))}
+        ))} */}
+        <EventCard />
+        <EventCard />
+        <EventCard className="max-md:hidden" />
+        <EventCard className="max-md:hidden" />
+        <EventCard className="max-md:hidden" />
+        <EventCard className="max-md:hidden" />
+        <EventCard className="max-md:hidden" />
+        <EventCard discoverMore />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { Button } from '../../layout';
 const Collaboration = () => {
   return (
     <div className=' flex justify-center lg:justify-start md:flex-row flex-col items-center md:gap-x-28 '>
-      <div className='w-full max-w-2xl mt-7 lg:mt-0'>
+      <div className='w-full max-w-2xl md:mt-7 lg:mt-0'>
         <h2 className='text-primary text-2xl md:text-3xl font-bold nohemi-font'>
           Start Your Journey of Collaboration and Innovation
         </h2>
@@ -26,7 +26,7 @@ const Collaboration = () => {
           <GoArrowUpRight className='w-6 h-6' />
         </Button>
       </div>
-      <div className='hidden lg:block'>
+      <div className='block'>
         <img src={HomeImages.teamGoals} alt='' />
       </div>
     </div>
