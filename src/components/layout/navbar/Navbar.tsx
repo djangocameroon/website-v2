@@ -1,10 +1,10 @@
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
-import { HomeImages } from '../../../assets';
-import { ToggleSwitch } from '../../../components';
+import { HomeImages } from '@/assets';
+import { ToggleSwitch } from '@/components';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { navLinks } from '../../../utils/constants';
+import { navLinks } from '@/utils/constants';
 import { Button } from '../button';
 import { VscAccount } from "react-icons/vsc";
 

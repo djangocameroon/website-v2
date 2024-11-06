@@ -1,5 +1,5 @@
 import { IoLogoLinkedin } from "react-icons/io";
-import { AboutImages } from "../../../assets";
+import { AboutImages } from "@/assets";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa6";
 

@@ -1,7 +1,7 @@
 import { Badge, Button } from './layout';
 import { Link } from 'react-router-dom';
 import { GoArrowUpRight } from 'react-icons/go';
-import { cn } from '../utils/constants';
+import { cn } from '@/utils/constants';
 
 interface EventCardProps {
   discoverMore?: boolean;

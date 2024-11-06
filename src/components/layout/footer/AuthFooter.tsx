@@ -1,8 +1,8 @@
-import { AuthImages } from '../../../assets';
+import { AuthImages } from '@/assets';
 import { VscGithubAlt } from 'react-icons/vsc';
 import { CiTwitter } from 'react-icons/ci';
 import { FiLinkedin, FiYoutube } from 'react-icons/fi';
-import { LanguageSwitcher } from '../..';
+import { LanguageSwitcher } from '@/components';
 
 
 const AuthFooter = () => {

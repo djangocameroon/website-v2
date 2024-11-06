@@ -6,7 +6,7 @@ import {
 	YoutubeSection,
 	Header,
 	Newsletter,
-} from "../components/pages/Home-Page-Components";
+} from "@/components/pages/Home-Page-Components";
 
 const Home = () => {
 	return (

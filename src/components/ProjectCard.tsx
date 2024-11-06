@@ -1,4 +1,4 @@
-import { HomeImages } from "../assets";
+import { HomeImages } from "@/assets";
 import { Badge } from "./layout";
 import { GrArticle } from "react-icons/gr";
 import { GoArrowUpRight } from "react-icons/go";

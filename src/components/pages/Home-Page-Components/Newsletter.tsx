@@ -1,6 +1,6 @@
-import { Badge, Button } from '../../layout'
+import { Badge, Button } from '@/components/layout'
 import { AiOutlineSend } from 'react-icons/ai';
-import { HomeImages } from '../../../assets';
+import { HomeImages } from '@/assets';
 
 
 const Newsletter = () => {

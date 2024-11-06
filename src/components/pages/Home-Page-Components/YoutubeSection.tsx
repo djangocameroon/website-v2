@@ -1,6 +1,6 @@
-import { AvatarUsers } from "../..";
-import { HomeImages } from "../../../assets";
-import { Badge, Button } from "../../layout";
+import { AvatarUsers } from "@/components";
+import { HomeImages } from "@/assets";
+import { Badge, Button } from "@/components/layout";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 

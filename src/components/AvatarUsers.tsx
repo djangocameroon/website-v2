@@ -1,4 +1,4 @@
-import { Avatars } from '../assets';
+import { Avatars } from '@/assets';
 
 const AvatarUsers = (
   // { amount }: { amount?: number }
