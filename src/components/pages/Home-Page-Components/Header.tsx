@@ -1,5 +1,5 @@
-import { Button } from "../../layout";
-import { HomeImages } from "../../../assets";
+import { Button } from "@/components/layout";
+import { HomeImages } from "@/assets";
 
 const Header = () => {
 	const FACTS = [

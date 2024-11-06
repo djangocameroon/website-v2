@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ILoginForm } from "../../models";
+import { ILoginForm } from "@/models";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Button } from "../../components/layout";
+import { Button } from "@/components/layout";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-// import {Carousel} from "../../components";
+// import {Carousel} from "@/components";
 import { useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
-import AuthQuote from "../../components/pages/Auth-Page-Components/AuthQuote";
-import { signinUser } from "../../apis";
+import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
+import { signinUser } from "@/apis";
 
 const Login = () => {
 	const navigate = useNavigate();

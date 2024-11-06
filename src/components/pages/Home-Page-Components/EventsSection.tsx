@@ -1,4 +1,4 @@
-import { EventCard } from '../..';
+import { EventCard } from '@/components';
 import { Link } from 'react-router-dom';
 import { GoArrowUpRight } from 'react-icons/go';
 

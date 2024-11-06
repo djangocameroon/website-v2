@@ -1,7 +1,7 @@
 
 import { Outlet } from 'react-router-dom';
-import { TogglePage } from '../../components/pages/Auth-Page-Components';
-import { AuthFooter, AuthNavbar } from '../../components/layout';
+import { TogglePage } from '@/components/pages/Auth-Page-Components';
+import { AuthFooter, AuthNavbar } from '@/components/layout';
 
 const Auth = () => {
   return (

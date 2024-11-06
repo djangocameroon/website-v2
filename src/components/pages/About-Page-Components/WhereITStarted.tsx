@@ -1,4 +1,4 @@
-import { AboutImages } from '../../../assets';
+import { AboutImages } from '@/assets';
 
 const WhereITStarted = () => {
   return (

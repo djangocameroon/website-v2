@@ -1,6 +1,6 @@
 
 import { useLocation } from 'react-router-dom'
-import { AuthImages } from '../../../assets'
+import { AuthImages } from '@/assets'
 
 const AuthQuote = () => {
     const { pathname } = useLocation()

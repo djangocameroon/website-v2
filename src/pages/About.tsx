@@ -4,7 +4,7 @@ import {
   MissionVission,
   Organisers,
   WhereITStarted,
-} from '../components/pages/About-Page-Components';
+} from '@/components/pages/About-Page-Components';
 
 const About = () => {
   return (

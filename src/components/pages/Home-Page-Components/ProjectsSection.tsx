@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ProjectCard } from "../..";
+import { ProjectCard } from "@/components";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { useRef } from "react";

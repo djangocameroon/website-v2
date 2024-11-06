@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { cn } from '../../../utils/constants';
+import { cn } from '@/utils/constants';
 
 
 interface BadgeProps {

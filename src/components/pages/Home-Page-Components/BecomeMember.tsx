@@ -1,5 +1,5 @@
-import { HomeImages } from '../../../assets';
-import { Button } from '../../layout';
+import { HomeImages } from '@/assets';
+import { Button } from '@/components/layout';
 
 const BecomeMember = () => {
   const { blueDjango, blueMap } = HomeImages;

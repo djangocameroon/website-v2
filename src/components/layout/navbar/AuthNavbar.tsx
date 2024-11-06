@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { AuthImages } from '../../../assets'
+import { AuthImages } from '@/assets'
 
 const AuthNavbar = () => {
   return (

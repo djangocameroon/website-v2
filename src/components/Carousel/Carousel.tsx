@@ -1,7 +1,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-import {AuthImages} from '../../assets'
+import {AuthImages} from '@/assets'
 
 
 import 'swiper/css';

@@ -2,7 +2,7 @@
 
 import { AxiosError } from "axios";
 import axiosClient from "./axios";
-import { ILoginForm, IRegisterForm } from "../models";
+import { ILoginForm, IRegisterForm } from "@/models";
 import { toast } from "react-hot-toast";
 
 type IResponse<T = unknown> = {
@@ -76,4 +76,23 @@ export const signinUser = async (
         }
 	}
     return null;
+};
+
+
+
+
+export const verifyEmail = async (body: {
+	email: string;
+}): Promise<IResponse | null> => {
+	try {
+		const { data } = await axiosClient.post<IResponse>("/auth/password/reset/", body);
+        toast.success(data.message);
+		return data;
+	} catch (err) {
+		if (err instanceof AxiosError){
+            const { data: { errors } } = err.response!
+            toast.error(errors[0]);
+        }
+		return null;
+	}
 };

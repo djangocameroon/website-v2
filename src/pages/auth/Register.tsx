@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { IRegisterForm } from "../../models";
+import { IRegisterForm } from "@/models";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Button } from "../../components/layout";
+import { Button } from "@/components/layout";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-// import {Carousel} from "../../components";
+// import {Carousel} from "@/components";
 import { useNavigate } from "react-router-dom";
-import AuthQuote from "../../components/pages/Auth-Page-Components/AuthQuote";
-import { registerUser } from "../../apis";
+import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
+import { registerUser } from "@/apis";
 
 const Register = () => {
 	const navigate = useNavigate();

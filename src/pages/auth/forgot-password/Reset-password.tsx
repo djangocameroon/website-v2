@@ -1,8 +1,8 @@
 import {Link, useNavigate} from 'react-router-dom';
-import { AuthImages, HomeImages } from '../../../assets';
-import { Button } from '../../../components/layout';
+import { AuthImages, HomeImages } from '@/assets';
+import { Button } from '@/components/layout';
 import { useForm } from 'react-hook-form';
-import { ResetPasswordForm } from '../../../models';
+import { ResetPasswordForm } from '@/models';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 

@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-// import { AuthImages } from '../../../assets';
+// import { AuthImages } from '@/assets';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

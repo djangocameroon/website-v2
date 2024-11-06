@@ -1,4 +1,4 @@
-import { Button } from '../../layout';
+import { Button } from '@/components/layout';
 
 
 const JoinUsNow = () => {
