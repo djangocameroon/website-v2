@@ -1,9 +1,9 @@
 export interface ForgotPasswordForm {
-    email: string
+    email: string;
+    code: string;
 }
 
 export interface ResetPasswordForm {
-    // code :string
     password: string;
     confirmPassword: string;
 }
