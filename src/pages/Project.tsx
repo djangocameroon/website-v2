@@ -1,7 +1,6 @@
 import { ProjectCard } from "@/components";
 import { Badge } from "@/components/layout";
 import { useState } from "react";
-import { GrArticle } from "react-icons/gr";
 import { FaCode, FaLayerGroup } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 
@@ -11,8 +10,9 @@ const Project = () => {
 
   const filters = [
     { id: "all", label: "All Projects", icon: <FaLayerGroup /> },
-    { id: "articles", label: "Articles", icon: <GrArticle /> },
-    { id: "projects", label: "Projects", icon: <FaCode /> },
+    { id: "web", label: "Web Apps", icon: <FaCode /> },
+    { id: "api", label: "APIs & Backends", icon: <FaCode /> },
+    { id: "tools", label: "Tools & Libraries", icon: <FaCode /> },
   ];
 
   return (
@@ -33,11 +33,11 @@ const Project = () => {
           </Badge>
         </div>
         <h1 className="text-primary nohemi-font text-4xl md:text-6xl font-extrabold">
-          Projects & Articles
+          Community Projects
         </h1>
         <p className="text-text-color urbanist-font text-lg md:text-xl max-w-3xl mx-auto">
-          Discover innovative projects, insightful articles, and technical
-          resources crafted by the Django Cameroon community
+          Explore open-source Django projects built by the Django Cameroon
+          community. Star, contribute, and collaborate on amazing projects!
         </p>
       </div>
 
@@ -49,7 +49,7 @@ const Project = () => {
             <BiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" />
             <input
               type="text"
-              placeholder="Search projects and articles..."
+              placeholder="Search projects by name, technology, or description..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-14 pr-6 py-4 rounded-full border-2 border-gray-300 focus:border-secondary focus:outline-none urbanist-font text-base"
@@ -83,34 +83,38 @@ const Project = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12">
+      <div className="bg-[#0C4B33] rounded-3xl p-8 md:p-12 shadow-lg">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center text-white space-y-2">
             <h2 className="nohemi-font text-4xl md:text-5xl font-extrabold">
               45+
             </h2>
-            <p className="urbanist-font text-sm md:text-base">Total Projects</p>
+            <p className="urbanist-font text-sm md:text-base opacity-90">
+              Open Source Projects
+            </p>
           </div>
           <div className="text-center text-white space-y-2">
             <h2 className="nohemi-font text-4xl md:text-5xl font-extrabold">
-              120+
+              2.3k+
             </h2>
-            <p className="urbanist-font text-sm md:text-base">
-              Articles Published
+            <p className="urbanist-font text-sm md:text-base opacity-90">
+              GitHub Stars
             </p>
           </div>
           <div className="text-center text-white space-y-2">
             <h2 className="nohemi-font text-4xl md:text-5xl font-extrabold">
               30+
             </h2>
-            <p className="urbanist-font text-sm md:text-base">Contributors</p>
+            <p className="urbanist-font text-sm md:text-base opacity-90">
+              Active Contributors
+            </p>
           </div>
           <div className="text-center text-white space-y-2">
             <h2 className="nohemi-font text-4xl md:text-5xl font-extrabold">
-              5k+
+              150+
             </h2>
-            <p className="urbanist-font text-sm md:text-base">
-              Community Members
+            <p className="urbanist-font text-sm md:text-base opacity-90">
+              Total Contributions
             </p>
           </div>
         </div>
@@ -118,17 +122,18 @@ const Project = () => {
 
       {/* Projects Grid */}
       <div className="space-y-8">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap gap-4">
           <h2 className="text-primary nohemi-font text-2xl md:text-3xl font-bold">
             Featured Projects
           </h2>
           <p className="text-text-color urbanist-font text-sm md:text-base">
-            Showing <span className="font-bold text-secondary">12</span> results
+            Showing <span className="font-bold text-secondary">12</span> of{" "}
+            <span className="font-bold">45</span> projects
           </p>
         </div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-12 justify-items-center">
           <ProjectCard />
           <ProjectCard />
           <ProjectCard />
@@ -158,15 +163,15 @@ const Project = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-primary/5 rounded-3xl p-8 md:p-12 text-center space-y-6 border-2 border-primary/10">
-        <h2 className="text-primary nohemi-font text-3xl md:text-4xl font-bold">
-          Want to Contribute?
+      <div className="bg-[#0C4B33] rounded-3xl p-8 md:p-12 text-center space-y-6 shadow-lg">
+        <h2 className="text-white nohemi-font text-3xl md:text-4xl font-bold">
+          Have a Django Project?
         </h2>
-        <p className="text-text-color urbanist-font text-lg max-w-2xl mx-auto">
-          Share your Django projects and articles with the community. Help
-          others learn and grow together!
+        <p className="text-white/90 urbanist-font text-lg max-w-2xl mx-auto">
+          Share your open-source Django project with the community. Let's build
+          amazing things together and inspire others!
         </p>
-        <button className="bg-secondary text-white urbanist-font font-bold text-lg px-8 py-4 rounded-full hover:bg-secondary/90 transition-all shadow-lg">
+        <button className="bg-white text-[#0C4B33] urbanist-font font-bold text-lg px-8 py-4 rounded-full hover:bg-gray-100 transition-all shadow-lg">
           Submit Your Project
         </button>
       </div>
