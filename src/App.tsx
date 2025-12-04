@@ -8,6 +8,7 @@ import { ForgotPassword, ResetPassword } from "./pages/auth/forgot-password";
 import About from "./pages/About";
 
 import { Toaster } from "react-hot-toast";
+import Project from "./pages/Project";
 
 const App = () => {
 	return (
@@ -32,6 +33,7 @@ const App = () => {
 						/>
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
+						<Route path="/projects" element={<Project />} />
 					</Routes>
 
 					<div className="bg-transparent">
