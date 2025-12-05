@@ -17,7 +17,11 @@ const Navbar = () => {
   const isAuthRoute = pathname.includes('/auth');
 
   const changeNavColor = () => {
-    window.scrollY >= 200 ? setNavBg(true) : setNavBg(false);
+    if (window.scrollY >= 200) {
+      setNavBg(true);
+    } else {
+      setNavBg(false);
+    }
   };
 
   useEffect(() => {
