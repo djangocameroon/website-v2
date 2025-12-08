@@ -16,7 +16,7 @@ const defaultLinks = [
     { path: '/', label: 'Project' },
     { path: '/', label: 'Contact' },
     { path: '/', label: 'Chapter' },
-];
+    { path: '/', label: 'Blog'}];
 
 const Navbar = ({ links = defaultLinks }) => {
   const [open, setOpen] = useState(false);
