@@ -1,44 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nova+Script&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nova+Script&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-    font-family: "Nohemi";
-    src: url("/fonts/Nohemi-ExtraBold.ttf") format("truetype");
-    font-weight: 800; /* Black weight is typically 900 */
-    font-style: normal;
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-ExtraBold.ttf") format("truetype");
+  font-weight: 800; /* Black weight is typically 900 */
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Nohemi";
-    src: url("/fonts/Nohemi-Bold.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Nohemi";
-    src: url("/fonts/Nohemi-SemiBold.ttf") format("truetype");
-    font-weight: 600;
-    font-style: normal;
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Nohemi";
-    src: url("/fonts/Nohemi-Medium.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
 }
 
 .nohemi-font {
-    font-family: "Nohemi", sans-serif;
+  font-family: "Nohemi", sans-serif;
 }
 
 .urbanist-font {
-    font-family: "urbanist";
+  font-family: "urbanist";
 }
 
 /* Rectangle 122
@@ -53,58 +53,65 @@ top: 2903px;
 /* background: #FFFFFF; */
 /* filter: blur(75px);  */
 
+body {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+* {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol {
+  overflow: hidden;
+}
 
-body{
-    min-height: 100vh;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-}
-*{
-    scroll-behavior: smooth;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-p,span,h1,h2,h3,h4,h5,h6,ol{
-    overflow:hidden;
+.font-family {
+  font-family: "Poppins", sans-serif;
 }
 
-.font-family{
-    font-family: 'Poppins', sans-serif;
-}
-
-.dark-bg{
-    background: linear-gradient(180deg, #2A2C38 0%, rgba(42, 44, 56, 0.00) 100%);
+.dark-bg {
+  background: linear-gradient(180deg, #2a2c38 0%, rgba(42, 44, 56, 0) 100%);
 }
 .red-bg {
-    background: linear-gradient(115deg, #C20102 0%, #7B0100 100%);
+  background: linear-gradient(115deg, #c20102 0%, #7b0100 100%);
 }
-.header-bg{
-    background: url('/images/home/curlygrid.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    height: 100%;
-    width: 100%;
+.header-bg {
+  background: url("/images/home/curlygrid.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 body::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 body::-webkit-scrollbar-track {
-    background: rgba(16, 62, 46, 1);
-    border-radius: 5px;
+  background: rgba(16, 62, 46, 1);
+  border-radius: 5px;
 }
- 
+
 body::-webkit-scrollbar-thumb {
-    background: #c9c7c7;
-    border-radius: 5px;
+  background: #c9c7c7;
+  border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: #dddddd;
+  background: #dddddd;
 }
 
 /* .projects-slider {
@@ -112,127 +119,154 @@ body::-webkit-scrollbar-thumb:hover {
 } */
 
 .projects-slider::-webkit-scrollbar {
-    height: 5px;
-    /* height: 90%; */
+  height: 5px;
+  /* height: 90%; */
 }
 .projects-slider::-webkit-scrollbar-track {
-    background: rgba(18, 18, 18, 0.05);;
-    border-radius: 5px;
+  background: rgba(18, 18, 18, 0.05);
+  border-radius: 5px;
 }
- 
+
 .projects-slider::-webkit-scrollbar-thumb {
-    background-color: rgba(66, 133, 244, 1);
-    border-radius: 5px;
-    /* width: 0px; */
+  background-color: rgba(66, 133, 244, 1);
+  border-radius: 5px;
+  /* width: 0px; */
 }
 
 .projects-slider::-webkit-scrollbar-thumb:hover {
-    background: #dddddd;
+  background: #dddddd;
 }
 
 .header-number-stats {
-    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
 }
 
-.about-bg{
-    background: url('/images/home/greenbg.svg');
-     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
+.about-bg {
+  background: url("/images/home/greenbg.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }
-.green-backbg{
-    background: url('/images/home/greenbackbg.svg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.green-backbg {
+  background: url("/images/home/greenbackbg.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.green-backbg-auth{
-    background: url('/images/home/greenbackbg.svg');
-     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100%;
+.green-backbg-auth {
+  background: url("/images/home/greenbackbg.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
 }
-.stevebg-auth{
-    background: url('/images/auth/yokwejuste.svg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.joelfahbg-auth{
-    background: url('/images/auth/joelfah.svg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.stevebg-auth {
+  background: url("/images/auth/yokwejuste.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.get-started{
-    background: url('/images/home/get-started.svg');
-     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
+.joelfahbg-auth {
+  background: url("/images/auth/joelfah.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.bluelightbg{
-    background: url('/images/home/bluelightbg.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.get-started {
+  background: url("/images/home/get-started.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }
 
-.grid-container{
-    display: grid;
-    gap: 15px;
-    grid-template-columns: 1fr 1fr;
-    
-    grid-template-rows: 150px 150px 150px;
-    grid-template-areas: "img3 img2"
-                         "img3 img4"
-                         "img1 img4"
-                         "img1 img5" 
-
-                          ;
+.bluelightbg {
+  background: url("/images/home/bluelightbg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.grid-container img{
-    width: 100%;
-    height: 100%;
-    /* object-fit: contain;a */
-} 
-.grid-container .img1{
-    grid-area: img1;
-}
-.grid-container .img2{
-    grid-area: img2;
-}
-.grid-container .img3{
-    grid-area: img3;
-}
-.grid-container .img4{
-    grid-area: img4;
-}
-.grid-container .img5{
-    grid-area: img5;
+.grid-container {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+
+  grid-template-rows: 150px 150px 150px;
+  grid-template-areas:
+    "img3 img2"
+    "img3 img4"
+    "img1 img4"
+    "img1 img5";
 }
 
-
-
+.grid-container img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: contain;a */
+}
+.grid-container .img1 {
+  grid-area: img1;
+}
+.grid-container .img2 {
+  grid-area: img2;
+}
+.grid-container .img3 {
+  grid-area: img3;
+}
+.grid-container .img4 {
+  grid-area: img4;
+}
+.grid-container .img5 {
+  grid-area: img5;
+}
 
 .btn-outline {
-    @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
+  @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
 }
 .btn-white {
-    @apply bg-white text-primary
+  @apply bg-white text-primary;
 }
 
-.nav-hover-link{
-    @apply hover:border-b-4 border-primary ;
+.nav-hover-link {
+  @apply hover:border-b-4 border-primary;
+}
+
+/* Stars background animation */
+.stars-background {
+  background: #0a0e27;
+  background-image: radial-gradient(
+      2px 2px at 20px 30px,
+      white,
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(2px 2px at 60px 70px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 50px 50px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 130px 80px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 90px 10px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 160px 120px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 200px 90px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 30px 100px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 140px 40px, white, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 110px 150px, white, rgba(0, 0, 0, 0));
+  background-size: 200px 200px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  animation: starsMove 120s linear infinite;
+}
+
+@keyframes starsMove {
+  from {
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  }
+  to {
+    background-position: 200px 0, 240px 60px, 330px 270px, 270px 100px;
+  }
 }

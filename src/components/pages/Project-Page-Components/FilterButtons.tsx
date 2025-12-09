@@ -1,12 +1,8 @@
-import { Badge } from "@/components/layout";
 import { ProjectCategory } from "@/types/project";
-import { FaCode, FaLayerGroup } from "react-icons/fa";
-import { ReactNode } from "react";
 
 interface Filter {
   id: ProjectCategory;
   label: string;
-  icon: ReactNode;
 }
 
 interface FilterButtonsProps {
@@ -15,10 +11,10 @@ interface FilterButtonsProps {
 }
 
 const filters: Filter[] = [
-  { id: "all", label: "All Projects", icon: <FaLayerGroup /> },
-  { id: "web", label: "Web Apps", icon: <FaCode /> },
-  { id: "api", label: "APIs & Backends", icon: <FaCode /> },
-  { id: "tools", label: "Tools & Libraries", icon: <FaCode /> },
+  { id: "all", label: "Quick peek" },
+  { id: "web", label: "Web" },
+  { id: "api", label: "Mobile" },
+  { id: "tools", label: "API" },
 ];
 
 const FilterButtons = ({
@@ -26,27 +22,37 @@ const FilterButtons = ({
   onFilterChange,
 }: FilterButtonsProps) => {
   return (
-    <div className="flex justify-center items-center gap-4 flex-wrap">
+    <div className="flex items-center gap-3 flex-wrap">
       {filters.map((filter) => (
-        <Badge
+        <button
           key={filter.id}
-          backgroundColor={
-            activeFilter === filter.id ? "bg-secondary" : "bg-secondary/10"
-          }
-          className={`cursor-pointer transition-all ${
-            activeFilter === filter.id ? "text-white" : "text-secondary"
+          onClick={() => onFilterChange(filter.id)}
+          className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all ${
+            activeFilter === filter.id
+              ? "bg-[#CCE2D8] text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
-          outline={activeFilter !== filter.id}
         >
-          <div
-            className="flex items-center gap-2 px-2"
-            onClick={() => onFilterChange(filter.id)}
-          >
-            {filter.icon}
-            <span className="font-medium">{filter.label}</span>
-          </div>
-        </Badge>
+          {filter.label}
+        </button>
       ))}
+      <button className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white urbanist-font font-medium text-sm hover:bg-gray-800 transition-all">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+        Search
+      </button>
     </div>
   );
 };

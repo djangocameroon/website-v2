@@ -1,60 +1,55 @@
 import {
   ProjectHeader,
-  SearchBar,
   FilterButtons,
-  ProjectStats,
   ProjectGrid,
   Pagination,
-  ProjectCTA,
 } from "@/components/pages/Project-Page-Components";
-import { mockProjects, mockProjectStats } from "@/data/mockProjects";
+import { ProjectNavbar } from "@/components/layout/navbar";
+import { mockProjects } from "@/data/mockProjects";
 import { useProjectFilter } from "@/hooks/useProjectFilter";
 
 const Project = () => {
   const {
-    searchQuery,
     activeFilter,
     currentPage,
     paginatedProjects,
     totalPages,
     totalFiltered,
-    handleSearchChange,
     handleFilterChange,
     setCurrentPage,
   } = useProjectFilter(mockProjects);
 
   return (
-    <div
-      id="project"
-      className="overflow-x-hidden mx-auto w-[90%] max-w-[1400px] mt-32 mb-20 space-y-12"
-    >
-      <ProjectHeader />
+    <div id="project" className="overflow-x-hidden">
+      <ProjectNavbar />
+      <ProjectHeader featuredProjects={mockProjects} />
 
-      <div className="space-y-6">
-        <SearchBar
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search projects by name, technology, or description..."
-        />
-        <FilterButtons
-          activeFilter={activeFilter}
-          onFilterChange={handleFilterChange}
-        />
+      {/* Main Content Area - White Background */}
+      <div className="bg-white pt-40 pb-20">
+        <div className="mx-auto w-[90%] max-w-[1400px] space-y-12">
+          {/* Search and Filters Section */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-12">
+            <FilterButtons
+              activeFilter={activeFilter}
+              onFilterChange={handleFilterChange}
+            />
+          </div>
+
+          {/* Projects Grid */}
+          <ProjectGrid
+            projects={paginatedProjects}
+            totalProjects={totalFiltered}
+          />
+
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          )}
+        </div>
       </div>
-
-      <ProjectStats stats={mockProjectStats} />
-
-      <ProjectGrid projects={paginatedProjects} totalProjects={totalFiltered} />
-
-      {totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-      )}
-
-      <ProjectCTA />
     </div>
   );
 };
