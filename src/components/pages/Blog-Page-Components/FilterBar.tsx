@@ -1,5 +1,5 @@
-import { Search } from 'lucide-react';
-import { FILTERS } from '@/data/blogData'; // On importe les filtres
+import { BiSearch } from 'react-icons/bi';
+import { FILTERS } from '@/data/blogData';
 
 const FilterBar = () => {
   return (
@@ -24,7 +24,7 @@ const FilterBar = () => {
             placeholder="Search" 
             className="bg-black text-white pl-5 pr-6 py-2.5 rounded-full text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+            <BiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
         </div>
       </div>
 

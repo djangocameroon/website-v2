@@ -1,5 +1,6 @@
 import React from 'react';
-import { ThumbsUp,Clock, Eye, ArrowUpRight } from 'lucide-react';
+import { AiOutlineLike, AiOutlineEye, AiOutlineArrowUp } from 'react-icons/ai';
+import { BiTimeFive } from 'react-icons/bi';
 import { VscAccount } from "react-icons/vsc";
 
 interface BlogCardProps {
@@ -40,16 +41,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ image, tags, title, like, views, re
 
         {/* Meta Stats */}
         <div className="mt-auto flex items-center gap-6 text-[12px] text-gray-500 font-semibold mb-6 border-b border-gray-50 pb-6">
-            <span className="flex items-center gap-1.5"><ThumbsUp size={14} className="text-blue-500" /> {like}</span>
-            <span className="flex items-center gap-1.5"><Eye size={14} /> {views}</span>
-            <span className="flex items-center gap-1.5"><Clock size={14} /> {readTime}</span>
+            <span className="flex items-center gap-1.5"><AiOutlineLike size={14} className="text-blue-500" /> {like}</span>
+            <span className="flex items-center gap-1.5"><AiOutlineEye size={14} /> {views}</span>
+            <span className="flex items-center gap-1.5"><BiTimeFive size={14} /> {readTime}</span>
             <span className="flex items-center gap-1.5 ml-auto text-gray-800"><VscAccount size={14} /> {author}</span>
         </div>
 
         {/* Button */}
         <button className="w-full bg-[#13322b] hover:bg-[#0d241f] text-white py-4 rounded-2xl flex items-center justify-between px-8 text-sm font-bold transition-all transform active:scale-[0.98]">
           Read more
-          <ArrowUpRight size={18} />
+          <AiOutlineArrowUp size={18} />
         </button>
       </div>
     </div>
