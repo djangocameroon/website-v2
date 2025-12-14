@@ -30,6 +30,8 @@ const Project = () => {
     >
       <ProjectHeader />
 
+      <ProjectStats stats={mockProjectStats} />
+
       <div className="space-y-6">
         <SearchBar
           value={searchQuery}
@@ -41,8 +43,6 @@ const Project = () => {
           onFilterChange={handleFilterChange}
         />
       </div>
-
-      <ProjectStats stats={mockProjectStats} />
 
       <ProjectGrid projects={paginatedProjects} totalProjects={totalFiltered} />
 
