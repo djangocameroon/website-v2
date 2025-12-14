@@ -7,17 +7,17 @@ const JoinUs = () => {
   const { blueBgInitials } = HomeImages;
   return (
     <div>
-      <div className='bg-secondary rounded-[3.125rem] bluelightbg h-[400px] relative'>
-        <img src={blueBgInitials} alt="" className='max-md:hidden' />
-        <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
+      <div className='bg-secondary rounded-[3.125rem] bluelightbg h-[400px] relative overflow-hidden'>
+        <img src={blueBgInitials} alt="" className='max-md:hidden relative z-0' />
+        <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center z-10'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
             <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
             <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false}>Join the community</Button>
           </div>
-          
+
         </div>
       </div>
-      <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12 gap-y-1'>
+      <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12 gap-y-1 relative z-20'>
         <div className='max-w-2xl w-full space-y-1.5'>
           <p className='nohemi-font font-semibold text-2xl'>
             And also make sure to join our newsletter to remain updated about
