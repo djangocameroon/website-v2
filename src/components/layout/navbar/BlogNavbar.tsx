@@ -37,36 +37,28 @@ const Navbar = () => {
       <div className='flex items-center justify-between w-[92%] lg:w-[90%] mx-auto'>
         
         {/* Logo */}
-        <Link to='/' className='z-50'>
+        <div className='z-50'>
           <img
             src={HomeImages.Logo}
             alt='logo'
-            className={`cursor-pointer h-10 lg:h-12 transition-all ${isTransparent ? 'brightness-0 invert' : ''}`}
+            className={`md:cursor-pointer h-10 lg:h-12 transition-all ${isTransparent ? 'brightness-0 invert' : ''}`} 
           />
-        </Link>
+        </div>
 
         {/* Desktop Links */}
         <ul className='hidden md:flex items-center gap-8 lg:gap-12'>
-          {navLinks.map((navLink, id) => {
-            const isActive = pathname === navLink.link;
-            return (
-              <li key={id}>
-                <Link
-                  to={navLink.link}
-                  className={`text-sm lg:text-base transition-all duration-300 relative pb-1 ${
-                    isActive
-                      ? `font-bold ${isTransparent ? 'text-white hover:text-blue-200' : 'text-blue-600 hover:text-blue-700'}`
-                      : `font-semibold ${isTransparent ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-500'}`
-                  }`}
-                >
-                  {navLink.label}
-                  {isActive && (
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 ${isTransparent ? 'bg-white' : 'bg-blue-600'} rounded-full`}></span>
-                  )}
-                </Link>
-              </li>
-            );
-          })}
+          {navLinks.map((navLink, id) => (
+            <li key={id}>
+              <Link 
+                to={navLink.link} 
+                className={`text-sm lg:text-base font-semibold transition-colors hover:text-blue-400 ${
+                  isTransparent ? 'text-white' : 'text-gray-700'
+                }`}
+              >
+                {navLink.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         {/* Actions (Button) */}
@@ -102,27 +94,20 @@ const Navbar = () => {
 
       {/* Mobile Menu Sidebar */}
       <ul className={`
-        md:hidden fixed top-0 h-screen w-[75%] bg-white py-20 px-10 transition-all duration-500 z-50 shadow-2xl
+        md:hidden fixed top-0 h-screen w-[75%] bg-white py-20 px-10 transition-all duration-500 z-50
         ${open ? 'left-0' : 'left-[-100%]'}
       `}>
-        {navLinks.map((navLink, id) => {
-          const isActive = pathname === navLink.link;
-          return (
-            <li key={id} className="mb-4">
-              <Link
-                to={navLink.link}
-                className={`text-xl font-bold py-3 px-4 rounded-lg block transition-all duration-200 ${
-                  isActive
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-gray-900 hover:bg-gray-100'
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {navLink.label}
-              </Link>
-            </li>
-          );
-        })}
+        {navLinks.map((navLink, id) => (
+          <li key={id} className="mb-6">
+            <Link 
+              to={navLink.link} 
+              className="text-xl font-bold text-gray-900"
+              onClick={() => setOpen(false)}
+            >
+              {navLink.label}
+            </Link>
+          </li>
+        ))}
         <div className="mt-10">
           <Link to='/auth/login' onClick={() => setOpen(false)}>
             <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold">

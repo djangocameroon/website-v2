@@ -1,7 +1,7 @@
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
-import { BLOG_POSTS } from '@/data/blogData';
+import { blogData } from '@/data/blogData';
 import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
-import Navbar from './navbar';
+import Navbar from '@/components/layout/navbar/BlogNavbar';
 
 
 const Blog = () => {
@@ -13,7 +13,7 @@ const Blog = () => {
       <div className='w-full md:w-[85%] mx-auto'>
         <section className="max-w-7xl mx-auto px-6 pb-10">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-12">
-              {BLOG_POSTS.map((post) => (
+              {blogData.map((post) => (
                   <BlogCard 
                     key={post.id}
                     {...post} 
