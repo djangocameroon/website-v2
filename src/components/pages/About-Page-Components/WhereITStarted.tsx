@@ -30,8 +30,8 @@ const WhereITStarted = () => {
       </div>
 
       <article className='w-full space-y-8'>
-        <div className='w-full'>
-          <img src={AboutImages.peopleTogether} alt='' />
+        <div className='w-full rounded-[30px] border-secondary border-[5px] overflow-hidden max-h-[350px]'>
+          <img src={AboutImages.peopleTogether} alt='' className='object-fill w-full h-full grayscale hover:grayscale-[85%] transition-all' />
         </div>
 
         <div className='space-y-4'>

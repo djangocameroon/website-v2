@@ -1,7 +1,14 @@
 import { AboutImages } from '@/assets';
 import AnimatedSection from './animated-section';
+import { cn } from '@/utils/constants';
 
 const RegionalImpact = () => {
+    const regions = [
+        { name: 'Bafoussam', image: AboutImages.house1 },
+        { name: 'Buea', image: AboutImages.house2 },
+        { name: 'Yaounde', image: AboutImages.landscape1 },
+        { name: 'Bamenda', image: AboutImages.landscape2 },
+    ] as const;
     return (
         <AnimatedSection className='relative flex max-md:flex-col items-start justify-between gap-10 lg:gap-32 md:pb-[6.25rem] pb-10'>
             <div className='absolute left-0 inset-y-0 flex w-[0.938rem] max-md:hidden'>
@@ -36,44 +43,31 @@ const RegionalImpact = () => {
                             Velit eleifend in ullamcorper id ultrices nibh. Amet sed nibh feugiat elit rhoncus non non. Neque nunc aliquam sagittis fusce posuere odio potenti amet. Leo quisque at pellentesque tincidunt nulla malesuada vitae faucibus. Ut at semper eget et nisi convallis. Ut viverra non pellentesque morbi enim phasellus duis. Vulputate libero sed in amet rhoncus.
                         </p>
                     </article>
-                    <article className='w-full lg:w-[60%] grid-container'>
-                        <div className='relative img1'>
-                            <div className='absolute bottom-4 left-5'>
-                                <div className='cursor-pointer bg-secondary flex justify-center items-center rounded-full text-white text-sm py-1 px-5'>
-                                    Bafoussam
+                    <article className='w-full lg:w-[60%] flex gap-4 max-lg:flex-col'>
+                        {Array.from({ length: 2 }).fill(null).map((_, id) => {
+                            const colIndex = id + 1;
+                            return (
+                                <div className={'w-full space-y-4' + (colIndex === 2 ? ' mt-20' : '')} key={colIndex}>
+                                    {regions.slice(colIndex * 2 - 2, colIndex * 2).map((region, index) => (
+                                        <div key={index} className={cn(`relative img${index + 1} rounded-[30px] border-secondary border-[3px] w-full h-[500px] overflow-hidden`, {
+                                            "lg:h-[395px]": (colIndex - 1) * 2 + index === 0 || (colIndex - 1) * 2 + index === 3,
+                                            "lg:h-[580px]": (colIndex - 1) * 2 + index === 1 || (colIndex - 1) * 2 + index === 2,
+                                        })}>
+                                            <div className='absolute bottom-4 left-5 z-10'>
+                                                <div className='cursor-pointer bg-secondary flex justify-center items-center rounded-full text-white text-sm py-1 px-5'>
+                                                    {region.name}
+                                                </div>
+                                            </div>
+                                            <img src={region.image} alt={region.name} className='object-cover w-full h-full grayscale transition-all hover:grayscale-0' />
+                                        </div>
+                                    ))}
                                 </div>
-                            </div>
-                            <img src={AboutImages.house1} alt='' />
-                        </div>
-                        <div className='relative img2 w-full h-6'></div>
-                        <div className='relative img3'>
-                            <div className='absolute bottom-2 left-5'>
-                                <div className='cursor-pointer bg-secondary flex justify-center items-center rounded-full text-white text-sm py-1 px-5'>
-                                    Buea
-                                </div>
-                            </div>
-                            <img src={AboutImages.house2} alt='' className='object' />
-                        </div>
-                        <div className='relative img4'>
-                            <div className='absolute bottom-2 left-5'>
-                                <div className='cursor-pointer bg-secondary flex justify-center items-center rounded-full text-white text-sm py-1 px-5'>
-                                    Yaounde
-                                </div>
-                            </div>
-                            <img src={AboutImages.landscape1} alt='' />
-                        </div>
-                        <div className='relative img5'>
-                            <div className='absolute bottom-4 left-5'>
-                                <div className='cursor-pointer bg-secondary flex justify-center items-center rounded-full text-white text-sm py-1 px-5'>
-                                    Bamenda
-                                </div>
-                            </div>
-                            <img src={AboutImages.landscape2} alt='' />
-                        </div>
+                            )
+                        })}
                     </article>
-                </section>
-            </div>
-        </AnimatedSection>
+                </section >
+            </div >
+        </AnimatedSection >
     );
 }
 
