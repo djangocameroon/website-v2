@@ -1,26 +1,44 @@
 import { AboutImages } from '@/assets';
+import AnimatedSection from './animated-section';
 
 const WhereITStarted = () => {
+
   return (
-    <section className='flex items-start justify-between gap-10 lg:gap-32 px-4 sm:px-0 sm:pl-10 border-none sm:border-solid border-l-2 border-gray-200 ml-3 py-8'>
-      <div className='w-[35%] hidden sm:block '>
-        <div className='absolute left-0 md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
-        <span className='text-sm text-secondary font-semibold'>
-          Lorem ipsum subtitle
-        </span>
-        <h2 className='timeline-title text-xl my-4 text-gray-700 font-bold'>
-          Where & where it all started.
-        </h2>
-      </div>
-      <article className='w-full'>
-        <div className='w-full'>
-          <img src={AboutImages.peopleTogether} alt='' />
+    <AnimatedSection
+      className='relative flex max-md:flex-col items-start justify-between gap-10 lg:gap-32 pt-8 md:pb-[134px] pb-10'
+    >
+
+      <div className='absolute left-0 inset-y-0 flex w-[0.938rem] max-md:hidden'>
+        <div className="flex justify-center flex-[1]">
+          <div className="w-[1px] bg-dark"></div>
         </div>
-        <div>
-          <h2 className='text-3xl pt-8 pb-4 font-semibold'>
+      </div>
+
+      <div className='w-[35%] max-md:w-full'>
+        <div className='md:mt-4 md:pl-10 relative'>
+          <div className="max-md:hidden absolute left-0 top-4 size-[0.938rem] bg-white rounded-full border-[0.5px] border-text-color  flex justify-center items-center">
+            <div className='bg-text-color rounded-full size-[0.688rem] border-0'></div>
+          </div>
+
+          <span className='text-sm text-secondary urbanist-font mb-2 inline-block max-md:w-full max-md:text-center'>
+            Every Journey Has a First Step
+          </span>
+          <h3 className='timeline-title text-[1.625rem] leading-[1.875rem] font-semibold nohemi-font max-md:text-center'>
+            When & where it all<br />started.
+          </h3>
+        </div>
+      </div>
+
+      <article className='w-full space-y-8'>
+        <div className='w-full rounded-[30px] border-secondary border-[5px] overflow-hidden max-h-[350px]'>
+          <img src={AboutImages.peopleTogether} alt='' className='object-fill w-full h-full grayscale hover:grayscale-[85%] transition-all' />
+        </div>
+
+        <div className='space-y-4'>
+          <h2 className='text-[32px] leading-[35px] nohemi-font font-bold'>
             Lorem ipsum very big first title
           </h2>
-          <p className='text-text-color text-base'>
+          <p className='text-text-color text-base urbanist-font'>
             Lorem ipsum dolor sit amet consectetur. Fusce dolor at id quis nam
             sit morbi egestas. Urna nulla proin id nulla tortor risus ut in.
             Orci nisl purus nec eu justo diam aliquet faucibus tristique.
@@ -47,7 +65,7 @@ const WhereITStarted = () => {
           </p>
         </div>
       </article>
-    </section>
+    </AnimatedSection>
   );
 };
 

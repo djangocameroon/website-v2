@@ -191,24 +191,27 @@ body::-webkit-scrollbar-thumb:hover {
 .grid-container{
     display: grid;
     gap: 15px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
     
-    grid-template-rows: 150px 150px 150px;
-    grid-template-areas: "img3 img2"
-                         "img3 img4"
+    /* grid-template-rows: 350px 350px 350px 350px; */
+    /* grid-template-areas: "img3 img2"
+                         "img3 img2"
                          "img1 img4"
-                         "img1 img5" 
+                         "img1 img4" 
 
-                          ;
+                          ; */
 }
 
-.grid-container img{
+/* .grid-container img{
     width: 100%;
     height: 100%;
-    /* object-fit: contain;a */
 } 
-.grid-container .img1{
-    grid-area: img1;
+.bluelightbg{
+    background: url('/images/home/bluelightbg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .grid-container .img2{
     grid-area: img2;
@@ -218,10 +221,10 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .grid-container .img4{
     grid-area: img4;
-}
-.grid-container .img5{
+} */
+/* .grid-container .img5{
     grid-area: img5;
-}
+} */
 
 
 
