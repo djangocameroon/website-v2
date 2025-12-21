@@ -10,7 +10,7 @@ const Register = lazy(() => import("./pages/auth/Register"));
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const ForgotPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ForgotPassword })));
 const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ResetPassword })));
-const About = lazy(() => import("./pages/About"));
+const About = lazy(() => import("./pages/About").then(module => ({ default: module.default })));
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const Project = lazy(() => import("./pages/Project"));
 

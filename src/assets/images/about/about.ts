@@ -1,3 +1,5 @@
+import aboutbackground from '/images/about/about-background.png'
+import makingstorybanner from '/images/about/makingstory-banner.png'
 import rocket from '/images/about/rocket.png'
 import house1 from '/images/about/national-museum.png'
 import house2 from '/images/about/house2.png'
@@ -32,6 +34,7 @@ export {
     joel,
     manka,
     ariane,
-    hawa
-    
+    hawa,
+    aboutbackground,
+    makingstorybanner
 }
