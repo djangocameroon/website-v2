@@ -73,7 +73,6 @@ const Carousel = () => {
         >
             {
                 slider.map(data => (
-                    // eslint-disable-next-line react/jsx-key
                     <SwiperSlide key={data.id} style={{ backgroundImage: `url(${data.url})` }} className=" rounded-[20px] overflow-hidden myswiper-slider text-2xl relative">
                         <div className={' bg-gradient-to-b from-transparent from-20% to-secondary absolute left-0 top-0 w-full h-full'}></div>
                         <div className={'absolute bottom-28 text-2xl'}>

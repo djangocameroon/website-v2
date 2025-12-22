@@ -11,4 +11,14 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
     },
   },
+  server: {
+    host: true,
+    port: 5173,
+    allowedHosts: true,
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 3000,
+    strictPort: true,
+  },
 })

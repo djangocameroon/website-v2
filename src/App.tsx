@@ -1,23 +1,50 @@
+import { lazy, Suspense, useEffect } from "react";
 import { Footer, Navbar } from "./components/layout";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import Auth from "./pages/auth/Auth";
-import { ForgotPassword, ResetPassword } from "./pages/auth/forgot-password";
-import About from "./pages/About";
-
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Project from "./pages/Project";
 
-const App = () => {
+// Lazy load all page components
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
+const Auth = lazy(() => import("./pages/auth/Auth"));
+const ForgotPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ForgotPassword })));
+const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ResetPassword })));
+const About = lazy(() => import("./pages/About").then(module => ({ default: module.default })));
+const Blog = lazy(() => import("./pages/blog/Blog"));
+const Project = lazy(() => import("./pages/Project"));
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
+	return null;
+};
+
+const AppContent = () => {
+	const location = useLocation();
+	const isBlogPage = location.pathname === "/blog";
+	const isAuthPage = location.pathname.startsWith("/auth");
+	const shouldHideNavbar = isBlogPage || isAuthPage;
+
 	return (
-		<>
-			<Router>
-				<div className="relative h-full max-w-[4000px] ">
-					<div className="fixed top-0 z-30 w-full overflow-hidden">
-						<Navbar />
-					</div>
+		<div className="relative flex flex-col min-h-screen max-w-[4000px]">
+			<ScrollToTop />
+			{!shouldHideNavbar && (
+				<div className="fixed top-0 z-30 w-full overflow-hidden">
+					<Navbar />
+				</div>
+			)}
+			<Suspense fallback={
+				<div className="flex items-center justify-center min-h-screen">
+					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+				</div>
+			}>
+				<div className="flex-grow">
 					<Routes>
 						<Route path="/auth" element={<Auth />}>
 							<Route path="login" element={<Login />} />
@@ -34,12 +61,24 @@ const App = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/projects" element={<Project />} />
+						<Route path="/blog" element={<Blog />} />
+						 
 					</Routes>
-
-					<div className="bg-transparent">
-						<Footer />
-					</div>
 				</div>
+			</Suspense>
+
+			<div className="bg-transparent mt-auto">
+				<Footer />
+			</div>
+		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<>
+			<Router>
+				<AppContent />
 			</Router>
 			<Toaster position="top-right" />
 		</>

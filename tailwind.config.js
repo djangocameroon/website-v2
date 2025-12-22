@@ -15,6 +15,7 @@ export default {
         'secondary-light': 'rgba(66, 133, 244, 0.1)',
         'dark-primary': '#C6EADE',
         'text-color': 'rgba(18, 18, 18, 1)',
+        'dark': 'rgba(18, 18, 18, 1)',
         'grey': 'rgba(95, 99, 104, 1)'
       },
       boxShadow: {
