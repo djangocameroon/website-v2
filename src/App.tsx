@@ -60,8 +60,9 @@ const AppContent = () => {
 						/>
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
-						<Route path="/blog" element={<Blog />} />
 						<Route path="/projects" element={<Project />} />
+						<Route path="/blog" element={<Blog />} />
+						 
 					</Routes>
 				</div>
 			</Suspense>
