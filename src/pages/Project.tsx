@@ -7,14 +7,21 @@ import {
   ProjectNewsletter,
 } from "@/components/pages/Project-Page-Components";
 import { ProjectNavbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
 import { mockProjects } from "@/data/mockProjects";
 import { useProjectFilter } from "@/hooks/useProjectFilter";
 import { useState } from "react";
 
 const Project = () => {
-  const { activeFilter, paginatedProjects, totalFiltered, handleFilterChange } =
-    useProjectFilter(mockProjects);
+  const {
+    searchQuery,
+    activeFilter,
+    paginatedProjects,
+    totalFiltered,
+    handleFilterChange,
+    handleSearchChange,
+  } = useProjectFilter(mockProjects);
+
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const [itemsToShow, setItemsToShow] = useState(9);
   const displayedProjects = paginatedProjects.slice(0, itemsToShow);
@@ -36,6 +43,10 @@ const Project = () => {
             <FilterButtons
               activeFilter={activeFilter}
               onFilterChange={handleFilterChange}
+              searchOpen={searchOpen}
+              onSearchToggle={() => setSearchOpen((s) => !s)}
+              searchValue={searchQuery}
+              onSearchChange={(q) => handleSearchChange(q)}
             />
           </div>
 

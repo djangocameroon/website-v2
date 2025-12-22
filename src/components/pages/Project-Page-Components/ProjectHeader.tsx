@@ -7,7 +7,7 @@ interface ProjectHeaderProps {
 
 const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
   return (
-    <div className="relative w-full  pt-24 pb-12 overflow-visible border-4 border-[#e20707] mt-14 ">
+    <div className="relative w-full  pt-24 pb-12 overflow-visible mt-14 ">
       {/* Dark navy background with stars */}
       <div className="absolute inset-0 bg-[#0A0E27] stars-background"></div>
 
