@@ -44,7 +44,7 @@ const BlogCard: React.FC<BlogCardProps & { id: number }> = ({ id, image, tags, t
         <div className="mt-auto flex items-center gap-6 text-[12px] text-gray-500 font-semibold mb-6 border-b border-gray-50 pb-6">
             <span className="flex items-center gap-1.5"><AiOutlineLike size={14} className="text-blue-500" /> {like} likes</span>
             <span className="flex items-center gap-1.5"><AiOutlineEye size={14} /> {views} views</span>
-            <span className="flex items-center gap-1.5"><BiTimeFive size={14} /> {readTime} read</span>
+            <span className="flex items-center gap-1.5"><BiTimeFive size={14} /> {readTime} mins read</span>
             <span className="flex items-center gap-1.5 ml-auto text-gray-800"><VscAccount size={14} /> {author}</span>
         </div>
 

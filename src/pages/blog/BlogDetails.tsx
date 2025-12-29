@@ -29,7 +29,7 @@ const BlogDetail = () => {
           ))}
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-10">
+        <h1 className="text-3xl md:text-5xl font-bold nohemi-font text-gray-900 leading-tight mb-10">
           {post.title}
         </h1>
 
@@ -46,8 +46,8 @@ const BlogDetail = () => {
         </div>
 
         {/* Article Body */}
-        <article className="text-gray-800 leading-relaxed text-lg space-y-10">
-          <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left">
+        <article className="text-gray-800 leading-relaxed text-lg space-y-10 urbanist-font">
+          <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left ">
             {post.description.part1}
           </p>
 

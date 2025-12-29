@@ -14,7 +14,7 @@ export const AVAILABLE_TAGS = [
 
 export const FILTERS = [
     { label: "Latest", active: true },
-    { label: "Most Read", active: false },
+    { label: "Most Liked", active: false },
     { label: "Most Viewed", active: false },
 ];
 export interface BlogPost {
@@ -41,7 +41,7 @@ export const blogData: BlogPost[] = [
     title: "From Beginner to Pro: A Comprehensive Guide to Building Feature-Rich Web Applications with Django - Your One-Stop Shop for Mastering the Python Framework",
     like: "234",
     views: "458",
-    readTime: "3mins",
+    readTime: "3",
     author: "joel_fah",
     description: {
       part1: "Lorem ipsum dolor sit amet consectetur. Iaculis aenean libero eu purus massa elementum ante. Quisque vitae pretium ipsum proin scelerisque faucibus quis. Massa turpis risus viverra tempus blandit. Velit mattis faucibus cursus sit varius nulla quis suspendisse mauris. Erat viverra dui odio massa rhoncus dictum nunc. Volutpat ullamcorper mi mattis tristique pellentesque. Adipiscing vitae vulputate nulla sagittis mauris nunc platea neque. Eget sit cursus sed dictumst commodo tincidunt. Et nisl porta vitae etiam. Et ipsum dictum a mattis. Ac purus mattis pulvinar arcu natoque elit tristique euismod.",
@@ -56,7 +56,7 @@ export const blogData: BlogPost[] = [
     title: "Django for the Modern Web: Integrating Cutting-Edge Technologies Like Machine Learning, Real-Time Messaging, and Single-Page Applications",
     like: "59",
     views: "324",
-    readTime: "7 mins",
+    readTime: "7",
     author: "Anonymous",
     description: {
       part1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iaculis aenean libero eu purus massa elementum ante...",
@@ -69,9 +69,9 @@ export const blogData: BlogPost[] = [
     image: BlogImages.post3,
     tags: ["AI", "ML", "Real-Time"],
     title: "Django for the Modern Web: Integrating Cutting-Edge Technologies Like Machine Learning, Real-Time Messaging, and Single-Page Applications",
-    like: "59",
-    views: "324",
-    readTime: "7 mins",
+    like: "159",
+    views: "224",
+    readTime: "4",
     author: "Anonymous",
     description: {
       part1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iaculis aenean libero eu purus massa elementum ante...",
