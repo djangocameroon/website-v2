@@ -10,9 +10,10 @@ const Register = lazy(() => import("./pages/auth/Register"));
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const ForgotPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ForgotPassword })));
 const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ResetPassword })));
-const About = lazy(() => import("./pages/About").then(module => ({ default: module.default })));
+const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const Project = lazy(() => import("./pages/Project"));
+const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -61,6 +62,7 @@ const AppContent = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
+						<Route path="/blog/:id" element={<BlogDetail />} />
 						<Route path="/projects" element={<Project />} />
 					</Routes>
 				</div>

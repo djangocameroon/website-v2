@@ -53,14 +53,10 @@ const Navbar = () => {
               <img
                 src={HomeImages.Logo}
                 alt='logo'
-                className={cn('cursor-pointer h-[3.3rem]', {
-                  "invert brightness-0": variant === "secondary" && !navBg && !open,
-                })}
+                className='cursor-pointer h-[3.3rem]'
               />
             </Link>
-            <div className={cn('text-3xl md:hidden', {
-              'text-white': !navBg && variant === 'secondary' && !open,
-            })} onClick={() => setOpen(!open)}>
+            <div className='text-3xl md:hidden' onClick={() => setOpen(!open)}>
               {open ? <AiOutlineClose size='25' /> : <HiMenuAlt3 size='25' />}
               {/* {open ? <AiOutlineClose size='25' /> : <HiMenuAlt3 size='25' />} */}
             </div>
@@ -72,19 +68,8 @@ const Navbar = () => {
               navLinks.map((navLink, id) => {
                 const isActive = pathname === navLink.link;
                 return (
-                  <li
-                    key={id}
-                    className={cn(
-                      'hover:scale-105 hover:text-primary transition-all text-xl',
-                      isActive ? 'font-bold text-primary' : 'font-medium',
-                      {
-                        'text-white': !navBg && variant === 'secondary',
-                        'hover:text-secondary/90': !navBg && variant === 'secondary' && !isActive,
-                        'hover:text-secondary': !navBg && variant === 'secondary' && isActive,
-                      }
-                    )}
-                  >
-                    <Link to={navLink.link} className='py-7 text-lg inline-block urbanist-font'>
+                  <li key={id} className={`hover:scale-105 hover:text-primary transition-all urbanist-font text-xl ${isActive ? 'text-primary font-bold' : 'font-medium'}`}>
+                    <Link to={navLink.link} className='py-7 text-lg inline-block'>
                       {navLink.label}
                     </Link>
                   </li>
@@ -121,13 +106,7 @@ const Navbar = () => {
             {navLinks.map((navLink, id) => {
               const isActive = pathname === navLink.link;
               return (
-                <li
-                  key={id}
-                  className={cn(
-                    "w-full hover:bg-primary hover:text-white",
-                    isActive && "bg-primary text-white"
-                  )}
-                >
+                <li key={id} className={`w-full hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
                   <Link
                     to={navLink.link}
                     className='py-5 capitalise text-xl inline-block px-10'

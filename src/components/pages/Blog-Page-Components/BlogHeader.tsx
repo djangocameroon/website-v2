@@ -9,14 +9,14 @@ const BlogHeader = () => {
       <div className="max-w-7xl h-screen mx-auto px-6 pt-32 flex flex-col md:flex-row items-center justify-between">
         {/* Text Content */}
         <div className="md:w-1/2 pb-20 z-10">
-          <p className="text-blue-400 text-sm font-medium mb-3 tracking-wide">
+          <p className="text-blue-400 text-sm urbanist-font font-medium mb-3 tracking-wide">
             Feed yourself with knowledge from experts
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">
+          <h1 className="text-5xl md:text-6xl nohemi-font font-bold text-white mb-6 leading-[1.1]">
             Trending insights <br />
             <span className="text-gray-600">from our </span>#Blog
           </h1>
-          <p className="text-gray-400 text-sm md:text-base max-w-md mb-8 leading-relaxed">
+          <p className="text-gray-100 text-sm md:text-base urbanist-font max-w-md mb-8 leading-relaxed">
             Lorem ipsum dolor sit amet consectetur. Mauris semper odio velit
             suspendisse diam. Imperdiet phasellus pharetra viverra eget. Urna
             nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam eu
