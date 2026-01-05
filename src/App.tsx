@@ -28,14 +28,12 @@ const ScrollToTop = () => {
 
 const AppContent = () => {
 	const location = useLocation();
-	const isBlogPage = location.pathname === "/blog";
 	const isAuthPage = location.pathname.startsWith("/auth");
-	const shouldHideNavbar = isBlogPage || isAuthPage;
 
 	return (
 		<div className="relative flex flex-col min-h-screen max-w-[4000px]">
 			<ScrollToTop />
-			{!shouldHideNavbar && (
+			{!isAuthPage && (
 				<div className="fixed top-0 z-30 w-full overflow-hidden">
 					<Navbar />
 				</div>

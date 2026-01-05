@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
 import { blogData, BlogPost } from '@/data/blogData';
-import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
-import Navbar from '@/components/layout/navbar/BlogNavbar';
+//import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
+import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
+
 
 type FilterType = "Latest" | "Most Liked" | "Most Viewed";
 
@@ -62,7 +63,6 @@ const Blog = () => {
 
   return (
     <div className='relative'>
-      <Navbar />
       <BlogHeader />
       <FilterBar 
         onFilterChange={handleFilterChange}
@@ -84,7 +84,10 @@ const Blog = () => {
             Showing 1 - {filteredBlogs.length} of {blogData.length}
           </div>
         </section>
-        <JoinUs />
+        {/*<JoinUs/>*/}
+        <div className='w-full md:w-[85%] mx-auto max-md:px-4'>
+          <Newsletter />
+        </div>
       </div>
     </div>
   );
