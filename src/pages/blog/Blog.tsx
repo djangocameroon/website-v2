@@ -1,32 +1,93 @@
+"use client";
+import { useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
-import { BLOG_POSTS } from '@/data/blogData';
-import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
-import Navbar from './navbar';
+import { blogData, BlogPost } from '@/data/blogData';
+//import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
+import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
 
+
+type FilterType = "Latest" | "Most Liked" | "Most Viewed";
 
 const Blog = () => {
+  const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>(blogData);
+  const [currentFilter, setCurrentFilter] = useState<FilterType>("Latest");
+
+  const handleFilterChange = (filter: FilterType) => {
+    setCurrentFilter(filter);
+    let sorted = [...blogData];
+
+    switch (filter) {
+      case "Most Liked":
+        sorted.sort((a, b) => parseInt(b.like) - parseInt(a.like));
+        break;
+      case "Most Viewed":
+        sorted.sort((a, b) => parseInt(b.views) - parseInt(a.views));
+        break;
+      case "Latest":
+        sorted.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+        break;
+      default:
+        break;
+    }
+
+    setFilteredBlogs(sorted);
+  };
+
+  const handleSearchChange = (query: string) => {
+    let filtered = [...blogData];
+    
+    // Apply the current sorting filter
+    switch (currentFilter) {
+      case "Most Liked":
+        filtered.sort((a, b) => parseInt(b.like) - parseInt(a.like));
+        break;
+      case "Most Viewed":
+        filtered.sort((a, b) => parseInt(b.views) - parseInt(a.views));
+        break;
+      case "Latest":
+        filtered.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+        break;
+    }
+
+    // Apply the search if present
+    if (query) {
+      filtered = filtered.filter((blog) =>
+        blog.title.toLowerCase().includes(query.toLowerCase()) ||
+        blog.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+        blog.author.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    setFilteredBlogs(filtered);
+  };
+
   return (
     <div className='relative'>
-      <Navbar />
-      <BlogHeader/>
-      <FilterBar/>
+      <BlogHeader />
+      <FilterBar 
+        onFilterChange={handleFilterChange}
+        onSearchChange={handleSearchChange}
+      />
       <div className='w-full md:w-[85%] mx-auto'>
         <section className="max-w-7xl mx-auto px-6 pb-10">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-12">
-              {BLOG_POSTS.map((post) => (
-                  <BlogCard 
-                    key={post.id}
-                    {...post} 
-                  />
-              ))}
+            {filteredBlogs.map((post) => (
+              <BlogCard 
+                key={post.id}
+                {...post} 
+              />
+            ))}
           </div>
           
           {/* Pagination Text */}
           <div className="text-center mt-12 text-xs font-medium text-gray-400">
-              Showing 1 - 3 of 12
+            Showing 1 - {filteredBlogs.length} of {blogData.length}
           </div>
         </section>
-        <JoinUs />
+        {/*<JoinUs/>*/}
+        <div className='w-full md:w-[85%] mx-auto max-md:px-4'>
+          <Newsletter />
+        </div>
       </div>
     </div>
   );
