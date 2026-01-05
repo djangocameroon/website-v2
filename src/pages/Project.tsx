@@ -6,7 +6,7 @@ import {
   CommunityCTA,
   ProjectNewsletter,
 } from "@/components/pages/Project-Page-Components";
-import { ProjectNavbar } from "@/components/layout/navbar";
+import { Navbar } from "@/components/layout/navbar";
 import { mockProjects } from "@/data/mockProjects";
 import { useProjectFilter } from "@/hooks/useProjectFilter";
 import { useState } from "react";
@@ -32,7 +32,7 @@ const Project = () => {
 
   return (
     <div id="project" className="overflow-x-hidden">
-      <ProjectNavbar />
+      <Navbar />
       <ProjectHeader featuredProjects={mockProjects} />
 
       {/* Main Content Area - White Background */}

@@ -43,10 +43,10 @@ const FilterButtons = ({
           <button
             key={filter.id}
             onClick={() => onFilterChange(filter.id)}
-            className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all ${
+            className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all border-2 ${
               activeFilter === filter.id
-                ? "bg-[#CCE2D8] text-[#103E2E] border-2 border-[#103E2E]"
-                : "bg-white text-gray-700 hover:bg-gray-200"
+                ? "bg-[#CCE2D8] text-[#103E2E] border-[#103E2E]"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
             }`}
           >
             {filter.label}
