@@ -3,13 +3,11 @@ import {
   FilterButtons,
   ProjectGrid,
   LoadMoreButton,
-  CommunityCTA,
-  ProjectNewsletter,
 } from "@/components/pages/Project-Page-Components";
-import { Navbar } from "@/components/layout/navbar";
 import { mockProjects } from "@/data/mockProjects";
 import { useProjectFilter } from "@/hooks/useProjectFilter";
 import { useState } from "react";
+import { Newsletter } from "@/components/pages/Home-Page-Components";
 
 const Project = () => {
   const {
@@ -32,11 +30,11 @@ const Project = () => {
 
   return (
     <div id="project" className="overflow-x-hidden">
-      <Navbar />
+      
       <ProjectHeader featuredProjects={mockProjects} />
 
       {/* Main Content Area - White Background */}
-      <div className="bg-white pt-28 pb-20">
+      <div className="bg-white pt-12 pb-20">
         <div className="mx-auto w-[90%] max-w-[1400px] space-y-12">
           {/* Filters Section */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-12">
@@ -63,11 +61,7 @@ const Project = () => {
             onLoadMore={handleLoadMore}
           />
 
-          {/* Community CTA */}
-          <CommunityCTA />
-
-          {/* Newsletter Section */}
-          <ProjectNewsletter />
+          <Newsletter />
         </div>
       </div>
     </div>

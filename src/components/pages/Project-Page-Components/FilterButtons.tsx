@@ -20,6 +20,7 @@ const filters: Filter[] = [
   { id: "web", label: "Web" },
   { id: "api", label: "Mobile" },
   { id: "tools", label: "API" },
+  { id: "tools", label: "AI/ML" },
 ];
 
 const FilterButtons = ({
@@ -30,53 +31,47 @@ const FilterButtons = ({
   searchValue,
   onSearchChange,
 }: FilterButtonsProps) => {
-  const handleSearchClick = () => onSearchToggle();
   return (
-    <div className="flex items-center gap-3 flex-wrap justify-center">
-      {/* Filters area - fades out when search is open */}
-      <div
-        className={`flex items-center gap-3 flex-wrap transition-opacity duration-300 ${
-          searchOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        {filters.map((filter) => (
-          <button
-            key={filter.id}
-            onClick={() => onFilterChange(filter.id)}
-            className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all border-2 ${
-              activeFilter === filter.id
-                ? "bg-[#CCE2D8] text-[#103E2E] border-[#103E2E]"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-            }`}
-          >
-            {filter.label}
-          </button>
-        ))}
-      </div>
+    <div className="flex items-center justify-center gap-6 border border-gray-100 rounded-full px-6 py-3 shadow-lg bg-white">
+      {/* Filters */}
+      {!searchOpen && (
+        <>
+          <div className="flex items-center gap-2">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => onFilterChange(filter.id)}
+                className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all border-2 whitespace-nowrap ${
+                  activeFilter === filter.id
+                    ? "bg-[#CCE2D8] text-[#103E2E] border-[#103E2E]"
+                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
 
-      {/* Search input (scales from right to left) */}
-      <div className="relative flex items-center">
-        <div
-          className={`transform origin-right transition-transform duration-300 ease-out overflow-hidden ${
-            searchOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-          }`}
-        >
+          {/* Divider */}
+          <div className="h-6 w-[1.75px] bg-gray-900 mx-2"></div>
+        </>
+      )}
+
+      {/* Search */}
+      <div className="flex items-center gap-0">
+        {searchOpen && (
           <SearchBar
             value={searchValue}
             onChange={onSearchChange}
             placeholder="Search projects..."
             className="w-72"
-            autoFocus={searchOpen}
+            autoFocus
           />
-        </div>
+        )}
 
-        {/* Search toggle button */}
         <button
-          onClick={handleSearchClick}
-          aria-pressed={searchOpen}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#121212] text-white urbanist-font font-medium text-sm hover:bg-gray-800 transition-all ml-3 ${
-            searchOpen ? "ring-2 ring-white/20" : ""
-          }`}
+          onClick={() => onSearchToggle()}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#121212] text-white urbanist-font font-medium text-sm hover:bg-gray-800 transition-all"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -91,12 +86,12 @@ const FilterButtons = ({
               strokeWidth={2}
               d={
                 searchOpen
-                  ? "M6 18L18 6M6 6l12 12" // X icon when open
-                  : "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" // search icon when closed
+                  ? "M6 18L18 6M6 6l12 12"
+                  : "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               }
             />
           </svg>
-          <span className="hidden sm:inline">
+          <span className="hidden sm:inline urbanist-font font-medium ">
             {searchOpen ? "Close" : "Search"}
           </span>
         </button>

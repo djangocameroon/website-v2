@@ -7,5 +7,3 @@ export { default as ProjectCard } from "./ProjectCard";
 export { default as Pagination } from "./Pagination";
 export { default as ProjectCTA } from "./ProjectCTA";
 export { default as LoadMoreButton } from "./LoadMoreButton";
-export { default as CommunityCTA } from "./CommunityCTA";
-export { default as ProjectNewsletter } from "./ProjectNewsletter";

@@ -23,7 +23,7 @@ const LoadMoreButton = ({
         <button
           onClick={onLoadMore}
           disabled={loading}
-          className="inline-flex items-center gap-3 bg-[#4A90E2] text-white urbanist-font font-semibold text-base px-6 py-3 rounded-full hover:bg-[#357ABD] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-3 bg-[#4A90E2] text-white nohemi-font font-medium text-base px-6 py-3 rounded-md hover:bg-[#357ABD] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span>Load more projects</span>
 
