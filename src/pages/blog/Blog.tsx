@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
 import { blogData, BlogPost } from '@/data/blogData';
 //import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
@@ -11,10 +11,22 @@ type FilterType = "Latest" | "Most Liked" | "Most Viewed";
 const Blog = () => {
   const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>(blogData);
   const [currentFilter, setCurrentFilter] = useState<FilterType>("Latest");
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call handler right away to get initial size
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentFilter(filter);
-    let sorted = [...blogData];
+    const sorted = [ ...blogData  ];
 
     switch (filter) {
       case "Most Liked":
@@ -35,7 +47,7 @@ const Blog = () => {
 
   const handleSearchChange = (query: string) => {
     let filtered = [...blogData];
-    
+
     // Apply the current sorting filter
     switch (currentFilter) {
       case "Most Liked":
@@ -64,30 +76,37 @@ const Blog = () => {
   return (
     <div className='relative'>
       <BlogHeader />
-      <FilterBar 
+      <FilterBar
         onFilterChange={handleFilterChange}
         onSearchChange={handleSearchChange}
       />
-      <div className='w-full md:w-[85%] mx-auto'>
-        <section className="max-w-7xl mx-auto px-6 pb-10">
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-12">
+      <div className='w-full md:w-[85%] mx-auto max-md:px-4'>
+        <section className="pb-10">
+          <div
+            className="grid gap-5"
+            style={{
+              gridTemplateColumns:
+                windowWidth >= 1380
+                  ? "repeat(2, minmax(0, 1fr))"
+                  : "repeat(1, minmax(0, 1fr))",
+            }}
+          >
             {filteredBlogs.map((post) => (
-              <BlogCard 
+              <BlogCard
                 key={post.id}
-                {...post} 
+                {...post}
               />
             ))}
           </div>
-          
+
           {/* Pagination Text */}
           <div className="text-center mt-12 text-xs font-medium text-gray-400">
             Showing 1 - {filteredBlogs.length} of {blogData.length}
           </div>
         </section>
+
         {/*<JoinUs/>*/}
-        <div className='w-full md:w-[85%] mx-auto max-md:px-4'>
-          <Newsletter />
-        </div>
+        <Newsletter />
       </div>
     </div>
   );

@@ -33,16 +33,16 @@ const AppContent = () => {
 	return (
 		<div className="relative flex flex-col min-h-screen max-w-[4000px]">
 			<ScrollToTop />
-			{!isAuthPage && (
-				<div className="fixed top-0 z-30 w-full overflow-hidden">
-					<Navbar />
-				</div>
-			)}
 			<Suspense fallback={
 				<div className="flex items-center justify-center min-h-screen">
 					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
 				</div>
 			}>
+				{!isAuthPage && (
+					<div className="fixed top-0 z-30 w-full overflow-hidden">
+						<Navbar />
+					</div>
+				)}
 				<div className="flex-grow">
 					<Routes>
 						<Route path="/auth" element={<Auth />}>
