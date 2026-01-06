@@ -1,6 +1,6 @@
 export { default as ProjectHeader } from "./ProjectHeader";
 export { default as SearchBar } from "./SearchBar";
-export { default as FilterButtons } from "./FilterButtons";
+// export { default as FilterButtons } from "./FilterButtons";
 export { default as ProjectStats } from "./ProjectStats";
 export { default as ProjectGrid } from "./ProjectGrid";
 export { default as ProjectCard } from "./ProjectCard";

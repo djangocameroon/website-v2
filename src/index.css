@@ -34,7 +34,11 @@
 }
 
 .nohemi-font {
-  font-family: "Nohemi", sans-serif;
+    font-family: "Nohemi", sans-serif;
+}
+
+.nohemi-font * {
+    font-family: "Nohemi", sans-serif;
 }
 
 .urbanist-font {
@@ -199,17 +203,26 @@ body::-webkit-scrollbar-thumb:hover {
   background-repeat: no-repeat;
 }
 
-.grid-container {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr;
+/* .about-header-bg {
+  background-image: url('/images/about/about-background.png'), url('/path/to/rocket.png');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+} */
 
-  grid-template-rows: 150px 150px 150px;
-  grid-template-areas:
-    "img3 img2"
-    "img3 img4"
-    "img1 img4"
-    "img1 img5";
+.grid-container{
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    
+    /* grid-template-rows: 350px 350px 350px 350px; */
+    /* grid-template-areas: "img3 img2"
+                         "img3 img2"
+                         "img1 img4"
+                         "img1 img4" 
+
+                          ; */
 }
 
 .grid-container img {

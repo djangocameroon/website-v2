@@ -16,7 +16,7 @@ export interface Technology {
   color: string;
 }
 
-export type ProjectCategory = "web" | "api" | "tools" | "all";
+export type ProjectCategory = "web" | "api" | "mobile" | "other" | "all";
 
 export interface ProjectFilter {
   id: ProjectCategory;

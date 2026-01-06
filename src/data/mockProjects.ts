@@ -47,7 +47,7 @@ export const mockProjects: Project[] = [
       { name: "Django", color: "#0C4B33" },
       { name: "Python", color: "#3776AB" },
     ],
-    category: "tools",
+    category: "other",
     contributors: 5,
   },
   {
@@ -94,7 +94,7 @@ export const mockProjects: Project[] = [
       { name: "Django", color: "#0C4B33" },
       { name: "Python", color: "#3776AB" },
     ],
-    category: "tools",
+    category: "other",
     contributors: 10,
   },
 ];

@@ -1,16 +1,24 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
-import { blogData, BlogPost } from '@/data/blogData';
+import { blogData } from '@/data/blogData';
 //import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
 import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
 
 
-type FilterType = "Latest" | "Most Liked" | "Most Viewed";
 
 const Blog = () => {
-  const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>(blogData);
-  const [currentFilter, setCurrentFilter] = useState<FilterType>("Latest");
+  const filterTabs = [
+    { title: "Latest", value: "latest" },
+    { title: "Most Liked", value: "most-liked" },
+    { title: "Most Viewed", value: "most-viewed" },
+  ] as const;
+  
+  type FilterType = typeof filterTabs[number]['value'];
+
+  // const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>(blogData);
+  const [currentFilter, setCurrentFilter] = useState<FilterType>(filterTabs[0].value);
+  const [searchQuery, setSearchQuery] = useState("");
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -24,59 +32,47 @@ const Blog = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleFilterChange = (filter: FilterType) => {
-    setCurrentFilter(filter);
-    const sorted = [ ...blogData  ];
+  const filteredBlogs = useMemo(() => {
+    const _blogs = [ ...blogData ];
 
-    switch (filter) {
-      case "Most Liked":
-        sorted.sort((a, b) => parseInt(b.like) - parseInt(a.like));
+    switch (currentFilter) {
+      case "most-liked":
+        _blogs.sort((a, b) => parseInt(b.like) - parseInt(a.like));
         break;
-      case "Most Viewed":
-        sorted.sort((a, b) => parseInt(b.views) - parseInt(a.views));
+      case "most-viewed":
+        _blogs.sort((a, b) => parseInt(b.views) - parseInt(a.views));
         break;
-      case "Latest":
-        sorted.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+      case "latest":
+        _blogs.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
         break;
       default:
         break;
     }
 
-    setFilteredBlogs(sorted);
-  };
-
-  const handleSearchChange = (query: string) => {
-    let filtered = [...blogData];
-
-    // Apply the current sorting filter
-    switch (currentFilter) {
-      case "Most Liked":
-        filtered.sort((a, b) => parseInt(b.like) - parseInt(a.like));
-        break;
-      case "Most Viewed":
-        filtered.sort((a, b) => parseInt(b.views) - parseInt(a.views));
-        break;
-      case "Latest":
-        filtered.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
-        break;
-    }
-
-    // Apply the search if present
-    if (query) {
-      filtered = filtered.filter((blog) =>
-        blog.title.toLowerCase().includes(query.toLowerCase()) ||
-        blog.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
-        blog.author.toLowerCase().includes(query.toLowerCase())
+    if (searchQuery.trim()) {
+      return _blogs.filter((bi) =>
+        bi.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        bi.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        bi.author.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    setFilteredBlogs(filtered);
+    return _blogs;
+  }, [currentFilter, searchQuery]);
+
+  const handleFilterChange = (filter: FilterType) => {
+    setCurrentFilter(filter);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
   };
 
   return (
     <div className='relative'>
       <BlogHeader />
       <FilterBar
+        tabs={filterTabs}
         onFilterChange={handleFilterChange}
         onSearchChange={handleSearchChange}
       />

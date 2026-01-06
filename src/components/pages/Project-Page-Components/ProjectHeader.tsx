@@ -20,7 +20,7 @@ export const RoundMarker = ({ className = "" }: { className?: string }) => {
 
 const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
   return (
-    <div className="relative w-full pt-24 pb-12 overflow-visible ">
+    <div className="relative w-full pt-24 pb-12 overflow-visible max-lg:h-screen">
       {/* Dark navy background with stars */}
       <div className="absolute inset-0 bg-[#0A0E27] stars-background"></div>
 
@@ -36,7 +36,7 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 w-full top-[3.375rem] mb-[4.375rem] pl-8 md:pl-16 lg:pl-20">
+      <div className="relative z-10 w-full top-[3.375rem] mb-[4.375rem] pl-8 md:pl-16 lg:pl-20 max-lg:hidden">
         <div className="flex items-start gap-6 md:gap-8 max-w-7xl">
           {/* Main Content Area */}
           <div className="flex-1 pr-8 md:pr-16 lg:pr-20">
@@ -95,6 +95,28 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      </div>
+
+      <div className='absolute inset-0 flex lg:hidden justify-center items-center w-full h-full z-10'>
+        <div className='w-full flex flex-col justify-center items-center'>
+          <span className='text-xl text-secondary font-semibold urbanist-font text-center'>
+            Get busy with us
+          </span>
+          <h2 className='text-4xl text-center pb-6 text-white my-4 font-bold nohemi-font'>
+            We build <span className="text-gray-400">Open</span> Source <span className="text-[#808396]">#Projects</span>
+          </h2>
+          <div className="pt-2 md:mb-2">
+            <a
+              href="https://github.com/djangocameroon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#4A90E2] text-white urbanist-font font-semibold text-base md:text-lg px-6 py-3 rounded-lg hover:bg-[#357ABD] transition-all shadow-lg"
+            >
+              <FaGithub className="w-5 h-5" />
+              View organization on GitHub
+            </a>
           </div>
         </div>
       </div>

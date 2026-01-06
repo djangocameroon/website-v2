@@ -4,23 +4,25 @@ import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { motion } from "framer-motion";
 
-type FilterType = "Latest" | "Most Liked" | "Most Viewed";
-
-interface FilterBarProps {
-  onFilterChange?: (filter: FilterType) => void;
-  onSearchChange?: (query: string) => void;
+type TabType<T extends string = string> = {
+  title: string;
+  value: T;
 }
 
-const FilterBar = ({ onFilterChange, onSearchChange }: FilterBarProps) => {
-  const [activeFilter, setActiveFilter] = useState<FilterType>("Latest");
+interface FilterBarProps<T extends string = string> {
+  onFilterChange?: (filter: T) => void;
+  onSearchChange?: (query: string) => void;
+  tabs?: readonly TabType<T>[];
+}
+
+const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, tabs: filters = [] as readonly TabType<T>[] }: FilterBarProps<T>) => {
+  const [activeFilter, setActiveFilter] = useState(filters?.[0] || null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
 
-  const filters: FilterType[] = ["Latest", "Most Liked", "Most Viewed"];
-
-  const handleFilterClick = (filter: FilterType) => {
+  const handleFilterClick = (filter: TabType<T>) => {
     setActiveFilter(filter);
-    onFilterChange?.(filter);
+    onFilterChange?.(filter.value);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,18 +43,17 @@ const FilterBar = ({ onFilterChange, onSearchChange }: FilterBarProps) => {
         <div className="flex items-center gap-2 max-sm:w-full max-sm:justify-center max-sm:flex-wrap">
           {filters.map((filter) => (
             <button
-              key={filter}
+              key={filter.value}
               onClick={() => handleFilterClick(filter)}
-              className={`relative px-4 py-2.5 max-sm:px-3 max-sm:py-2 rounded-full transition-all duration-200 max-sm:text-sm ${
-                activeFilter === filter
+              className={`relative px-4 py-2.5 max-sm:px-3 max-sm:py-2 rounded-full transition-all duration-200 max-sm:text-sm ${activeFilter === filter
                   ? "text-primary"
                   : "text-gray-900 hover:text-black"
-              }`}
+                }`}
               style={{
                 transformStyle: "preserve-3d",
               }}
             >
-              {activeFilter === filter && (
+              {activeFilter?.value === filter.value && (
                 <motion.div
                   layoutId="clickedbutton"
                   transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
@@ -60,7 +61,7 @@ const FilterBar = ({ onFilterChange, onSearchChange }: FilterBarProps) => {
                 />
               )}
               <span className="relative block urbanist-font font-medium whitespace-nowrap">
-                {filter}
+                {filter.title}
               </span>
             </button>
           ))}

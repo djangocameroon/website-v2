@@ -19,18 +19,18 @@ const LoadMoreButton = ({
         Showing {showing} - {Math.min(showing + 8, total)} of {total}
       </p>
       {/*TODO:replace with showing < total */}
-      {true && (
+      {showing < total && (
         <button
           onClick={onLoadMore}
           disabled={loading}
-          className="inline-flex items-center gap-3 bg-[#4A90E2] text-white nohemi-font font-medium text-base px-6 py-3 rounded-md hover:bg-[#357ABD] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2.5 bg-secondary text-white nohemi-font font-medium text-lg px-7 py-5 rounded-2xl hover:bg-secondary/90 border-[1.5px] border-secondary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span>Load more projects</span>
 
           
           <span
             aria-hidden
-            className="w-5 h-5 inline-flex items-center justify-center"
+            className="size-5 inline-flex items-center justify-center"
           >
              
             <svg
