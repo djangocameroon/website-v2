@@ -41,6 +41,10 @@
     font-family: "urbanist";
 }
 
+.urbanist-font * {
+    font-family: "urbanist";
+}
+
 /* Rectangle 122
 
 position: absolute;
