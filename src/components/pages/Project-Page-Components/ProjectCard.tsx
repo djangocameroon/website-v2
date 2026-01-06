@@ -1,7 +1,3 @@
-import { Badge } from "@/components/layout";
-import { FaStar, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { BiGitPullRequest } from "react-icons/bi";
-import { useState } from "react";
 import { Project } from "@/types/project";
 
 interface ProjectCardProps {
@@ -9,109 +5,56 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleStarClick = () => {
-    window.open(project.githubUrl, "_blank", "noopener,noreferrer");
-  };
-
-  const handleLiveClick = () => {
-    if (project.liveUrl) {
-      window.open(project.liveUrl, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  const handleContributeClick = () => {
+  const handleViewProject = () => {
     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <div
-      className="relative cursor-pointer bg-white px-6 py-6 max-md:w-[90vw] max-md:h-[500px] w-[625px] h-[700px] border border-gray-400 rounded-[55px] shadow-xl flex flex-col shrink-0 transition-all duration-300 hover:shadow-2xl hover:border-secondary group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="relative">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="rounded-[30px] w-full h-full object-cover"
-        />
-        {/* Hover Overlay with Actions */}
-        <div
-          className={`absolute inset-0 bg-[#0C4B33]/95 rounded-[30px] flex items-center justify-center gap-4 transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <button
-            onClick={handleStarClick}
-            className="bg-white text-[#0C4B33] p-4 rounded-2xl hover:scale-110 transition-transform shadow-lg flex flex-col items-center gap-2"
+    <div className="bg-white rounded-3xl p-6 hover:shadow-lg transition-all border border-gray-100 flex flex-col h-full max-w-lg">
+      {/* Technology Tags */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.technologies.slice(0, 3).map((tech, index) => (
+          <span
+            key={index}
+            className="px-3 py-1 rounded-full text-xs urbanist-font font-medium bg-gray-100 text-gray-700"
           >
-            <FaStar className="w-6 h-6" />
-            <span className="text-xs urbanist-font font-bold">Star</span>
-          </button>
-          {project.liveUrl && (
-            <button
-              onClick={handleLiveClick}
-              className="bg-white text-[#0C4B33] p-4 rounded-2xl hover:scale-110 transition-transform shadow-lg flex flex-col items-center gap-2"
-            >
-              <FaExternalLinkAlt className="w-6 h-6" />
-              <span className="text-xs urbanist-font font-bold">Live</span>
-            </button>
-          )}
-          <button
-            onClick={handleContributeClick}
-            className="bg-white text-[#0C4B33] p-4 rounded-2xl hover:scale-110 transition-transform shadow-lg flex flex-col items-center gap-2"
-          >
-            <BiGitPullRequest className="w-6 h-6" />
-            <span className="text-xs urbanist-font font-bold">Contribute</span>
-          </button>
-        </div>
+            {tech.name}
+          </span>
+        ))}
       </div>
-      <div className="grow flex justify-between flex-col">
-        <div className="md:space-y-9 space-y-5">
-          <p className="text-primary text-2xl my-3 urbanist-font font-bold group-hover:text-secondary transition-colors">
-            {project.title}
-          </p>
-          <p className="text-text-color urbanist-font text-base line-clamp-2">
-            {project.description}
-          </p>
-          <div className="flex justify-start items-center gap-3 flex-wrap">
-            {project.technologies.map((tech, index) => (
-              <Badge key={index} backgroundColor={`${tech.color}1A`}>
-                <div className="flex justify-center items-center gap-2">
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: tech.color }}
-                  ></span>
-                  <p
-                    className="urbanist-font font-medium"
-                    style={{ color: tech.color }}
-                  >
-                    {tech.name}
-                  </p>
-                </div>
-              </Badge>
-            ))}
-          </div>
-        </div>
 
-        <div className="flex items-center justify-between">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-fit flex items-center gap-x-2 urbanist-font text-lg text-gray-600 py-1 px-2 font-medium hover:text-[#0C4B33] transition-colors"
-          >
-            <FaGithub className="w-5 h-5" />
-            View on GitHub
-          </a>
-          <div className="flex items-center gap-2 text-gray-500 urbanist-font text-sm">
-            <FaStar className="w-4 h-4 text-yellow-500" />
-            <span className="font-medium">{project.stars}</span>
-          </div>
-        </div>
-      </div>
+      {/* Project Title */}
+      <h3 className="text-xl md:text-2xl nohemi-font font-bold text-gray-900 mb-3 line-clamp-2">
+        {project.title}
+      </h3>
+
+      {/* Project Description */}
+      <p className="text-gray-600 urbanist-font text-base mb-6 line-clamp-3 flex-grow">
+        {project.description}
+      </p>
+
+      {/* View Project Button */}
+      <button
+        onClick={handleViewProject}
+        className="w-full bg-[#0C4B33] text-white urbanist-font font-semibold py-3 px-6 rounded-xl hover:bg-[#0A3D28] transition-all flex items-center justify-center gap-2"
+      >
+        View project
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 19L19 6M19 6V18.48M19 6H6.52"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </div>
   );
 };

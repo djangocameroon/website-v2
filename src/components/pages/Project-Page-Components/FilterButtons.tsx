@@ -1,52 +1,101 @@
-import { Badge } from "@/components/layout";
 import { ProjectCategory } from "@/types/project";
-import { FaCode, FaLayerGroup } from "react-icons/fa";
-import { ReactNode } from "react";
+import SearchBar from "./SearchBar";
 
 interface Filter {
   id: ProjectCategory;
   label: string;
-  icon: ReactNode;
 }
 
 interface FilterButtonsProps {
   activeFilter: ProjectCategory;
   onFilterChange: (filter: ProjectCategory) => void;
+  searchOpen: boolean;
+  onSearchToggle: () => void;
+  searchValue: string;
+  onSearchChange: (v: string) => void;
 }
 
 const filters: Filter[] = [
-  { id: "all", label: "All Projects", icon: <FaLayerGroup /> },
-  { id: "web", label: "Web Apps", icon: <FaCode /> },
-  { id: "api", label: "APIs & Backends", icon: <FaCode /> },
-  { id: "tools", label: "Tools & Libraries", icon: <FaCode /> },
+  { id: "all", label: "Quick peek" },
+  { id: "web", label: "Web" },
+  { id: "api", label: "Mobile" },
+  { id: "tools", label: "API" },
+  { id: "tools", label: "AI/ML" },
 ];
 
 const FilterButtons = ({
   activeFilter,
   onFilterChange,
+  searchOpen,
+  onSearchToggle,
+  searchValue,
+  onSearchChange,
 }: FilterButtonsProps) => {
   return (
-    <div className="flex justify-center items-center gap-4 flex-wrap">
-      {filters.map((filter) => (
-        <Badge
-          key={filter.id}
-          backgroundColor={
-            activeFilter === filter.id ? "bg-secondary" : "bg-secondary/10"
-          }
-          className={`cursor-pointer transition-all ${
-            activeFilter === filter.id ? "text-white" : "text-secondary"
-          }`}
-          outline={activeFilter !== filter.id}
-        >
-          <div
-            className="flex items-center gap-2 px-2"
-            onClick={() => onFilterChange(filter.id)}
-          >
-            {filter.icon}
-            <span className="font-medium">{filter.label}</span>
+    <div className="flex items-center justify-center gap-6 border border-gray-100 rounded-full px-6 py-3 shadow-lg bg-white">
+      {/* Filters */}
+      {!searchOpen && (
+        <>
+          <div className="flex items-center gap-2">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => onFilterChange(filter.id)}
+                className={`px-5 py-2.5 rounded-full urbanist-font font-medium text-sm transition-all border-2 whitespace-nowrap ${
+                  activeFilter === filter.id
+                    ? "bg-[#CCE2D8] text-[#103E2E] border-[#103E2E]"
+                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
-        </Badge>
-      ))}
+
+          {/* Divider */}
+          <div className="h-6 w-[1.75px] bg-gray-900 mx-2"></div>
+        </>
+      )}
+
+      {/* Search */}
+      <div className="flex items-center gap-0">
+        {searchOpen && (
+          <SearchBar
+            value={searchValue}
+            onChange={onSearchChange}
+            placeholder="Search projects..."
+            className="w-72"
+            autoFocus
+          />
+        )}
+
+        <button
+          onClick={() => onSearchToggle()}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#121212] text-white urbanist-font font-medium text-sm hover:bg-gray-800 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d={
+                searchOpen
+                  ? "M6 18L18 6M6 6l12 12"
+                  : "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              }
+            />
+          </svg>
+          <span className="hidden sm:inline urbanist-font font-medium ">
+            {searchOpen ? "Close" : "Search"}
+          </span>
+        </button>
+      </div>
     </div>
   );
 };

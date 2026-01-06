@@ -11,7 +11,7 @@ import { VscAccount } from "react-icons/vsc";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [navBg, setNavBg] = useState(false);
-  const pagesWithSecondaryNavbar = ['/about', '/blog', 'projects'];
+  const pagesWithSecondaryNavbar = ['/about', '/blog', '/projects'];
   // const [nav, setNav] = useState(false)
 
   const { pathname } = useLocation();

@@ -26,20 +26,20 @@ const Footer = () => {
         </a>
       </div>
       <div>
-        <a className='block text-lg md:text-base urbanist-font' href='/'>
-        Sitemap • Credits • FAQs
+        <a className="block text-lg md:text-base urbanist-font" href="/">
+          Sitemap • Credits • FAQs
         </a>
       </div>
-      <div className='flex items-center gap-2.5'>
-        <VscGithubAlt size='24' />
-        <CiTwitter size='24' />
-        <FiLinkedin size='24' />
-        <FiYoutube size='24' />
+      <div className="flex items-center gap-2.5">
+        <VscGithubAlt size="24" />
+        <CiTwitter size="24" />
+        <FiLinkedin size="24" />
+        <FiYoutube size="24" />
       </div>
 
       <LanguageSwitcher />
     </div>
   );
-}
+};
 
-export default Footer
+export default Footer;
