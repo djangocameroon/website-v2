@@ -49,9 +49,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <path
             d="M6 19L19 6M19 6V18.48M19 6H6.52"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>

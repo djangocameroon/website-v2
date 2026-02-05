@@ -151,13 +151,9 @@ body::-webkit-scrollbar-thumb:hover {
   -webkit-text-stroke-color: white;
 }
 
-.about-bg {
-  background: url("/images/home/greenbg.svg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
+.blue-bg {
+  background: linear-gradient(359.32deg, #000733 39.6%, #020818 99.34%);
+
 }
 .green-backbg {
   background: url("/images/home/greenbackbg.svg");

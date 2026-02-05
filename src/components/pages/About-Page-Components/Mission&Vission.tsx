@@ -31,16 +31,16 @@ const MissionVission = () => {
         <div className='bg-secondary/10 hover:bg-secondary/15 transition-all w-full p-5 space-y-4'>
           <h2 className="nohemi-font font-bold text-3xl">A community with a <br className="max-md:hidden" /><span className='text-secondary nohemi-font'>#vision</span></h2>
           <p className='urbanist-font'>
-            Lorem ipsum dolor sit amet consectetur. Pulvinar et sapien cursus pellentesque consectetur dictumst auctor sit massa. At bibendum convallis dignissim vitae sagittis sed sagittis diam. Mi ac facilisis amet tincidunt. Magna amet non mattis donec. Elementum ullamcorper amet massa integer eget rhoncus a. Mattis donec ut massa egestas fringilla in id. Lacus vitae id erat ligula at et tristique habitant. Fringilla turpis convallis gravida in et. Sapien natoque eu cum adipiscing nulla.<br />
-            Nisl et aliquam aliquet felis nunc suspendisse. Quisque in suspendisse in diam condimentum quam amet. Tincidunt a neque ullamcorper est nec. Dictum id pellentesque donec ultrices vulputate faucibus sit. Feugiat rhoncus potenti pretium et mi.
+            We see a Cameroon where Django developers don't work in isolation. Where asking for help is normal. Where sharing knowledge is expected. Where junior developers get real guidance from people who've been there.<br />
+            We want to build the kind of tech community we wished existed when we started. One that's practical, not performative. Where people collaborate on actual projects, not just talk about them. Where success means helping others succeed too.
           </p>
         </div>
 
         <div className='hover:bg-secondary/5 transition-all w-full p-5 space-y-4 max-md:border max-md:border-secondary max-md:border-dashed'>
           <h2 className="nohemi-font font-bold text-3xl">A community for the <br className="max-md:hidden" /><span className='text-secondary nohemi-font'>#missions</span></h2>
           <p className='urbanist-font'>
-            Lorem ipsum dolor sit amet consectetur. Amet ut sagittis blandit tincidunt pretium bibendum fermentum facilisis ipsum. Sit amet viverra imperdiet at facilisis amet porta vitae. Nisi ornare nec ullamcorper malesuada. Mauris est sed aliquam dignissim. Non ac quis volutpat urna leo at elementum. Pretium turpis malesuada tristique et. Viverra morbi magna pellentesque augue. Suscipit sed parturient vitae consequat quis porttitor risus volutpat.<br />
-            Purus et at sit commodo. At tristique enim in faucibus lacus in massa amet. Diam risus turpis enim platea ut viverra convallis sagittis urna. Commodo curabitur ipsum sed malesuada nunc morbi risus vel. Urna sit egestas sed cras nec quis a. Vulputate.
+            We run monthly meetups where people present what they're building. We organize workshops on Django best practices, testing, deployment, and scaling. We maintain open source projects where members can contribute and learn.<br />
+            We connect experienced developers with those just starting out. We help people find jobs and freelance opportunities. And we keep building spaces where Cameroonian developers can grow their skills and their careers.
           </p>
         </div>
       </div>
