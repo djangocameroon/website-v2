@@ -2,7 +2,7 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HomeImages } from '@/assets';
 import { ToggleSwitch } from '@/components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn, navLinks } from '@/utils/constants';
 import { Button } from '../button';
@@ -24,6 +24,10 @@ const Navbar = () => {
     await logout();
     // if (res) window.location.reload()
   }
+
+  const loginLink = useMemo(() => {
+    return pathname === '/' ? '/auth/login' : `/auth/login?redirect=${encodeURIComponent(pathname)}`;
+  }, [pathname]);
 
   const variant = pagesWithSecondaryNavbar.includes(pathname)
     ? 'secondary'
@@ -107,7 +111,7 @@ const Navbar = () => {
               isAuthenticated ?
                 <Button
                   outline
-                  onClick={() => handleSignOut()}
+                  onClick={handleSignOut}
                   spacing={false}
                   className={cn(
                     "duration-500 hover:scale-90 font-medium text-xl transition-all py-2.5 px-5 urbanist-font flex gap-x-2.5 items-center",
@@ -120,7 +124,7 @@ const Navbar = () => {
                   Sign Out
                 </Button>
                 :
-                <Link to='/auth/login'>
+                <Link to={loginLink}>
                   <Button
                     outline={false}
                     spacing={false}
@@ -166,11 +170,17 @@ const Navbar = () => {
             })}
 
             <div className='py-5 flex flex-col gap-7 items-start justify-start px-10'>
-              <Link to='/auth/login'>
-                <Button outline={false} spacing={false} className="duration-500 hover:scale-90 transition-all">
-                  Sign Up
+              {isAuthenticated ?
+                <Button onClick={handleSignOut} outline spacing={false} className="duration-500 hover:scale-90 transition-all">
+                  Sign Out
                 </Button>
-              </Link>
+                :
+                <Link to={loginLink}>
+                  <Button outline={false} spacing={false} className="duration-500 hover:scale-90 transition-all">
+                    Sign In
+                  </Button>
+                </Link>
+              }
               <div className='mt-1'>
                 <ToggleSwitch />
               </div>

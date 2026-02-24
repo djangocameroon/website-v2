@@ -47,7 +47,8 @@ const Login = () => {
 		// console.log(data);
 		const res = await login(data);
 		if (res && res.status) {
-			navigate("/");
+			const redirectPath = new URLSearchParams(window.location.search).get('redirect');
+			navigate(redirectPath || '/');
 		}
 		reset();
 	};
