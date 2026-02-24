@@ -12,10 +12,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
-import { signinUser } from "@/apis";
+import { useAuth } from "@/components/contexts/auth-context";
 
 const Login = () => {
 	const navigate = useNavigate();
+	const { login } = useAuth();
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -43,12 +44,9 @@ const Login = () => {
 	});
 
 	const onSubmit = async (data: ILoginForm) => {
-		console.log(data);
-		const res = await signinUser(data);
-		if (res) {
-      const { user, ...token } = res;
-			localStorage.setItem("TOKEN", JSON.stringify(token));
-			localStorage.setItem("user", JSON.stringify(user));
+		// console.log(data);
+		const res = await login(data);
+		if (res && res.status) {
 			navigate("/");
 		}
 		reset();

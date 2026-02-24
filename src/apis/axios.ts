@@ -1,3 +1,4 @@
+import { getAuthInfoFromLocalStorage } from "@/utils";
 import axios, {
 	AxiosError,
 	AxiosResponse,
@@ -13,9 +14,9 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
 	(config: InternalAxiosRequestConfig) => {
-		const resource = localStorage.getItem("TOKEN");
+		const resource = getAuthInfoFromLocalStorage();
 		if (resource) {
-            const token = JSON.parse(resource).access_token;
+            const token = resource.token.accessToken;
 			config.headers.Authorization = `Bearer ${token}`;
 		}
 		// config.headers["access-control-allow-origin"] = "*";

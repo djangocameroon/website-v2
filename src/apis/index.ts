@@ -33,49 +33,36 @@ type IUserResponse = {
 
 export const registerUser = async (
 	body: IRegisterForm
-): Promise<IResponse | null> => {
-	try {
-		const requestBody = {
-			email: body.email,
-			username: body.username,
-			password: body.password,
-			password_confirmation: body.passwordConfirmation,
-			first_name: body.name.split(" ")[0],
-			last_name: body.name.split(" ")[1],
-		};
-		const { data } = await axiosClient.post<IResponse>(
-			"/auth/register/",
-			requestBody
-		);
-		toast.success(data.message);
-		return data;
-	} catch (err) {
-		if (err instanceof AxiosError){
-            const { data: { errors } } = err.response!
-            toast.error(errors[0]);
-        }
-		return null;
-	}
+) => {
+	const requestBody = {
+		email: body.email,
+		username: body.username,
+		password: body.password,
+		password_confirmation: body.passwordConfirmation,
+		first_name: body.name.split(" ")[0],
+		last_name: body.name.split(" ")[1],
+	};
+	const { data } = await axiosClient.post<IResponse>(
+		"/auth/register/",
+		requestBody
+	);
+	return data;
 };
 
 export const signinUser = async (
 	body: ILoginForm
-): Promise<IUserResponse | null> => {
-	try {
-        const requestBody = {
-			email_or_username: body.emailOrUsername,
-			password: body.password,
-		};
-		const { data } = await axiosClient.post<IResponse<IUserResponse>>("/auth/login/", requestBody);
-		toast.success(data.message);
-        if (data.status) return data.data;
-	} catch (err: unknown) {
-		if (err instanceof AxiosError){
-            const { data: { errors } } = err.response!
-            toast.error(errors[0]);
-        }
-	}
-    return null;
+) => {
+	const requestBody = {
+		email_or_username: body.emailOrUsername,
+		password: body.password,
+	};
+	const { data } = await axiosClient.post<IResponse<IUserResponse>>("/auth/login/", requestBody);
+	return data;
+};
+
+export const signOutUser = async () => {
+	const { data } = await axiosClient.post<IResponse>("/auth/logout/");
+	return data;
 };
 
 
@@ -86,13 +73,13 @@ export const verifyEmail = async (body: {
 }): Promise<IResponse | null> => {
 	try {
 		const { data } = await axiosClient.post<IResponse>("/auth/password/reset/", body);
-        toast.success(data.message);
+		toast.success(data.message);
 		return data;
 	} catch (err) {
-		if (err instanceof AxiosError){
-            const { data: { errors } } = err.response!
-            toast.error(errors[0]);
-        }
+		if (err instanceof AxiosError) {
+			const { data: { errors } } = err.response!
+			toast.error(errors[0]);
+		}
 		return null;
 	}
 };

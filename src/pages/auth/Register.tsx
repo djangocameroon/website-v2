@@ -9,10 +9,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
-import { registerUser } from "@/apis";
+import { useAuth } from "@/components/contexts/auth-context";
 
 const Register = () => {
 	const navigate = useNavigate();
+	const { signUp } = useAuth()
 
 	const [showPassword, setShowPassword] = useState({
 		password1: false,
@@ -54,8 +55,8 @@ const Register = () => {
 	});
 
 	const onSubmit = async (data: IRegisterForm) => {
-		console.log(data);
-		const res = await registerUser(data);
+		// console.log(data);
+		const res = await signUp(data);
 		if (res && res.status) navigate("/auth/login");
 	};
 

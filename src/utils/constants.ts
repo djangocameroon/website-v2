@@ -38,3 +38,6 @@ export const navLinks = [
     link: "/blog"
   },
 ]
+
+export const SECRET_KEY = 'a-very-secret-key-123';
+export const SAVED_AUTH_INFO_KEY = 'dj-auth';
