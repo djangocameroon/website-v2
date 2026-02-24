@@ -162,7 +162,8 @@ const Login = () => {
 					<Button
 						outline={false}
 						backgroundColor="bg-secondary"
-						className="w-full"
+						className="w-full hover:shadow-[0_8px_30px_rgba(66,133,244,0.4)]
+							active:scale-[0.98] transition-all duration-300"
 						disabled={isSubmitting}
 					>
 						Login into account
