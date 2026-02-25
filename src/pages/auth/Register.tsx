@@ -57,7 +57,7 @@ const Register = () => {
 	const onSubmit = async (data: IRegisterForm) => {
 		// console.log(data);
 		const res = await signUp(data);
-		if (res && res.status) navigate("/auth/login");
+		if (res && res.status) navigate("/auth/verify-email", { state: { email: data.email } });
 	};
 
 	// Shared input styles with animations

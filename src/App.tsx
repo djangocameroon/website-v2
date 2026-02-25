@@ -2,11 +2,13 @@ import { lazy, Suspense, useEffect } from "react";
 import { Footer, Navbar } from "./components/layout";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { AuthRedirectWrapper } from "./pages/auth/Auth";
 
 // Lazy load all page components
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
+const VerifyEmail = lazy(() => import("./pages/auth/VerifyEmail"))
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const ForgotPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ForgotPassword })));
 const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(module => ({ default: module.ResetPassword })));
@@ -45,24 +47,34 @@ const AppContent = () => {
 				)}
 				<div className="flex-grow">
 					<Routes>
-						<Route path="/auth" element={<Auth />}>
+						<Route path="/auth" element={
+							<AuthRedirectWrapper>
+								<Auth />
+							</AuthRedirectWrapper>
+						}>
 							<Route path="login" element={<Login />} />
 							<Route path="register" element={<Register />} />
+							<Route
+								path="verify-email"
+								element={<VerifyEmail />}
+							/>
+							<Route
+								path="forgot-password"
+								element={<ForgotPassword />}
+							/>
+							<Route
+								path="reset-password"
+								element={<ResetPassword />}
+							/>
 						</Route>
-						<Route
-							path="/auth/forgot-password"
-							element={<ForgotPassword />}
-						/>
-						<Route
-							path="/auth/reset-password"
-							element={<ResetPassword />}
-						/>
+
+
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/blog/:id" element={<BlogDetail />} />
 						<Route path="/projects" element={<Project />} />
-						 
+
 					</Routes>
 				</div>
 			</Suspense>

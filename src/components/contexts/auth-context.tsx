@@ -1,6 +1,6 @@
 "use client";
 
-import { registerUser, signinUser, signOutUser } from '@/apis';
+import { registerUser, signinUser, signOutUser, verifyUserEmail } from '@/apis';
 import { ILoginForm, IRegisterForm } from '@/models';
 import { AuthInfoT } from '@/types';
 import { getAuthInfoFromLocalStorage, isValidDateString, removeAuthInfoFromLocalStorage, saveAuthInfoToLocalStorage } from '@/utils';
@@ -13,6 +13,7 @@ interface AuthContextType {
     user: AuthInfoT['user'] | null;
     isLoading: boolean;
     signUp: (data: IRegisterForm) => Promise<Awaited<ReturnType<typeof registerUser>> | undefined>;
+    verifyEmail: (data: { email: string; otp: string; }) => Promise<Awaited<ReturnType<typeof verifyUserEmail>>>;
     login: (data: ILoginForm) => Promise<Awaited<ReturnType<typeof signinUser>> | undefined>;
     logout: (silently?: boolean) => Promise<void>;
     saveAuthInfo: (user: AuthInfoT['user'], token: AuthInfoT['token']) => void
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContextType>({
     user: null,
     isLoading: true,
     signUp: async () => undefined,
+    verifyEmail: async () => null,
     login: async () => undefined,
     logout: async () => { },
     saveAuthInfo: () => { },
@@ -115,36 +117,43 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
         }
     }
 
-    const login = async (data: ILoginForm) => {
-        try {
-            const response = await signinUser(data);
-            if (!(response && response.status)) throw new Error("Login failed");
+    const verifyEmail = async (data: {
+        email: string;
+        otp: string;
+    }) => {
+        return await verifyUserEmail(data);
+    }
 
-            toast.success(response.message);
-            const { user, ...token } = response.data;
-            const _user = {
-                email: user.email,
-                username: user.username,
-                profileImage: user.profile_image,
-                firstName: user.first_name,
-                lastName: user.last_name,
-            } satisfies AuthInfoT['user'];
-            const _token = {
-                accessToken: token.access_token,
-                refreshToken: token.refresh_token,
-                expiresIn: token.expires_in,
-            } satisfies AuthInfoT['token'];
-            saveAuthInfo(_user, _token);
-            return response;
-        } catch (err) {
-            console.error(err);
-            if (err instanceof AxiosError) {
-                const errors = err.response?.data?.errors;
-                toast.error(errors?.[0] || "Login failed");
-                return;
-            }
-            toast.error("Login failed");
-        }
+    const login = async (data: ILoginForm) => {
+        const response = await signinUser(data);
+        if (!(response && response.status)) throw new Error("Login failed");
+
+        toast.success(response.message);
+        const { user, ...token } = response.data;
+        const _user = {
+            email: user.email,
+            username: user.username,
+            profileImage: user.profile_image,
+            firstName: user.first_name,
+            lastName: user.last_name,
+        } satisfies AuthInfoT['user'];
+        const _token = {
+            accessToken: token.access_token,
+            refreshToken: token.refresh_token,
+            expiresIn: token.expires_in,
+        } satisfies AuthInfoT['token'];
+        saveAuthInfo(_user, _token);
+        return response;
+        // try {
+        // } catch (err) {
+        //     console.error(err);
+        //     if (err instanceof AxiosError) {
+        //         const errors = err.response?.data?.errors;
+        //         toast.error(errors?.[0] || "Login failed");
+        //         return;
+        //     }
+        //     toast.error("Login failed");
+        // }
     }
 
     const logout = async (silently = false) => {
@@ -171,6 +180,7 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
         user,
         isLoading,
         signUp,
+        verifyEmail,
         login,
         logout,
         saveAuthInfo,

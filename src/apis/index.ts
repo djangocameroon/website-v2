@@ -1,19 +1,15 @@
-// This function contains the different API functions
-
-import { AxiosError } from "axios";
 import axiosClient from "./axios";
 import { ILoginForm, IRegisterForm } from "@/models";
-import { toast } from "react-hot-toast";
 
 type IResponse<T = unknown> = {
 	message: string;
 	status_code: number;
 } & ({
 	status: false;
-    errors: string[];
+	errors: string[];
 } | {
 	status: true;
-    data: T
+	data: T
 })
 
 type IUserResponse = {
@@ -65,21 +61,15 @@ export const signOutUser = async () => {
 	return data;
 };
 
-
-
-
-export const verifyEmail = async (body: {
+export const verifyUserEmail = async (body: {
 	email: string;
+	otp: string;
 }): Promise<IResponse | null> => {
-	try {
-		const { data } = await axiosClient.post<IResponse>("/auth/password/reset/", body);
-		toast.success(data.message);
-		return data;
-	} catch (err) {
-		if (err instanceof AxiosError) {
-			const { data: { errors } } = err.response!
-			toast.error(errors[0]);
-		}
-		return null;
-	}
+	const { data } = await axiosClient.post<IResponse>("/auth/verify-email/", body);
+	return data;
+};
+
+export const resendVerificationEmail = async (email: string): Promise<IResponse | null> => {
+	const { data } = await axiosClient.post<IResponse>("/auth/resend-verification/", { email });
+	return data;
 };
