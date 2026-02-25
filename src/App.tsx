@@ -92,7 +92,53 @@ const App = () => {
 			<Router>
 				<AppContent />
 			</Router>
-			<Toaster position="top-right" />
+			<Toaster 
+                position="bottom-right"
+                toastOptions={{
+                    // Default styles for all toasts
+                    style: {
+                        background: 'rgba(10, 14, 39, 0.95)',
+                        color: '#fff',
+                        border: '1px solid rgba(66, 133, 244, 0.3)',
+                        borderRadius: '1rem',
+                        fontFamily: 'urbanist, sans-serif',
+                        backdropFilter: 'blur(10px)',
+                    },
+                    // Duration
+                    duration: 4000,
+                    // Success toast
+                    success: {
+						duration: 2500,
+                        style: {
+                            background: 'rgba(16, 62, 46, 0.95)',
+                            border: '1px solid rgba(34, 197, 94, 0.5)',
+                        },
+                        iconTheme: {
+                            primary: '#22c55e',
+                            secondary: '#fff',
+                        },
+                    },
+                    // Error toast
+                    error: {
+						duration: 5000,
+                        style: {
+                            background: 'rgba(39, 10, 10, 0.95)',
+                            border: '1px solid rgba(239, 68, 68, 0.5)',
+                        },
+                        iconTheme: {
+                            primary: '#ef4444',
+                            secondary: '#fff',
+                        },
+                    },
+                    // Loading toast
+                    loading: {
+                        style: {
+                            background: 'rgba(10, 14, 39, 0.95)',
+                            border: '1px solid rgba(66, 133, 244, 0.5)',
+                        },
+                    },
+                }}
+            />
 		</>
 	);
 };
