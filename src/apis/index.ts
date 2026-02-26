@@ -73,3 +73,17 @@ export const resendVerificationEmail = async (email: string): Promise<IResponse 
 	const { data } = await axiosClient.post<IResponse>("/auth/resend-verification/", { email });
 	return data;
 };
+
+export const sendPasswordResetRequest = async (email: string): Promise<IResponse | null> => {
+	const { data } = await axiosClient.post<IResponse>("/auth/password/reset/", { email });
+	return data;
+};
+
+export const resetUserPassword = async (body: {
+	otp: string;
+	password: string;
+	password_confirmation: string;
+}): Promise<IResponse | null> => {
+	const { data } = await axiosClient.post<IResponse>("/auth/password/reset/confirm/", body);
+	return data;
+};

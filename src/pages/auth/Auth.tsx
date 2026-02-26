@@ -9,7 +9,13 @@ const Auth = () => {
   const location = useLocation();
   const showAuthComponent = ['/auth/login', '/auth/register'].includes(location.pathname);
 
-  if (!showAuthComponent) return <Outlet />;
+  if (!showAuthComponent) return (
+    <>
+      <Outlet />
+      <AuthFooter />
+    </>
+  );
+
   return (
     <div className='green-backbg md:px-5 flex flex-col md:gap-2 justify-start h-screen items-center  overflow-auto'>
       <AuthNavbar />
