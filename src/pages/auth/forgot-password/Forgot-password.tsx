@@ -1,11 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthImages, HomeImages } from '@/assets'
 import { Button } from '@components/layout';
 import { useForm } from 'react-hook-form';
 import { FiCheck, FiX } from 'react-icons/fi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sendPasswordResetRequest, resetUserPassword } from '@/apis';
 import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -100,6 +100,7 @@ const ProgressIndicator = ({ verificationStatus }: { verificationStatus: Verific
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('idle');
     const [step, setStep] = useState<'email' | 'reset'>('email');
     const [userEmail, setUserEmail] = useState('');
@@ -111,6 +112,7 @@ const ForgotPassword = () => {
         handleSubmit: handleEmailSubmit,
         register: registerEmail,
         formState: { errors: emailErrors, isSubmitting: isEmailSubmitting },
+        setValue: setEmailValue,
     } = useForm<EmailFormData>({
         resolver: yupResolver(EmailSchema),
     });
@@ -123,6 +125,11 @@ const ForgotPassword = () => {
     } = useForm<ResetPasswordFormData>({
         resolver: yupResolver(ResetPasswordSchema),
     });
+
+    useEffect(() => {
+        const emailFromState = location.state?.email;
+        if (emailFromState) setEmailValue('email', emailFromState)
+    }, [location.state, setEmailValue])
 
     const handleSendPasswordResetRequest = async (data: EmailFormData) => {
         setVerificationStatus('sending');

@@ -3,10 +3,10 @@
 import { ILoginForm } from "@/models";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Button } from "@/components/layout";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // import {Carousel} from "@/components";
 import { useNavigate } from "react-router-dom";
@@ -40,11 +40,26 @@ const Login = () => {
 	const {
 		handleSubmit,
 		register,
+		control,
 		formState: { errors, isSubmitting },
 		reset,
 	} = useForm<ILoginForm>({
 		resolver: yupResolver(loginFormSchema),
 	});
+
+	const emailOrUsernameValue = useWatch({
+		control,
+		name: "emailOrUsername",
+		defaultValue: "",
+	});
+
+	const getForgotPasswordState = useCallback(() => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (emailRegex.test(emailOrUsernameValue)) {
+			return { email: emailOrUsernameValue };
+		}
+		return undefined;
+	}, [emailOrUsernameValue]);
 
 	const onSubmit = async (data: ILoginForm) => {
 		// console.log(data);
@@ -177,6 +192,7 @@ const Login = () => {
 						</div>
 						<Link
 							to="/auth/forgot-password"
+							state={getForgotPasswordState()}
 							className="text-white flex justify-end items-end urbanist-font gap-x-2"
 						>
 							Forgot password?
