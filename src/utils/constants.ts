@@ -39,5 +39,12 @@ export const navLinks = [
   },
 ]
 
+export const socialLinks = {
+  github: "https://github.com/djangocameroon",
+  twitter: "https://x.com/DjangoCameroon",
+  linkedin: "https://linkedin.com/company/djangocameroon",
+  youtube: "https://www.youtube.com/@DjangoCameroon"
+} as const;
+
 export const SECRET_KEY = 'a-very-secret-key-123';
 export const SAVED_AUTH_INFO_KEY = 'dj-auth';
