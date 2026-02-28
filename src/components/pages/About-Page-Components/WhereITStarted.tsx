@@ -1,53 +1,49 @@
 import { AboutImages } from '@/assets';
+import AnimatedSection from './animated-section';
 
 const WhereITStarted = () => {
+
   return (
-    <section className='flex items-start justify-between gap-10 lg:gap-32 px-4 sm:px-0 sm:pl-10 border-none sm:border-solid border-l-2 border-gray-200 ml-3 py-8'>
-      <div className='w-[35%] hidden sm:block '>
-        <div className='absolute left-0 md:left-[7.5%] bg-primary h-6 w-6 rounded-full border-4 border-gray-400'></div>
-        <span className='text-sm text-secondary font-semibold'>
-          Lorem ipsum subtitle
-        </span>
-        <h2 className='timeline-title text-xl my-4 text-gray-700 font-bold'>
-          Where & where it all started.
-        </h2>
-      </div>
-      <article className='w-full'>
-        <div className='w-full'>
-          <img src={AboutImages.peopleTogether} alt='' />
+    <AnimatedSection
+      className='relative flex max-md:flex-col items-start justify-between gap-10 lg:gap-32 pt-8 md:pb-[134px] pb-10'
+    >
+
+      <div className='absolute left-0 inset-y-0 flex w-[0.938rem] max-md:hidden'>
+        <div className="flex justify-center flex-[1]">
+          <div className="w-[1px] bg-dark"></div>
         </div>
-        <div>
-          <h2 className='text-3xl pt-8 pb-4 font-semibold'>
-            Lorem ipsum very big first title
+      </div>
+
+      <div className='w-[35%] max-md:w-full'>
+        <div className='md:mt-4 md:pl-10 relative'>
+          <div className="max-md:hidden absolute left-0 top-4 size-[0.938rem] bg-white rounded-full border-[0.5px] border-text-color  flex justify-center items-center">
+            <div className='bg-text-color rounded-full size-[0.688rem] border-0'></div>
+          </div>
+
+          <span className='text-sm text-secondary urbanist-font mb-2 inline-block max-md:w-full max-md:text-center'>
+            Every Journey Has a First Step
+          </span>
+          <h3 className='timeline-title text-[1.625rem] leading-[1.875rem] font-semibold nohemi-font max-md:text-center'>
+            When & where it all<br />started.
+          </h3>
+        </div>
+      </div>
+
+      <article className='w-full space-y-8'>
+        <div className='w-full rounded-[30px] border-secondary border-[5px] overflow-hidden max-h-[350px]'>
+          <img src={AboutImages.peopleTogether} alt='' className='object-fill w-full h-full grayscale hover:grayscale-[85%] transition-all' />
+        </div>
+
+        <div className='space-y-4'>
+          <h2 className='text-[32px] leading-[35px] nohemi-font font-bold'>
+            A small team with a simple idea
           </h2>
-          <p className='text-text-color text-base'>
-            Lorem ipsum dolor sit amet consectetur. Fusce dolor at id quis nam
-            sit morbi egestas. Urna nulla proin id nulla tortor risus ut in.
-            Orci nisl purus nec eu justo diam aliquet faucibus tristique.
-            Aliquam sit eros mauris amet lacus vulputate non. Massa vitae at
-            tempor auctor libero purus urna. Risus suspendisse at tristique ut
-            vitae enim vehicula iaculis arcu. Dictum convallis sed mauris mauris
-            eget tincidunt vel suspendisse. Elementum pretium adipiscing sed
-            mauris pellentesque sed mi posuere id. Elementum semper duis et
-            volutpat eu. Faucibus sit eu magna dui turpis facilisis tincidunt
-            purus vel. Venenatis lorem turpis nullam id mauris vel dignissim.
-            Pharetra ac sit ullamcorper vitae fusce neque. Ut duis fermentum
-            facilisis bibendum facilisis. Mi rhoncus sed a donec dapibus lectus.
-            Ullamcorper dictumst elementum lectus nunc magna vitae. At mus
-            libero ac sollicitudin. Eget condimentum tincidunt at aliquam purus
-            quam massa cras. Cras bibendum diam velit suscipit parturient
-            feugiat. Neque lacus platea eu ipsum. Risus non imperdiet egestas
-            maecenas egestas pellentesque ultrices sem. Senectus quis lectus
-            purus hac. Bibendum et adipiscing scelerisque nunc velit mauris
-            tortor. Venenatis sit vitae pellentesque orci velit urna vitae
-            senectus. Felis amet id sapien purus. Nunc sed vulputate libero
-            morbi ut in tortor. Mattis tristique pellentesque risus in enim dui
-            dis in nibh. Elit eu morbi tempor lacinia eu mi velit nulla. Odio
-            turpis urna.
+          <p className='text-text-color text-base urbanist-font'>
+            It started with a few Django developers meeting up in Bamenda. We noticed something: there were talented people building things in isolation. No place to ask questions. No one to review code. No way to know what others were working on. So we created a space where Django developers in Cameroon could connect. First meetup had eight people. We talked about projects, shared solutions to problems we'd all hit, and realized we weren't alone. That feeling stuck. More people started showing up. Students learning Django for the first time. Mid-level developers building SaaS products. Senior engineers working at companies across Africa. Everyone had something to share and something to learn. We started organizing workshops. Created project teams where people could contribute to real applications. And we made it clear from day one: this isn't about being the best. It's about getting better together. Today, we're a community of developers across Cameroon. Some of us work remotely for international companies. Others are building startups. A few teach at universities. But we all share the same goal: make Cameroon a place where Django developers can grow, connect, and build things that matter.
           </p>
         </div>
       </article>
-    </section>
+    </AnimatedSection>
   );
 };
 

@@ -1,21 +1,25 @@
- 
+
 
 import { ILoginForm } from "@/models";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Button } from "@/components/layout";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // import {Carousel} from "@/components";
 import { useNavigate } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
-import { signinUser } from "@/apis";
+import { useAuth } from "@/components/contexts/auth-context";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { resendVerificationEmail } from "@/apis";
 
 const Login = () => {
 	const navigate = useNavigate();
+	const { login } = useAuth();
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -36,20 +40,56 @@ const Login = () => {
 	const {
 		handleSubmit,
 		register,
+		control,
 		formState: { errors, isSubmitting },
 		reset,
 	} = useForm<ILoginForm>({
 		resolver: yupResolver(loginFormSchema),
 	});
 
+	const emailOrUsernameValue = useWatch({
+		control,
+		name: "emailOrUsername",
+		defaultValue: "",
+	});
+
+	const getForgotPasswordState = useCallback(() => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (emailRegex.test(emailOrUsernameValue)) {
+			return { email: emailOrUsernameValue };
+		}
+		return undefined;
+	}, [emailOrUsernameValue]);
+
 	const onSubmit = async (data: ILoginForm) => {
-		console.log(data);
-		const res = await signinUser(data);
-		if (res) {
-      const { user, ...token } = res;
-			localStorage.setItem("TOKEN", JSON.stringify(token));
-			localStorage.setItem("user", JSON.stringify(user));
-			navigate("/");
+		// console.log(data);
+		try {
+			await login(data);
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				if (err.response?.status === 403) {
+					toast.error("Account is not active.");
+					const inputValue = data.emailOrUsername;
+					const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+					const email = emailRegex.test(inputValue) ? inputValue : '';
+					if (email) {
+						resendVerificationEmail(email).then(() => {
+							console.log("Verification email sent.");
+						}).catch((err) => {
+							console.error("Error: ", err);
+						});
+						navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
+					} else {
+						reset({ emailOrUsername: '' });
+						toast.error("Please use your email instead to login and verify your account.");
+					}
+					return;
+				}
+				const errors = err.response?.data?.errors;
+				toast.error(errors?.[0] || "Login failed");
+				return;
+			}
+			toast.error("Login failed");
 		}
 		reset();
 	};
@@ -131,7 +171,7 @@ const Login = () => {
 							</div>
 						</div>
 					</div>
-          {errors.password && (
+					{errors.password && (
 						<label className="label mt-2 block">
 							<span className="label-text-alt text-red-500 urbanist-font">
 								{errors.password?.message}
@@ -152,6 +192,7 @@ const Login = () => {
 						</div>
 						<Link
 							to="/auth/forgot-password"
+							state={getForgotPasswordState()}
 							className="text-white flex justify-end items-end urbanist-font gap-x-2"
 						>
 							Forgot password?
@@ -162,7 +203,8 @@ const Login = () => {
 					<Button
 						outline={false}
 						backgroundColor="bg-secondary"
-						className="w-full"
+						className="w-full hover:shadow-[0_8px_30px_rgba(66,133,244,0.4)]
+							active:scale-[0.98] transition-all duration-300"
 						disabled={isSubmitting}
 					>
 						Login into account
