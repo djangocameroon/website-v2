@@ -33,7 +33,7 @@ const Login = () => {
 			.min(8, "Password must be atleast 8 characters long")
 			.matches(
 				/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-				`${"Enter a correct password"}`
+				`${"Enter a strong password"}`
 			),
 	});
 
@@ -68,7 +68,7 @@ const Login = () => {
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				if (err.response?.status === 403) {
-					toast.error("Account is not active.");
+					// toast.error("Account is not active.");
 					const inputValue = data.emailOrUsername;
 					const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 					const email = emailRegex.test(inputValue) ? inputValue : '';
@@ -85,8 +85,8 @@ const Login = () => {
 					}
 					return;
 				}
-				const errors = err.response?.data?.errors;
-				toast.error(errors?.[0] || "Login failed");
+				const errorMessage = err?.response?.data.message;
+				toast.error(errorMessage || "Login failed");
 				return;
 			}
 			toast.error("Login failed");
