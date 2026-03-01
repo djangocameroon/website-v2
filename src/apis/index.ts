@@ -1,5 +1,6 @@
+import { ILoginForm } from "@/pages/auth/Login";
 import axiosClient from "./axios";
-import { ILoginForm, IRegisterForm } from "@/models";
+import { IRegisterForm } from "@/models";
 
 type IResponse<T = unknown> = {
 	message: string;
@@ -51,6 +52,7 @@ export const signinUser = async (
 	const requestBody = {
 		email_or_username: body.emailOrUsername,
 		password: body.password,
+		remember_me: body.remember_me,
 	};
 	const { data } = await axiosClient.post<IResponse<IUserResponse>>("/auth/login/", requestBody);
 	return data;

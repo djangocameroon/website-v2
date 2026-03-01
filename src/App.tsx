@@ -114,7 +114,7 @@ const App = () => {
                             border: '1px solid rgba(34, 197, 94, 0.5)',
                         },
                         iconTheme: {
-                            primary: '#22c55e',
+                            primary: 'rgb(15, 157, 88)',
                             secondary: '#fff',
                         },
                     },
@@ -126,7 +126,7 @@ const App = () => {
                             border: '1px solid rgba(239, 68, 68, 0.5)',
                         },
                         iconTheme: {
-                            primary: '#ef4444',
+                            primary: 'rgb(219, 68, 55)',
                             secondary: '#fff',
                         },
                     },

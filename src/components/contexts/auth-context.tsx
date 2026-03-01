@@ -1,7 +1,8 @@
 "use client";
 
 import { registerUser, signinUser, signOutUser, verifyUserEmail } from '@/apis';
-import { ILoginForm, IRegisterForm } from '@/models';
+import { IRegisterForm } from '@/models';
+import { ILoginForm } from '@/pages/auth/Login';
 import { AuthInfoT } from '@/types';
 import { getAuthInfoFromLocalStorage, isValidDateString, removeAuthInfoFromLocalStorage, saveAuthInfoToLocalStorage } from '@/utils';
 import { AxiosError } from 'axios';
@@ -15,7 +16,7 @@ interface AuthContextType {
     signUp: (data: IRegisterForm) => Promise<Awaited<ReturnType<typeof registerUser>> | undefined>;
     verifyEmail: (data: { email: string; otp: string; }) => Promise<Awaited<ReturnType<typeof verifyUserEmail>>>;
     login: (data: ILoginForm) => Promise<Awaited<ReturnType<typeof signinUser>> | undefined>;
-    logout: (silently?: boolean) => Promise<void>;
+    logout: (silently?: boolean, sendRequest?: boolean) => Promise<void>;
     saveAuthInfo: (user: AuthInfoT['user'], token: AuthInfoT['token']) => void
     isAuthenticated: boolean;
 }
@@ -70,6 +71,7 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
 
             if (savedAuthInfo) {
                 const { user: savedUser, token: savedToken } = savedAuthInfo;
+                console.log(savedToken)
                 if (!isTokenValid(savedToken)) {
                     await logout(true);
                     return;
@@ -89,16 +91,37 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
         const now = Date.now();
 
         // Refresh 3 minutes before expiration
-        const logoutTime = expiresAt.getTime() - now - (3 * 60 * 1000);
+        let remaining = expiresAt.getTime() - now - (3 * 60 * 1000);
 
-        if (logoutTime > 0) {
-            const timeoutId = setTimeout(() => {
-                console.log(`Logging out in ${logoutTime / 1000} seconds...`);
-                logout(true);
-            }, logoutTime);
-
-            return () => clearTimeout(timeoutId);
+        if (remaining <= 0) {
+            logout(true, false); // Token already expired, logout immediately without sending request
+            return;
         }
+
+        const MAX_TIMEOUT = 2 ** 31 - 1; // safe cap for setTimeout
+        let timeoutId: number | null = null;
+        let isCleared = false;
+
+        const schedule = () => {
+            if (isCleared) return;
+            const delay = Math.min(remaining, MAX_TIMEOUT);
+            timeoutId = window.setTimeout(() => {
+                remaining -= delay;
+                if (remaining <= 0) {
+                    logout(true);
+                } else {
+                    schedule(); // chain next chunk if needed
+                }
+            }, delay);
+        };
+
+        console.log(`Logging out in ${Math.round((remaining / 1000) / 60)} minutes...`);
+        schedule();
+
+        return () => {
+            isCleared = true;
+            if (timeoutId != null) clearTimeout(timeoutId);
+        };
     }, [token]);
 
     const signUp = async (data: IRegisterForm) => {
@@ -156,23 +179,27 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
         // }
     }
 
-    const logout = async (silently = false) => {
-        setIsLoading(true);
-        try {
-            const res = await signOutUser();
-            if (!silently) toast.success(res?.message || "");
-            removeAuthInfoFromLocalStorage();
-            setToken(null);
-            setUser(null);
-        } catch (err) {
-            console.error('Logout error:', err);
-            if (err instanceof AxiosError) {
-                const errors = err.response?.data?.errors;
-                if (!silently) toast.error(errors?.[0] || "Something went wrong while logging out.");
+    const logout = async (silently = false, sendRequest = true) => {
+        if (sendRequest) {
+            setIsLoading(true);
+            try {
+                const res = await signOutUser();
+                if (!silently) toast.success(res?.message || "");
+            } catch (err) {
+                console.error('Logout error:', err);
+                if (err instanceof AxiosError) {
+                    const errors = err.response?.data?.errors;
+                    if (!silently) toast.error(errors?.[0] || "Something went wrong while logging out.");
+                }
+            } finally {
+                setIsLoading(false);
             }
-        } finally {
-            setIsLoading(false);
         }
+
+        removeAuthInfoFromLocalStorage();
+        setToken(null);
+        setUser(null);
+
     };
 
     const value = {

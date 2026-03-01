@@ -1,6 +1,3 @@
-
-
-import { ILoginForm } from "@/models";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useWatch } from "react-hook-form";
@@ -17,25 +14,28 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { resendVerificationEmail } from "@/apis";
 
+const loginFormSchema = yup.object().shape({
+	emailOrUsername: yup
+		.string()
+		.required("You must provide a value for this field"),
+	password: yup
+		.string()
+		.required("You must provide a value for this field")
+		.min(8, "Password must be atleast 8 characters long")
+		.matches(
+			/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
+			`${"Enter a strong password"}`
+		),
+	remember_me: yup
+		.boolean(),
+});
+
+export type ILoginForm = yup.InferType<typeof loginFormSchema>;
 const Login = () => {
 	const navigate = useNavigate();
 	const { login } = useAuth();
 
 	const [showPassword, setShowPassword] = useState(false);
-
-	const loginFormSchema = yup.object().shape({
-		emailOrUsername: yup
-			.string()
-			.required("You must provide a value for this field"),
-		password: yup
-			.string()
-			.required("You must provide a value for this field")
-			.min(8, "Password must be atleast 8 characters long")
-			.matches(
-				/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-				`${"Enter a strong password"}`
-			),
-	});
 
 	const {
 		handleSubmit,
@@ -45,6 +45,9 @@ const Login = () => {
 		reset,
 	} = useForm<ILoginForm>({
 		resolver: yupResolver(loginFormSchema),
+		defaultValues: {
+			remember_me: false,
+		},
 	});
 
 	const emailOrUsernameValue = useWatch({
@@ -85,7 +88,7 @@ const Login = () => {
 					}
 					return;
 				}
-				const errorMessage = err?.response?.data.message;
+				const errorMessage = err?.response?.data?.errors?.[0] || err?.response?.data.message;
 				toast.error(errorMessage || "Login failed");
 				return;
 			}
@@ -181,10 +184,11 @@ const Login = () => {
 				</div>
 				<div className="grow flex flex-col md:justify-between mt-5 md:mt-7">
 					<div className="flex md:justify-between md:items-center max-md:flex-col-reverse px-2.5 max-md:mb-5 gap-y-5">
-						<div>
+						<div className="flex items-center">
 							<input
 								type="checkbox"
-								className="md:w-[1.17rem] md:h-[1.17rem] w-4 h-4 rounded-md border-secondary border-1"
+								className="md:size-[1.17rem] size-4 rounded-[0.414rem] border-secondary-light bg-white border appearance-none checked:bg-secondary remember-me-checkbox cursor-pointer"
+								{...register("remember_me")}
 							/>
 							<span className="text-white urbanist-font ml-2.5">
 								Keep me logged in next time
@@ -211,6 +215,25 @@ const Login = () => {
 					</Button>
 				</div>
 			</form>
+			<style>{`
+				input.remember-me-checkbox::before {
+					content: "";
+					color: transparent;
+					display: block;
+					width: inherit;
+					height: inherit;
+					border-radius: inherit;
+					border: 0;
+					background-color: transparent;
+					background-size: contain;
+					background-repeat: no-repeat, no-repeat;
+				}
+				input.remember-me-checkbox:checked::before {
+					margin-top: 2px;
+					box-shadow: none;
+					background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" width="8.82" height="6.07" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>');
+				}
+			`}</style>
 		</div>
 	);
 };

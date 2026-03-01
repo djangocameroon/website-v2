@@ -34,8 +34,8 @@ axiosClient.interceptors.response.use(
 	},
 	(error: AxiosError) => {
 		if (error.response && error.response.status === 401) {
-			localStorage.removeItem("TOKEN");
-			window.location.reload();
+			// localStorage.removeItem("TOKEN");
+			// window.location.reload();
 		}
 		return Promise.reject(error);
 	}
