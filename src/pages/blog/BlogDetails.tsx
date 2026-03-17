@@ -1,14 +1,63 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams, Link } from 'react-router-dom';
-import { blogData } from '@/data/blogData';
+import { useState, useEffect } from 'react';
+import { blogApi } from '@/lib/blogApi';
+import { BlogPost } from '@/types/blog';;
 import { AiOutlineLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiTimeFive } from 'react-icons/bi';
 import { VscAccount } from "react-icons/vsc";
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const post = blogData.find((item) => item.id == Number(id));
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!post) return <div className="pt-40 text-center">Post not found</div>;
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!id) return;
+
+      try {
+        setLoading(true);
+        const data = await blogApi.getPostById(Number(id));
+        setPost(data);
+        setError(null);
+        
+        // Les vues sont incrémentées automatiquement par le hook useBlogPost
+        // Mais on peut aussi le faire manuellement ici si nécessaire
+        await blogApi.incrementViews(Number(id));
+      } catch (err: any) {
+        console.error('Error fetching post:', err);
+        setError(err.message || 'Failed to load blog post');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <div className="min-h-screen bg-white pt-40 text-center">
+        <p className="text-red-500 font-semibold mb-4">Post not found</p>
+        <p className="text-gray-600">{error}</p>
+        <Link to="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
+          ← Back to blog
+        </Link>
+      </div>
+    );
+  }
+
+  const authorName = typeof post.author === 'object' ? post.author.username : post.author;
 
   return (
     <div className="min-h-screen bg-white">
@@ -36,33 +85,69 @@ const BlogDetail = () => {
         {/* Stats Bar */}
         <div className="flex items-center justify-between py-6 border-y border-gray-100 mb-12 text-sm text-gray-500 font-bold">
           <div className="flex items-center gap-8">
-            <span className="flex items-center gap-2"><AiOutlineLike size={20} className="text-blue-500" /> {post.like} likes</span>
-            <span className="flex items-center gap-2"><AiOutlineEye size={20} /> {post.views} views</span>
-            <span className="flex items-center gap-2"><BiTimeFive size={20} /> {post.readTime}</span>
+            <span className="flex items-center gap-2">
+              <AiOutlineLike size={20} className="text-blue-500" /> {post.likes_count} likes
+            </span>
+            <span className="flex items-center gap-2">
+              <AiOutlineEye size={20} /> {post.views_count} views
+            </span>
+            <span className="flex items-center gap-2">
+              <BiTimeFive size={20} /> {post.read_time} mins read
+            </span>
           </div>
           <div className="flex items-center gap-2 text-gray-900">
-            <VscAccount size={20} /> {post.author}
+            <VscAccount size={20} /> {authorName}
           </div>
         </div>
 
-        {/* Article Body */}
+        {/* Article Body - Affichage du contenu HTML de l'éditeur */}
         <article className="text-gray-800 leading-relaxed text-lg space-y-10 urbanist-font">
-          <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left ">
-            {post.description.part1}
-          </p>
-
-          <div className="w-full rounded-[2rem] overflow-hidden shadow-2xl my-16 border border-gray-100">
-            <img 
-              src={post.description.middleImage} 
-              alt="Content visual" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          <p>{post.description.part2}</p>
+          <div 
+            className="blog-content prose prose-lg max-w-none"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </article>
+
+        {/* Style pour le contenu du blog */}
+        <style >{`
+          .blog-content {
+            line-height: 1.8;
+          }
+          .blog-content p {
+            margin-bottom: 1.5rem;
+          }
+          .blog-content img {
+            width: 100%;
+            border-radius: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+          }
+          .blog-content h1,
+          .blog-content h2,
+          .blog-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+          }
+          .blog-content a {
+            color: #2563eb;
+            text-decoration: underline;
+          }
+          .blog-content ul,
+          .blog-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+          }
+          .blog-content code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+          }
+        `}</style>
       </main>
     </div>
   );
 };
+
 export default BlogDetail;

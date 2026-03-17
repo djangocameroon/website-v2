@@ -1,4 +1,5 @@
 import { BlogImages } from '@/assets';
+import { Link } from 'react-router-dom';
 
 const BlogHeader = () => {
   return (
@@ -22,10 +23,12 @@ const BlogHeader = () => {
             nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam eu
             neque in. In sit leo fermentum amet orci odio. Purus dolor mattis.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all">
-            <img src={BlogImages.article} alt='' className='size-5 font-bold' />
-            Submit an article
-          </button>
+          <Link to={`/blog/new`}>
+            <button className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all">
+              <img src={BlogImages.article} alt='' className='size-5 font-bold' />
+              Submit an article
+            </button>
+          </Link>
         </div>
         <div className="md:w-1/2 flex pb-0 relative mt-auto md:mt-auto z-10">
           <img src={BlogImages.plane} alt='' className='size-4/5' />

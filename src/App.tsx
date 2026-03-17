@@ -13,6 +13,7 @@ const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(mod
 const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const Project = lazy(() => import("./pages/Project"));
+const BlogAdd = lazy(() => import("./pages/blog/BlogAdd"));
 const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
 
 // Scroll to top on route change
@@ -60,6 +61,7 @@ const AppContent = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
+						<Route path="/blog/new" element={<BlogAdd />} />
 						<Route path="/blog/:id" element={<BlogDetail />} />
 						<Route path="/projects" element={<Project />} />
 					</Routes>

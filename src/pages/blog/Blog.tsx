@@ -14,7 +14,7 @@ const Blog = () => {
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentFilter(filter);
-    let sorted = [...blogData];
+    const sorted = [...blogData];
 
     switch (filter) {
       case "Most Liked":
