@@ -36,32 +36,10 @@ const WhereITStarted = () => {
 
         <div className='space-y-4'>
           <h2 className='text-[32px] leading-[35px] nohemi-font font-bold'>
-            Lorem ipsum very big first title
+            A small team with a simple idea
           </h2>
           <p className='text-text-color text-base urbanist-font'>
-            Lorem ipsum dolor sit amet consectetur. Fusce dolor at id quis nam
-            sit morbi egestas. Urna nulla proin id nulla tortor risus ut in.
-            Orci nisl purus nec eu justo diam aliquet faucibus tristique.
-            Aliquam sit eros mauris amet lacus vulputate non. Massa vitae at
-            tempor auctor libero purus urna. Risus suspendisse at tristique ut
-            vitae enim vehicula iaculis arcu. Dictum convallis sed mauris mauris
-            eget tincidunt vel suspendisse. Elementum pretium adipiscing sed
-            mauris pellentesque sed mi posuere id. Elementum semper duis et
-            volutpat eu. Faucibus sit eu magna dui turpis facilisis tincidunt
-            purus vel. Venenatis lorem turpis nullam id mauris vel dignissim.
-            Pharetra ac sit ullamcorper vitae fusce neque. Ut duis fermentum
-            facilisis bibendum facilisis. Mi rhoncus sed a donec dapibus lectus.
-            Ullamcorper dictumst elementum lectus nunc magna vitae. At mus
-            libero ac sollicitudin. Eget condimentum tincidunt at aliquam purus
-            quam massa cras. Cras bibendum diam velit suscipit parturient
-            feugiat. Neque lacus platea eu ipsum. Risus non imperdiet egestas
-            maecenas egestas pellentesque ultrices sem. Senectus quis lectus
-            purus hac. Bibendum et adipiscing scelerisque nunc velit mauris
-            tortor. Venenatis sit vitae pellentesque orci velit urna vitae
-            senectus. Felis amet id sapien purus. Nunc sed vulputate libero
-            morbi ut in tortor. Mattis tristique pellentesque risus in enim dui
-            dis in nibh. Elit eu morbi tempor lacinia eu mi velit nulla. Odio
-            turpis urna.
+            It started with a few Django developers meeting up in Bamenda. We noticed something: there were talented people building things in isolation. No place to ask questions. No one to review code. No way to know what others were working on. So we created a space where Django developers in Cameroon could connect. First meetup had eight people. We talked about projects, shared solutions to problems we'd all hit, and realized we weren't alone. That feeling stuck. More people started showing up. Students learning Django for the first time. Mid-level developers building SaaS products. Senior engineers working at companies across Africa. Everyone had something to share and something to learn. We started organizing workshops. Created project teams where people could contribute to real applications. And we made it clear from day one: this isn't about being the best. It's about getting better together. Today, we're a community of developers across Cameroon. Some of us work remotely for international companies. Others are building startups. A few teach at universities. But we all share the same goal: make Cameroon a place where Django developers can grow, connect, and build things that matter.
           </p>
         </div>
       </article>

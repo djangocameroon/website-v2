@@ -70,9 +70,9 @@ const BlogDetail = () => {
         </Link>
 
         {/* Header Content */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2.5 mb-6">
           {post.tags.map((tag, idx) => (
-            <span key={idx} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 rounded-md">
+            <span key={idx} className="px-4 max-md:px-3 py-1 max-md:py-0.5 urbanist-font font-medium uppercase tracking-[0%] text-base max-md:text-xs text-blue-600 bg-[#D9E7FF] rounded-[10px] max-md:rounded-lg border border-secondary">
               {tag}
             </span>
           ))}

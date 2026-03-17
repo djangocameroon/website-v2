@@ -18,7 +18,7 @@ const MakingTheStory = () => {
             <div className='text-center space-y-2 z-10 lg:w-[50%] lg:mx-auto absolute inset-x-0 bottom-[70px] max-lg:static max-lg:mt-8'>
                 <h1 className="nohemi-font text-[5rem] max-lg:text-[3rem] leading-[5.313rem] max-lg:leading-[3.313rem] font-extrabold inline-block">We are the ones making the story.</h1>
                 <p className="urbanist-font">
-                    Lorem ipsum dolor sit amet consectetur. Euismod sit porttitor amet sed ac faucibus. Tincidunt at in nulla feugiat massa sit nunc. Pretium eget amet fermentum diam fringilla elementum nunc cursus consequat. Hac fermentum nullam felis mauris rhoncus. Arcu facilisi aliquet mollis pretium tincidunt quam egestas in. Nulla sapien tempus in arcu diam sed nunc sed. Nulla faucibus pellentesque condimentum consequat diam.
+                    This community isn't finished. We're still figuring things out. Still learning what works and what doesn't. But that's the point. We're building something together, and there's room for more people to help shape where it goes. If you write Django code in Cameroon, you belong here. Simple as that.
                 </p>
             </div>
         </AnimatedSection>

@@ -2,17 +2,11 @@ import { AboutImages } from '@/assets';
 import { cn } from '@/utils/constants';
 
 const AboutHeaderImage = () => {
+
   return (
     <div className='absolute inset-0'>
-      <div className="relative size-full">
-        <div className="absolute inset-0 -z-30">
-          <img src={AboutImages.aboutbackground} alt='' className='object-cover size-full' />
-        </div>
-        <div className="absolute inset-0 -z-20">
-          <img src={AboutImages.rocket} alt='' className='object-cover size-full' />
-        </div>
-      </div>
-
+      <img src={AboutImages.rocket} alt='' className='object-cover size-full' />
+    
     </div>
   );
 }
@@ -26,8 +20,32 @@ export const RoundMarker = ({ className = "" }: { className?: string }) => {
 }
 
 const AboutHeader = () => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const onTitleMouseOver = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    // console.log(target.dataset);
+    const text = target.dataset.text || "";
+    let i = 0;
+
+    const interval = setInterval(() => {
+      target.textContent = text
+        .split("")
+        .map((char, index) =>
+          index < i
+            ? char
+            : chars[Math.floor(Math.random() * chars.length)]
+        )
+        .join("");
+
+      // console.log(target.textContent);
+      i++;
+
+      if (i > text.length) clearInterval(interval);
+    }, 80);
+
+  }
   return (
-    <section className='h-screen bg-secondary/5 w-full relative'>
+    <section className='h-screen w-full relative blue-bg'>
       <AboutHeaderImage />
 
       <div className='flex lg:hidden justify-center items-center w-full h-full '>
@@ -39,10 +57,7 @@ const AboutHeader = () => {
             Django Cameroon
           </h2>
           <p className='text-center px-10 text-white urbanist-font'>
-            Lorem ipsum dolor sit amet consectetur. Mauris semper odio velit
-            suspendisse diam. Imperdiet phasellus pharetra viverra eget. Urna
-            nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam eu
-            neque in. In sit leo fermentum amet orci odio. Purus dolor mattis.
+            We are a vibrant community of Django developers in Cameroon, united by our passion for building amazing web applications. Join us as we learn, share knowledge, and create innovative solutions together while fostering the next generation of tech talent in Africa.
           </p>
         </div>
       </div>
@@ -62,15 +77,11 @@ const AboutHeader = () => {
               <span className='text-xl text-secondary font-bold urbanist-font'>
                 Welcome to the verse of
               </span>
-              <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2' style={{ letterSpacing: '-0%' }}>
-                Django Cameroon
+              <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2 scramble' style={{ letterSpacing: '-0%' }}>
+                <span onMouseOver={onTitleMouseOver} data-text="Django">Django</span> <span onMouseOver={onTitleMouseOver} data-text="Cameroon">Cameroon</span>
               </h2>
               <p className='text-white leading-7 urbanist-font'>
-                Lorem ipsum dolor sit amet consectetur. Mauris semper odio velit
-                suspendisse diam. Imperdiet phasellus pharetra viverra eget. Urna
-                nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam
-                eu neque in. In sit leo fermentum amet orci odio. Purus dolor
-                mattis.
+                We are a vibrant community of Django developers in Cameroon, united by our passion for building amazing web applications. Join us as we learn, share knowledge, and create innovative solutions together while fostering the next generation of tech talent in Africa.
               </p>
             </div>
             <div className='mt-[3.125rem]'>

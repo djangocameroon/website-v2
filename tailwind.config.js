@@ -12,7 +12,7 @@ export default {
         'primary-light': 'rgba(16, 62, 46, 0.1)',
         'primary-lighter': 'rgba(154, 176, 166, 1)',
         'secondary': 'rgba(66, 133, 244, 1)',
-        'secondary-light': 'rgba(66, 133, 244, 0.1)',
+        'secondary-light': 'rgba(138, 180, 248, 1)',
         'dark-primary': '#C6EADE',
         'text-color': 'rgba(18, 18, 18, 1)',
         'dark': 'rgba(18, 18, 18, 1)',
@@ -20,6 +20,15 @@ export default {
       },
       boxShadow: {
         'shadow-outline': '0 0 6px 10px rgba(0,0,0,0.3)',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.4s ease-out forwards',
       },
     },
   },
