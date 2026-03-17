@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
-import { blogData } from '@/data/blogData';
 //import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
 import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 
 
 const Blog = () => {
@@ -12,13 +12,14 @@ const Blog = () => {
     { title: "Most Liked", value: "most-liked" },
     { title: "Most Viewed", value: "most-viewed" },
   ] as const;
-  
+
   type FilterType = typeof filterTabs[number]['value'];
 
-  // const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>(blogData);
   const [currentFilter, setCurrentFilter] = useState<FilterType>(filterTabs[0].value);
   const [searchQuery, setSearchQuery] = useState("");
   const [windowWidth, setWindowWidth] = useState(0);
+
+  const { posts: blogs } = useBlogPosts();
 
   useEffect(() => {
     // Handler to call on window resize
@@ -32,17 +33,17 @@ const Blog = () => {
   }, []);
 
   const filteredBlogs = useMemo(() => {
-    const _blogs = [ ...blogData ];
+    const _blogs = [...blogs];
 
     switch (currentFilter) {
       case "most-liked":
-        _blogs.sort((a, b) => parseInt(b.like) - parseInt(a.like));
+        _blogs.sort((a, b) => b.likes - a.likes);
         break;
       case "most-viewed":
-        _blogs.sort((a, b) => parseInt(b.views) - parseInt(a.views));
+        _blogs.sort((a, b) => b.views - a.views);
         break;
       case "latest":
-        _blogs.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+        _blogs.sort((a, b) => parseInt(a.read_time) - parseInt(b.read_time));
         break;
       default:
         break;
@@ -52,12 +53,12 @@ const Blog = () => {
       return _blogs.filter((bi) =>
         bi.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         bi.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        bi.author.toLowerCase().includes(searchQuery.toLowerCase())
+        bi.author.username.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     return _blogs;
-  }, [currentFilter, searchQuery]);
+  }, [blogs, currentFilter, searchQuery]);
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentFilter(filter);
@@ -96,7 +97,7 @@ const Blog = () => {
 
           {/* Pagination Text */}
           <div className="text-center mt-12 text-xs font-medium text-gray-400">
-            Showing 1 - {filteredBlogs.length} of {blogData.length}
+            Showing 1 - {filteredBlogs.length} of {blogs.length}
           </div>
         </section>
 

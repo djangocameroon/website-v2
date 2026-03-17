@@ -28,18 +28,18 @@ class BlogApiService {
     if (filters?.page) params.append('page', String(filters.page));
     if (filters?.page_size) params.append('page_size', String(filters.page_size));
 
-    const response = await this.api.get<BlogPostList>('/posts/', { params });
+    const response = await this.api.get('/posts/', { params });
     return response.data;
   }
 
   // ================ GET SINGLE BLOG POST ================
   async getPostById(id: string): Promise<BlogPost> {
-    const response = await this.api.get<BlogPost>(`/blog/${id}/`);
+    const response = await this.api.get<BlogPost>(`/posts/${id}/`);
     return response.data;
   }
 
   async getPostBySlug(slug: string): Promise<BlogPost> {
-    const response = await this.api.get<BlogPost>(`/blog/${slug}/`);
+    const response = await this.api.get<BlogPost>(`/posts/${slug}/`);
     return response.data;
   }
 

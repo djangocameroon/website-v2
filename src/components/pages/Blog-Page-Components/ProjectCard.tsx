@@ -6,17 +6,10 @@ import { VscAccount } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
-interface BlogCardProps {
-  image: string;
-  tags: string[];
-  title: string;
-  like: string;
-  views: string;
-  readTime: string;
-  author: string;
-}
+import { BlogPost } from '@/types/blog';
+type BlogCardProps = BlogPost;
 
-const BlogCard: React.FC<BlogCardProps & { id: number }> = ({ id, image, tags, title, like, views, readTime, author }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, likes, views, read_time, author }) => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -52,7 +45,7 @@ const BlogCard: React.FC<BlogCardProps & { id: number }> = ({ id, image, tags, t
     >
       <div className="relative h-[25rem] max-md:h-52 w-full overflow-hidden rounded-3xl max-md:rounded-2xl border border-gray-100">
         <img
-          src={image}
+          src={cover_image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -77,22 +70,22 @@ const BlogCard: React.FC<BlogCardProps & { id: number }> = ({ id, image, tags, t
         <div className="flex max-md:flex-col items-center max-md:items-start gap-6 max-md:gap-3 text-[12px] font-semibold border-b border-gray-50 pb-4 max-md:pb-3 mb-4 max-md:mb-3">
           <div className="flex items-center max-md:flex-wrap gap-6 max-md:gap-3 max-md:w-full">
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
-              <AiOutlineLike size={24} className="max-md:w-4 max-md:h-4" /> {like} likes
+              <AiOutlineLike size={24} className="max-md:w-4 max-md:h-4" /> {likes} likes
             </span>
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
               <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4" /> {views} views
             </span>
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
-              <LuTimer size={24} className="max-md:w-4 max-md:h-4" /> {readTime} mins read
+              <LuTimer size={24} className="max-md:w-4 max-md:h-4" /> {read_time} mins read
             </span>
           </div>
           <span className="flex items-center gap-[0.5rem] ml-auto max-md:ml-0 text-gray-800 urbanist-font font-medium text-xl max-md:text-sm">
-            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author}
+            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author.username}
           </span>
         </div>
 
         {/* Button */}
-        <Link to={`/blog/${id}`} className="mt-auto">
+        <Link to={`/blog/${slug}`} className="mt-auto">
           <button className="w-full bg-primary hover:bg-primary/90 active:scale-105 text-white py-5 max-md:py-3.5 rounded-xl max-md:rounded-lg flex items-center justify-between px-7 max-md:px-5 transition-all border-primary border-[1.5px]">
             <span className="inline-flex items-center mx-auto nohemi-font text-[18px] max-md:text-sm  font-medium">
               Read more

@@ -38,7 +38,7 @@ export interface BlogPostList {
     current_page: number,
     total_pages: number
   },
-  results: BlogPost[];
+  data: BlogPost[];
 }
 
 export interface BlogFilters {
