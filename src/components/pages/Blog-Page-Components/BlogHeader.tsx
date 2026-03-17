@@ -1,5 +1,6 @@
 import { AboutImages, BlogImages } from '@/assets';
 import { cn } from '@/utils/constants';
+import { Link } from 'react-router-dom';
 
 const BlogHeaderImage = () => {
   return (
@@ -100,24 +101,25 @@ const BlogHeader = () => {
               </p>
             </div>
             <div className='mt-[3.125rem]'>
-              <button
-                className="rounded-2xl text-white nohemi-font bg-secondary hover:bg-secondary/80 duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7 flex"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2.5'>
-                  <g clip-path="url(#clip0_2207_1682)">
-                    <path d="M22 14V8.5M6 13V6C6 4.34315 7.34315 3 9 3H14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M16.9922 4H19.9922M19.9922 4H22.9922M19.9922 4V1M19.9922 4V7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M12 21H6C3.79086 21 2 19.2091 2 17C2 14.7909 3.79086 13 6 13H17H18C15.7909 13 14 14.7909 14 17C14 19.2091 15.7909 21 18 21C20.2091 21 22 19.2091 22 17V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_2207_1682">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-
-                Submit an article
-              </button>
+              <Link to={`/blog/new`} className='block'>
+                <button
+                  className="rounded-2xl text-white nohemi-font bg-secondary hover:bg-secondary/80 duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7 flex"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2.5'>
+                    <g clip-path="url(#clip0_2207_1682)">
+                      <path d="M22 14V8.5M6 13V6C6 4.34315 7.34315 3 9 3H14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M16.9922 4H19.9922M19.9922 4H22.9922M19.9922 4V1M19.9922 4V7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M12 21H6C3.79086 21 2 19.2091 2 17C2 14.7909 3.79086 13 6 13H17H18C15.7909 13 14 14.7909 14 17C14 19.2091 15.7909 21 18 21C20.2091 21 22 19.2091 22 17V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2207_1682">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  Submit an article
+                </button>
+              </Link>
             </div>
           </div>
         </div>

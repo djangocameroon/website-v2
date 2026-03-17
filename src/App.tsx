@@ -15,6 +15,7 @@ const ResetPassword = lazy(() => import("./pages/auth/forgot-password").then(mod
 const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const Project = lazy(() => import("./pages/Project"));
+const BlogAdd = lazy(() => import("./pages/blog/BlogAdd"));
 const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
 
 // Scroll to top on route change
@@ -35,6 +36,11 @@ const AppContent = () => {
 	return (
 		<div className="relative flex flex-col min-h-screen max-w-[4000px]">
 			<ScrollToTop />
+			{!isAuthPage && (
+				<div className="fixed top-0 z-30 w-full overflow-hidden">
+					<Navbar />
+				</div>
+			)}
 			<Suspense fallback={
 				<div className="flex items-center justify-center min-h-screen">
 					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -72,6 +78,7 @@ const AppContent = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
+						<Route path="/blog/new" element={<BlogAdd />} />
 						<Route path="/blog/:id" element={<BlogDetail />} />
 						<Route path="/projects" element={<Project />} />
 

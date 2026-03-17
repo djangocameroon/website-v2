@@ -6,7 +6,6 @@ import { blogData } from '@/data/blogData';
 import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
 
 
-
 const Blog = () => {
   const filterTabs = [
     { title: "Latest", value: "latest" },
