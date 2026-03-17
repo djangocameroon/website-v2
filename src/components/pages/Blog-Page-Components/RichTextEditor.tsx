@@ -66,7 +66,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             // Style du contenu
             content_style: `
               body { 
-                font-family: -apple-system, BlinkMacSystemFont, urbanist, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+                font-family: "urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
                 font-size: 16px; 
                 line-height: 1.6;
                 padding: 1rem;

@@ -1,5 +1,5 @@
 export interface BlogPost {
-  id?: string;
+  id: string;
   title: string;
   slug: string;
   content: string;
@@ -8,7 +8,7 @@ export interface BlogPost {
   author: {
     username: string;
   };
-  read_time: string;
+  read_time: number;
   likes: number;
   views: number;
   created_at: string;

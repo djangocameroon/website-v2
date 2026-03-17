@@ -4,28 +4,27 @@ import { useState, useEffect } from 'react';
 import { blogApi } from '@/lib/blogApi';
 import { BlogPost } from '@/types/blog';;
 import { AiOutlineLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
-import { BiTimeFive } from 'react-icons/bi';
 import { VscAccount } from "react-icons/vsc";
+import { LuTimer } from 'react-icons/lu';
+import { useAuth } from '@/components/contexts/auth-context';
+import toast from 'react-hot-toast';
 
 const BlogDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
+  const { isAuthenticated } = useAuth();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
-      if (!id) return;
+      if (!slug) return;
 
       try {
         setLoading(true);
-        const data = await blogApi.getPostById(id);
+        const data = await blogApi.getPostBySlug(slug);
         setPost(data);
         setError(null);
-        
-        // Les vues sont incrémentées automatiquement par le hook useBlogPost
-        // Mais on peut aussi le faire manuellement ici si nécessaire
-        await blogApi.incrementViews(id);
       } catch (err: any) {
         console.error('Error fetching post:', err);
         setError(err.message || 'Failed to load blog post');
@@ -35,7 +34,16 @@ const BlogDetail = () => {
     };
 
     fetchPost();
-  }, [id]);
+  }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      // Les vues sont incrémentées automatiquement par le hook useBlogPost
+      // Mais on peut aussi le faire manuellement ici si nécessaire
+      blogApi.incrementViews(post.id);
+    }
+
+  }, [post])
 
   if (loading) {
     return (
@@ -57,12 +65,27 @@ const BlogDetail = () => {
     );
   }
 
-  const authorName = typeof post.author === 'object' ? post.author.username : post.author;
+  const authorName = post.author.username;
+
+  const handleOnLike = async () => {
+    if (!isAuthenticated) {
+      toast.custom((t) => (
+        <div className={`bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${t.visible ? 'animate-enter' : 'animate-leave'}`}>
+          <span className="font-medium">You need to be logged in to like posts.</span>
+          <a href={"/auth/login" + `/?redirect=${encodeURIComponent(window.location.pathname)}`} className="text-blue-600 hover:underline font-semibold">
+            Log in
+          </a>
+        </div>
+      ));
+      return;
+    }
+    console.log("Like feature is not implemented yet");
+  }
 
   return (
     <div className="min-h-screen bg-white">
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
-        
+
         {/* Back Link */}
         <Link to="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 mb-8 transition-colors group">
           <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -83,27 +106,31 @@ const BlogDetail = () => {
         </h1>
 
         {/* Stats Bar */}
-        <div className="flex items-center justify-between py-6 border-y border-gray-100 mb-12 text-sm text-gray-500 font-bold">
-          <div className="flex items-center gap-8">
+        <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
+          <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
             <span className="flex items-center gap-2">
-              <AiOutlineLike size={20} className="text-blue-500" /> {post.likes} likes
+              <AiOutlineLike
+                onClick={handleOnLike}
+                size={24}
+                className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
+              /> {post.likes} like{(post.likes !== 1) ? 's' : ''}
             </span>
             <span className="flex items-center gap-2">
-              <AiOutlineEye size={20} /> {post.views} views
+              <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.views} view{post.views !== 1 ? 's' : ''}
             </span>
             <span className="flex items-center gap-2">
-              <BiTimeFive size={20} /> {post.read_time} mins read
+              <LuTimer size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.read_time} min{post.read_time > 1 ? 's' : ''} read
             </span>
           </div>
-          <div className="flex items-center gap-2 text-gray-900">
-            <VscAccount size={20} /> {authorName}
+          <div className="flex items-center gap-2 flex-[1] justify-end">
+            <VscAccount size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {authorName}
           </div>
         </div>
 
         {/* Article Body - Affichage du contenu HTML de l'éditeur */}
-        <article className="text-gray-800 leading-relaxed text-lg space-y-10 urbanist-font">
-          <div 
-            className="blog-content prose prose-lg max-w-none"
+        <article className="leading-relaxed text-lg space-y-10 urbanist-font">
+          <div
+            className="blog-content prose prose-lg max-w-none md:font-medium"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
@@ -112,6 +139,7 @@ const BlogDetail = () => {
         <style >{`
           .blog-content {
             line-height: 1.8;
+            font-family: "urbanist";
           }
           .blog-content p {
             margin-bottom: 1.5rem;

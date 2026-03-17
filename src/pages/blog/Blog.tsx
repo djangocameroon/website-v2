@@ -43,7 +43,7 @@ const Blog = () => {
         _blogs.sort((a, b) => b.views - a.views);
         break;
       case "latest":
-        _blogs.sort((a, b) => parseInt(a.read_time) - parseInt(b.read_time));
+        _blogs.sort((a, b) => a.read_time - b.read_time);
         break;
       default:
         break;

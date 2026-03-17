@@ -79,7 +79,7 @@ class BlogApiService {
 
   // ================ INCREMENT VIEWS ================
   async incrementViews(id: string): Promise<{ views_count: number }> {
-    const response = await this.api.post(`/blog/${id}/view/`);
+    const response = await this.api.get(`/posts/${id}/view/`);
     return response.data;
   }
 
