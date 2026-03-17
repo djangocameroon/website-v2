@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { blogApi } from '@/lib/blogApi';
-import { 
-  BlogAddHeader, 
-  TitleInput, 
-  TagsSelector, 
+import {
+  BlogAddHeader,
+  TitleInput,
+  TagsSelector,
   ImageUpload,
   RichTextEditor,
-  FormActions 
+  FormActions
 } from '@/components/pages/Blog-Page-Components';
 import { CalculateReadingTime } from '@/components/pages/Blog-Page-Components/CalculateReadingTime';
 import toast from 'react-hot-toast';
 
 const AVAILABLE_TAGS = [
-  "Beginner", 
-  "Python", 
-  "Django", 
-  "AI", 
-  "ML", 
+  "Beginner",
+  "Python",
+  "Django",
+  "AI",
+  "ML",
   "Real-Time",
   "Tutorial",
   "Community"
 ];
 
 const BlogAdd = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const editorRef = useRef<any>(null);
-  
+
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [mainImage, setMainImage] = useState<File | null>(null);
@@ -56,10 +56,10 @@ const BlogAdd = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const editorContent = content ?? editorRef.current?.getContent() ?? '';
     const readTime = CalculateReadingTime(editorContent);
-    
+
     if (!title || !editorContent || tags.length === 0 || !mainImage) {
       alert('Please fill in all required fields');
       return;
@@ -68,23 +68,23 @@ const BlogAdd = () => {
     setIsSubmitting(true);
 
     try {
-
+      let cover_image = mainImagePreview;
       if (mainImage) {
         const uploadResult = await blogApi.uploadImage(mainImage);
-        console.log('Image uploaded successfully:', uploadResult);
+        cover_image = uploadResult.file_url;
+        if (import.meta.env.MODE === "development") cover_image = import.meta.env.VITE_PUBLIC_API_URL + cover_image;
       }
       const newBlog = {
         title,
         tags: tags.map(t => t.toLowerCase()),
-        cover_image: mainImagePreview,
-        content:  editorContent,
+        cover_image,
+        content: editorContent,
         read_time: readTime,
       };
 
-      console.log('New blog post:', newBlog);
       await blogApi.createPost(newBlog);
-      
-      // navigate('/blog');
+
+      navigate('/blog');
     } catch (error) {
       console.error('Error creating blog post:', error);
       toast.error('Failed to create blog post. Please try again.');
@@ -96,11 +96,11 @@ const BlogAdd = () => {
   return (
     <div className="min-h-screen bg-white">
       <main className="max-w-screen-lg mx-auto px-6 pt-32 pb-20">
-        
-        <BlogAddHeader/>
+
+        <BlogAddHeader />
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          
+
           <TitleInput value={title} onChange={setTitle} />
 
           <ImageUpload
@@ -123,10 +123,10 @@ const BlogAdd = () => {
             onEditorInit={(editor) => editorRef.current = editor}
           />
 
-          <FormActions 
+          <FormActions
             isSubmitting={isSubmitting}
           />
-          
+
         </form>
       </main>
     </div>

@@ -51,7 +51,7 @@ class BlogApiService {
 
     console.log('Creating blog post with payload:', payload);
 
-    const response = await this.api.post<BlogPost>('/posts/', payload);
+    const { data: response } = await this.api.post('/posts/', payload);
     return response.data;
   }
 
@@ -85,16 +85,16 @@ class BlogApiService {
 
   // ================ GET TAGS ================
   async getAllTags(): Promise<string[]> {
-    const response = await this.api.get<string[]>('/blog/tags/');
+    const { data: response } = await this.api.get('/blog/tags/');
     return response.data;
   }
 
   // ================ UPLOAD IMAGE ================
-  async uploadImage(file: File) {
+  async uploadImage(file: File): Promise<{ file_url: string }> {
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await this.api.post<{ file_url: string }>('/upload/', formData, {
+    const { data: response } = await this.api.post('/upload/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

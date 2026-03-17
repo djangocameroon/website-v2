@@ -71,7 +71,6 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
 
             if (savedAuthInfo) {
                 const { user: savedUser, token: savedToken } = savedAuthInfo;
-                console.log(savedToken)
                 if (!isTokenValid(savedToken)) {
                     await logout(true);
                     return;
