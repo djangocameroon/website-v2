@@ -66,14 +66,9 @@ class BlogApiService {
     await this.api.delete(`/posts/${id}/`);
   }
 
-  // ================ LIKE/UNLIKE POST ================
-  async likePost(id: string): Promise<{ likes_count: number }> {
-    const response = await this.api.post(`/posts/${id}/like/`);
-    return response.data;
-  }
-
-  async unlikePost(id: string): Promise<{ likes_count: number }> {
-    const response = await this.api.post(`/posts/${id}/unlike/`);
+  // ================ TOGGLE POST ================
+  async togglePost(id: string): Promise<{ likes_count: number, liked: boolean }> {
+    const { data: response} = await this.api.post(`/posts/${id}/like/`);
     return response.data;
   }
 

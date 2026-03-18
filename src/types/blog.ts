@@ -5,9 +5,10 @@ export interface BlogPost {
   content: string;
   cover_image: string; // main image URL
   tags: string[];
+  is_liked_by_user: boolean;
   author: {
     username: string;
-  };
+  } | null;
   read_time: number;
   likes: number;
   views: number;

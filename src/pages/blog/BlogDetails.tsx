@@ -3,11 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { blogApi } from '@/lib/blogApi';
 import { BlogPost } from '@/types/blog';;
-import { AiOutlineLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineLike, AiFillLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
 import { VscAccount } from "react-icons/vsc";
 import { LuTimer } from 'react-icons/lu';
 import { useAuth } from '@/components/contexts/auth-context';
 import toast from 'react-hot-toast';
+import { useBlogLike } from '@/hooks/useBlogLike';
 
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -40,10 +41,16 @@ const BlogDetail = () => {
     if (post) {
       // Les vues sont incrémentées automatiquement par le hook useBlogPost
       // Mais on peut aussi le faire manuellement ici si nécessaire
-      blogApi.incrementViews(post.id);
+      blogApi.incrementViews(post.id).catch(() => {});
     }
 
   }, [post])
+
+  const {
+    toggle,
+    liked: isBlogLiked,
+    count: likeCount,
+  } = useBlogLike(post);
 
   if (loading) {
     return (
@@ -65,7 +72,8 @@ const BlogDetail = () => {
     );
   }
 
-  const authorName = post.author.username;
+  const authorName = post.author?.username || "Anonymous";
+
 
   const handleOnLike = async () => {
     if (!isAuthenticated) {
@@ -79,7 +87,7 @@ const BlogDetail = () => {
       ));
       return;
     }
-    console.log("Like feature is not implemented yet");
+    toggle();
   }
 
   return (
@@ -109,11 +117,20 @@ const BlogDetail = () => {
         <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
           <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
             <span className="flex items-center gap-2">
-              <AiOutlineLike
-                onClick={handleOnLike}
-                size={24}
-                className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
-              /> {post.likes} like{(post.likes !== 1) ? 's' : ''}
+              {isBlogLiked ?
+                <AiFillLike
+                  onClick={handleOnLike}
+                  size={24}
+                  fill="#103E2E"
+                  className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
+                />
+                :
+                <AiOutlineLike
+                  onClick={handleOnLike}
+                  size={24}
+                  className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
+                />
+              } {likeCount} like{(likeCount !== 1) ? 's' : ''}
             </span>
             <span className="flex items-center gap-2">
               <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.views} view{post.views !== 1 ? 's' : ''}
@@ -171,6 +188,10 @@ const BlogDetail = () => {
             padding: 0.2rem 0.4rem;
             border-radius: 0.25rem;
             font-size: 0.9em;
+          }
+
+          svg.liked {
+            stroke:red;
           }
         `}</style>
       </main>

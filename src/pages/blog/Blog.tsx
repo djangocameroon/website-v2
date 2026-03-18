@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useMemo, useState } from 'react';
 import { BlogHeader, FilterBar, BlogCard } from '@/components/pages/Blog-Page-Components';
 //import JoinUs from "@/components/pages/Blog-Page-Components/JoinUs";
@@ -53,7 +52,7 @@ const Blog = () => {
       return _blogs.filter((bi) =>
         bi.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         bi.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        bi.author.username.toLowerCase().includes(searchQuery.toLowerCase())
+        bi.author?.username.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 

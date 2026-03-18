@@ -80,7 +80,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
             </span>
           </div>
           <span className="flex items-center gap-[0.5rem] ml-auto max-md:ml-0 text-gray-800 urbanist-font font-medium text-xl max-md:text-sm">
-            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author.username}
+            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author?.username || "Anonymous"}
           </span>
         </div>
 

@@ -66,10 +66,8 @@ const BlogHeader = () => {
             Trending insights <span className='text-[#808396] nohemi-font'>from our</span> #Blog
           </h2>
           <p className='text-center px-10 text-white urbanist-font'>
-            Lorem ipsum dolor sit amet consectetur. Mauris semper odio velit
-            suspendisse diam. Imperdiet phasellus pharetra viverra eget. Urna
-            nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam eu
-            neque in. In sit leo fermentum amet orci odio. Purus dolor mattis.
+            Explore real stories and insights from people building things.
+            Learn from their experience, mistakes, and wins. Whether you're looking for tips on a specific problem or just want to see how others approach their work, you'll find something useful here. And if you've got knowledge worth sharing, we'd love to have your voice in the mix.
           </p>
         </div>
       </div>
@@ -93,11 +91,8 @@ const BlogHeader = () => {
                 Trending insights <span className='text-[#808396] nohemi-font'>from our</span> #Blog
               </h2>
               <p className='text-white leading-7 urbanist-font'>
-                Lorem ipsum dolor sit amet consectetur. Mauris semper odio velit
-                suspendisse diam. Imperdiet phasellus pharetra viverra eget. Urna
-                nulla dapibus nibh tellus bibendum id. Venenatis laoreet aliquam
-                eu neque in. In sit leo fermentum amet orci odio. Purus dolor
-                mattis.
+                Explore real stories and insights from people building things.
+            Learn from their experience, mistakes, and wins. Whether you're looking for tips on a specific problem or just want to see how others approach their work, you'll find something useful here. And if you've got knowledge worth sharing, we'd love to have your voice in the mix.
               </p>
             </div>
             <div className='mt-[3.125rem]'>
