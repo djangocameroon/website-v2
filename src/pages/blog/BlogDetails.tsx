@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { blogApi } from '@/lib/blogApi';
 import { BlogPost } from '@/types/blog';;
 import { AiOutlineLike, AiFillLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
@@ -41,7 +42,7 @@ const BlogDetail = () => {
     if (post) {
       // Les vues sont incrémentées automatiquement par le hook useBlogPost
       // Mais on peut aussi le faire manuellement ici si nécessaire
-      blogApi.incrementViews(post.id).catch(() => {});
+      blogApi.incrementViews(post.id).catch(() => { });
     }
 
   }, [post])
@@ -90,70 +91,160 @@ const BlogDetail = () => {
     toggle();
   }
 
+  // Generate SEO-friendly description from content (first 160 chars)
+  const generateDescription = (htmlContent: string): string => {
+    const plainText = htmlContent
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .trim();
+    return plainText.substring(0, 160);
+  };
+
+  const metaDescription = generateDescription(post.content);
+  const canonicalUrl = `${window.location.origin}/blog/${post.slug}`;
+  const publishedDate = new Date(post.created_at).toISOString();
+
   return (
-    <div className="min-h-screen bg-white">
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
+    <>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>{post.title} | Blog - Django Cameroon</title>
+        <meta name="title" content={`${post.title} | Blog - Django Cameroon`} />
+        <meta name="description" content={metaDescription} />
+        <meta name="keywords" content={post.tags.join(', ')} />
+        <meta name="author" content={authorName} />
 
-        {/* Back Link */}
-        <Link to="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 mb-8 transition-colors group">
-          <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-bold">Back to blog</span>
-        </Link>
+        {/* Canonical URL */}
+        <link rel="canonical" href={canonicalUrl} />
 
-        {/* Header Content */}
-        <div className="flex gap-2.5 mb-6">
-          {post.tags.map((tag, idx) => (
-            <span key={idx} className="px-4 max-md:px-3 py-1 max-md:py-0.5 urbanist-font font-medium uppercase tracking-[0%] text-base max-md:text-xs text-blue-600 bg-[#D9E7FF] rounded-[10px] max-md:rounded-lg border border-secondary">
-              {tag}
-            </span>
-          ))}
-        </div>
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={post.cover_image} />
+        <meta property="og:image:alt" content={post.title} />
+        <meta property="og:site_name" content="Django Cameroon Blog" />
 
-        <h1 className="text-3xl md:text-5xl font-bold nohemi-font text-gray-900 leading-tight mb-10">
-          {post.title}
-        </h1>
+        {/* Article Meta Tags */}
+        <meta property="article:published_time" content={publishedDate} />
+        <meta property="article:author" content={authorName} />
+        {post.tags.map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
 
-        {/* Stats Bar */}
-        <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
-          <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
-            <span className="flex items-center gap-2">
-              {isBlogLiked ?
-                <AiFillLike
-                  onClick={handleOnLike}
-                  size={24}
-                  fill="#103E2E"
-                  className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
-                />
-                :
-                <AiOutlineLike
-                  onClick={handleOnLike}
-                  size={24}
-                  className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
-                />
-              } {likeCount} like{(likeCount !== 1) ? 's' : ''}
-            </span>
-            <span className="flex items-center gap-2">
-              <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.views} view{post.views !== 1 ? 's' : ''}
-            </span>
-            <span className="flex items-center gap-2">
-              <LuTimer size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.read_time} min{post.read_time > 1 ? 's' : ''} read
-            </span>
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={post.cover_image} />
+        <meta name="twitter:creator" content={`@${authorName}`} />
+
+        {/* Additional Meta */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": metaDescription,
+            "image": post.cover_image,
+            "author": {
+              "@type": "Person",
+              "name": authorName
+            },
+            "datePublished": publishedDate,
+            "articleBody": post.content.replace(/<[^>]*>/g, ''),
+            "keywords": post.tags.join(', '),
+            "wordCount": post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
+            "url": canonicalUrl,
+            "timeRequired": `PT${post.read_time}M`,
+            "interactionStatistic": [
+              {
+                "@type": "InteractionCounter",
+                "interactionType": "https://schema.org/LikeAction",
+                "userInteractionCount": post.likes
+              },
+              {
+                "@type": "InteractionCounter",
+                "interactionType": "https://schema.org/ViewAction",
+                "userInteractionCount": post.views
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+      <div className="min-h-screen bg-white">
+        <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
+
+          {/* Back Link */}
+          <Link to="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 mb-8 transition-colors group">
+            <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <span className="text-sm font-bold">Back to blog</span>
+          </Link>
+
+          {/* Header Content */}
+          <div className="flex gap-2.5 mb-6">
+            {post.tags.map((tag, idx) => (
+              <span key={idx} className="px-4 max-md:px-3 py-1 max-md:py-0.5 urbanist-font font-medium uppercase tracking-[0%] text-base max-md:text-xs text-blue-600 bg-[#D9E7FF] rounded-[10px] max-md:rounded-lg border border-secondary">
+                {tag}
+              </span>
+            ))}
           </div>
-          <div className="flex items-center gap-2 flex-[1] justify-end">
-            <VscAccount size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {authorName}
+
+          <h1 className="text-3xl md:text-5xl font-bold nohemi-font text-gray-900 leading-tight mb-10">
+            {post.title}
+          </h1>
+
+          {/* Stats Bar */}
+          <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
+            <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
+              <span className="flex items-center gap-2">
+                {isBlogLiked ?
+                  <AiFillLike
+                    onClick={handleOnLike}
+                    size={24}
+                    fill="#103E2E"
+                    className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
+                  />
+                  :
+                  <AiOutlineLike
+                    onClick={handleOnLike}
+                    size={24}
+                    className="max-md:w-4 max-md:h-4 shrink-0 active:scale-95 transition-transform"
+                  />
+                } {likeCount} like{(likeCount !== 1) ? 's' : ''}
+              </span>
+              <span className="flex items-center gap-2">
+                <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.views} view{post.views !== 1 ? 's' : ''}
+              </span>
+              <span className="flex items-center gap-2">
+                <LuTimer size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {post.read_time} min{post.read_time > 1 ? 's' : ''} read
+              </span>
+            </div>
+            <div className="flex items-center gap-2 flex-[1] justify-end">
+              <VscAccount size={24} className="max-md:w-4 max-md:h-4 shrink-0" /> {authorName}
+            </div>
           </div>
-        </div>
 
-        {/* Article Body - Affichage du contenu HTML de l'éditeur */}
-        <article className="leading-relaxed text-lg space-y-10 urbanist-font">
-          <div
-            className="blog-content prose prose-lg max-w-none md:font-medium"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </article>
+          {/* Article Body - Affichage du contenu HTML de l'éditeur */}
+          <article className="leading-relaxed text-lg space-y-10 urbanist-font">
+            <div
+              className="blog-content prose prose-lg max-w-none md:font-medium"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          </article>
 
-        {/* Style pour le contenu du blog */}
-        <style >{`
+          {/* Style pour le contenu du blog */}
+          <style >{`
           .blog-content {
             line-height: 1.8;
             font-family: "urbanist";
@@ -194,8 +285,9 @@ const BlogDetail = () => {
             stroke:red;
           }
         `}</style>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 };
 
