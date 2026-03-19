@@ -16,6 +16,7 @@ const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const Project = lazy(() => import("./pages/Project"));
 const BlogAdd = lazy(() => import("./pages/blog/BlogAdd"));
+const BlogEdit = lazy(() => import("./pages/blog/BlogEdit"));
 const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
 
 // Scroll to top on route change
@@ -79,6 +80,7 @@ const AppContent = () => {
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/blog/new" element={<BlogAdd />} />
+						<Route path="/blog/:slug/edit" element={<BlogEdit />} />
 						<Route path="/blog/:slug" element={<BlogDetail />} />
 						<Route path="/projects" element={<Project />} />
 

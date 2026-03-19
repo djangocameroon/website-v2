@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { blogApi } from '@/lib/blogApi';
 import { BlogPost } from '@/types/blog';;
 import { AiOutlineLike, AiFillLike, AiOutlineEye, AiOutlineArrowLeft } from 'react-icons/ai';
+import { HiEllipsisVertical } from 'react-icons/hi2';
+import { MdEdit, MdDelete } from 'react-icons/md';
 import { VscAccount } from "react-icons/vsc";
 import { LuTimer } from 'react-icons/lu';
 import { useAuth } from '@/components/contexts/auth-context';
@@ -13,10 +15,13 @@ import { useBlogLike } from '@/hooks/useBlogLike';
 
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { isAuthenticated, user: authUser } = useAuth();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -47,6 +52,19 @@ const BlogDetail = () => {
 
   }, [post])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showMenu]);
+
   const {
     toggle,
     liked: isBlogLiked,
@@ -73,7 +91,27 @@ const BlogDetail = () => {
     );
   }
 
+
   const authorName = post.author?.username || "Anonymous";
+  const isAuthor = post?.author?.username === authUser?.username;
+
+
+
+
+  const handleEditClick = () => {
+    navigate(`/blog/${post.slug}/edit`);
+  };
+
+  const handleDeleteClick = async () => {
+    if (!window.confirm('Are you sure? This cannot be undone.')) return;
+    try {
+      await blogApi.deletePost(post.id);
+      toast.success('Blog deleted successfully');
+      navigate('/blog');
+    } catch {
+      toast.error('Failed to delete blog');
+    }
+  };
 
 
   const handleOnLike = async () => {
@@ -89,107 +127,56 @@ const BlogDetail = () => {
       return;
     }
     toggle();
-  }
-
-  // Generate SEO-friendly description from content (first 160 chars)
-  const generateDescription = (htmlContent: string): string => {
-    const plainText = htmlContent
-      .replace(/<[^>]*>/g, '') // Remove HTML tags
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/\s+/g, ' ') // Normalize spaces
-      .trim();
-    return plainText.substring(0, 160);
   };
-
-  const metaDescription = generateDescription(post.content);
-  const canonicalUrl = `${window.location.origin}/blog/${post.slug}`;
-  const publishedDate = new Date(post.created_at).toISOString();
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>{post.title} | Blog - Django Cameroon</title>
-        <meta name="title" content={`${post.title} | Blog - Django Cameroon`} />
-        <meta name="description" content={metaDescription} />
-        <meta name="keywords" content={post.tags.join(', ')} />
-        <meta name="author" content={authorName} />
-
-        {/* Canonical URL */}
-        <link rel="canonical" href={canonicalUrl} />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={post.cover_image} />
-        <meta property="og:image:alt" content={post.title} />
-        <meta property="og:site_name" content="Django Cameroon Blog" />
-
-        {/* Article Meta Tags */}
-        <meta property="article:published_time" content={publishedDate} />
-        <meta property="article:author" content={authorName} />
-        {post.tags.map((tag) => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={canonicalUrl} />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={post.cover_image} />
-        <meta name="twitter:creator" content={`@${authorName}`} />
-
-        {/* Additional Meta */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": post.title,
-            "description": metaDescription,
-            "image": post.cover_image,
-            "author": {
-              "@type": "Person",
-              "name": authorName
-            },
-            "datePublished": publishedDate,
-            "articleBody": post.content.replace(/<[^>]*>/g, ''),
-            "keywords": post.tags.join(', '),
-            "wordCount": post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
-            "url": canonicalUrl,
-            "timeRequired": `PT${post.read_time}M`,
-            "interactionStatistic": [
-              {
-                "@type": "InteractionCounter",
-                "interactionType": "https://schema.org/LikeAction",
-                "userInteractionCount": post.likes
-              },
-              {
-                "@type": "InteractionCounter",
-                "interactionType": "https://schema.org/ViewAction",
-                "userInteractionCount": post.views
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+      <BlogDetailMetadata post={post} />
       <div className="min-h-screen bg-white">
         <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
 
-          {/* Back Link */}
-          <Link to="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 mb-8 transition-colors group">
-            <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-bold">Back to blog</span>
-          </Link>
+          {/* Back Link + Author Actions */}
+          <div className="flex items-center justify-between mb-8">
+            <Link to="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors group">
+              <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-bold">Back to blog</span>
+            </Link>
+
+            {/* Author Menu - Only visible to post author */}
+            {isAuthor && (
+              <div className="relative">
+                <button
+                  onClick={() => setShowMenu(!showMenu)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  aria-label="Post actions"
+                >
+                  <HiEllipsisVertical size={24} className="text-gray-600" />
+                </button>
+
+                {showMenu && (
+                  <div
+                    className="absolute right-0 top-12 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-max"
+                    ref={menuRef}
+                  >
+                    <button
+                      onClick={handleEditClick}
+                      className="w-full px-4 py-2.5 flex items-center gap-3 hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors first:rounded-t-lg text-sm font-medium"
+                    >
+                      <MdEdit size={18} />
+                      Edit post
+                    </button>
+                    <button
+                      onClick={handleDeleteClick}
+                      className="w-full px-4 py-2.5 flex items-center gap-3 hover:bg-red-50 text-gray-700 hover:text-red-600 transition-colors last:rounded-b-lg text-sm font-medium border-t border-gray-100"
+                    >
+                      <MdDelete size={18} />
+                      Delete post
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Header Content */}
           <div className="flex gap-2.5 mb-6">
@@ -289,6 +276,100 @@ const BlogDetail = () => {
       </div>
     </>
   );
-};
+}
+
+const BlogDetailMetadata = ({ post }: { post: BlogPost }) => {
+  // Generate SEO-friendly description from content (first 160 chars)
+  const generateDescription = (htmlContent: string): string => {
+    const plainText = htmlContent
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .trim();
+    return plainText.substring(0, 160);
+  };
+
+  const metaDescription = generateDescription(post.content);
+  const canonicalUrl = `${window.location.origin}/blog/${post.slug}`;
+  const publishedDate = new Date(post.created_at).toISOString();
+  const authorName = post.author?.username || "Anonymous";
+  return (
+    <Helmet>
+      {/* Primary Meta Tags */}
+      <title>{post.title} | Blog - Django Cameroon</title>
+      <meta name="title" content={`${post.title} | Blog - Django Cameroon`} />
+      <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={post.tags.join(', ')} />
+      <meta name="author" content={authorName} />
+
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl} />
+
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="article" />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:title" content={post.title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:image" content={post.cover_image} />
+      <meta property="og:image:alt" content={post.title} />
+      <meta property="og:site_name" content="Django Cameroon Blog" />
+
+      {/* Article Meta Tags */}
+      <meta property="article:published_time" content={publishedDate} />
+      <meta property="article:author" content={authorName} />
+      {post.tags.map((tag) => (
+        <meta key={tag} property="article:tag" content={tag} />
+      ))}
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={canonicalUrl} />
+      <meta name="twitter:title" content={post.title} />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:image" content={post.cover_image} />
+      <meta name="twitter:creator" content={`@${authorName}`} />
+
+      {/* Additional Meta */}
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="robots" content="index, follow" />
+      <meta name="language" content="English" />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": metaDescription,
+          "image": post.cover_image,
+          "author": {
+            "@type": "Person",
+            "name": authorName
+          },
+          "datePublished": publishedDate,
+          "articleBody": post.content.replace(/<[^>]*>/g, ''),
+          "keywords": post.tags.join(', '),
+          "wordCount": post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
+          "url": canonicalUrl,
+          "timeRequired": `PT${post.read_time}M`,
+          "interactionStatistic": [
+            {
+              "@type": "InteractionCounter",
+              "interactionType": "https://schema.org/LikeAction",
+              "userInteractionCount": post.likes
+            },
+            {
+              "@type": "InteractionCounter",
+              "interactionType": "https://schema.org/ViewAction",
+              "userInteractionCount": post.views
+            }
+          ]
+        })}
+      </script>
+    </Helmet>
+  )
+}
 
 export default BlogDetail;

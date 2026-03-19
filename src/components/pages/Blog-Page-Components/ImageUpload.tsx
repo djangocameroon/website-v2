@@ -3,7 +3,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 interface ImageUploadProps {
   label: string;
   required?: boolean;
-  preview: string;
+  preview?: string;
   onImageChange: (file: File) => void;
   id: string;
 }

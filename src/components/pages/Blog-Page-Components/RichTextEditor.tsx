@@ -3,11 +3,13 @@ import { Editor } from '@hugerte/hugerte-react';
 import type { Editor as HugeRTEEditor } from 'hugerte';
 
 interface RichTextEditorProps {
+  initialContent?: string;
   onContentChange: (content: string) => void;
   onEditorInit: (editor: HugeRTEEditor) => void;
 }
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = ({
+  initialContent,
   onContentChange,
   onEditorInit
 }) => {
@@ -84,6 +86,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               }
             `,
           }}
+          initialValue={initialContent}
           onEditorChange={onContentChange}
         />
       </div>
