@@ -12,6 +12,8 @@ import { LuTimer } from 'react-icons/lu';
 import { useAuth } from '@/components/contexts/auth-context';
 import toast from 'react-hot-toast';
 import { useBlogLike } from '@/hooks/useBlogLike';
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github-dark-dimmed.css'
 
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -223,12 +225,7 @@ const BlogDetail = () => {
           </div>
 
           {/* Article Body - Affichage du contenu HTML de l'éditeur */}
-          <article className="leading-relaxed text-lg space-y-10 urbanist-font">
-            <div
-              className="blog-content prose prose-lg max-w-none md:font-medium"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </article>
+          <BlogContent htmlContent={post.content} />
 
           {/* Style pour le contenu du blog */}
           <style >{`
@@ -261,21 +258,92 @@ const BlogDetail = () => {
             margin: 1rem 0;
             padding-left: 2rem;
           }
-          .blog-content code {
-            background: #f3f4f6;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-size: 0.9em;
-          }
-
-          svg.liked {
-            stroke:red;
-          }
         `}</style>
         </main>
       </div>
     </>
   );
+}
+
+const BlogContent = ({ htmlContent }: { htmlContent: string }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightElement(block as HTMLElement);
+        block.classList.add('relative');
+
+        if (!block.querySelector('.copy-button')) {
+          const copyButton = document.createElement('button');
+          copyButton.className =
+            'copy-button absolute top-[18px] right-[18px] cursor-pointer flex items-center text-white justify-center bg-white bg-opacity-0 border border-white rounded size-8 border-opacity-20 hover:bg-opacity-10 hover:border-opacity-40 active:scale-95';
+
+          const setSVG = (element: HTMLElement, svgString: string) => {
+            element.innerHTML = svgString;
+          };
+
+          const copyIcon = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+            </svg>
+          `;
+
+          const checkIcon = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+          `;
+
+          copyButton.addEventListener('click', () => {
+            const codeText = block.textContent || '';
+            navigator.clipboard
+              .writeText(codeText)
+              .then(() => {
+                setSVG(copyButton, checkIcon);
+                toast.custom((t) => (
+                  <div
+                    className={`bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${
+                      t.visible ? 'animate-enter' : 'animate-leave'
+                    }`}
+                  >
+                    <span className="font-medium">Code copied to clipboard!</span>
+                  </div>
+                ));
+                setTimeout(() => {
+                  setSVG(copyButton, copyIcon);
+                }, 2000);
+              })
+              .catch(() => {
+                toast.custom((t) => (
+                  <div
+                    className={`bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${
+                      t.visible ? 'animate-enter' : 'animate-leave'
+                    }`}
+                  >
+                    <span className="font-medium">Failed to copy code.</span>
+                  </div>
+                ));
+              });
+          });
+
+          setSVG(copyButton, copyIcon);
+          block.appendChild(copyButton);
+        }
+      });
+    }
+  }, [htmlContent]);
+
+  return (
+    <article className="leading-relaxed text-lg space-y-10 urbanist-font">
+      <div
+        ref={contentRef}
+        className="blog-content prose prose-lg max-w-none md:font-medium"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+    </article>
+  )
 }
 
 const BlogDetailMetadata = ({ post }: { post: BlogPost }) => {
