@@ -3,6 +3,7 @@ import { Footer, Navbar } from "./components/layout";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthRedirectWrapper } from "./pages/auth/Auth";
+import { Helmet } from "react-helmet-async";
 
 // Lazy load all page components
 const Home = lazy(() => import("./pages/Home"));
@@ -98,6 +99,7 @@ const AppContent = () => {
 const App = () => {
 	return (
 		<>
+			<SEO />
 			<Router>
 				<AppContent />
 			</Router>
@@ -149,6 +151,75 @@ const App = () => {
                 }}
             />
 		</>
+	);
+};
+
+const SEO = () => {
+	return (
+		<Helmet>
+			{/* Primary Meta Tags */}
+			<title>Django Cameroon</title>
+			<meta name="title" content="Django Cameroon" />
+			<meta name="description" content="Join the Django Cameroon community. Learn, collaborate, and build amazing web applications with Django." />
+			<meta name="keywords" content="Django, Cameroon, Web Development, Python, Community" />
+			<meta name="author" content="Django Cameroon" />
+			<meta name="robots" content="index, follow" />
+			<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+
+			{/* Canonical URL */}
+			<link rel="canonical" href="https://djangocameroon.org" />
+
+			{/* Viewport and Basic */}
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta httpEquiv="x-ua-compatible" content="IE=edge" />
+			<meta name="language" content="English" />
+
+			{/* Open Graph / Facebook */}
+			<meta property="og:locale" content="en_US" />
+			<meta property="og:type" content="website" />
+			<meta property="og:title" content="Django Cameroon" />
+			<meta property="og:description" content="Join the Django Cameroon community. Learn, collaborate, and build amazing web applications with Django." />
+			<meta property="og:url" content="https://djangocameroon.org" />
+			<meta property="og:image" content="https://djangocameroon.org/ogimage.png" />
+			<meta property="og:image:width" content="2500" />
+			<meta property="og:image:height" content="1389" />
+			<meta property="og:site_name" content="Django Cameroon" />
+
+			{/* Twitter */}
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta property="twitter:title" content="Django Cameroon" />
+			<meta property="twitter:description" content="Join the Django Cameroon community. Learn, collaborate, and build amazing web applications with Django." />
+			<meta property="twitter:image" content="https://djangocameroon.org/ogimage.png" />
+			<meta property="twitter:image:width" content="900" />
+			<meta property="twitter:image:height" content="500" />
+			<meta name="twitter:creator" content="@djangocameroon" />
+
+			{/* Additional Meta */}
+			<meta name="theme-color" content="#4285F4" />
+			<meta name="msapplication-TileColor" content="#4285F4" />
+
+			{/* JSON-LD Structured Data */}
+			<script type="application/ld+json">
+				{JSON.stringify({
+					"@context": "https://schema.org",
+					"@type": "Organization",
+					"name": "Django Cameroon",
+					"description": "A community dedicated to promoting Django and Python web development in Cameroon",
+					"url": "https://djangocameroon.org",
+					"logo": "https://djangocameroon.org/favicon.svg",
+					"sameAs": [
+						"https://twitter.com/djangocameroon",
+						"https://facebook.com/djangocameroon",
+						"https://github.com/djangocameroon"
+					],
+					"contactPoint": {
+						"@type": "ContactPoint",
+						"contactType": "Community",
+						"url": "https://djangocameroon.org/contact"
+					}
+				})}
+			</script>
+		</Helmet>
 	);
 };
 

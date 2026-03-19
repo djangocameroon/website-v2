@@ -119,7 +119,7 @@ const BlogDetail = () => {
       toast.custom((t) => (
         <div className={`bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${t.visible ? 'animate-enter' : 'animate-leave'}`}>
           <span className="font-medium">You need to be logged in to like posts.</span>
-          <a href={"/auth/login" + `/?redirect=${encodeURIComponent(window.location.pathname)}`} className="text-blue-600 hover:underline font-semibold">
+          <a href={"/auth/login" + `?redirect=${encodeURIComponent(window.location.pathname)}`} className="text-blue-600 hover:underline font-semibold">
             Log in
           </a>
         </div>
@@ -195,7 +195,7 @@ const BlogDetail = () => {
           <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
             <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
               <span className="flex items-center gap-2">
-                {isBlogLiked ?
+                {isBlogLiked && isAuthenticated ?
                   <AiFillLike
                     onClick={handleOnLike}
                     size={24}
