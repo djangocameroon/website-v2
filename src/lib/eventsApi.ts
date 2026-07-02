@@ -7,6 +7,7 @@ import {
   Reservation,
   ReservationCreateResponse,
   EventReservationsResponse,
+  CheckRegistrationResponse,
   EventFilters,
 } from '@/types/events';
 
@@ -44,6 +45,15 @@ class EventsApiService {
   async getEventReservations(eventId: string): Promise<Reservation[]> {
     const { data } = await this.api.get<EventReservationsResponse>(
       '/events/retrieve_event_reservations/',
+      { params: { event_id: eventId } }
+    );
+    return data.data;
+  }
+
+  // GET /events/check_registration/?event_id=<uuid> — auth required
+  async checkRegistration(eventId: string): Promise<CheckRegistrationResponse['data']> {
+    const { data } = await this.api.get<CheckRegistrationResponse>(
+      '/events/check_registration/',
       { params: { event_id: eventId } }
     );
     return data.data;

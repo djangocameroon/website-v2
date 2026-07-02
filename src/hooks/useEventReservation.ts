@@ -16,9 +16,8 @@ export const useEventReservation = (eventId?: string) => {
     }
     try {
       setChecking(true);
-      const reservations = await eventsApi.getEventReservations(eventId);
-      const mine = reservations.find((r) => r.user.id === user.id);
-      setReservationId(mine ? mine.id : null);
+      const { registered, reservation_id } = await eventsApi.checkRegistration(eventId);
+      setReservationId(registered ? reservation_id : null);
     } catch {
       setReservationId(null);
     } finally {

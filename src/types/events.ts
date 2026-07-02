@@ -108,6 +108,15 @@ export interface EventReservationsResponse {
   data: Reservation[];
 }
 
+export interface CheckRegistrationResponse {
+  status: boolean;
+  message: string;
+  data: {
+    registered: boolean;
+    reservation_id: string | null;
+  };
+}
+
 export interface EventFilters {
   page?: number;
 }
