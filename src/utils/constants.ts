@@ -29,10 +29,10 @@ export const navLinks = [
     label: "Projects",
     link: "/projects"
   },
-  {
-    label: "Product",
-    link: "/product"
-  },
+  // {
+  //   label: "Product",
+  //   link: "/product"
+  // },
   {
     label: "Blog",
     link: "/blog"

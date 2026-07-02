@@ -7,10 +7,10 @@ const BlogHeaderImage = () => {
     <div className='absolute inset-0'>
       <div className="relative size-full">
         <div className="absolute inset-0 -z-30">
-          <img src={AboutImages.aboutbackground} alt='' className='object-cover size-full' />
+          <img src={AboutImages.aboutbackground} alt='' className='object-cover size-full' fetchPriority='high' />
         </div>
         <div className="absolute inset-0 -z-20">
-          <img src={BlogImages.plane} alt='' className='object-cover size-full' />
+          <img src={BlogImages.plane} alt='' className='object-cover size-full' fetchPriority='high' />
         </div>
       </div>
 

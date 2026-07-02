@@ -4,6 +4,7 @@ import { TogglePage } from '@/components/pages/Auth-Page-Components';
 import { AuthFooter, AuthNavbar } from '@/components/layout';
 import { useAuth } from '@/components/contexts/auth-context';
 import { useEffect } from 'react';
+import { HomeImages } from '@/assets';
 
 const Auth = () => {
   const location = useLocation();
@@ -17,7 +18,15 @@ const Auth = () => {
   );
 
   return (
-    <div className='green-backbg md:px-5 flex flex-col md:gap-2 justify-start h-screen items-center  overflow-auto'>
+    <div className='relative md:px-5 flex flex-col md:gap-2 justify-start h-screen items-center  overflow-auto'>
+      <div className="fixed inset-0 -z-10 bg-primary/90" />
+      <img
+        src={HomeImages.greenBackBg}
+        alt=""
+        fetchPriority="high"
+        className="fixed inset-0 -z-10 size-full object-cover"
+      />
+
       <AuthNavbar />
       <div className='md:mb-[4.625rem] mb-10'>
         <TogglePage />
