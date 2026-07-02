@@ -32,7 +32,7 @@ const AuthFooter = () => {
       </div>
       <div>
         <span className="block text-lg md:text-base urbanist-font">
-          <a href="/sitemap">Sitemap</a>
+          <a href="/sitemap.xml">Sitemap</a>
           <span className="mx-2">•</span>
           <a href="/credits">Credits</a>
           <span className="mx-2">•</span>
