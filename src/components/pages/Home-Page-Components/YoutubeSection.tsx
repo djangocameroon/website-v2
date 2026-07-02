@@ -132,7 +132,7 @@ const YoutubeSection = () => {
 						Not sure where to begin with Django? Doubt no more!
 					</h2>
 					<Link
-						to="#"
+						to="https://www.youtube.com/@DjangoCameroon"
 						className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary"
 					>
 						View all Tutorials

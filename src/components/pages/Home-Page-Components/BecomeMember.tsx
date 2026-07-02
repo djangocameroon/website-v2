@@ -1,10 +1,12 @@
 import { HomeImages } from '@/assets';
 import { Button } from '@/components/layout';
+import { useNavigate } from 'react-router-dom';
 
 const BecomeMember = () => {
   const { blueDjango, blueMap } = HomeImages;
+  const navigate = useNavigate();
   return (
-    <div className='relative md:mx-56'>
+    <section id="become-member" className='relative md:mx-56'>
       <div className='absolute left-0 top-14 max-md:hidden'>
         <img src={blueDjango} alt='' className='' />
       </div>
@@ -23,7 +25,7 @@ const BecomeMember = () => {
           ecosystem together. Join us in this supportive journey, where we  
           celebrate the spirit of camaraderie in the world of coding.
         </p>
-        <Button outline={false} backgroundColor='bg-primary'>
+        <Button outline={false} backgroundColor='bg-primary' onClick={() => navigate('/about')}>
           Discover more about
         </Button>
       </div>
@@ -31,7 +33,7 @@ const BecomeMember = () => {
       <div className='absolute right-0 -bottom-4 max-md:hidden'>
         <img src={blueMap} alt='' className='' />
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -6,7 +6,7 @@ const AboutHeaderImage = () => {
   return (
     <div className='absolute inset-0'>
       <img src={AboutImages.rocket} alt='' className='object-cover size-full' />
-    
+
     </div>
   );
 }
@@ -44,6 +44,17 @@ const AboutHeader = () => {
     }, 80);
 
   }
+
+  const SCROLL_OFFSET = 80;
+  const handleLetsGoooClick = () => {
+    const nextSection = document.getElementById("where-it-started");
+    console.log(nextSection);
+    if (!nextSection) return;
+
+    const top = nextSection.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
     <section className='h-screen w-full relative blue-bg'>
       <AboutHeaderImage />
@@ -87,6 +98,7 @@ const AboutHeader = () => {
             <div className='mt-[3.125rem]'>
               <button
                 className="rounded-2xl text-white nohemi-font bg-secondary duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7"
+                onClick={handleLetsGoooClick}
               >
                 Let&apos;s gooo!
               </button>

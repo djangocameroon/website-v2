@@ -13,7 +13,7 @@ const EventsSection = () => {
         <h3 className='text-primary text-3xl font-bold nohemi-font'>
           You are welcome at our &#123;next&#125; events
         </h3>
-        <Link to="#" className='mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary'>
+        <Link to="/events" className='mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary'>
           View all events
           <GoArrowUpRight className='w-6 h-6' />
         </Link>

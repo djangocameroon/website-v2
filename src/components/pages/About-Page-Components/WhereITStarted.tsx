@@ -5,6 +5,7 @@ const WhereITStarted = () => {
 
   return (
     <AnimatedSection
+      id='where-it-started'
       className='relative flex max-md:flex-col items-start justify-between gap-10 lg:gap-32 pt-8 md:pb-[134px] pb-10'
     >
 

@@ -5,6 +5,12 @@ import { HomeImages } from '@/assets';
 
 const Newsletter = () => {
   const { blueBgInitials } = HomeImages;
+
+  const handleJoinCommunityClick = () => {
+    const communityLink = import.meta.env.VITE_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
+    window.open(communityLink, '_blank', 'noopener,noreferrer');
+  }
+
   return (
     <>
       <div className='bg-secondary rounded-[3.125rem] bluelightbg h-[500px] relative'>
@@ -12,9 +18,9 @@ const Newsletter = () => {
         <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
             <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
-            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false}>Join the community</Button>
+            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false} onClick={handleJoinCommunityClick}>Join the community</Button>
           </div>
-          
+
         </div>
       </div>
       <div className='flex md:w-[90%] mx-auto flex-wrap md:justify-between sm:flex-nowrap w-full my-12 gap-y-5'>
@@ -38,7 +44,7 @@ const Newsletter = () => {
             className='w-4/5 h-5 bg-transparent focus:outline-none urbanist-font text-lg placeholder:text-base flex justify-center items-center'
           />
           <button type='submit' className=''>
-            <AiOutlineSend size='25' className='w-5 h-5' />
+            <AiOutlineSend size='25' className='size-5' />
           </button>
         </form>
         </div>

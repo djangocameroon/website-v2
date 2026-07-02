@@ -10,8 +10,9 @@ import {
 } from '@/components/pages/Event-Page-Components';
 import { useEvents } from '@/hooks/useEvents';
 import { cn } from '@/utils/constants';
+import Newsletter from '@/components/pages/Home-Page-Components/Newsletter';
 
-const SKELETON_COUNT = 4;
+const SKELETON_COUNT = 3;
 
 const getEventDateStatus = (dateStr: string): 'Upcoming' | 'Ongoing' | 'Past' => {
   const eventDate = new Date(dateStr);
@@ -86,7 +87,7 @@ const Events = () => {
       <div className="w-full md:w-[85%] mx-auto max-md:px-4">
         <section id="events-grid" className="scroll-mt-10 pt-10 pb-10">
           {loading ? (
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap gap-5 justify-center">
               {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
                 <EventCardSkeleton key={i} />
               ))}
@@ -132,7 +133,7 @@ const Events = () => {
                 </div>
               ) : (
                 <>
-                  <div className="flex flex-wrap gap-5">
+                  <div className="flex flex-wrap gap-5 justify-center">
                     <AnimatePresence mode="popLayout">
                       {filteredEvents.map((event, index) => (
                         <motion.div
@@ -188,6 +189,10 @@ const Events = () => {
             </MotionConfig>
           )}
         </section>
+      </div>
+
+      <div className='w-full md:w-[85%] mx-auto max-md:px-4'>
+        <Newsletter />
       </div>
     </div>
   );

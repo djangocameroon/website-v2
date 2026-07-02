@@ -1,5 +1,8 @@
 import { Button } from "@/components/layout";
 import { HomeImages } from "@/assets";
+import { useNavigate } from "react-router-dom";
+
+const SCROLL_OFFSET = 150;
 
 const Header = () => {
 	const FACTS = [
@@ -24,6 +27,14 @@ const Header = () => {
 			description: "Small Description",
 		},
 	];
+	const navigate = useNavigate();
+	const handleGetStartedClick = () => {
+		const section = document.getElementById("become-member");
+		if (!section) return;
+
+		const top = section.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+		window.scrollTo({ top, behavior: "smooth" });
+	};
 
 	return (
 		<div className="h-full max-md:mt-40 mt-48 mb-12" id="home">
@@ -41,10 +52,10 @@ const Header = () => {
 					</p>
 
 					<div className="flex justify-center items-center w-full mt-4 gap-10 max-md:gap-5">
-						<Button outline={false} backgroundColor="bg-primary">
+						<Button outline={false} backgroundColor="bg-primary" onClick={handleGetStartedClick}>
 							Get Started
 						</Button>
-						<Button outline={true}>Learn more</Button>
+						<Button outline={true} onClick={() => navigate('/about')}>Learn more</Button>
 					</div>
 				</div>
 			</div>

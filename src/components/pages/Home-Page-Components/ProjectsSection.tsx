@@ -26,7 +26,7 @@ const ProjectsSection = () => {
 					The Crew
 				</h3>
 				<Link
-					to="#"
+					to="/blog"
 					className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl max-md:text-base text-secondary py-1 px-2 border-b border-b-secondary"
 				>
 					View all projects & articles

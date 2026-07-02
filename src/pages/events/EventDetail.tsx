@@ -91,7 +91,7 @@ const EventDetail = () => {
       </Helmet>
 
       <MotionConfig reducedMotion="user">
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white mb-10">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-primary sm:aspect-[16/7]">
             <img
               src={thumbnailSrc}
