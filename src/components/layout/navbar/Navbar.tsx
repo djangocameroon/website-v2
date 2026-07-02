@@ -13,7 +13,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [navBg, setNavBg] = useState(false);
   const { isAuthenticated, logout } = useAuth()
-  const pagesWithSecondaryNavbar = ['/about', '/blog', '/projects'];
+  const pagesWithSecondaryNavbar = ['/about', '/blog', '/projects', '/events'];
   // const [nav, setNav] = useState(false)
 
   const { pathname } = useLocation();

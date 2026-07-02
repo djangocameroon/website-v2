@@ -1,4 +1,5 @@
 export type LoggedInUser = {
+    id: string;
     email: string;
     username: string;
     profileImage: string;

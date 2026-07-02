@@ -19,6 +19,8 @@ const Project = lazy(() => import("./pages/Project"));
 const BlogAdd = lazy(() => import("./pages/blog/BlogAdd"));
 const BlogEdit = lazy(() => import("./pages/blog/BlogEdit"));
 const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
+const Events = lazy(() => import("./pages/events/Events"));
+const EventDetail = lazy(() => import("./pages/events/EventDetail"));
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -83,6 +85,8 @@ const AppContent = () => {
 						<Route path="/blog/new" element={<BlogAdd />} />
 						<Route path="/blog/:slug/edit" element={<BlogEdit />} />
 						<Route path="/blog/:slug" element={<BlogDetail />} />
+						<Route path="/events" element={<Events />} />
+						<Route path="/events/:id" element={<EventDetail />} />
 						<Route path="/projects" element={<Project />} />
 
 					</Routes>

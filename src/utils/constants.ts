@@ -46,5 +46,17 @@ export const socialLinks = {
   youtube: "https://www.youtube.com/@DjangoCameroon"
 } as const;
 
+export const SocialMediaPlatform = {
+  TWITTER: "Twitter (X)",
+  LINKEDIN: "LinkedIn",
+  GITHUB: "GitHub",
+  INSTAGRAM: "Instagram",
+  FACEBOOK: "Facebook",
+  YOUTUBE: "YouTube",
+  TIKTOK: "TikTok",
+  WHATSAPP: "WhatsApp",
+  TELEGRAM: "Telegram",
+} as const;
+
 export const SECRET_KEY = 'a-very-secret-key-123';
 export const SAVED_AUTH_INFO_KEY = 'dj-auth';

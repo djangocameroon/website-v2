@@ -153,6 +153,7 @@ const AuthProvider = ({ children }: { children: Readonly<React.ReactNode> }) => 
         toast.success(response.message);
         const { user, ...token } = response.data;
         const _user = {
+            id: user.id,
             email: user.email,
             username: user.username,
             profileImage: user.profile_image,

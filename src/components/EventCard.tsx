@@ -34,7 +34,7 @@ const EventCard = ({ discoverMore=false, className }: EventCardProps) => {
         <>
           <div className='space-y-12'>
             <h1 className="text-center text-white nohemi-font font-semibold text-2xl">Discover more events from the community</h1>
-            <Link to="#" className='block w-full'>
+            <Link to="/events" className='block w-full'>
               <Button backgroundColor='bg-white' className='py-4 flex justify-center items-center gap-x-2.5 text-primary w-full'>
                 View More
                 <GoArrowUpRight className='w-6 h-6' />
