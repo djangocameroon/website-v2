@@ -21,6 +21,7 @@ const BlogEdit = lazy(() => import("./pages/blog/BlogEdit"));
 const BlogDetail = lazy(() => import("./pages/blog/BlogDetails"));
 const Events = lazy(() => import("./pages/events/Events"));
 const EventDetail = lazy(() => import("./pages/events/EventDetail"));
+const NewsletterSubscription = lazy(() => import("./pages/NewsletterSubscription"));
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -35,12 +36,13 @@ const ScrollToTop = () => {
 
 const AppContent = () => {
 	const location = useLocation();
-	const isAuthPage = location.pathname.startsWith("/auth");
+	const isImmersivePage = location.pathname.startsWith("/auth")
+		|| location.pathname.startsWith("/newsletter-subscription");
 
 	return (
 		<div className="relative flex flex-col min-h-screen max-w-[4000px]">
 			<ScrollToTop />
-			{!isAuthPage && (
+			{!isImmersivePage && (
 				<div className="fixed top-0 z-30 w-full overflow-hidden">
 					<Navbar />
 				</div>
@@ -50,7 +52,7 @@ const AppContent = () => {
 					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
 				</div>
 			}>
-				{!isAuthPage && (
+				{!isImmersivePage && (
 					<div className="fixed top-0 z-30 w-full overflow-hidden">
 						<Navbar />
 					</div>
@@ -88,6 +90,7 @@ const AppContent = () => {
 						<Route path="/events" element={<Events />} />
 						<Route path="/events/:id" element={<EventDetail />} />
 						<Route path="/projects" element={<Project />} />
+						<Route path="/newsletter-subscription" element={<NewsletterSubscription />} />
 
 					</Routes>
 				</div>
