@@ -1,8 +1,11 @@
 import { Button } from "@/components/layout";
 import { HomeImages } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, staggerContainer } from "./motion";
 
 const SCROLL_OFFSET = 150;
+const factsStagger = staggerContainer(0.1, 0.5);
 
 const Header = () => {
 	const FACTS = [
@@ -40,27 +43,50 @@ const Header = () => {
 		<div className="h-full max-md:mt-40 mt-48 mb-12" id="home">
 			<div className="flex justify-center w-full max-h-[95vh]">
 				<div className="w-full max-w-[900px]">
-					<h1 className="leading-[1.15] text-primary nohemi-font overflow-hidden text-center text-3xl sm:text-[80px] font-extrabold">
+					<motion.h1
+						initial="hidden"
+						animate="visible"
+						variants={fadeUp}
+						className="leading-[1.15] text-primary nohemi-font overflow-hidden text-center text-3xl sm:text-[80px] font-extrabold"
+					>
 						The Django Ecosystem <br/>{" "}
 						in Cameroon
-					</h1>
-					<p className="leading-normal text-center text-xl max-md:text-base urbanist-font tracking-wide mt-3 md:mt-6 w-full px-3 lg:px-0 overflow-hidden mx-auto text-text-color font-regular">
+					</motion.h1>
+					<motion.p
+						initial="hidden"
+						animate="visible"
+						variants={fadeUp}
+						transition={{ delay: 0.15 }}
+						className="leading-normal text-center text-xl max-md:text-base urbanist-font tracking-wide mt-3 md:mt-6 w-full px-3 lg:px-0 overflow-hidden mx-auto text-text-color font-regular"
+					>
 						Fueling Innovation, Forging Connections. We're a dynamic
 						community of developers in Cameroon, passionate about
 						Django! Empowering dreams and pioneer change through
 						technology
-					</p>
+					</motion.p>
 
-					<div className="flex justify-center items-center w-full mt-4 gap-10 max-md:gap-5">
+					<motion.div
+						initial="hidden"
+						animate="visible"
+						variants={fadeUp}
+						transition={{ delay: 0.3 }}
+						className="flex justify-center items-center w-full mt-4 gap-10 max-md:gap-5"
+					>
 						<Button outline={false} backgroundColor="bg-primary" onClick={handleGetStartedClick}>
 							Get Started
 						</Button>
 						<Button outline={true} onClick={() => navigate('/about')}>Learn more</Button>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 
-			<div className="max-w-[1500px] w-full mx-auto max-md:mt-5">
+			<motion.div
+				initial="hidden"
+				animate="visible"
+				variants={scaleIn}
+				transition={{ delay: 0.4 }}
+				className="max-w-[1500px] w-full mx-auto max-md:mt-5"
+			>
 				<img
 					src={HomeImages.HeaderImage}
 					alt=""
@@ -71,9 +97,14 @@ const Header = () => {
 					alt=""
 					className="rounded-lg object-contain md:hidden"
 				/>
-			</div>
+			</motion.div>
 
-			<div className="bg-primary max-w-7xl h-56 w-full mx-auto rounded-[32px] relative max-sm:hidden -mt-2.5">
+			<motion.div
+				initial="hidden"
+				animate="visible"
+				variants={factsStagger}
+				className="bg-primary max-w-7xl h-56 w-full mx-auto rounded-[32px] relative max-sm:hidden -mt-2.5"
+			>
 				<img
 					src={HomeImages.curlyGrid}
 					alt=""
@@ -81,7 +112,7 @@ const Header = () => {
 				/>
 				<div className="absolute inset-0 flex justify-between items-center w-full h-full px-12">
 					{FACTS.map((fact, index) => (
-						<div key={index} className="space-y-2 text-white">
+						<motion.div key={index} variants={fadeUp} className="space-y-2 text-white">
 							<div className="relative">
 								<h1 className="nohemi-font font-extrabold text-[80px] leading-[85px]">
 									{fact.number}
@@ -101,14 +132,19 @@ const Header = () => {
 									</p>
 								</div>
 							</div>
-						</div>
+						</motion.div>
 					))}
 				</div>
-			</div>
+			</motion.div>
 
-			<div className="bg-primary rounded-2xl sm:hidden grid grid-cols-2 gap-10 p-5 mx-auto -mt-2.5">
+			<motion.div
+				initial="hidden"
+				animate="visible"
+				variants={factsStagger}
+				className="bg-primary rounded-2xl sm:hidden grid grid-cols-2 gap-10 p-5 mx-auto -mt-2.5"
+			>
 				{FACTS.map((fact, index) => (
-					<div key={index} className="space-y-2 text-white">
+					<motion.div key={index} variants={fadeUp} className="space-y-2 text-white">
 						<div className="relative text-center">
 							<h1 className="nohemi-font font-extrabold text-6xl">
 								{fact.number}
@@ -128,9 +164,9 @@ const Header = () => {
 								</p>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
 		</div>
 	);
 };

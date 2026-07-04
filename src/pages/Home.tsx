@@ -1,3 +1,4 @@
+import { MotionConfig } from "framer-motion";
 import {
 	BecomeMember,
 	Collaboration,
@@ -10,18 +11,18 @@ import {
 
 const Home = () => {
 	return (
-		<div className="overflow-x-hidden mx-auto w-[90%] space-y-20 mb-5">
-			<Header />
-			<BecomeMember />
-			<YoutubeSection />
-			<Collaboration />
-			{/* <div className="mx-auto w-[90%] mb-20"></div> */}
+		<MotionConfig reducedMotion="user">
+			<div className="overflow-hidden mx-auto w-[90%] space-y-20 mb-5">
+				<Header />
+				<BecomeMember />
+				<YoutubeSection />
+				<Collaboration />
 
-			<ProjectsSection />
-			<EventsSection />
-			<Newsletter />
-			{/* <div className="mx-auto w-[90%]"></div> */}
-		</div>
+				<ProjectsSection />
+				<EventsSection />
+				<Newsletter />
+			</div>
+		</MotionConfig>
 	);
 };
 

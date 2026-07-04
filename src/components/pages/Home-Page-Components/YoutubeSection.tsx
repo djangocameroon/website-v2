@@ -3,13 +3,25 @@ import { HomeImages } from "@/assets";
 import { Badge, Button } from "@/components/layout";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
+import { motion } from "framer-motion";
+import { fadeUp, revealOnce, staggerContainer } from "./motion";
+
+const cardsStagger = staggerContainer(0.15);
+const badgesStagger = staggerContainer(0.06);
+const staggerContainerGrid = staggerContainer(0.08);
 
 const YoutubeSection = () => {
 	const { bird, connect, whyJoin } = HomeImages;
 	return (
 		<div className="space-y-10">
 			<div className="md:py-20 flex justify-center items-start max-md:flex-wrap md:gap-x-36">
-				<div className="w-full md:max-w-2xl md:mt-11">
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={revealOnce}
+					variants={fadeUp}
+					className="w-full md:max-w-2xl md:mt-11"
+				>
 					<h2 className="text-primary text-3xl max-md:text-2xl lg:text-[32px] nohemi-font font-bold leading-9">
 						Empowering Learning Through YouTube{" "}
 						<br className="hidden lg:block" /> Tutorials
@@ -27,18 +39,30 @@ const YoutubeSection = () => {
 						Consider getting started now
 					</Button>
 
-					<div className="flex items-center flex-wrap gap-4">
-						<Badge>1.3k subscribers</Badge>
-						<Badge>20+ videos</Badge>
-						<Badge>1M+ views</Badge>
-						<Badge>10+ playlists</Badge>
-						<Badge>Source code links</Badge>
-						<Badge>7d/24h active support</Badge>
-					</div>
-				</div>
+					<motion.div
+						variants={badgesStagger}
+						initial="hidden"
+						whileInView="visible"
+						viewport={revealOnce}
+						className="flex items-center flex-wrap gap-4"
+					>
+						<motion.div variants={fadeUp}><Badge>1.3k subscribers</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>20+ videos</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>1M+ views</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>10+ playlists</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>Source code links</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>7d/24h active support</Badge></motion.div>
+					</motion.div>
+				</motion.div>
 				<div className="w-full max-md:mt-4">
-					<div className="flex flex-col justify-center max-md:items-center items-start gap-y-7">
-						<div className="bg-secondary/10 rounded-[30px] space-y-4 p-5 max-w-[500px] w-full">
+					<motion.div
+						variants={cardsStagger}
+						initial="hidden"
+						whileInView="visible"
+						viewport={revealOnce}
+						className="flex flex-col justify-center max-md:items-center items-start gap-y-7"
+					>
+						<motion.div variants={fadeUp} className="bg-secondary/10 rounded-[30px] space-y-4 p-5 max-w-[500px] w-full">
 							<div className="flex items-center gap-5">
 								<img src={whyJoin} alt="" className="w-12" />
 								<h3 className="text-text-color nohemi-font font-semibold text-2xl">
@@ -52,9 +76,9 @@ const YoutubeSection = () => {
 								journey!
 							</p>
 							<AvatarUsers />
-						</div>
+						</motion.div>
 
-						<div className="bg-secondary/10 rounded-[30px] space-y-4 p-5 md:ml-auto max-w-[500px] w-full">
+						<motion.div variants={fadeUp} className="bg-secondary/10 rounded-[30px] space-y-4 p-5 md:ml-auto max-w-[500px] w-full">
 							<div className="flex items-center gap-5 mb-3">
 								<img src={connect} alt="" className="w-10" />
 								<p className="text-text-color nohemi-font font-semibold text-2xl">
@@ -67,8 +91,8 @@ const YoutubeSection = () => {
 								dreams and make coding an inspiring journey!
 							</p>
 							<img src={bird} alt="avatars" className="ml-auto" />
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				</div>
 			</div>
 
@@ -122,7 +146,13 @@ const YoutubeSection = () => {
         </div>
       </div> */}
 			<div className="h-fit">
-				<div className="text-center mb-7">
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={revealOnce}
+					variants={fadeUp}
+					className="text-center mb-7"
+				>
 					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance max-md:hidden">
 						Still doubting on where and how to get{" "}
 						<br className="" />
@@ -138,19 +168,22 @@ const YoutubeSection = () => {
 						View all Tutorials
 						<GoArrowUpRight className="w-6 h-6" />
 					</Link>
-				</div>
+				</motion.div>
 				<div className="relative">
-					<div className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] max-md:flex max-md:flex-col gap-5">
-						{/* {Array.from({ length: 6 }, (_, index) => (
-              <div key={index} className={`border rounded-[28px] h-[300px] ${index%2 === 0 ? "border-secondary bg-secondary-light" : "border-primary bg-primary-light"}`}></div>
-            ))} */}
-						<div className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light"></div>
-						<div className="border rounded-[28px] h-[300px] border-primary bg-primary-light"></div>
-						<div className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></div>
-						<div className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></div>
-						<div className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></div>
-						<div className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></div>
-					</div>
+					<motion.div
+						variants={staggerContainerGrid}
+						initial="hidden"
+						whileInView="visible"
+						viewport={revealOnce}
+						className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] max-md:flex max-md:flex-col gap-5"
+					>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light"></motion.div>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light"></motion.div>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></motion.div>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></motion.div>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></motion.div>
+						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></motion.div>
+					</motion.div>
 					<div className="h-[300px] absolute bottom-0 inset-x-0">
 						<div className="w-full bg-gradient-to-b absolute bottom-0 left-0 from-transparent to-white via-white   inset-0 z-0" />
 						<Button

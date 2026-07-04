@@ -1,12 +1,26 @@
 import { GoArrowUpRight } from 'react-icons/go';
 import { HomeImages } from '@/assets';
 import { Button } from '@/components/layout';
+import { motion } from 'framer-motion';
+import { revealOnce, slideInLeft, slideInRight } from './motion';
 
 
 const Collaboration = () => {
+
+  const handleJoinCommunityClick = () => {
+    const communityLink = import.meta.env.VITE_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
+    window.open(communityLink, '_blank', 'noopener,noreferrer');
+  }
+
   return (
     <div className=' flex justify-center lg:justify-start md:flex-row flex-col items-center md:gap-x-28 '>
-      <div className='w-full max-w-2xl md:mt-7 lg:mt-0'>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={revealOnce}
+        variants={slideInLeft}
+        className='w-full max-w-2xl md:mt-7 lg:mt-0'
+      >
         <h2 className='text-primary text-2xl md:text-3xl font-bold nohemi-font'>
           Start Your Journey of Collaboration and Innovation
         </h2>
@@ -21,14 +35,20 @@ const Collaboration = () => {
           panels, and security spells turn your web projects into enchanted
           experiences! ✨🪄
         </blockquote>
-        <Button className='py-2.5 px-5 flex gap-x-2.5 urbanist-font justify-center items-center text-xl'>
+        <Button className='py-2.5 px-5 flex gap-x-2.5 urbanist-font justify-center items-center text-xl' onClick={handleJoinCommunityClick}>
           Join the community
           <GoArrowUpRight className='w-6 h-6' />
         </Button>
-      </div>
-      <div className='block'>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={revealOnce}
+        variants={slideInRight}
+        className='block'
+      >
         <img src={HomeImages.teamGoals} alt='' />
-      </div>
+      </motion.div>
     </div>
   );
 }

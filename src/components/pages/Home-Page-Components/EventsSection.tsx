@@ -1,11 +1,21 @@
 import { EventCard } from '@/components';
 import { Link } from 'react-router-dom';
 import { GoArrowUpRight } from 'react-icons/go';
+import { motion } from 'framer-motion';
+import { fadeUp, revealOnce, staggerContainer } from './motion';
+
+const cardsStagger = staggerContainer(0.08);
 
 const EventsSection = () => {
   return (
     <div className='mt-24'>
-      <div className='text-center mb-1.5'>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={revealOnce}
+        variants={fadeUp}
+        className='text-center mb-1.5'
+      >
         <p className='text-grey mb-2 text-xl urbanist-font font-medium'>
           {' '}
           Going through projects might be a bit confusing...
@@ -17,21 +27,24 @@ const EventsSection = () => {
           View all events
           <GoArrowUpRight className='w-6 h-6' />
         </Link>
-      </div>
+      </motion.div>
 
-      <div className='mt-6 flex justify-center flex-wrap items-center gap-5'>
-        {/* {Array.from({ length: 8 }, (_, index) => (
-          <EventCard key={index} discoverMore={index===7} />
-        ))} */}
-        <EventCard />
-        <EventCard />
-        <EventCard className="max-md:hidden" />
-        <EventCard className="max-md:hidden" />
-        <EventCard className="max-md:hidden" />
-        <EventCard className="max-md:hidden" />
-        <EventCard className="max-md:hidden" />
-        <EventCard discoverMore />
-      </div>
+      <motion.div
+        variants={cardsStagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={revealOnce}
+        className='mt-6 flex justify-center flex-wrap items-center gap-5'
+      >
+        <motion.div variants={fadeUp} className="shrink-0"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0 max-md:hidden"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0 max-md:hidden"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0 max-md:hidden"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0 max-md:hidden"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0 max-md:hidden"><EventCard /></motion.div>
+        <motion.div variants={fadeUp} className="shrink-0"><EventCard discoverMore /></motion.div>
+      </motion.div>
     </div>
   );
 };
