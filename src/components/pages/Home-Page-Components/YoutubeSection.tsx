@@ -12,6 +12,9 @@ const staggerContainerGrid = staggerContainer(0.08);
 
 const YoutubeSection = () => {
 	const { bird, connect, whyJoin } = HomeImages;
+	const navigateToYoutube = () => {
+		window.open("https://www.youtube.com/@DjangoCameroon", "_blank");
+	}
 	return (
 		<div className="space-y-10">
 			<div className="md:py-20 flex justify-center items-start max-md:flex-wrap md:gap-x-36">
@@ -35,7 +38,7 @@ const YoutubeSection = () => {
 						of the way. Let's learn, create, and inspire together!
 					</p>
 
-					<Button outline={false} backgroundColor="bg-primary">
+					<Button outline={false} backgroundColor="bg-primary" onClick={navigateToYoutube}>
 						Consider getting started now
 					</Button>
 
