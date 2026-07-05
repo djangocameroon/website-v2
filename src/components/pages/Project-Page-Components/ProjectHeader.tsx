@@ -1,9 +1,10 @@
 import { FaGithub } from "react-icons/fa";
-import { Project } from "@/types/project";
+import { HiOutlineCodeBracket } from "react-icons/hi2";
+import { ProjectItem } from "@/types/project";
 import { cn } from "@/utils/constants";
 
 interface ProjectHeaderProps {
-  featuredProjects?: Project[];
+  featuredProjects?: ProjectItem[];
 }
 
 export const RoundMarker = ({ className = "" }: { className?: string }) => {
@@ -73,26 +74,41 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
             {/* Featured Project Cards Preview */}
             {featuredProjects.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ml-8 -mb-20">
-                {featuredProjects.slice(0, 3).map((project, index) => (
-                  <div
-                    key={project.id}
-                    className="relative z-30 rounded-2xl overflow-hidden shadow-xl border border-[#2A3B6F] transition-transform transform translate-y-3 hover:translate-y-4 cursor-pointer"
-                  >
-                    {/* Top title bar */}
-                    <div className="bg-[#4A90E2] px-4 py-3 text-white urbanist-font font-medium text-sm rounded-t-2xl">
-                      {project.title || `This project's name #${index + 1}`}
-                    </div>
+                {featuredProjects.slice(0, 3).map((project, index) => {
+                  const href = project.demo_link || project.github_link;
+                  const Wrapper = href ? "a" : "div";
 
-                    {/* Project Image */}
-                    <div className="aspect-video bg-[#0F1629]">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                ))}
+                  return (
+                    <Wrapper
+                      key={project.id}
+                      {...(href
+                        ? { href, target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="relative z-30 rounded-2xl overflow-hidden shadow-xl border border-[#2A3B6F] transition-transform transform translate-y-3 hover:translate-y-4 cursor-pointer"
+                    >
+                      {/* Top title bar */}
+                      <div className="bg-[#4A90E2] px-4 py-3 text-white urbanist-font font-medium text-sm rounded-t-2xl line-clamp-1">
+                        {project.title || `This project's name #${index + 1}`}
+                      </div>
+
+                      {/* Project Image */}
+                      <div className="aspect-video bg-[#0F1629]">
+                        {project.thumbnail ? (
+                          <img
+                            src={project.thumbnail}
+                            alt={project.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex size-full items-center justify-center">
+                            <HiOutlineCodeBracket className="size-8 text-white/40" />
+                          </div>
+                        )}
+                      </div>
+                    </Wrapper>
+                  );
+                })}
               </div>
             )}
           </div>

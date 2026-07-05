@@ -1,19 +1,32 @@
-import { Project } from "@/types/project";
+import { AnimatePresence, motion } from "framer-motion";
+import { ProjectItem } from "@/types/project";
 import ProjectCard from "./ProjectCard";
 
 interface ProjectGridProps {
-  projects: Project[];
-  totalProjects: number;
+  projects: ProjectItem[];
 }
 
 const ProjectGrid = ({ projects }: ProjectGridProps) => {
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3  gap-6">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <AnimatePresence mode="popLayout">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            layout
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{
+              duration: 0.35,
+              ease: [0.16, 1, 0.3, 1],
+              delay: Math.min(index, 6) * 0.05,
+            }}
+          >
+            <ProjectCard project={project} className="h-full" />
+          </motion.div>
         ))}
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,26 +1,20 @@
-export interface Project {
+export interface ProjectItem {
   id: string;
   title: string;
   description: string;
-  image: string;
-  githubUrl: string;
-  liveUrl?: string;
-  stars: number;
-  technologies: Technology[];
-  category: ProjectCategory;
-  contributors?: number;
+  tags: string[];
+  github_link: string | null;
+  demo_link: string | null;
+  thumbnail: string | null;
+  is_featured: boolean;
+  created_at: string;
 }
 
-export interface Technology {
-  name: string;
-  color: string;
-}
-
-export type ProjectCategory = "web" | "api" | "mobile" | "other" | "all";
-
-export interface ProjectFilter {
-  id: ProjectCategory;
-  label: string;
+export interface ProjectListResponse {
+  status: boolean;
+  message: string;
+  data: ProjectItem[];
+  status_code: number;
 }
 
 export interface ProjectStats {

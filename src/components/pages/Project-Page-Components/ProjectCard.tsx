@@ -1,60 +1,101 @@
-import { Project } from "@/types/project";
+import { FaGithub } from "react-icons/fa";
+import { GoArrowUpRight } from "react-icons/go";
+import { HiOutlineCodeBracket, HiOutlineStar } from "react-icons/hi2";
+import { cn } from "@/utils/constants";
+import { ProjectItem } from "@/types/project";
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectItem;
+  className?: string;
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
-  const handleViewProject = () => {
-    window.open(project.githubUrl, "_blank", "noopener,noreferrer");
-  };
+const ProjectImagePlaceholder = () => (
+  <div className="flex size-full items-center justify-center bg-gradient-to-br from-primary via-primary to-secondary/50">
+    <HiOutlineCodeBracket className="size-10 text-white/50" />
+  </div>
+);
+
+const ProjectCard = ({ project, className }: ProjectCardProps) => {
+  const hasLinks = Boolean(project.github_link || project.demo_link);
 
   return (
-    <div className="bg-white rounded-3xl p-6 hover:shadow-lg transition-all border border-gray-100 flex flex-col h-full max-w-lg">
-      {/* Technology Tags */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.technologies.slice(0, 3).map((tech, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 rounded-full text-xs urbanist-font font-medium bg-gray-100 text-gray-700"
-          >
-            {tech.name}
+    <div
+      className={cn(
+        "group flex h-full w-full flex-col overflow-hidden rounded-[30px] border-[1.5px] border-primary shadow-outline shadow-xl transition-transform duration-300 hover:-translate-y-1",
+        className
+      )}
+    >
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary">
+        {project.thumbnail ? (
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            loading="lazy"
+            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <ProjectImagePlaceholder />
+        )}
+
+        {project.is_featured && (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-white urbanist-font shadow-md">
+            <HiOutlineStar className="size-3.5" />
+            Featured
           </span>
-        ))}
+        )}
       </div>
 
-      {/* Project Title */}
-      <h3 className="text-xl md:text-2xl nohemi-font font-bold text-gray-900 mb-3 line-clamp-2">
-        {project.title}
-      </h3>
+      <div className="flex flex-1 flex-col gap-3 px-5 py-5">
+        {project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary urbanist-font"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
-      {/* Project Description */}
-      <p className="text-gray-600 urbanist-font text-base mb-6 line-clamp-3 flex-grow">
-        {project.description}
-      </p>
+        <h3 className="line-clamp-2 text-xl font-semibold text-primary nohemi-font md:text-2xl">
+          {project.title}
+        </h3>
 
-      {/* View Project Button */}
-      <button
-        onClick={handleViewProject}
-        className="w-full bg-[#0C4B33] text-white urbanist-font font-semibold py-3 px-6 rounded-xl hover:bg-[#0A3D28] transition-all flex items-center justify-center gap-2"
-      >
-        View project
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6 19L19 6M19 6V18.48M19 6H6.52"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+        <p className="line-clamp-3 flex-1 text-sm text-grey urbanist-font md:text-base">
+          {project.description}
+        </p>
+
+        {hasLinks && (
+          <div className="mt-auto flex items-center gap-3 pt-2">
+            {project.github_link && (
+              <a
+                href={project.github_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} source code on GitHub`}
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white urbanist-font transition-colors duration-200 hover:bg-primary/90"
+              >
+                <FaGithub className="size-4 shrink-0" />
+                Code
+              </a>
+            )}
+            {project.demo_link && (
+              <a
+                href={project.demo_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open live demo for ${project.title}`}
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border-[1.5px] border-primary px-4 py-3 text-sm font-semibold text-primary urbanist-font transition-colors duration-200 hover:bg-primary hover:text-white"
+              >
+                Live demo
+                <GoArrowUpRight className="size-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

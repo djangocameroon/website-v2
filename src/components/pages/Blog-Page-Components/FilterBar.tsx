@@ -19,6 +19,7 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
   const [activeFilter, setActiveFilter] = useState(filters?.[0] || null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const hasTabs = filters.length > 0;
 
   const handleFilterClick = (filter: TabType<T>) => {
     setActiveFilter(filter);
@@ -30,6 +31,24 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
     setSearchQuery(value);
     onSearchChange?.(value);
   };
+
+  if (!hasTabs) return (
+    <div
+      className={`max-w-7xl ml-auto my-10 max-sm:my-6 flex items-center gap-2.5 bg-black text-white rounded-[6.25rem] px-4 py-2.5 max-sm:py-2 transition-all duration-300 max-sm:w-full ${searchExpanded ? "w-80 max-sm:w-full" : "w-28 max-sm:w-full"
+        }`}
+    >
+      <BiSearch className="size-[18px] flex-shrink-0" />
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        onFocus={() => setSearchExpanded(true)}
+        onBlur={() => !searchQuery && setSearchExpanded(false)}
+        className="bg-transparent border-none outline-none placeholder-gray-300 w-full font-normal placeholder:font-medium urbanist-font max-sm:text-sm"
+      />
+    </div>
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10 max-sm:px-4 max-sm:py-6 flex flex-col items-center justify-center gap-4">
@@ -46,8 +65,8 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
               key={filter.value}
               onClick={() => handleFilterClick(filter)}
               className={`relative px-4 py-2.5 max-sm:px-3 max-sm:py-2 rounded-full transition-all duration-200 max-sm:text-sm ${activeFilter === filter
-                  ? "text-primary"
-                  : "text-gray-900 hover:text-black"
+                ? "text-primary"
+                : "text-gray-900 hover:text-black"
                 }`}
               style={{
                 transformStyle: "preserve-3d",
@@ -69,15 +88,14 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
 
         {/* Vertical separator - hidden on mobile */}
         <div className="w-[1.5px] bg-[#5F6368] h-8 max-sm:hidden"></div>
-        
+
         {/* Horizontal separator - visible only on mobile */}
         <div className="hidden max-sm:block w-full h-[1.5px] bg-[#5F6368]"></div>
 
         {/* Search bar */}
         <div
-          className={`flex items-center gap-2.5 bg-black text-white rounded-[6.25rem] px-4 py-2.5 max-sm:py-2 transition-all duration-300 max-sm:w-full ${
-            searchExpanded ? "w-80 max-sm:w-full" : "w-28 max-sm:w-full"
-          }`}
+          className={`flex items-center gap-2.5 bg-black text-white rounded-[6.25rem] px-4 py-2.5 max-sm:py-2 transition-all duration-300 max-sm:w-full ${searchExpanded ? "w-80 max-sm:w-full" : "w-28 max-sm:w-full"
+            }`}
         >
           <BiSearch className="size-[18px] flex-shrink-0" />
           <input
