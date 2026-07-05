@@ -18,6 +18,8 @@ class EventsApiService {
   async getAllEvents(filters?: EventFilters): Promise<EventListResponse> {
     const params = new URLSearchParams();
     if (filters?.page) params.append('page', String(filters.page));
+    if (filters?.page_size) params.append('page_size', String(filters.page_size));
+    if (filters?.upcoming) params.append('upcoming', 'true');
     const { data } = await this.api.get<EventListResponse>('/events/', { params });
     return data;
   }

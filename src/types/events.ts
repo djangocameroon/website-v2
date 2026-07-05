@@ -119,4 +119,7 @@ export interface CheckRegistrationResponse {
 
 export interface EventFilters {
   page?: number;
+  page_size?: number;
+  /** Only published events with a future date, ordered soonest first. */
+  upcoming?: boolean;
 }
