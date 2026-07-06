@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { GoArrowUpRight } from "react-icons/go";
 import { HiOutlineCodeBracket, HiOutlineStar } from "react-icons/hi2";
@@ -27,11 +30,12 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary">
         {project.thumbnail ? (
-          <img
+          <Image
             src={project.thumbnail}
             alt={project.title}
-            loading="lazy"
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <ProjectImagePlaceholder />

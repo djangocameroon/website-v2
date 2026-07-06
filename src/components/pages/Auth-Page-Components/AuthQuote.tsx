@@ -1,9 +1,12 @@
+"use client";
 
-import { useLocation } from 'react-router-dom'
+import Image from "next/image";
+
+import { usePathname } from "next/navigation";
 import { AuthImages } from '@/assets'
 
 const AuthQuote = () => {
-    const { pathname } = useLocation()
+    const pathname = usePathname();
     const { avatarsList } = AuthImages;
 
     const isRegisterPage = pathname === '/auth/register'
@@ -22,7 +25,7 @@ const AuthQuote = () => {
             <p className='urbanist-font'>{quote}</p>
             <p className="text-end italic font-medium text-xl">{quoteAuthor}</p>
         </div>
-        <img src={avatarsList} alt="avatars" className='absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2'  />
+        <Image src={avatarsList} alt="avatars" className='absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2'  />
     </div>
   )
 }

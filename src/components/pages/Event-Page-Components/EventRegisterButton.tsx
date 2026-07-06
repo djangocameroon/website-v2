@@ -1,12 +1,14 @@
+"use client";
+
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/layout';
 import { useAuth } from '@/components/contexts/auth-context';
 import { useEventReservation } from '@/hooks/useEventReservation';
 
 const EventRegisterButton = ({ eventId }: { eventId: string }) => {
   const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isRegistered, checking, submitting, register, cancel } = useEventReservation(eventId);
 
   const handleClick = () => {
@@ -20,7 +22,7 @@ const EventRegisterButton = ({ eventId }: { eventId: string }) => {
           <p className="text-sm font-medium text-gray-900">You need to be logged in to register for this event.</p>
         </div>
       ));
-      navigate('/auth/login' + `?redirect=${encodeURIComponent(window.location.pathname)}`);
+      router.push('/auth/login' + `?redirect=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
     if (isRegistered) {

@@ -1,3 +1,5 @@
+"use client";
+
 const ProjectCTA = () => {
   return (
     <div className="bg-[#0C4B33] rounded-3xl p-8 md:p-12 text-center space-y-6 shadow-lg">

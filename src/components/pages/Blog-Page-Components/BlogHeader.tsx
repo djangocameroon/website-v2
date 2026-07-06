@@ -1,16 +1,19 @@
+"use client";
+
+import Image from "next/image";
 import { AboutImages, BlogImages } from '@/assets';
 import { cn } from '@/utils/constants';
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 
 const BlogHeaderImage = () => {
   return (
     <div className='absolute inset-0'>
       <div className="relative size-full">
         <div className="absolute inset-0 -z-30">
-          <img src={AboutImages.aboutbackground} alt='' className='object-cover size-full' fetchPriority='high' />
+          <Image src={AboutImages.aboutbackground} alt='' className='object-cover size-full' priority />
         </div>
         <div className="absolute inset-0 -z-20">
-          <img src={BlogImages.plane} alt='' className='object-cover size-full' fetchPriority='high' />
+          <Image src={BlogImages.plane} alt='' className='object-cover size-full' priority />
         </div>
       </div>
 
@@ -48,12 +51,12 @@ const BlogHeader = () => {
             neque in. In sit leo fermentum amet orci odio. Purus dolor mattis.
           </p>
           <button className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all">
-            <img src={BlogImages.article} alt='' className='size-5 font-bold' />
+            <Image src={BlogImages.article} alt='' className='size-5 font-bold' />
             Submit an article
           </button>
         </div>
         <div className="md:w-1/2 flex pb-0 relative mt-auto md:mt-auto z-10">
-          <img src={BlogImages.plane} alt='' className='size-4/5' />
+          <Image src={BlogImages.plane} alt='' className='size-4/5' />
         </div>
       </div> */}
 
@@ -96,7 +99,7 @@ const BlogHeader = () => {
               </p>
             </div>
             <div className='mt-[3.125rem]'>
-              <Link to={`/blog/new`} className='block'>
+              <Link href={`/blog/new`} className='block'>
                 <button
                   className="rounded-2xl text-white nohemi-font bg-secondary hover:bg-secondary/80 duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7 flex"
                 >

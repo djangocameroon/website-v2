@@ -1,5 +1,7 @@
+"use client";
+
 import { useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { HiOutlineFaceFrown } from "react-icons/hi2";
@@ -80,11 +82,11 @@ const ProjectsSection = () => {
         </h3>
         <p className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl max-md:text-base text-secondary py-1 px-2 border-b border-b-secondary">
           <span>View all</span>
-          <Link to="/projects" className="hover:font-semibold">
+          <Link href="/projects" className="hover:font-semibold">
             projects
           </Link>
           <span>&</span>
-          <Link to="/blog" className="hover:font-semibold">
+          <Link href="/blog" className="hover:font-semibold">
             articles
           </Link>
           <GoArrowUpRight className="w-6 h-6" />

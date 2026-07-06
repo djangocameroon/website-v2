@@ -1,7 +1,10 @@
+"use client";
+
+import Image from "next/image";
 import { AvatarUsers } from "@/components";
 import { HomeImages } from "@/assets";
 import { Badge, Button } from "@/components/layout";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
 import { motion } from "framer-motion";
 import { fadeUp, revealOnce, staggerContainer } from "./motion";
@@ -67,7 +70,7 @@ const YoutubeSection = () => {
 					>
 						<motion.div variants={fadeUp} className="bg-secondary/10 rounded-[30px] space-y-4 p-5 max-w-[500px] w-full">
 							<div className="flex items-center gap-5">
-								<img src={whyJoin} alt="" className="w-12" />
+								<Image src={whyJoin} alt="" className="w-12 h-auto" />
 								<h3 className="text-text-color nohemi-font font-semibold text-2xl">
 									Why Joining?
 								</h3>
@@ -83,7 +86,7 @@ const YoutubeSection = () => {
 
 						<motion.div variants={fadeUp} className="bg-secondary/10 rounded-[30px] space-y-4 p-5 md:ml-auto max-w-[500px] w-full">
 							<div className="flex items-center gap-5 mb-3">
-								<img src={connect} alt="" className="w-10" />
+								<Image src={connect} alt="" className="w-10 h-auto" />
 								<p className="text-text-color nohemi-font font-semibold text-2xl">
 									Connect & Learn
 								</p>
@@ -93,7 +96,7 @@ const YoutubeSection = () => {
 								passionate developers. Together, we empower
 								dreams and make coding an inspiring journey!
 							</p>
-							<img src={bird} alt="avatars" className="ml-auto" />
+							<Image src={bird} alt="avatars" className="ml-auto" />
 						</motion.div>
 					</motion.div>
 				</div>
@@ -143,7 +146,7 @@ const YoutubeSection = () => {
             </div>
 
             <div className='mt-10 red-bg  rounded-lg flex justify-center items-center py-6 px-10'>
-              <img src={HomeImages.youtubeThumbnail} alt='' />
+              <Image src={HomeImages.youtubeThumbnail} alt='' />
             </div>
           </div>
         </div>
@@ -165,7 +168,7 @@ const YoutubeSection = () => {
 						Not sure where to begin with Django? Doubt no more!
 					</h2>
 					<Link
-						to="https://www.youtube.com/@DjangoCameroon"
+						href="https://www.youtube.com/@DjangoCameroon"
 						className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary"
 					>
 						View all Tutorials

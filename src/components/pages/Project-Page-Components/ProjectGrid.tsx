@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { ProjectItem } from "@/types/project";
 import ProjectCard from "./ProjectCard";

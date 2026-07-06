@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuTimer } from "react-icons/lu";
@@ -31,11 +34,12 @@ const ArticleCard = ({ post, className }: ArticleCardProps) => {
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary">
         {post.cover_image ? (
-          <img
+          <Image
             src={post.cover_image}
             alt={post.title}
-            loading="lazy"
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, 384px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <ArticleImagePlaceholder />
@@ -76,7 +80,7 @@ const ArticleCard = ({ post, className }: ArticleCardProps) => {
         </div>
 
         <Link
-          to={href}
+          href={href}
           className="flex w-fit items-center gap-x-2 py-1 text-lg font-medium text-secondary urbanist-font transition-colors duration-200 hover:text-secondary/80"
         >
           Read article

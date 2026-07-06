@@ -1,9 +1,13 @@
+"use client";
+
+import Image from "next/image";
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HomeImages } from '@/assets';
 import { ToggleSwitch } from '@/components';
 import { useState, useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn, navLinks } from '@/utils/constants';
 import { Button } from '../button';
 import { VscAccount, VscSignOut } from "react-icons/vsc";
@@ -13,10 +17,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [navBg, setNavBg] = useState(false);
   const { isAuthenticated, logout } = useAuth()
-  const pagesWithSecondaryNavbar = ['/about', '/blog', '/projects', '/events', `/events/${useLocation().pathname.split('/').pop()}`];
+  const pagesWithSecondaryNavbar = ['/about', '/blog', '/projects', '/events', `/events/${usePathname().split('/').pop()}`];
   // const [nav, setNav] = useState(false)
 
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const isAuthRoute = pathname.includes('/auth');
 
   const handleSignOut = async () => {
@@ -61,11 +65,11 @@ const Navbar = () => {
       >
         <div className='flex items-center font-medium justify-around lg:justify-between lg:w-[90%] lg:mx-auto'>
           <div className='z-50 p-5 md:w-auto w-full flex justify-between'>
-            <Link to='/'>
-              <img
+            <Link href='/'>
+              <Image
                 src={HomeImages.Logo}
                 alt='logo'
-                className={cn('cursor-pointer h-[3.3rem]', {
+                className={cn('cursor-pointer h-[3.3rem] w-auto', {
                   "invert brightness-0": variant === "secondary" && !navBg && !open,
                 })}
               />
@@ -96,7 +100,7 @@ const Navbar = () => {
                       }
                     )}
                   >
-                    <Link to={navLink.link} className='py-7 text-lg inline-block urbanist-font'>
+                    <Link href={navLink.link} className='py-7 text-lg inline-block urbanist-font'>
                       {navLink.label}
                     </Link>
                   </li>
@@ -124,7 +128,7 @@ const Navbar = () => {
                   Sign Out
                 </Button>
                 :
-                <Link to={loginLink}>
+                <Link href={loginLink}>
                   <Button
                     outline={false}
                     spacing={false}
@@ -159,7 +163,7 @@ const Navbar = () => {
                   )}
                 >
                   <Link
-                    to={navLink.link}
+                    href={navLink.link}
                     className='py-5 capitalise text-xl inline-block px-10'
                     onClick={() => setOpen(false)}
                   >
@@ -175,7 +179,7 @@ const Navbar = () => {
                   Sign Out
                 </Button>
                 :
-                <Link to={loginLink}>
+                <Link href={loginLink}>
                   <Button outline={false} spacing={false} className="duration-500 hover:scale-90 transition-all">
                     Sign In
                   </Button>

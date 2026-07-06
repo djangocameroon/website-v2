@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom';
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
 import { GoArrowUpRight } from 'react-icons/go';
 import { HiOutlineCalendarDays, HiOutlineClock, HiOutlineGlobeAlt, HiOutlineMapPin } from 'react-icons/hi2';
 import { cn } from '@/utils/constants';
@@ -39,11 +42,12 @@ const EventCard = ({ event, className }: EventCardProps) => {
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary">
         {event.thumbnail ? (
-          <img
+          <Image
             src={event.thumbnail}
             alt={event.title}
-            loading="lazy"
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, 384px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <EventImagePlaceholder />
@@ -80,7 +84,7 @@ const EventCard = ({ event, className }: EventCardProps) => {
         </span>
 
         <Link
-          to={`/events/${event.slug}`}
+          href={`/events/${event.slug}`}
           className="mt-auto flex w-fit items-center gap-x-2 py-1 text-xl font-medium text-secondary urbanist-font transition-colors duration-200 hover:text-secondary/80"
         >
           View Event

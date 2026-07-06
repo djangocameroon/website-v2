@@ -1,12 +1,15 @@
+"use client";
+
+import Image from "next/image";
 import { HomeImages } from '@/assets';
 import { Button } from '@/components/layout';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 import { motion } from 'framer-motion';
 import { fadeUp, revealOnce, slideInLeft, slideInRight } from './motion';
 
 const BecomeMember = () => {
   const { blueDjango, blueMap } = HomeImages;
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <section id="become-member" className='relative md:mx-56'>
       <motion.div
@@ -17,7 +20,7 @@ const BecomeMember = () => {
         transition={{ delay: 0.2 }}
         className='absolute left-0 top-14 max-md:hidden'
       >
-        <img src={blueDjango} alt='' className='' />
+        <Image src={blueDjango} alt='' className='' />
       </motion.div>
       <motion.div
         initial="hidden"
@@ -40,7 +43,7 @@ const BecomeMember = () => {
           ecosystem together. Join us in this supportive journey, where we
           celebrate the spirit of camaraderie in the world of coding.
         </p>
-        <Button outline={false} backgroundColor='bg-primary' onClick={() => navigate('/about')}>
+        <Button outline={false} backgroundColor='bg-primary' onClick={() => router.push('/about')}>
           Discover more about
         </Button>
       </motion.div>
@@ -53,7 +56,7 @@ const BecomeMember = () => {
         transition={{ delay: 0.2 }}
         className='absolute right-0 -bottom-4 max-md:hidden'
       >
-        <img src={blueMap} alt='' className='' />
+        <Image src={blueMap} alt='' className='' />
       </motion.div>
     </section>
   );

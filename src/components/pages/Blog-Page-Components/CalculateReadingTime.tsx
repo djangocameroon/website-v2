@@ -1,3 +1,5 @@
+"use client";
+
 export function CalculateReadingTime(text: string): number {
   if (!text) return 0;
   const wordsPerMinute = 200; // Average reading speed

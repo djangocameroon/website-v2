@@ -1,3 +1,5 @@
+"use client";
+
 import { LuChevronDown } from "react-icons/lu";
 
 const LanguageSwitcher = () => {

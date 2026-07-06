@@ -1,6 +1,9 @@
+"use client";
+
+import Image from "next/image";
 import { IoLogoLinkedin } from "react-icons/io";
 import { AboutImages } from "@/assets";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import AnimatedSection from './animated-section';
 
@@ -110,7 +113,7 @@ const Organisers = () => {
             OrganisersTeam.map((organiser, index) => (
               <div key={index} className='relative group/card hover:scale-105 transition-all rounded-lg w-full sm:w-auto'>
                 <div className='relative border-[5px] border-secondary rounded-[30px] w-full sm:w-[240px] sm:h-[240px] overflow-hidden'>
-                  <img
+                  <Image
                     src={organiser.image}
                     alt=""
                     className='w-full h-full object-cover'
@@ -119,10 +122,10 @@ const Organisers = () => {
                 <div className=" mt-2 flex justify-between items-start flex-col">
                   <p className="uppercase font-semibold text-lg">{organiser.name}</p>
                   <div className="group/item flex gap-3 sm:gap-1 items-center overflow-hidden pr-2">
-                    <Link to={organiser.linkedin} className="text-secondary group-hover/item:scale-110  transition-all">
+                    <Link href={organiser.linkedin} className="text-secondary group-hover/item:scale-110  transition-all">
                       <IoLogoLinkedin size='25' />
                     </Link>
-                    <Link to={organiser.github} className="text-secondary group-hover/item:scale-110  transition-all">
+                    <Link href={organiser.github} className="text-secondary group-hover/item:scale-110  transition-all">
                       <FaGithub size='23' />
                     </Link>
                   </div>
@@ -156,15 +159,15 @@ const Organisers = () => {
     //           <div key={index} className='relative group/card hover:scale-105 transition-all py-7 px-1 lg:px-3 rounded-lg w-full sm:w-auto'>
     //             <div className=" hidden md:block absolute top-2 left-0  rounded-lg bg-secondary shadow-inner w-full sm:w-52 sm:h-52"></div>
     //             <div className='relative border-4 border-primary  rounded-xl w-full sm:w-52 sm:h-52'>
-    //               <img src={organiser.image} alt="" className=' w-full h-full' />
+    //               <Image src={organiser.image} alt="" className=' w-full h-full' />
     //             </div>
     //             <div className=" mt-2 flex justify-between items-start flex-col">
     //               <p className="uppercase font-semibold text-lg">{organiser.name}</p>
     //               <div className="group/item flex gap-3 sm:gap-1 items-center overflow-hidden pr-2">
-    //                 <Link to={organiser.linkedin} className="text-secondary group-hover/item:scale-110  transition-all">
+    //                 <Link href={organiser.linkedin} className="text-secondary group-hover/item:scale-110  transition-all">
     //                   <IoLogoLinkedin size='25' />
     //                 </Link>
-    //                 <Link to={organiser.github} className="text-secondary group-hover/item:scale-110  transition-all">
+    //                 <Link href={organiser.github} className="text-secondary group-hover/item:scale-110  transition-all">
     //                   <FaGithub size='23' />
     //                 </Link>
     //               </div>

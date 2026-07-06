@@ -1,8 +1,9 @@
-import { ILoginForm } from "@/pages/auth/Login";
+import axios from "axios";
 import axiosClient from "./axios";
-import { IRegisterForm } from "@/models";
+import { ILoginForm, IRegisterForm } from "@/models";
+import { LoggedInUser } from "@/types";
 
-type IResponse<T = unknown> = {
+export type IResponse<T = unknown> = {
 	message: string;
 	status_code: number;
 } & ({
@@ -12,21 +13,6 @@ type IResponse<T = unknown> = {
 	status: true;
 	data: T
 })
-
-type IUserResponse = {
-	access_token: string;
-	refresh_token: string;
-	expires_in: string;
-	user: {
-		id: string;
-		email: string;
-		username: string;
-		profile_image: string;
-		first_name: string;
-		last_name: string;
-		last_login?: Date;
-	};
-};
 
 export const registerUser = async (
 	body: IRegisterForm
@@ -46,6 +32,8 @@ export const registerUser = async (
 	return data;
 };
 
+// Login and logout go through internal Next.js route handlers, which exchange
+// credentials with the Django API and manage the httpOnly session cookie.
 export const signinUser = async (
 	body: ILoginForm
 ) => {
@@ -54,12 +42,15 @@ export const signinUser = async (
 		password: body.password,
 		remember_me: body.remember_me,
 	};
-	const { data } = await axiosClient.post<IResponse<IUserResponse>>("/auth/login/", requestBody);
+	const { data } = await axios.post<IResponse<{ user: LoggedInUser }>>(
+		"/api/auth/login",
+		requestBody
+	);
 	return data;
 };
 
 export const signOutUser = async () => {
-	const { data } = await axiosClient.post<IResponse>("/auth/logout/");
+	const { data } = await axios.post<IResponse>("/api/auth/logout");
 	return data;
 };
 

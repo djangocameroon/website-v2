@@ -1,3 +1,5 @@
+"use client";
+
 // import { ProjectCategory } from "@/types/project";
 // import SearchBar from "./SearchBar";
 

@@ -1,32 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
+"use client";
+
+import { useQuery } from '@tanstack/react-query';
 import { eventsApi } from '@/lib/eventsApi';
-import { EventItem } from '@/types/events';
+import { queryKeys } from '@/lib/query-keys';
 
 export const useEvent = (idOrSlug?: string) => {
-  const [event, setEvent] = useState<EventItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: queryKeys.event(idOrSlug ?? ''),
+    queryFn: () => eventsApi.getEventByIdOrSlug(idOrSlug!),
+    enabled: !!idOrSlug,
+  });
 
-  useEffect(() => {
-    if (!idOrSlug) return;
-
-    const fetchEvent = async () => {
-      try {
-        setLoading(true);
-        const data = await eventsApi.getEventByIdOrSlug(idOrSlug);
-        setEvent(data);
-        setError(null);
-      } catch (err: any) {
-        console.error('Error fetching event:', err);
-        setError(err.message || 'Failed to load event');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvent();
-  }, [idOrSlug]);
-
-  return { event, loading, error };
+  return {
+    event: data ?? null,
+    loading: isPending,
+    error: error ? (error as Error).message || 'Failed to load event' : null,
+  };
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, MotionConfig } from 'framer-motion';
 import { HiOutlineChevronDown, HiOutlineGlobeAlt, HiOutlineMapPin } from 'react-icons/hi2';
 import { cn } from '@/utils/constants';

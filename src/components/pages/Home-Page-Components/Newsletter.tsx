@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { useState } from 'react';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -18,7 +21,7 @@ const Newsletter = () => {
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   const handleJoinCommunityClick = () => {
-    const communityLink = import.meta.env.VITE_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
+    const communityLink = process.env.NEXT_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
     window.open(communityLink, '_blank', 'noopener,noreferrer');
   }
 
@@ -54,7 +57,7 @@ const Newsletter = () => {
         variants={scaleIn}
         className='bg-secondary rounded-[3.125rem] bluelightbg h-[500px] relative'
       >
-        <img src={blueBgInitials} alt="" className='max-md:hidden' />
+        <Image src={blueBgInitials} alt="" className='max-md:hidden' />
         <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
             <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>

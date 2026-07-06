@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { GoArrowUpRight } from 'react-icons/go';
 import { HomeImages } from '@/assets';
 import { Button } from '@/components/layout';
@@ -8,7 +11,7 @@ import { revealOnce, slideInLeft, slideInRight } from './motion';
 const Collaboration = () => {
 
   const handleJoinCommunityClick = () => {
-    const communityLink = import.meta.env.VITE_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
+    const communityLink = process.env.NEXT_PUBLIC_DJANGO_COMMUNITY_INVITE_LINK || "";
     window.open(communityLink, '_blank', 'noopener,noreferrer');
   }
 
@@ -47,7 +50,7 @@ const Collaboration = () => {
         variants={slideInRight}
         className='block'
       >
-        <img src={HomeImages.teamGoals} alt='' />
+        <Image src={HomeImages.teamGoals} alt='' />
       </motion.div>
     </div>
   );

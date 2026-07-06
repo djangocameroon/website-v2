@@ -1,44 +1,27 @@
-import { getAuthInfoFromLocalStorage } from "@/utils";
-import axios, {
-	AxiosError,
-	AxiosResponse,
-	InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
-const baseURL = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/`;
+const isServer = typeof window === "undefined";
 
-// Create an axios instance with the base URL
+// On the server we talk to the Django API directly — server-side fetches are
+// public reads (blog/event/project prefetches, metadata). In the browser every
+// call goes through the /api/proxy route handler, which injects the Bearer
+// token from the httpOnly session cookie, so the access token never reaches
+// client-side JavaScript.
+const baseURL = isServer
+  ? `${process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL}/api/v1/`
+  : "/api/proxy/";
+
 const axiosClient = axios.create({
-	baseURL,
+  baseURL,
 });
 
-axiosClient.interceptors.request.use(
-	(config: InternalAxiosRequestConfig) => {
-		const resource = getAuthInfoFromLocalStorage();
-		if (resource) {
-            const token = resource.token.accessToken;
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		// config.headers["access-control-allow-origin"] = "*";
-		return config;
-	},
-	(error: AxiosError) => {
-		return Promise.reject(error);
-	}
-);
-
-// Response interceptor to handle errors
 axiosClient.interceptors.response.use(
-	(response: AxiosResponse) => {
-		return response;
-	},
-	(error: AxiosError) => {
-		if (error.response && error.response.status === 401) {
-			// localStorage.removeItem("TOKEN");
-			// window.location.reload();
-		}
-		return Promise.reject(error);
-	}
+  (response: AxiosResponse) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
 );
 
 export default axiosClient;

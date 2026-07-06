@@ -1,33 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { blogApi } from '@/lib/blogApi';
-import { BlogPost } from '@/types/blog';
+import { queryKeys } from '@/lib/query-keys';
 
 export const useBlogPost = (slug?: string) => {
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: queryKeys.post(slug ?? ''),
+    queryFn: () => blogApi.getPostBySlug(slug!),
+    enabled: !!slug,
+  });
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      if (!slug) return;
-
-      try {
-        setLoading(true);
-        const data = await blogApi.getPostBySlug(slug);
-        setPost(data);
-        setError(null);
-      } catch (err: any) {
-        console.error('Error fetching post:', err);
-        setError(err.message || 'Failed to load blog post');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPost();
-  }, [slug]);
-
-  return { post, loading, error };
+  return {
+    post: data ?? null,
+    loading: isPending,
+    error: error ? (error as Error).message || 'Failed to load blog post' : null,
+  };
 };

@@ -1,50 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useCallback } from 'react';
+"use client";
+
+import { useQuery } from '@tanstack/react-query';
 import { blogApi } from '@/lib/blogApi';
-import { BlogPost, BlogFilters } from '@/types/blog';
+import { BlogFilters } from '@/types/blog';
+import { queryKeys } from '@/lib/query-keys';
+
+const EMPTY_PAGINATION = {
+  count: 0,
+  next: null as string | null,
+  previous: null as string | null,
+  current_page: 1,
+  total_pages: 1,
+};
 
 export const useBlogPosts = (filters?: BlogFilters) => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [pagination, setPagination] = useState<{
-    count: number;
-    next: string | null;
-    previous: string | null;
-    current_page: number;
-    total_pages: number;
-  }>({
-    count: 0,
-    next: null as string | null,
-    previous: null as string | null,
-    current_page: 1,
-    total_pages: 1,
+  const { data, isPending, error, refetch } = useQuery({
+    queryKey: queryKeys.posts(filters),
+    queryFn: () => blogApi.getAllPosts(filters),
   });
 
-  const fetchPosts = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await blogApi.getAllPosts(filters);
-      setPosts(response.data);
-      setPagination(response.pagination);
-      setError(null);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch blog posts');
-      console.error('Error fetching posts:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
-
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
-
   return {
-    posts,
-    loading,
-    error,
-    pagination,
-    refetch: fetchPosts,
+    posts: data?.data ?? [],
+    loading: isPending,
+    error: error ? (error as Error).message || 'Failed to fetch blog posts' : null,
+    pagination: data?.pagination ?? EMPTY_PAGINATION,
+    refetch,
   };
 };

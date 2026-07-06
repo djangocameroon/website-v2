@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Editor } from '@hugerte/hugerte-react';
 import type { Editor as HugeRTEEditor } from 'hugerte';

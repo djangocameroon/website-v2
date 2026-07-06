@@ -1,3 +1,5 @@
+"use client";
+
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
@@ -73,7 +75,7 @@ const Carousel = () => {
         >
             {
                 slider.map(data => (
-                    <SwiperSlide key={data.id} style={{ backgroundImage: `url(${data.url})` }} className=" rounded-[20px] overflow-hidden myswiper-slider text-2xl relative">
+                    <SwiperSlide key={data.id} style={{ backgroundImage: `url(${data.url.src})` }} className=" rounded-[20px] overflow-hidden myswiper-slider text-2xl relative">
                         <div className={' bg-gradient-to-b from-transparent from-20% to-secondary absolute left-0 top-0 w-full h-full'}></div>
                         <div className={'absolute bottom-28 text-2xl'}>
                             <h2 className={'text-4xl text-white'}>{data.title}</h2>

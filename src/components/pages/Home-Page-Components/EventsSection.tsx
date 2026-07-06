@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+"use client";
+
+import Link from "next/link";
 import { GoArrowUpRight } from 'react-icons/go';
 import { motion } from 'framer-motion';
 import { EventCard } from '@/components/pages/Event-Page-Components';
@@ -34,7 +36,7 @@ const EventsDiscoverMoreCard = () => (
       <h1 className="text-center text-white nohemi-font font-semibold text-2xl">
         Discover more events from the community
       </h1>
-      <Link to="/events" className="block w-full">
+      <Link href="/events" className="block w-full">
         <Button backgroundColor="bg-white" className="py-4 flex justify-center items-center gap-x-2.5 text-primary w-full">
           View More
           <GoArrowUpRight className="w-6 h-6" />
@@ -64,7 +66,7 @@ const EventsSection = () => {
         <h3 className='text-primary text-3xl font-bold nohemi-font'>
           You are welcome at our &#123;next&#125; events
         </h3>
-        <Link to="/events" className='mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary'>
+        <Link href="/events" className='mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary'>
           View all events
           <GoArrowUpRight className='w-6 h-6' />
         </Link>

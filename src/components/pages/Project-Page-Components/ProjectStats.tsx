@@ -1,3 +1,5 @@
+"use client";
+
 import { ProjectStats as ProjectStatsType } from "@/types/project";
 
 interface ProjectStatsProps {

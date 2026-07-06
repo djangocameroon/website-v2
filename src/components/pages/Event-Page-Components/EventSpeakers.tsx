@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import type { IconType } from 'react-icons';
 import {
   FaFacebookF,
@@ -46,9 +49,11 @@ const EventSpeakers = ({ speakers }: { speakers: Speaker[] }) => {
 
           return (
             <div key={speaker.id} className="flex flex-col items-center text-center gap-y-1.5 w-[17.188rem]">
-              <img
+              <Image
                 src={getSpeakerPfp()}
                 alt={speaker.name}
+                width={175}
+                height={175}
                 loading="lazy"
                 className="size-[10.9375rem] rounded-full object-cover ring-4 ring-primary/10"
               />

@@ -1,3 +1,6 @@
+"use client";
+
+
 import { AiOutlinePlus } from 'react-icons/ai';
 
 interface ImageUploadProps {
@@ -38,6 +41,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         />
         <label htmlFor={id} className="cursor-pointer">
           {preview ? (
+            // eslint-disable-next-line @next/next/no-img-element -- preview is a data: URL, unsupported by next/image
             <img
               src={preview}
               alt={`${label} preview`}

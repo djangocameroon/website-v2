@@ -1,34 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+"use client";
+
+import { useQuery } from '@tanstack/react-query';
 import { projectsApi } from '@/lib/projectsApi';
-import { ProjectItem } from '@/types/project';
+import { queryKeys } from '@/lib/query-keys';
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState<ProjectItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchProjects = useCallback(async () => {
-    try {
-      setLoading(true);
-      const data = await projectsApi.getAllProjects();
-      setProjects(data);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch projects');
-      console.error('Error fetching projects:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
+  const { data, isPending, error, refetch } = useQuery({
+    queryKey: queryKeys.projects(),
+    queryFn: () => projectsApi.getAllProjects(),
+  });
 
   return {
-    projects,
-    loading,
-    error,
-    refetch: fetchProjects,
+    projects: data ?? [],
+    loading: isPending,
+    error: error ? (error as Error).message || 'Failed to fetch projects' : null,
+    refetch,
   };
 };

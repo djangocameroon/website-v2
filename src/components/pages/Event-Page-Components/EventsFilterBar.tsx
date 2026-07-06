@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import { BiSearch, BiX } from 'react-icons/bi';
 import { cn } from '@/utils/constants';

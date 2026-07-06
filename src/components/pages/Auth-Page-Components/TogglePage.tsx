@@ -1,8 +1,11 @@
-import { NavLink, useLocation } from 'react-router-dom';
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const TogglePage = () => {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
 
   const tabs = [
     { title: 'Sign in', path: '/auth/login' },
@@ -13,9 +16,9 @@ const TogglePage = () => {
     <div className='bg-white/10 p-2.5 rounded-full overflow-hidden shadow-xl'>
       <div className='flex items-center rounded-full'>
         {tabs.map((tab) => (
-          <NavLink
+          <Link
             key={tab.path}
-            to={tab.path}
+            href={tab.path}
             className={`py-2 rounded-full px-5 text-center font-medium text-xl urbanist-font ${pathname === tab.path
               ? 'text-primary'
               : 'bg-transparent text-white/50'
@@ -32,7 +35,7 @@ const TogglePage = () => {
               />
             )}
             <span className='relative block urbanist-font font-medium whitespace-nowrap'>{tab.title}</span>
-          </NavLink>
+          </Link>
         ))}
       </div>
     </div>

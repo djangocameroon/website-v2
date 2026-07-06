@@ -1,50 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useCallback } from 'react';
+"use client";
+
+import { useQuery } from '@tanstack/react-query';
 import { eventsApi } from '@/lib/eventsApi';
-import { EventItem, EventFilters } from '@/types/events';
+import { EventFilters } from '@/types/events';
+import { queryKeys } from '@/lib/query-keys';
+
+const EMPTY_PAGINATION = {
+  count: 0,
+  next: null as string | null,
+  previous: null as string | null,
+  current_page: 1,
+  total_pages: 1,
+};
 
 export const useEvents = (filters?: EventFilters) => {
-  const [events, setEvents] = useState<EventItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [pagination, setPagination] = useState<{
-    count: number;
-    next: string | null;
-    previous: string | null;
-    current_page: number;
-    total_pages: number;
-  }>({
-    count: 0,
-    next: null,
-    previous: null,
-    current_page: 1,
-    total_pages: 1,
+  const { data, isPending, error, refetch } = useQuery({
+    queryKey: queryKeys.events(filters),
+    queryFn: () => eventsApi.getAllEvents(filters),
   });
 
-  const fetchEvents = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await eventsApi.getAllEvents(filters);
-      setEvents(response.data);
-      setPagination(response.pagination);
-      setError(null);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch events');
-      console.error('Error fetching events:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
-
-  useEffect(() => {
-    fetchEvents();
-  }, [fetchEvents]);
-
   return {
-    events,
-    loading,
-    error,
-    pagination,
-    refetch: fetchEvents,
+    events: data?.data ?? [],
+    loading: isPending,
+    error: error ? (error as Error).message || 'Failed to fetch events' : null,
+    pagination: data?.pagination ?? EMPTY_PAGINATION,
+    refetch,
   };
 };

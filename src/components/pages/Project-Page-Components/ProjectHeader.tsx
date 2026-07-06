@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineCodeBracket } from "react-icons/hi2";
 import { ProjectItem } from "@/types/project";
@@ -92,13 +95,14 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
                       </div>
 
                       {/* Project Image */}
-                      <div className="aspect-video bg-[#0F1629]">
+                      <div className="relative aspect-video bg-[#0F1629]">
                         {project.thumbnail ? (
-                          <img
+                          <Image
                             src={project.thumbnail}
                             alt={project.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 640px"
+                            className="object-cover"
                           />
                         ) : (
                           <div className="flex size-full items-center justify-center">

@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { Badge, Button } from '@/components/layout'
 import { AiOutlineSend } from 'react-icons/ai';
 import { HomeImages } from '@/assets';
@@ -8,7 +11,7 @@ const JoinUs = () => {
   return (
     <div>
       <div className='bg-secondary rounded-[3.125rem] p-3 max-md:px-7 bluelightbg h-[400px] md:h-[400px] max-md:h-[250px] relative overflow-hidden'>
-        <img src={blueBgInitials} alt="" className='max-md:hidden relative z-0' />
+        <Image src={blueBgInitials} alt="" className='max-md:hidden relative z-0' />
         <div className='absolute inset-0 md:pr-[100px] max-md:px-6 flex justify-center md:justify-end items-center z-10'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
             <h1 className='nohemi-font font-bold text-2xl md:text-5xl text-center md:text-right max-md:leading-tight'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>

@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { AboutImages } from '@/assets';
 import { cn } from '@/utils/constants';
 
@@ -5,7 +8,7 @@ const AboutHeaderImage = () => {
 
   return (
     <div className='absolute inset-0'>
-      <img src={AboutImages.rocket} alt='' className='object-cover size-full' />
+      <Image src={AboutImages.rocket} alt='' className='object-cover size-full' />
 
     </div>
   );

@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { AboutImages } from '@/assets/images'
 import AnimatedSection from './animated-section';
 
@@ -5,7 +8,7 @@ const MakingTheStory = () => {
     return (
         <AnimatedSection className='w-screen lg:h-screen relative lg:mb-[100px] mb-8 max-lg:px-4'>
             <div className="absolute inset-0 -z-10 pointer-events-none">
-                <img src={AboutImages.makingstorybanner} alt='Making the Story Banner' className='max-xl:hidden w-full h-full' />
+                <Image src={AboutImages.makingstorybanner} alt='Making the Story Banner' className='max-xl:hidden w-full h-full' />
             </div>
 
             {/* Banner text section */}

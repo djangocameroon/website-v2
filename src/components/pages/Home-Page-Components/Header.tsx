@@ -1,6 +1,9 @@
+"use client";
+
+import Image from "next/image";
 import { Button } from "@/components/layout";
 import { HomeImages } from "@/assets";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeUp, scaleIn, staggerContainer } from "./motion";
 
@@ -30,7 +33,7 @@ const Header = () => {
 			description: "Small Description",
 		},
 	];
-	const navigate = useNavigate();
+	const router = useRouter();
 	const handleGetStartedClick = () => {
 		const section = document.getElementById("become-member");
 		if (!section) return;
@@ -75,7 +78,7 @@ const Header = () => {
 						<Button outline={false} backgroundColor="bg-primary" onClick={handleGetStartedClick}>
 							Get Started
 						</Button>
-						<Button outline={true} onClick={() => navigate('/about')}>Learn more</Button>
+						<Button outline={true} onClick={() => router.push('/about')}>Learn more</Button>
 					</motion.div>
 				</div>
 			</div>
@@ -87,12 +90,12 @@ const Header = () => {
 				transition={{ delay: 0.4 }}
 				className="max-w-[1500px] w-full mx-auto max-md:mt-5"
 			>
-				<img
+				<Image
 					src={HomeImages.HeaderImage}
 					alt=""
 					className="rounded-lg object-contain max-md:hidden"
 				/>
-				<img
+				<Image
 					src={HomeImages.HeaderImageMobile}
 					alt=""
 					className="rounded-lg object-contain md:hidden"
@@ -105,7 +108,7 @@ const Header = () => {
 				variants={factsStagger}
 				className="bg-primary max-w-7xl h-56 w-full mx-auto rounded-[32px] relative max-sm:hidden -mt-2.5"
 			>
-				<img
+				<Image
 					src={HomeImages.curlyGrid}
 					alt=""
 					className="rounded-lg object-contain"

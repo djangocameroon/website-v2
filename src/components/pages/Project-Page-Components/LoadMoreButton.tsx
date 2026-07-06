@@ -1,3 +1,5 @@
+"use client";
+
 // Icon placeholder: replace the inline <svg> below with your final SVG code
 
 interface LoadMoreButtonProps {

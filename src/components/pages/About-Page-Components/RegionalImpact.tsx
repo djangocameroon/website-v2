@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { AboutImages } from '@/assets';
 import AnimatedSection from './animated-section';
 import { cn } from '@/utils/constants';
@@ -56,7 +59,7 @@ const RegionalImpact = () => {
                                                     {region.name}
                                                 </div>
                                             </div>
-                                            <img src={region.image} alt={region.name} className='object-cover w-full h-full grayscale transition-all hover:grayscale-0' />
+                                            <Image src={region.image} alt={region.name} className='object-cover w-full h-full grayscale transition-all hover:grayscale-0' />
                                         </div>
                                     ))}
                                 </div>

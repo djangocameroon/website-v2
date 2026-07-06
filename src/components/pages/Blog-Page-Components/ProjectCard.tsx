@@ -1,9 +1,12 @@
+"use client";
+
+import Image from "next/image";
 import React, { useEffect } from 'react';
 import { AiOutlineLike, AiOutlineEye } from 'react-icons/ai';
 import { GoArrowUpRight } from 'react-icons/go';
 import { LuTimer } from 'react-icons/lu';
 import { VscAccount } from "react-icons/vsc";
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
 import { BlogPost } from '@/types/blog';
@@ -44,10 +47,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
       }}
     >
       <div className="relative h-[25rem] max-md:h-52 w-full overflow-hidden rounded-3xl max-md:rounded-2xl border border-gray-100">
-        <img
+        <Image
           src={cover_image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
+          sizes="(max-width: 1380px) 100vw, 50vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -85,7 +90,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
         </div>
 
         {/* Button */}
-        <Link to={`/blog/${slug}`} className="mt-auto">
+        <Link href={`/blog/${slug}`} className="mt-auto">
           <button className="w-full bg-primary hover:bg-primary/90 active:scale-105 text-white py-5 max-md:py-3.5 rounded-xl max-md:rounded-lg flex items-center justify-between px-7 max-md:px-5 transition-all border-primary border-[1.5px]">
             <span className="inline-flex items-center mx-auto nohemi-font text-[18px] max-md:text-sm  font-medium">
               Read more
