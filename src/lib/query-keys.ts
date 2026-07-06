@@ -9,4 +9,5 @@ export const queryKeys = {
   event: (idOrSlug: string) => ["event", idOrSlug] as const,
   eventRegistration: (eventId: string) => ["event-registration", eventId] as const,
   projects: () => ["projects"] as const,
+  youtubeVideos: (handle: string) => ["youtube-videos", handle] as const,
 };
