@@ -8,13 +8,23 @@ import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
 import { motion } from "framer-motion";
 import { fadeUp, revealOnce, staggerContainer } from "./motion";
+import VideoCard from "./VideoCard";
+import { useYoutubeVideos } from "@/hooks/useYoutubeVideos";
+import { cn, youtubeChannelHandle } from "@/utils/constants";
 
 const cardsStagger = staggerContainer(0.15);
 const badgesStagger = staggerContainer(0.06);
 const staggerContainerGrid = staggerContainer(0.08);
 
+const MAX_VIDEOS = 6;
+// Slots 3-6 stay hidden on mobile to keep the teaser strip compact.
+const hiddenOnMobile = (index: number) => (index >= 2 ? "max-md:hidden" : "");
+
 const YoutubeSection = () => {
 	const { bird, connect, whyJoin } = HomeImages;
+	const { videos, loading, error } = useYoutubeVideos(youtubeChannelHandle);
+	const isEmpty = !loading && (error !== null || videos.length === 0);
+
 	const navigateToYoutube = () => {
 		window.open("https://www.youtube.com/@DjangoCameroon", "_blank");
 	}
@@ -151,6 +161,7 @@ const YoutubeSection = () => {
           </div>
         </div>
       </div> */}
+			{/* VIDEOS DISPLAY SECTION */}
 			<div className="h-fit">
 				<motion.div
 					initial="hidden"
@@ -175,33 +186,78 @@ const YoutubeSection = () => {
 						<GoArrowUpRight className="w-6 h-6" />
 					</Link>
 				</motion.div>
-				<div className="relative">
-					<motion.div
-						variants={staggerContainerGrid}
-						initial="hidden"
-						whileInView="visible"
-						viewport={revealOnce}
-						className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] max-md:flex max-md:flex-col gap-5"
-					>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light"></motion.div>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light"></motion.div>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></motion.div>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></motion.div>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-secondary bg-secondary-light max-md:hidden"></motion.div>
-						<motion.div variants={fadeUp} className="border rounded-[28px] h-[300px] border-primary bg-primary-light max-md:hidden"></motion.div>
-					</motion.div>
-					<div className="h-[300px] absolute bottom-0 inset-x-0">
-						<div className="w-full bg-gradient-to-b absolute bottom-0 left-0 from-transparent to-white via-white   inset-0 z-0" />
+				{isEmpty ? (
+					<div className="relative">
+						<motion.div
+							variants={staggerContainerGrid}
+							initial="hidden"
+							whileInView="visible"
+							viewport={revealOnce}
+							className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] max-md:flex max-md:flex-col gap-5"
+						>
+							{Array.from({ length: MAX_VIDEOS }).map((_, index) => (
+								<motion.div
+									key={index}
+									variants={fadeUp}
+									className={cn(
+										"border rounded-[28px] h-[300px]",
+										index % 2 === 0 ? "border-secondary bg-secondary-light" : "border-primary bg-primary-light",
+										hiddenOnMobile(index)
+									)}
+								/>
+							))}
+						</motion.div>
+						<div className="h-[300px] absolute bottom-0 inset-x-0">
+							<div className="w-full bg-gradient-to-b absolute bottom-0 left-0 from-transparent to-white via-white   inset-0 z-0" />
+							<Button
+								outline={false}
+								backgroundColor="bg-secondary"
+								spacing={false}
+								onClick={navigateToYoutube}
+								className="mt-[167px] z-20 absolute left-1/2 transform -translate-x-1/2"
+							>
+								View videos catalogue
+							</Button>
+						</div>
+					</div>
+				) : (
+					<div className="space-y-8">
+						<motion.div
+							variants={staggerContainerGrid}
+							initial="hidden"
+							whileInView="visible"
+							viewport={revealOnce}
+							className="grid grid-cols-[repeat(3,_minmax(24rem,_3fr))] max-md:flex max-md:flex-col gap-5"
+						>
+							{loading
+								? Array.from({ length: MAX_VIDEOS }).map((_, index) => (
+									<motion.div
+										key={index}
+										variants={fadeUp}
+										className={cn(
+											"animate-pulse rounded-[28px] h-[300px] border",
+											index % 2 === 0 ? "border-secondary bg-secondary-light" : "border-primary bg-primary-light",
+											hiddenOnMobile(index)
+										)}
+									/>
+								))
+								: videos.slice(0, MAX_VIDEOS).map((video, index) => (
+									<motion.div key={video.videoId} variants={fadeUp} className={hiddenOnMobile(index)}>
+										<VideoCard video={video} accent={index % 2 === 0 ? "secondary" : "primary"} />
+									</motion.div>
+								))}
+						</motion.div>
 						<Button
 							outline={false}
 							backgroundColor="bg-secondary"
 							spacing={false}
-							className="mt-[167px] z-20 absolute left-1/2 transform -translate-x-1/2"
+							onClick={navigateToYoutube}
+							className="mx-auto flex w-fit"
 						>
 							View videos catalogue
 						</Button>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

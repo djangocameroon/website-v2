@@ -46,6 +46,9 @@ export const socialLinks = {
   youtube: "https://www.youtube.com/@DjangoCameroon"
 } as const;
 
+// Used to resolve the uploads playlist via the YouTube Data API (forHandle).
+export const youtubeChannelHandle = "DjangoCameroon";
+
 export const SocialMediaPlatform = {
   TWITTER: "Twitter (X)",
   LINKEDIN: "LinkedIn",
