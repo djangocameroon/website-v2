@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 type TabType<T extends string = string> = {
   title: string;
@@ -16,6 +17,7 @@ interface FilterBarProps<T extends string = string> {
 }
 
 const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, tabs: filters = [] as readonly TabType<T>[] }: FilterBarProps<T>) => {
+  const tc = useTranslations("Common");
   const [activeFilter, setActiveFilter] = useState(filters?.[0] || null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -40,7 +42,7 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
       <BiSearch className="size-[18px] flex-shrink-0" />
       <input
         type="text"
-        placeholder="Search"
+        placeholder={tc("search")}
         value={searchQuery}
         onChange={handleSearchChange}
         onFocus={() => setSearchExpanded(true)}
@@ -100,7 +102,7 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
           <BiSearch className="size-[18px] flex-shrink-0" />
           <input
             type="text"
-            placeholder="Search"
+            placeholder={tc("search")}
             value={searchQuery}
             onChange={handleSearchChange}
             onFocus={() => setSearchExpanded(true)}

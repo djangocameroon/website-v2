@@ -14,6 +14,7 @@ import {
   FaXTwitter,
   FaYoutube,
 } from 'react-icons/fa6';
+import { useTranslations } from 'next-intl';
 import { Speaker } from '@/types/events';
 import { SocialMediaPlatform } from '@/utils/constants';
 
@@ -30,12 +31,13 @@ const SOCIAL_ICONS: Record<string, IconType> = {
 };
 
 const EventSpeakers = ({ speakers }: { speakers: Speaker[] }) => {
+  const t = useTranslations('EventsPage.speakers');
   if (!speakers.length) return null;
 
 
   return (
     <section className="py-8">
-      <h2 className="nohemi-font font-semibold text-2xl text-primary mb-6 text-center">Speakers</h2>
+      <h2 className="nohemi-font font-semibold text-2xl text-primary mb-6 text-center">{t('title')}</h2>
       <div className="flex flex-wrap gap-x-8 gap-y-14 justify-center">
         {speakers.map((speaker) => {
           const links = speaker.social_media.filter((link) => link.active && link.profile_link);
@@ -76,7 +78,7 @@ const EventSpeakers = ({ speakers }: { speakers: Speaker[] }) => {
                         href={link.profile_link ?? undefined}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${speaker.name} on ${link.platform}`}
+                        aria-label={t('socialAria', { name: speaker.name, platform: link.platform })}
                         className="flex size-9 items-center justify-center rounded-full bg-primary/5 text-primary transition-colors duration-200 hover:bg-primary hover:text-white"
                       >
                         <Icon className="size-3.5" aria-hidden="true" />

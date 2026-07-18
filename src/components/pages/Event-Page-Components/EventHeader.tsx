@@ -2,6 +2,7 @@
 
 import { motion, MotionConfig } from 'framer-motion';
 import { HiOutlineChevronDown, HiOutlineGlobeAlt, HiOutlineMapPin } from 'react-icons/hi2';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/utils/constants';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -55,6 +56,7 @@ const LocationMarker = ({
 );
 
 const EventHeader = () => {
+  const t = useTranslations('EventsPage.header');
   const scrollToEvents = () => {
     document.getElementById('events-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -70,9 +72,9 @@ const EventHeader = () => {
               <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-16">
                 {/* connecting line + markers: encodes "in person and online" from the copy below */}
                 <div className="hidden shrink-0 flex-col items-start gap-6 lg:flex">
-                  <LocationMarker icon={HiOutlineMapPin} label="In person" />
+                  <LocationMarker icon={HiOutlineMapPin} label={t('inPerson')} />
                   <div className="ml-[1.125rem] h-10 w-px bg-white/25" />
-                  <LocationMarker icon={HiOutlineGlobeAlt} label="Online" />
+                  <LocationMarker icon={HiOutlineGlobeAlt} label={t('online')} />
                 </div>
 
                 <div className="max-w-2xl">
@@ -83,7 +85,7 @@ const EventHeader = () => {
                     custom={0}
                     className="block text-lg font-semibold text-secondary-light urbanist-font max-md:text-base"
                   >
-                    Meet the community, in person and online
+                    {t('eyebrow')}
                   </motion.span>
 
                   <motion.h1
@@ -93,7 +95,9 @@ const EventHeader = () => {
                     custom={0.08}
                     className="my-4 text-5xl font-bold leading-[1.05] text-white nohemi-font sm:text-6xl lg:text-7xl"
                   >
-                    Upcoming <span className="text-dark-primary">#Events</span>
+                    {t.rich('title', {
+                      accent: (chunks) => <span className="text-dark-primary">{chunks}</span>,
+                    })}
                   </motion.h1>
 
                   <motion.p
@@ -103,9 +107,7 @@ const EventHeader = () => {
                     custom={0.16}
                     className="leading-relaxed text-white/75 urbanist-font"
                   >
-                    Workshops, talks, and meetups from Django Cameroon and Django Girls
-                    Cameroon. Find something happening near you, or join online from
-                    anywhere.
+                    {t('description')}
                   </motion.p>
 
                   {/* mobile-only markers, shown inline since the side rail is desktop-only */}
@@ -116,8 +118,8 @@ const EventHeader = () => {
                     custom={0.22}
                     className="mt-6 flex items-center justify-center gap-8 lg:hidden"
                   >
-                    <LocationMarker icon={HiOutlineMapPin} label="In person" />
-                    <LocationMarker icon={HiOutlineGlobeAlt} label="Online" />
+                    <LocationMarker icon={HiOutlineMapPin} label={t('inPerson')} />
+                    <LocationMarker icon={HiOutlineGlobeAlt} label={t('online')} />
                   </motion.div>
 
                   <motion.button
@@ -128,7 +130,7 @@ const EventHeader = () => {
                     onClick={scrollToEvents}
                     className="mt-10 inline-flex items-center gap-2.5 rounded-2xl bg-dark-primary px-7 py-4 text-lg font-medium text-primary nohemi-font transition-all duration-300 hover:-translate-y-0.5 hover:bg-white active:translate-y-0"
                   >
-                    Browse events
+                    {t('browseEvents')}
                     <HiOutlineChevronDown className="size-5" />
                   </motion.button>
                 </div>
@@ -140,7 +142,7 @@ const EventHeader = () => {
         <button
           type="button"
           onClick={scrollToEvents}
-          aria-label="Scroll to the events list"
+          aria-label={t('scrollAria')}
           className="relative mx-auto mb-8 flex size-11 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors duration-300 hover:border-white/40 hover:text-white motion-safe:animate-bounce [animation-duration:2.2s]"
         >
           <HiOutlineChevronDown className="size-5" />

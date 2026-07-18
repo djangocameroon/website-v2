@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { AboutImages } from '@/assets';
 import AnimatedSection from './animated-section';
 import { cn } from '@/utils/constants';
 
 const RegionalImpact = () => {
+    const t = useTranslations("AboutPage.regionalImpact");
     const regions = [
         { name: 'Bafoussam', image: AboutImages.house1 },
         { name: 'Buea', image: AboutImages.house2 },
@@ -26,10 +28,10 @@ const RegionalImpact = () => {
             <div className='w-[35%] max-md:w-full'>
                 <div className='md:pl-10 relative'>
                     <span className='text-sm text-secondary urbanist-font mb-2 inline-block max-md:w-full max-md:text-center'>
-                        From Local Actions to Global Impact
+                        {t('eyebrow')}
                     </span>
                     <h3 className='timeline-title text-[1.625rem] leading-[1.875rem] font-semibold nohemi-font max-md:text-center'>
-                        Regional Impact
+                        {t('title')}
                     </h3>
                 </div>
             </div>
@@ -38,10 +40,12 @@ const RegionalImpact = () => {
                 <section className='flex items-start gap-8 flex-wrap lg:flex-nowrap'>
                     <article className='w-full lg:w-[40%] md:mt-[2.375rem] space-y-4'>
                         <h3 className='font-bold  nohemi-font text-[2rem] leading-[2.188rem]'>
-                            The impact of our <span className='text-secondary font-bold nohemi-font'>#actions</span>{' '} - nation wide.
+                            {t.rich('heading', {
+                                hash: (chunks) => <span className='text-secondary font-bold nohemi-font'>{chunks}</span>,
+                            })}
                         </h3>
                         <p className='text-lg urbanist-font'>
-                            We started in one city. Now we have active chapters in Yaoundé, Douala, Buea, Bamenda, and Bafoussam. Each chapter runs its own meetups and workshops. Each has its own organizers and regular members. What works in Yaoundé might not work in Buea. So we let each chapter adapt to what their local developers need. Some focus on student outreach. Others on connecting freelancers with clients. A few run regular code review sessions. But they all share resources, speakers, and lessons learned. When someone in Bamenda solves a tricky deployment issue, developers in Douala benefit too. When a company in Yaoundé is hiring, we spread the word across all chapters. This network effect is real. People moving between cities stay connected. Remote workers in small towns can tap into opportunities in bigger cities. And when we organize national events, we can bring together Django developers from across Cameroon who might never have met otherwise.
+                            {t('body')}
                         </p>
                     </article>
                     <article className='w-full lg:w-[60%] flex gap-4 max-lg:flex-col'>

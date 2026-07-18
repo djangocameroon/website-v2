@@ -1,18 +1,21 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface TitleInputProps {
   value: string;
   onChange: (value: string) => void;
 }
 
 export const TitleInput: React.FC<TitleInputProps> = ({ value, onChange }) => {
+  const t = useTranslations("BlogPage.add");
   return (
     <div className="w-full group">
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={"Titre de l'article..."}
+        placeholder={t("titlePlaceholder")}
         required={true}
         className="w-full bg-transparent border-none p-0 text-4xl md:text-5xl font-bold text-gray-900 placeholder-gray-200 focus:ring-0 outline-none nohemi-font tracking-tight"
       />

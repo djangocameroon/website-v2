@@ -9,26 +9,29 @@ import { useForm } from 'react-hook-form';
 import { ResetPasswordForm } from '@/models';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-const ResetPasswordSchema = z
-  .object({
-    password: z
-      .string()
-      .min(1, 'enter a password')
-      .min(8, 'Password must be atleast 8 characters long')
-      .regex(
-        /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-        'Enter a correct password'
-      ),
-    confirmPassword: z.string().min(1, 'enter a password'),
-  })
-  .refine((values) => values.password === values.confirmPassword, {
-    message: 'passwords do not match ',
-    path: ['confirmPassword'],
-  });
+import { useTranslations } from 'next-intl';
 
 const ResetPasswordClient = () => {
     const router = useRouter();
+    const t = useTranslations('AuthPage.resetPassword');
+    const tc = useTranslations('AuthPage.common');
+
+    const ResetPasswordSchema = z
+      .object({
+        password: z
+          .string()
+          .min(1, tc('required'))
+          .min(8, tc('passwordTooShort'))
+          .regex(
+            /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, 
+            tc('passwordStrong')
+          ),
+        confirmPassword: z.string().min(1, tc('required')),
+      })
+      .refine((values) => values.password === values.confirmPassword, {
+        message: tc('passwordMismatch'),
+        path: ['confirmPassword'],
+      });
 
     const {
       handleSubmit,
@@ -49,9 +52,9 @@ const ResetPasswordClient = () => {
         <Image src={HomeImages.Logo} alt='' />
       </Link>
       <div>
-        <h1 className='text-3xl font-bold text-center'>Reset Password</h1>
+        <h1 className='text-3xl font-bold text-center'>{t('title')}</h1>
         <p className='text-center text-lg text-medium'>
-          Now you get a chance to reset your password. keep it safe this time.
+          {t('subtitle')}
         </p>
       </div>
       <div>
@@ -64,13 +67,13 @@ const ResetPasswordClient = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label htmlFor='password' className='mb-2 text-lg font-light'>
-                  Set up a new password
+                  {t('passwordLabel')}
                   <span className='text-red-600 text-lg my-0'>*</span>
                 </label>
                 <input
                   type='password'
                   id='password'
-                  placeholder='enter new password'
+                  placeholder={t('passwordPlaceholder')}
                   {...register('password')}
                   className='mt-2 w-full border-[1px] placeholder:text-base py-3 px-3 border-gray-500 rounded-lg focus:outline-none focus:border-secondary'
                 />
@@ -85,13 +88,13 @@ const ResetPasswordClient = () => {
 
               <div className='mt-5'>
                 <label htmlFor='confirm-password' className='mb-2 font-light'>
-                  Confirm new password
+                  {t('confirmPasswordLabel')}
                   <span className='text-red-600 text-lg my-0'>*</span>
                 </label>
                 <input
                   type='password'
                   id='confirm-password'
-                  placeholder='enter the new password again'
+                  placeholder={t('confirmPasswordPlaceholder')}
                   {...register('confirmPassword')}
                   className='mt-2 placeholder:text-base w-full border-[1px] py-3 px-3 border-gray-500 rounded-lg focus:outline-none focus:border-secondary'
                 />
@@ -104,13 +107,13 @@ const ResetPasswordClient = () => {
                 )}
               </label>
               <div className='flex justify-center items-center gap-7 mt-10'>
-                <button onClick={()=>{
+                <button type='button' onClick={()=>{
                     router.push('/auth/login')
                 }} className='text-red-500 bg-transparent border border-red-500 rounded-xl px-10 py-2 flex justify-center items-center text-lg font-semibold'>
-                  Cancel
+                  {t('cancel')}
                 </button>
                 <Button outline={false} backgroundColor='bg-secondary'>
-                  <p className='px-10'>Reset Password</p>
+                  <p className='px-10'>{t('submit')}</p>
                 </Button>
               </div>
             </form>

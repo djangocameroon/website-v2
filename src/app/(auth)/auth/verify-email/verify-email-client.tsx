@@ -10,11 +10,14 @@ import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState, useRef } from 'react'
 import toast from 'react-hot-toast'
+import { useTranslations } from 'next-intl'
 
 const VerifyEmailClient = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const { verifyEmail } = useAuth()
+    const t = useTranslations('AuthPage.verifyEmail')
+    const tc = useTranslations('AuthPage.common')
     const [otp, setOtp] = useState(["", "", "", "", "", ""])
     const [loading, setLoading] = useState(false)
     const [resendLoading, setResendLoading] = useState(false)
@@ -64,7 +67,7 @@ const VerifyEmailClient = () => {
         if (value.length > 1) return
 
         if (!!value && !/^\d$/.test(value)) {
-            toast.error("Invalid input. Please enter only numeric digits.")
+            toast.error(tc('onlyDigits'))
             triggerShake()
             return
         }
@@ -103,7 +106,7 @@ const VerifyEmailClient = () => {
         for (let i = 0; i < (6 - index); i++) {
             if (!pastedData[i]) break
             if (!/^\d$/.test(pastedData[i])) {
-                toast.error("Invalid input. Please paste only numeric digits.")
+                toast.error(tc('pasteOnlyDigits'))
                 triggerShake()
                 break
             }
@@ -120,7 +123,7 @@ const VerifyEmailClient = () => {
         const otpCode = otp.join("")
 
         if (otpCode.length !== 6) {
-            toast.error("Invalid OTP. Please enter all 6 digits.")
+            toast.error(tc('enterAllOtpDigits'))
             triggerShake()
             return
         }
@@ -128,12 +131,12 @@ const VerifyEmailClient = () => {
         setLoading(true)
         try {
             await verifyEmail({ email, otp: otpCode })
-            toast.success("Email verified successfully!")
+            toast.success(t('verifiedSuccessfully'))
             router.replace("/auth/login")
         } catch (error) {
             if (error instanceof AxiosError) {
-                const errorMessage = error?.response?.data.message || "Invalid OTP code."
-                toast.error(`Verification Failed: ${errorMessage}`)
+                const errorMessage = error?.response?.data.message || tc('invalidOtpCode')
+                toast.error(t('verificationFailed', { message: errorMessage }))
                 triggerShake()
             }
         } finally {
@@ -146,16 +149,16 @@ const VerifyEmailClient = () => {
 
         try {
             await resendVerificationEmail(email)
-            toast.success("OTP sent! A new verification code has been sent to your email.")
+            toast.success(t('otpSent'))
             setCountdown(60)
             setOtp(["", "", "", "", "", ""])
             inputRefs.current[0]?.focus()
         } catch (error) {
             if (error instanceof AxiosError) {
-                let errorMessage = error?.response?.data.message || "Failed to resend code."
+                let errorMessage = error?.response?.data.message || tc('failedToResendCode')
                 if (error.status === 429)
-                        errorMessage = "Too many requests. Please wait before trying again."
-                toast.error(`Failed to resend OTP: ${errorMessage}`)
+                        errorMessage = tc('tooManyRequests')
+                toast.error(t('failedToResendOtp', { message: errorMessage }))
             }
         } finally {
             setResendLoading(false)
@@ -191,16 +194,16 @@ const VerifyEmailClient = () => {
                         >
                             <Image
                                 src={AuthImages.whiteLogo}
-                                alt="Django Cameroon"
+                                alt={t('logoAlt')}
                                 className="h-14 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_20px_rgba(66,133,244,0.4)]"
                             />
                         </Link>
 
                         <h1 className="text-2xl md:text-3xl font-bold text-white nohemi-font tracking-tight">
-                            Verify your email
+                            {t('title')}
                         </h1>
                         <p className="text-white/70 urbanist-font text-base md:text-lg leading-relaxed max-w-sm mx-auto">
-                            We&apos;ve sent a 6-digit code to<br />
+                            {t('subtitle')}<br />
                             <span className="text-secondary font-semibold break-all">{email}</span>
                         </p>
                     </div>
@@ -313,7 +316,7 @@ const VerifyEmailClient = () => {
                                 `}
                             />
                             <span className={`relative flex items-center justify-center gap-2 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-                                <span>Verify Email</span>
+                                <span>{t('verifyEmail')}</span>
                                 {isComplete && (
                                     <svg className="w-5 h-5 animate-[bounceRight_1s_ease-in-out_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -334,8 +337,8 @@ const VerifyEmailClient = () => {
                     {/* Resend section */}
                     <div className="mt-8 pt-6 border-t border-white/10 text-center space-y-3 animate-[fadeIn_0.5s_ease-out_0.4s_both]">
                         <p className="text-white/60 urbanist-font text-sm">
-                            Didn&apos;t receive the code?{' '}
-                            <span className="text-white/40">Check your spam folder</span>
+                            {t('didntReceiveCode')}{' '}
+                            <span className="text-white/40">{t('checkSpamFolder')}</span>
                         </p>
 
                         <button
@@ -357,7 +360,7 @@ const VerifyEmailClient = () => {
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                                     </svg>
-                                    <span>Sending...</span>
+                                    <span>{t('sending')}</span>
                                 </>
                             ) : countdown > 0 ? (
                                 <>
@@ -388,14 +391,14 @@ const VerifyEmailClient = () => {
                                             {countdown}
                                         </span>
                                     </div>
-                                    <span>Resend in {formatCountdown(countdown)}</span>
+                                    <span>{t('resendIn', { time: formatCountdown(countdown) })}</span>
                                 </>
                             ) : (
                                 <>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                     </svg>
-                                    <span>Resend Code</span>
+                                    <span>{t('resendCode')}</span>
                                 </>
                             )}
                         </button>
@@ -416,7 +419,7 @@ const VerifyEmailClient = () => {
                         >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                        <span>Back to login</span>
+                        <span>{t('backToLogin')}</span>
                     </Link>
                 </div>
             </div>

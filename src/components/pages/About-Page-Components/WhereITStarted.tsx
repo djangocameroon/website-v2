@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { AboutImages } from '@/assets';
 import AnimatedSection from './animated-section';
 
 const WhereITStarted = () => {
+  const t = useTranslations("AboutPage.whereItStarted");
 
   return (
     <AnimatedSection
@@ -25,10 +27,10 @@ const WhereITStarted = () => {
           </div>
 
           <span className='text-sm text-secondary urbanist-font mb-2 inline-block max-md:w-full max-md:text-center'>
-            Every Journey Has a First Step
+            {t('eyebrow')}
           </span>
           <h3 className='timeline-title text-[1.625rem] leading-[1.875rem] font-semibold nohemi-font max-md:text-center'>
-            When & where it all<br />started.
+            {t.rich('title', { br: () => <br /> })}
           </h3>
         </div>
       </div>
@@ -40,10 +42,10 @@ const WhereITStarted = () => {
 
         <div className='space-y-4'>
           <h2 className='text-[32px] leading-[35px] nohemi-font font-bold'>
-            A small team with a simple idea
+            {t('subtitle')}
           </h2>
           <p className='text-text-color text-base urbanist-font'>
-            It started with a few Django developers meeting up in Bamenda. We noticed something: there were talented people building things in isolation. No place to ask questions. No one to review code. No way to know what others were working on. So we created a space where Django developers in Cameroon could connect. First meetup had eight people. We talked about projects, shared solutions to problems we'd all hit, and realized we weren't alone. That feeling stuck. More people started showing up. Students learning Django for the first time. Mid-level developers building SaaS products. Senior engineers working at companies across Africa. Everyone had something to share and something to learn. We started organizing workshops. Created project teams where people could contribute to real applications. And we made it clear from day one: this isn't about being the best. It's about getting better together. Today, we're a community of developers across Cameroon. Some of us work remotely for international companies. Others are building startups. A few teach at universities. But we all share the same goal: make Cameroon a place where Django developers can grow, connect, and build things that matter.
+            {t('body')}
           </p>
         </div>
       </article>

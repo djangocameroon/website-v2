@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { AboutImages } from '@/assets';
 import { cn } from '@/utils/constants';
 
@@ -23,6 +24,7 @@ export const RoundMarker = ({ className = "" }: { className?: string }) => {
 }
 
 const AboutHeader = () => {
+  const t = useTranslations("AboutPage.header");
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const onTitleMouseOver = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -65,13 +67,13 @@ const AboutHeader = () => {
       <div className='flex lg:hidden justify-center items-center w-full h-full '>
         <div className='w-full flex flex-col justify-center items-center'>
           <span className='text-xl text-secondary font-semibold urbanist-font'>
-            Welcome to the verse of
+            {t('eyebrow')}
           </span>
           <h2 className='text-4xl text-center pb-6 text-white my-4 font-bold nohemi-font'>
             Django Cameroon
           </h2>
           <p className='text-center px-10 text-white urbanist-font'>
-            We are a vibrant community of Django developers in Cameroon, united by our passion for building amazing web applications. Join us as we learn, share knowledge, and create innovative solutions together while fostering the next generation of tech talent in Africa.
+            {t('description')}
           </p>
         </div>
       </div>
@@ -89,13 +91,13 @@ const AboutHeader = () => {
           <div className='pl-10 pt-12 border-gray-200'>
             <div className='w-[35%] space-y-[0.625rem]'>
               <span className='text-xl text-secondary font-bold urbanist-font'>
-                Welcome to the verse of
+                {t('eyebrow')}
               </span>
               <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2 scramble' style={{ letterSpacing: '-0%' }}>
                 <span onMouseOver={onTitleMouseOver} data-text="Django">Django</span> <span onMouseOver={onTitleMouseOver} data-text="Cameroon">Cameroon</span>
               </h2>
               <p className='text-white leading-7 urbanist-font'>
-                We are a vibrant community of Django developers in Cameroon, united by our passion for building amazing web applications. Join us as we learn, share knowledge, and create innovative solutions together while fostering the next generation of tech talent in Africa.
+                {t('description')}
               </p>
             </div>
             <div className='mt-[3.125rem]'>
@@ -103,7 +105,7 @@ const AboutHeader = () => {
                 className="rounded-2xl text-white nohemi-font bg-secondary duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7"
                 onClick={handleLetsGoooClick}
               >
-                Let&apos;s gooo!
+                {t('cta')}
               </button>
             </div>
           </div>

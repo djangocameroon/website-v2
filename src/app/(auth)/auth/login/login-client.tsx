@@ -15,25 +15,26 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { resendVerificationEmail } from "@/apis";
 import { ILoginForm } from "@/models";
-
-const loginFormSchema = z.object({
-	emailOrUsername: z
-		.string()
-		.min(1, "You must provide a value for this field"),
-	password: z
-		.string()
-		.min(1, "You must provide a value for this field")
-		.min(8, "Password must be atleast 8 characters long")
-		.regex(
-			/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-			"Enter a strong password"
-		),
-	remember_me: z.boolean().optional(),
-});
+import { useTranslations } from "next-intl";
 
 const LoginClient = () => {
 	const router = useRouter();
 	const { login } = useAuth();
+	const t = useTranslations("AuthPage.login");
+	const tc = useTranslations("AuthPage.common");
+
+	const loginFormSchema = z.object({
+		emailOrUsername: z.string().min(1, tc("required")),
+		password: z
+			.string()
+			.min(1, tc("required"))
+			.min(8, tc("passwordTooShort"))
+			.regex(
+				/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, 
+				tc("passwordStrong")
+			),
+		remember_me: z.boolean().optional(),
+	});
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -72,25 +73,27 @@ const LoginClient = () => {
 				if (err.response?.status === 403) {
 					const inputValue = data.emailOrUsername;
 					const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-					const email = emailRegex.test(inputValue) ? inputValue : '';
+					const email = emailRegex.test(inputValue) ? inputValue : "";
 					if (email) {
-						resendVerificationEmail(email).then(() => {
-							console.log("Verification email sent.");
-						}).catch((err) => {
-							console.error("Error: ", err);
-						});
+						void resendVerificationEmail(email)
+							.then(() => {
+								toast.success(tc("verificationEmailSent"));
+							})
+							.catch(() => {
+								toast.error(tc("verificationEmailFailed"));
+							});
 						router.push(`/auth/verify-email?email=${encodeURIComponent(email)}`);
 					} else {
-						reset({ emailOrUsername: '' });
-						toast.error("Please use your email instead to login and verify your account.");
+						reset({ emailOrUsername: "" });
+						toast.error(tc("useEmailInstead"));
 					}
 					return;
 				}
-				const errorMessage = err?.response?.data?.errors?.[0] || err?.response?.data.message;
-				toast.error(errorMessage || "Login failed");
+				const errorMessage = err?.response?.data?.errors?.[0] || err?.response?.data?.message;
+				toast.error(errorMessage || tc("loginFailed"));
 				return;
 			}
-			toast.error("Login failed");
+			toast.error(tc("loginFailed"));
 		}
 		reset();
 	};
@@ -104,23 +107,23 @@ const LoginClient = () => {
 			>
 				<div className="text-white text-center md:p-2.5 md:mb-[3.75rem] mb-12">
 					<h2 className="text-2xl max-md:text-xl font-semibold md:text-2xl nohemi-font">
-						Welcome Back Buddy!
+						{t("title")}
 					</h2>
 					<p className="urbanist-font font-medium text-xl max-md:text-lg">
-						It&apos;s been a while here since you were gone.
+						{t("subtitle")}
 					</p>
 				</div>
 				<div className="md:px-2.5">
 					<div className="space-y-2">
 						<label
-							htmlFor="email"
+							htmlFor="emailOrUsername"
 							className="text-white urbanist-font md:text-lg"
 						>
-							Hey, remind us your email or username.
+							{t("emailLabel")}
 						</label>
 						<input
 							id="emailOrUsername"
-							placeholder="Your email address or username"
+							placeholder={t("emailPlaceholder")}
 							className="w-full border-[1.5px] py-3.5 px-5 text-base border-white placeholder:text-lg bg-white/10 rounded-2xl focus:outline-none urbanist-font text-white"
 							{...register("emailOrUsername")}
 						/>
@@ -139,13 +142,13 @@ const LoginClient = () => {
 							htmlFor="password"
 							className="text-white urbanist-font md:text-lg"
 						>
-							And your Password
+							{t("passwordLabel")}
 						</label>
 						<div className="relative">
 							<input
 								type={showPassword ? "text" : "password"}
 								id="password"
-								placeholder="Your password"
+								placeholder={t("passwordPlaceholder")}
 								className="w-full border-[1.5px] py-3.5 px-5 border-white placeholder:text-lg bg-white/10 rounded-2xl focus:outline-none urbanist-font text-white"
 								{...register("password")}
 							/>
@@ -187,14 +190,14 @@ const LoginClient = () => {
 								{...register("remember_me")}
 							/>
 							<span className="text-white urbanist-font ml-2.5">
-								Keep me logged in next time
+								{t("rememberMe")}
 							</span>
 						</div>
 						<Link
 							href={getForgotPasswordHref()}
 							className="text-white flex justify-end items-end urbanist-font gap-x-2"
 						>
-							Forgot password?
+							{t("forgotPassword")}
 							<GoArrowUpRight className="md:w-6 md:h-6 w-5 h-5 " />
 						</Link>
 					</div>
@@ -206,7 +209,7 @@ const LoginClient = () => {
 							active:scale-[0.98] transition-all duration-300"
 						disabled={isSubmitting}
 					>
-						Login into account
+						{t("submit")}
 					</Button>
 				</div>
 			</form>

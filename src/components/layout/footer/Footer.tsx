@@ -6,12 +6,14 @@ import { FiGithub, FiLinkedin, FiYoutube } from 'react-icons/fi';
 import { LanguageSwitcher } from '@/components';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { FaXTwitter } from 'react-icons/fa6';
 import { socialLinks } from '@/utils/constants';
 
 
 const Footer = () => {
 
+  const tc = useTranslations("Common");
   const pathname = usePathname();
   const isAuthRoute = pathname.includes('/auth');
   const currentYear = new Date().getFullYear();
@@ -23,19 +25,19 @@ const Footer = () => {
         <Image src={HomeImages.Logo} alt='logo image' className='w-36 h-16' />
       </Link>
       <div className='text-lg md:text-base text-center md:text-left  text-opacity-80 urbanist-font'>
-        <span className='urbanist-font'> &copy; {yearRange} • Django Cameroon • All rights reserved</span>
+        <span className='urbanist-font'> {tc("footer.copyright", { yearRange })}</span>
         <Link className='block urbanist-font' href='/'>
           {' '}
-          Terms of use & Privacy Policy
+          {tc("footer.termsPrivacy")}
         </Link>
       </div>
       <div>
         <span className="block text-lg md:text-base urbanist-font">
           <a href="/sitemap.xml">Sitemap</a>
           <span className="mx-2">•</span>
-          <a href="/credits">Credits</a>
+          <a href="/credits">{tc("footer.credits")}</a>
           <span className="mx-2">•</span>
-          <a href="/faqs">FAQs</a>
+          <a href="/faqs">{tc("footer.faqs")}</a>
         </span>
       </div>
       <div className="flex items-center gap-2.5">

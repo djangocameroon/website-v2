@@ -3,19 +3,18 @@
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { AuthImages } from '@/assets'
 
 const AuthQuote = () => {
     const pathname = usePathname();
+    const t = useTranslations("AuthPage.quote");
     const { avatarsList } = AuthImages;
 
     const isRegisterPage = pathname === '/auth/register'
 
     const backgroundImageImage = isRegisterPage ? "stevebg-auth" : "joelfahbg-auth"
-    const quote = isRegisterPage ? 
-            "I am amazed the Django Cameroon community didn’t have a stigmatizing look regarding women in tech. Instead, I networked with many other girlies like me and it is just fun." 
-        : 
-            "Being part of this community for over 5 years already made me realised that knowledge is everywhere but opportunity isn't. So, we created an environment for each other's sake."
+    const quote = isRegisterPage ? t("register") : t("login")
 
     const quoteAuthor = isRegisterPage ? "- Steve Yonkeu" : "- Joël FAH"
     

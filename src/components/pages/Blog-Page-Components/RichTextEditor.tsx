@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Editor } from '@hugerte/hugerte-react';
 import type { Editor as HugeRTEEditor } from 'hugerte';
+import { useTranslations } from 'next-intl';
 
 interface RichTextEditorProps {
   initialContent?: string;
@@ -15,10 +16,11 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   onContentChange,
   onEditorInit
 }) => {
+  const t = useTranslations('BlogPage.add');
   return (
     <div>
       <label className="block urbanist-font text-sm font-bold text-gray-700 mb-2">
-        Content <span className="text-red-500">*</span>
+        {t('contentLabel')} <span className="text-red-500">*</span>
       </label>
       <div className="border border-gray-200 rounded-xl overflow-hidden">
         <Editor
@@ -47,11 +49,11 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
                     resolve(base64data);
                   };
                   reader.onerror = () => {
-                    reject('Image conversion failed');
+                    reject(t('imageConversionFailed'));
                   };
                   reader.readAsDataURL(blobInfo.blob());
                 } catch (error) {
-                  reject('Failed to process image');
+                  reject(t('imageProcessFailed'));
                 }
               });
             },

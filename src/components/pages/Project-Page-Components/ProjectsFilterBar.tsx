@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BiSearch, BiX } from "react-icons/bi";
+import { useTranslations } from "next-intl";
 import { cn } from "@/utils/constants";
 
 interface ProjectsFilterBarProps {
@@ -19,6 +20,8 @@ const ProjectsFilterBar = ({
   tagFilter,
   onTagFilterChange,
 }: ProjectsFilterBarProps) => {
+  const t = useTranslations("ProjectsPage.filter");
+  const tc = useTranslations("Common");
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -32,14 +35,14 @@ const ProjectsFilterBar = ({
           type="text"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search projects by name, description, or tag"
+          placeholder={t("searchPlaceholder")}
           className="w-full bg-transparent text-sm text-dark outline-none placeholder:text-grey urbanist-font"
         />
         {search && (
           <button
             type="button"
             onClick={() => onSearchChange("")}
-            aria-label="Clear search"
+            aria-label={tc("clearSearch")}
             className="flex size-6 shrink-0 items-center justify-center rounded-full text-primary/60 transition-colors duration-200 hover:bg-primary/10 hover:text-primary"
           >
             <BiX className="size-4" />
@@ -50,7 +53,7 @@ const ProjectsFilterBar = ({
       {tagOptions.length > 1 && (
         <div className="flex flex-col gap-3 border-t border-primary/10 pt-4 sm:flex-row sm:items-center">
           <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-grey urbanist-font">
-            Tags
+            {t("tagsLabel")}
           </span>
           <div className="flex flex-wrap gap-1.5">
             {tagOptions.map((tag) => (

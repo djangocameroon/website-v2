@@ -2,6 +2,8 @@
 
 // Icon placeholder: replace the inline <svg> below with your final SVG code
 
+import { useTranslations } from "next-intl";
+
 interface LoadMoreButtonProps {
   showing: number;
   total: number;
@@ -15,10 +17,11 @@ const LoadMoreButton = ({
   onLoadMore,
   loading = false,
 }: LoadMoreButtonProps) => {
+  const t = useTranslations("ProjectsPage.loadMore");
   return (
     <div className="flex flex-col items-center gap-4 my-12">
       <p className="text-gray-600 urbanist-font text-base">
-        Showing {showing} - {Math.min(showing + 8, total)} of {total}
+        {t("showing", { from: showing, to: Math.min(showing + 8, total), total })}
       </p>
       {/*TODO:replace with showing < total */}
       {showing < total && (
@@ -27,7 +30,7 @@ const LoadMoreButton = ({
           disabled={loading}
           className="inline-flex items-center gap-2.5 bg-secondary text-white nohemi-font font-medium text-lg px-7 py-5 rounded-2xl hover:bg-secondary/90 border-[1.5px] border-secondary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <span>Load more projects</span>
+          <span>{t("button")}</span>
 
           
           <span

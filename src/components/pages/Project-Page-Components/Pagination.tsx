@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -11,6 +13,7 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
+  const t = useTranslations("ProjectsPage.pagination");
   const handlePrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
@@ -38,7 +41,7 @@ const Pagination = ({
         disabled={currentPage === 1}
         className="px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-600 urbanist-font font-medium hover:border-secondary hover:text-secondary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Previous
+        {t("previous")}
       </button>
       {getPageNumbers().map((page) => (
         <button
@@ -58,7 +61,7 @@ const Pagination = ({
         disabled={currentPage === totalPages}
         className="px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-600 urbanist-font font-medium hover:border-secondary hover:text-secondary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Next
+        {t("next")}
       </button>
     </div>
   );

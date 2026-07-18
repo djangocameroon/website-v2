@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { GoArrowUpRight } from 'react-icons/go';
 import { HiOutlineCalendarDays, HiOutlineClock, HiOutlineGlobeAlt, HiOutlineMapPin } from 'react-icons/hi2';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/utils/constants';
 import { EventCommunity, EventItem } from '@/types/events';
 
@@ -24,10 +25,11 @@ const EventImagePlaceholder = () => (
 );
 
 const EventCard = ({ event, className }: EventCardProps) => {
+  const t = useTranslations('EventsPage.card');
   const isOnline = event.type === 'Online';
   const locationLabel = isOnline
-    ? 'Online'
-    : event.location_data?.name || event.location_data?.city?.name || 'Location TBA';
+    ? t('online')
+    : event.location_data?.name || event.location_data?.city?.name || t('locationTba');
   const dateTimeLabel = new Date(event.date).toLocaleString(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -87,7 +89,7 @@ const EventCard = ({ event, className }: EventCardProps) => {
           href={`/events/${event.slug}`}
           className="mt-auto flex w-fit items-center gap-x-2 py-1 text-xl font-medium text-secondary urbanist-font transition-colors duration-200 hover:text-secondary/80"
         >
-          View Event
+          {t('viewEvent')}
           <GoArrowUpRight className="size-6 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
       </div>

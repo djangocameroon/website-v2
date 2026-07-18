@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai';
+import { useTranslations } from 'next-intl';
 
 interface TagsSelectorProps {
   selectedTags: string[];
@@ -16,6 +17,7 @@ export const TagsSelector: React.FC<TagsSelectorProps> = ({
   onRemoveTag,
   availableTags
 }) => {
+  const t = useTranslations('BlogPage.add');
   const [currentTag, setCurrentTag] = useState('');
 
   // OPTION 1: Add the tag as soon as a comma is typed
@@ -74,7 +76,7 @@ export const TagsSelector: React.FC<TagsSelectorProps> = ({
   return (
     <div>
       <label className="block text-sm urbanist-font font-bold text-gray-700 mb-3">
-        Tags <span className="text-red-500">*</span>
+        {t('tagsLabel')} <span className="text-red-500">*</span>
       </label>
       
       {/* Available Tags */}
@@ -102,7 +104,7 @@ export const TagsSelector: React.FC<TagsSelectorProps> = ({
           value={currentTag}
           onChange={handleInputChange}
           onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddCustomTag())}
-          placeholder="Add custom tag (use comma to validate)..."
+          placeholder={t('tagPlaceholder')}
           className="flex-1 px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
@@ -111,7 +113,7 @@ export const TagsSelector: React.FC<TagsSelectorProps> = ({
           className="px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors flex items-center gap-2 font-bold text-sm"
         >
           <AiOutlinePlus size={16} />
-          Add
+          {t('addTag')}
         </button>
       </div>
 

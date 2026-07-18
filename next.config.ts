@@ -1,4 +1,11 @@
 import type { NextConfig } from "next";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const createNextIntlPlugin = require("next-intl/plugin");
+
+const withNextIntl = createNextIntlPlugin({
+  locales: ["en", "fr"],
+  defaultLocale: "en"
+});
 
 const apiUrl = new URL(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8912");
 
@@ -21,4 +28,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

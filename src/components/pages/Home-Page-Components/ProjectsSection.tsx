@@ -11,6 +11,7 @@ import ArticleCard from "./ArticleCard";
 import { useProjects } from "@/hooks/useProjects";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { BlogFilters } from "@/types/blog";
+import { useTranslations } from "next-intl";
 import { fadeUp, revealOnce } from "./motion";
 
 const LATEST_ARTICLES_COUNT = 3;
@@ -34,6 +35,7 @@ const CardSkeleton = () => (
 );
 
 const ProjectsSection = () => {
+  const t = useTranslations("HomePage.projects");
   const scrollableContainer = useRef<HTMLDivElement | null>(null);
 
   const { projects, loading: projectsLoading, error: projectsError } = useProjects();
@@ -74,20 +76,19 @@ const ProjectsSection = () => {
         className="mb-[1.875rem]"
       >
         <p className="text-center text-grey mb-1 md:mb-2 text-xl urbanist-font font-medium">
-          Still confused?
+          {t("intro")}
         </p>
         <h3 className="text-center text-primary text-3xl max-md:text-2xl font-bold nohemi-font">
-          Latest Projects & Articles <br className="md:hidden" /> From
-          The Crew
+          {t.rich("title", { br: () => <br className="md:hidden" /> })}
         </h3>
         <p className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl max-md:text-base text-secondary py-1 px-2 border-b border-b-secondary">
-          <span>View all</span>
+          <span>{t("viewAll")}</span>
           <Link href="/projects" className="hover:font-semibold">
-            projects
+            {t("projectsLink")}
           </Link>
-          <span>&</span>
+          <span>{t("and")}</span>
           <Link href="/blog" className="hover:font-semibold">
-            articles
+            {t("articlesLink")}
           </Link>
           <GoArrowUpRight className="w-6 h-6" />
         </p>
@@ -97,7 +98,7 @@ const ProjectsSection = () => {
         <div className="flex flex-col items-center gap-3 py-16 text-center">
           <HiOutlineFaceFrown className="size-10 text-primary/40" />
           <p className="text-grey urbanist-font">
-            Nothing to show here yet. Check back soon!
+            {t("empty")}
           </p>
         </div>
       ) : (
@@ -145,7 +146,7 @@ const ProjectsSection = () => {
             <motion.button
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              aria-label="Scroll left"
+              aria-label={t("scrollLeft")}
               className="text-secondary border-[1.5px] border-secondary rounded-2xl md:p-2.5 p-2 bg-secondary/10"
               onClick={() => handleDirectionClick("left")}
             >
@@ -154,7 +155,7 @@ const ProjectsSection = () => {
             <motion.button
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              aria-label="Scroll right"
+              aria-label={t("scrollRight")}
               className="text-secondary border-[1.5px] border-secondary rounded-2xl md:p-2.5 p-2 bg-secondary/10"
               onClick={() => handleDirectionClick("right")}
             >

@@ -9,10 +9,13 @@ import { VscAccount } from "react-icons/vsc";
 import Link from "next/link";
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { BlogPost } from '@/types/blog';
 type BlogCardProps = BlogPost;
 
 const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, likes, views, read_time, author }) => {
+  const t = useTranslations('BlogPage.card');
+  const tc = useTranslations('Common');
   const controls = useAnimation();
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -75,17 +78,17 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
         <div className="flex max-md:flex-col items-center max-md:items-start gap-6 max-md:gap-3 text-[12px] font-semibold border-b border-gray-50 pb-4 max-md:pb-3 mb-4 max-md:mb-3">
           <div className="flex items-center max-md:flex-wrap gap-6 max-md:gap-3 max-md:w-full">
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
-              <AiOutlineLike size={24} className="max-md:w-4 max-md:h-4" /> {likes} likes
+              <AiOutlineLike size={24} className="max-md:w-4 max-md:h-4" /> {t('likes', { count: likes })}
             </span>
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
-              <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4" /> {views} views
+              <AiOutlineEye size={24} className="max-md:w-4 max-md:h-4" /> {t('views', { count: views })}
             </span>
             <span className="flex items-center gap-[0.5rem] urbanist-font font-medium text-xl max-md:text-sm">
-              <LuTimer size={24} className="max-md:w-4 max-md:h-4" /> {read_time} mins read
+              <LuTimer size={24} className="max-md:w-4 max-md:h-4" /> {t('readTime', { count: read_time })}
             </span>
           </div>
           <span className="flex items-center gap-[0.5rem] ml-auto max-md:ml-0 text-gray-800 urbanist-font font-medium text-xl max-md:text-sm">
-            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author?.username || "Anonymous"}
+            <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author?.username || t('anonymous')}
           </span>
         </div>
 
@@ -93,7 +96,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
         <Link href={`/blog/${slug}`} className="mt-auto">
           <button className="w-full bg-primary hover:bg-primary/90 active:scale-105 text-white py-5 max-md:py-3.5 rounded-xl max-md:rounded-lg flex items-center justify-between px-7 max-md:px-5 transition-all border-primary border-[1.5px]">
             <span className="inline-flex items-center mx-auto nohemi-font text-[18px] max-md:text-sm  font-medium">
-              Read more
+              {tc('readMore')}
               <GoArrowUpRight size={24} className="max-md:size-4 ml-2.5" />
             </span>
           </button>

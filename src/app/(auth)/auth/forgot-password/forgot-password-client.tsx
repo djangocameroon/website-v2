@@ -13,44 +13,24 @@ import { useEffect, useState } from 'react';
 import { sendPasswordResetRequest, resetUserPassword } from '@/apis';
 import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-
-// Schema for initial email verification step
-const EmailSchema = z.object({
-    email: z
-        .string()
-        .min(1, 'This field is required')
-        .email('Enter a valid email'),
-});
-
-// Schema for reset password step (after email verified)
-const ResetPasswordSchema = z
-    .object({
-        otp: z
-            .string()
-            .min(1, 'Enter a code')
-            .regex(/^\d{6}$/, 'The code is invalid'),
-        password: z
-            .string()
-            .min(1, 'Password is required')
-            .min(8, 'Password must be at least 8 characters')
-            .regex(
-                /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-                'Password must contain uppercase, lowercase, number and special character'
-            ),
-        passwordConfirmation: z.string().min(1, 'Please confirm your password'),
-    })
-    .refine((values) => values.password === values.passwordConfirmation, {
-        message: 'Passwords must match',
-        path: ['passwordConfirmation'],
-    });
-
-type EmailFormData = z.infer<typeof EmailSchema>;
-type ResetPasswordFormData = z.infer<typeof ResetPasswordSchema>;
+import { useTranslations } from 'next-intl';
 
 type VerificationStatus = 'idle' | 'sending' | 'success' | 'error';
 
+type ProgressIndicatorProps = {
+    verificationStatus: VerificationStatus;
+    sendingText: string;
+    successText: string;
+    errorText: string;
+};
+
 // Progress step indicator component - defined outside to prevent re-creation on render
-const ProgressIndicator = ({ verificationStatus }: { verificationStatus: VerificationStatus }) => {
+const ProgressIndicator = ({
+    verificationStatus,
+    sendingText,
+    successText,
+    errorText,
+}: ProgressIndicatorProps) => {
     if (verificationStatus === 'idle') return null;
 
     return (
@@ -93,10 +73,10 @@ const ProgressIndicator = ({ verificationStatus }: { verificationStatus: Verific
                     `}
                 >
                     {verificationStatus === 'error'
-                        ? 'Verification failed'
+                        ? errorText
                         : verificationStatus === 'success'
-                            ? 'Code sent successfully!'
-                            : 'Sending verification code...'
+                            ? successText
+                            : sendingText
                     }
                 </span>
             </div>
@@ -107,11 +87,44 @@ const ProgressIndicator = ({ verificationStatus }: { verificationStatus: Verific
 const ForgotPasswordClient = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const t = useTranslations('AuthPage.forgotPassword');
+    const tc = useTranslations('AuthPage.common');
     const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('idle');
     const [step, setStep] = useState<'email' | 'reset'>('email');
     const [userEmail, setUserEmail] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const EmailSchema = z.object({
+        email: z
+            .string()
+            .min(1, tc('required'))
+            .email(tc('invalidEmail')),
+    });
+
+    const ResetPasswordSchema = z
+        .object({
+            otp: z
+                .string()
+                .min(1, t('otpRequired'))
+                .regex(/^\d{6}$/, t('otpInvalid')),
+            password: z
+                .string()
+                .min(1, tc('required'))
+                .min(8, tc('passwordTooShort'))
+                .regex(
+                    /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
+                    tc('passwordStrong')
+                ),
+            passwordConfirmation: z.string().min(1, tc('required')),
+        })
+        .refine((values) => values.password === values.passwordConfirmation, {
+            message: tc('passwordMismatch'),
+            path: ['passwordConfirmation'],
+        });
+
+    type EmailFormData = z.infer<typeof EmailSchema>;
+    type ResetPasswordFormData = z.infer<typeof ResetPasswordSchema>;
 
     // Form for email step
     const {
@@ -149,7 +162,7 @@ const ForgotPasswordClient = () => {
             }, 800);
         } catch {
             setVerificationStatus('error');
-            toast.error('An error occurred. Please try again.');
+            toast.error(t('requestFailed'));
         }
     };
 
@@ -160,27 +173,27 @@ const ForgotPasswordClient = () => {
                 password: data.password,
                 password_confirmation: data.passwordConfirmation,
             });
-            toast.success('Password reset successfully!');
+            toast.success(t('resetSuccess'));
             router.replace('/auth/login');
         } catch {
-            toast.error('An error occurred. Please try again.');
+            toast.error(t('resetFailed'));
         }
     };
 
     return (
         <div className='bg-no-repeat bg-cover min-h-screen bg-center flex flex-col justify-start items-center w-[85%] mx-auto pb-10'>
             <Link href={'/'} className='pt-[3.125rem] pb-[3.9rem] w-40'>
-                <Image src={HomeImages.Logo} alt='' className='h-[3.66rem] w-auto mx-auto md:cursor-pointer' />
+                <Image src={HomeImages.Logo} alt={t('logoAlt')} className='h-[3.66rem] w-auto mx-auto md:cursor-pointer' />
             </Link>
             <div className="flex flex-col flex-[1] w-full h-fit">
                 <div className=''>
                     <h1 className='text-5xl max-md:text-3xl font-bold text-center nohemi-font'>
-                        {step === 'email' ? 'Forgot Password' : 'Reset Password'}
+                        {step === 'email' ? t('emailTitle') : t('resetTitle')}
                     </h1>
                     <p className='text-center text-lg max-md:text-base text-medium urbanist-font mt-2'>
                         {step === 'email'
-                            ? "We are very sorry for you losing your password but we got your back."
-                            : `Enter the code sent to ${userEmail} and set your new password.`
+                            ? t('emailDescription')
+                            : t('resetDescription', { email: userEmail })
                         }
                     </p>
                 </div>
@@ -189,7 +202,7 @@ const ForgotPasswordClient = () => {
                         <Image
                             className={`w-[80%] h-auto -ml-7 transition-all duration-500 ${step === 'reset' ? 'opacity-80 scale-95' : ''}`}
                             src={AuthImages.Lock}
-                            alt=''
+                            alt={t('lockAlt')}
                         />
                     </div>
 
@@ -199,12 +212,12 @@ const ForgotPasswordClient = () => {
                             <form onSubmit={handleEmailSubmit(handleSendPasswordResetRequest)} className='animate-fadeIn'>
                                 <div>
                                     <label htmlFor='email' className='block mb-2.5 urbanist-font'>
-                                        Hey, remind us your email
+                                        {t('emailLabel')}
                                     </label>
                                     <input
                                         type='email'
                                         id='email'
-                                        placeholder='Your email address'
+                                        placeholder={t('emailPlaceholder')}
                                         disabled={isEmailSubmitting}
                                         className='w-full border-[1.5px] py-3.5 px-5 border-black placeholder:text-base rounded-2xl focus:outline-none urbanist-font disabled:opacity-50 disabled:cursor-not-allowed transition-opacity'
                                         {...registerEmail('email')}
@@ -219,7 +232,12 @@ const ForgotPasswordClient = () => {
                                 </label>
 
                                 {/* Progress step indicator */}
-                                <ProgressIndicator verificationStatus={verificationStatus} />
+                                <ProgressIndicator
+                                    verificationStatus={verificationStatus}
+                                    sendingText={t('sendingStatus')}
+                                    successText={t('successStatus')}
+                                    errorText={t('errorStatus')}
+                                />
 
                                 <div className='flex justify-center items-center gap-7 mt-6'>
                                     <Button
@@ -229,8 +247,8 @@ const ForgotPasswordClient = () => {
                                         disabled={isEmailSubmitting || verificationStatus === 'sending'}
                                     >
                                         {isEmailSubmitting || verificationStatus === 'sending'
-                                            ? 'Verifying...'
-                                            : 'Verify Email'
+                                            ? t('verifyingButton')
+                                            : t('verifyButton')
                                         }
                                     </Button>
                                 </div>
@@ -250,11 +268,11 @@ const ForgotPasswordClient = () => {
                                             htmlFor='otp'
                                             className='mb-2.5 block urbanist-font'
                                         >
-                                            Enter the verification code we sent to your email
+                                            {t('otpLabel')}
                                         </label>
                                         <input
                                             id='otp'
-                                            placeholder='XXXXXX'
+                                            placeholder={t('otpPlaceholder')}
                                             maxLength={6}
                                             className='w-full border-[1.5px] py-3.5 px-5 border-black placeholder:text-base rounded-2xl focus:outline-none urbanist-font tracking-[0.5em] text-center text-xl font-semibold'
                                             {...registerReset('otp')}
@@ -272,13 +290,13 @@ const ForgotPasswordClient = () => {
                                 {/* Password Input */}
                                 <div className='mt-5'>
                                     <label htmlFor='password' className='block mb-2.5 urbanist-font'>
-                                        Set up a new password
+                                        {t('passwordLabel')}
                                     </label>
                                     <div className='relative'>
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             id='password'
-                                            placeholder='Your new password'
+                                            placeholder={t('passwordPlaceholder')}
                                             className='w-full border-[1.5px] py-3.5 px-5 border-black placeholder:text-base rounded-2xl focus:outline-none urbanist-font pr-12'
                                             {...registerReset('password')}
                                         />
@@ -306,13 +324,13 @@ const ForgotPasswordClient = () => {
                                 {/* Confirm Password Input */}
                                 <div className='mt-5'>
                                     <label htmlFor='passwordConfirmation' className='block mb-2.5 urbanist-font'>
-                                        Confirm new password
+                                        {t('confirmPasswordLabel')}
                                     </label>
                                     <div className='relative'>
                                         <input
                                             type={showConfirmPassword ? 'text' : 'password'}
                                             id='passwordConfirmation'
-                                            placeholder='Confirm your new password'
+                                            placeholder={t('confirmPasswordPlaceholder')}
                                             className='w-full border-[1.5px] py-3.5 px-5 border-black placeholder:text-base rounded-2xl focus:outline-none urbanist-font pr-12'
                                             {...registerReset('passwordConfirmation')}
                                         />
@@ -344,7 +362,7 @@ const ForgotPasswordClient = () => {
                                         className='w-full'
                                         disabled={isResetSubmitting}
                                     >
-                                        {isResetSubmitting ? 'Resetting...' : 'Reset Password'}
+                                        {isResetSubmitting ? t('resettingButton') : t('resetButton')}
                                     </Button>
                                 </div>
 
@@ -357,7 +375,7 @@ const ForgotPasswordClient = () => {
                                     }}
                                     className='w-full mt-4 text-center text-gray-500 hover:text-gray-700 urbanist-font transition-colors text-sm'
                                 >
-                                    ← Use a different email
+                                    {t('differentEmail')}
                                 </button>
                             </form>
                         )}

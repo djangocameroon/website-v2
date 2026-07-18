@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { GoArrowUpRight } from "react-icons/go";
 import { HiOutlineCodeBracket, HiOutlineStar } from "react-icons/hi2";
+import { useTranslations } from "next-intl";
 import { cn } from "@/utils/constants";
 import { ProjectItem } from "@/types/project";
 
@@ -19,6 +20,7 @@ const ProjectImagePlaceholder = () => (
 );
 
 const ProjectCard = ({ project, className }: ProjectCardProps) => {
+  const t = useTranslations("ProjectsPage.card");
   const hasLinks = Boolean(project.github_link || project.demo_link);
 
   return (
@@ -44,7 +46,7 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
         {project.is_featured && (
           <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-white urbanist-font shadow-md">
             <HiOutlineStar className="size-3.5" />
-            Featured
+            {t('featured')}
           </span>
         )}
       </div>
@@ -78,11 +80,11 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
                 href={project.github_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`View ${project.title} source code on GitHub`}
+                aria-label={t('codeAria', { title: project.title })}
                 className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white urbanist-font transition-colors duration-200 hover:bg-primary/90"
               >
                 <FaGithub className="size-4 shrink-0" />
-                Code
+                {t('code')}
               </a>
             )}
             {project.demo_link && (
@@ -90,10 +92,10 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
                 href={project.demo_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Open live demo for ${project.title}`}
+                aria-label={t('demoAria', { title: project.title })}
                 className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border-[1.5px] border-primary px-4 py-3 text-sm font-semibold text-primary urbanist-font transition-colors duration-200 hover:bg-primary hover:text-white"
               >
-                Live demo
+                {t('liveDemo')}
                 <GoArrowUpRight className="size-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
             )}

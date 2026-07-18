@@ -7,6 +7,7 @@ import { Badge, Button } from "@/components/layout";
 import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { fadeUp, revealOnce, staggerContainer } from "./motion";
 import VideoCard from "./VideoCard";
 import { useYoutubeVideos } from "@/hooks/useYoutubeVideos";
@@ -21,6 +22,7 @@ const MAX_VIDEOS = 6;
 const hiddenOnMobile = (index: number) => (index >= 2 ? "max-md:hidden" : "");
 
 const YoutubeSection = () => {
+	const t = useTranslations("HomePage.youtube");
 	const { bird, connect, whyJoin } = HomeImages;
 	const { videos, loading, error } = useYoutubeVideos(youtubeChannelHandle);
 	const isEmpty = !loading && (error !== null || videos.length === 0);
@@ -39,20 +41,15 @@ const YoutubeSection = () => {
 					className="w-full md:max-w-2xl md:mt-11"
 				>
 					<h2 className="text-primary text-3xl max-md:text-2xl lg:text-[32px] nohemi-font font-bold leading-9">
-						Empowering Learning Through YouTube{" "}
-						<br className="hidden lg:block" /> Tutorials
+						{t.rich("title", { br: () => <br className="hidden lg:block" /> })}
 					</h2>
 
 					<p className="leading-6 urbanist-font md:mt-4 md:mb-3 my-2">
-						Our YouTube channel is your passport to Django
-						expertise. Dive into a world of friendly tutorials that
-						make web development a breeze. Whether you're starting
-						fresh or leveling up, we're here to guide you every step
-						of the way. Let's learn, create, and inspire together!
+						{t("description")}
 					</p>
 
 					<Button outline={false} backgroundColor="bg-primary" onClick={navigateToYoutube}>
-						Consider getting started now
+						{t("cta")}
 					</Button>
 
 					<motion.div
@@ -62,12 +59,12 @@ const YoutubeSection = () => {
 						viewport={revealOnce}
 						className="flex items-center flex-wrap gap-4"
 					>
-						<motion.div variants={fadeUp}><Badge>1.3k subscribers</Badge></motion.div>
-						<motion.div variants={fadeUp}><Badge>20+ videos</Badge></motion.div>
-						<motion.div variants={fadeUp}><Badge>1M+ views</Badge></motion.div>
-						<motion.div variants={fadeUp}><Badge>10+ playlists</Badge></motion.div>
-						<motion.div variants={fadeUp}><Badge>Source code links</Badge></motion.div>
-						<motion.div variants={fadeUp}><Badge>7d/24h active support</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.subscribers")}</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.videos")}</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.views")}</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.playlists")}</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.sourceCode")}</Badge></motion.div>
+						<motion.div variants={fadeUp}><Badge>{t("badges.support")}</Badge></motion.div>
 					</motion.div>
 				</motion.div>
 				<div className="w-full max-md:mt-4">
@@ -82,14 +79,11 @@ const YoutubeSection = () => {
 							<div className="flex items-center gap-5">
 								<Image src={whyJoin} alt="" className="w-12 h-auto" />
 								<h3 className="text-text-color nohemi-font font-semibold text-2xl">
-									Why Joining?
+									{t("whyJoinTitle")}
 								</h3>
 							</div>
 							<p className="text-base text-text-color urbanist-font">
-								Join Django Cameroon to connect, learn, and grow
-								with fellow passionate developers. Together, we
-								empower dreams and make coding an inspiring
-								journey!
+								{t("whyJoinText")}
 							</p>
 							<AvatarUsers />
 						</motion.div>
@@ -98,13 +92,11 @@ const YoutubeSection = () => {
 							<div className="flex items-center gap-5 mb-3">
 								<Image src={connect} alt="" className="w-10 h-auto" />
 								<p className="text-text-color nohemi-font font-semibold text-2xl">
-									Connect & Learn
+									{t("connectTitle")}
 								</p>
 							</div>
 							<p className="text-base text-text-color urbanist-font">
-								Learn, grow, and code together with fellow
-								passionate developers. Together, we empower
-								dreams and make coding an inspiring journey!
+								{t("connectText")}
 							</p>
 							<Image src={bird} alt="avatars" className="ml-auto" />
 						</motion.div>
@@ -171,18 +163,16 @@ const YoutubeSection = () => {
 					className="text-center mb-7"
 				>
 					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance max-md:hidden">
-						Still doubting on where and how to get{" "}
-						<br className="" />
-						started with Django? Doubt no more!
+						{t.rich("doubtTitleDesktop", { br: () => <br className="" /> })}
 					</h2>
 					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance md:hidden">
-						Not sure where to begin with Django? Doubt no more!
+						{t("doubtTitleMobile")}
 					</h2>
 					<Link
 						href="https://www.youtube.com/@DjangoCameroon"
 						className="mx-auto w-fit flex items-center gap-x-2 urbanist-font text-xl text-secondary py-1 px-2 border-b border-b-secondary"
 					>
-						View all Tutorials
+						{t("viewAllTutorials")}
 						<GoArrowUpRight className="w-6 h-6" />
 					</Link>
 				</motion.div>
@@ -216,7 +206,7 @@ const YoutubeSection = () => {
 								onClick={navigateToYoutube}
 								className="mt-[167px] z-20 absolute left-1/2 transform -translate-x-1/2"
 							>
-								View videos catalogue
+								{t("viewCatalogue")}
 							</Button>
 						</div>
 					</div>
@@ -254,7 +244,7 @@ const YoutubeSection = () => {
 							onClick={navigateToYoutube}
 							className="mx-auto flex w-fit"
 						>
-							View videos catalogue
+							{t("viewCatalogue")}
 						</Button>
 					</div>
 				)}

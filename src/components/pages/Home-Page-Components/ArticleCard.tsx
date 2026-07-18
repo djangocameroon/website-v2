@@ -6,6 +6,7 @@ import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuTimer } from "react-icons/lu";
 import { HiOutlineNewspaper } from "react-icons/hi2";
+import { useTranslations } from "next-intl";
 import { cn } from "@/utils/constants";
 import { BlogPost } from "@/types/blog";
 
@@ -21,6 +22,7 @@ const ArticleImagePlaceholder = () => (
 );
 
 const ArticleCard = ({ post, className }: ArticleCardProps) => {
+  const t = useTranslations("HomePage.articleCard");
   // BlogSerializer prefixes slug with "/" (e.g. "/my-post"); the detail route
   // is /blog/:slug, so concatenating without an extra separator avoids "//".
   const href = `/blog${post.slug}`;
@@ -75,7 +77,7 @@ const ArticleCard = ({ post, className }: ArticleCardProps) => {
           </span>
           <span className="flex items-center gap-1.5">
             <LuTimer className="size-4" />
-            {post.read_time} min read
+            {t("readTime", { count: post.read_time })}
           </span>
         </div>
 
@@ -83,7 +85,7 @@ const ArticleCard = ({ post, className }: ArticleCardProps) => {
           href={href}
           className="flex w-fit items-center gap-x-2 py-1 text-lg font-medium text-secondary urbanist-font transition-colors duration-200 hover:text-secondary/80"
         >
-          Read article
+          {t("readArticle")}
           <GoArrowUpRight className="size-5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
       </div>

@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const TogglePage = () => {
   const pathname = usePathname();
+  const t = useTranslations("AuthPage.tabs");
 
   const tabs = [
-    { title: 'Sign in', path: '/auth/login' },
-    { title: 'Sign up', path: '/auth/register' },
+    { title: t('signIn'), path: '/auth/login' },
+    { title: t('signUp'), path: '/auth/register' },
   ] as const;
 
   return (

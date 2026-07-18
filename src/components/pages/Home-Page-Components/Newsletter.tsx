@@ -9,6 +9,7 @@ import { AiOutlineSend, AiOutlineLoading3Quarters, AiOutlineCheck } from 'react-
 import { HomeImages } from '@/assets';
 import { subsApi } from '@/lib/subsApi';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { fadeUp, revealOnce, scaleIn, staggerContainer } from './motion';
 
 const badgesStagger = staggerContainer(0.06);
@@ -16,6 +17,7 @@ const badgesStagger = staggerContainer(0.06);
 type SubmitState = 'idle' | 'loading' | 'success';
 
 const Newsletter = () => {
+  const tc = useTranslations('Common');
   const { blueBgInitials } = HomeImages;
   const [email, setEmail] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -32,16 +34,16 @@ const Newsletter = () => {
     setSubmitState('loading');
     try {
       const response = await subsApi.sendVerificationEmail(email.trim());
-      toast.success(response.message || 'Verification email sent!');
+      toast.success(response.message || tc('newsletter.toastSent'));
       setSubmitState('success');
       setEmail('');
       setTimeout(() => setSubmitState('idle'), 2000);
     } catch (error) {
       let errorMessage = error instanceof AxiosError
-        ? error?.response?.data?.message || 'Failed to send verification email.'
-        : 'Failed to send verification email.';
+        ? error?.response?.data?.message || tc('newsletter.toastFailed')
+        : tc('newsletter.toastFailed');
       if (error instanceof AxiosError && error.response?.status === 429) {
-        errorMessage = 'Too many requests. Please try again later.';
+        errorMessage = tc('newsletter.toastRateLimited');
       }
       toast.error(errorMessage);
       setSubmitState('idle');
@@ -60,8 +62,8 @@ const Newsletter = () => {
         <Image src={blueBgInitials} alt="" className='max-md:hidden' />
         <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
-            <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>Not that it&apos;s now or never but don&apos;t miss such opportunity.</h1>
-            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false} onClick={handleJoinCommunityClick}>Join the community</Button>
+            <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>{tc('notNowOrNever')}</h1>
+            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false} onClick={handleJoinCommunityClick}>{tc('joinCommunity')}</Button>
           </div>
 
         </div>
@@ -75,8 +77,7 @@ const Newsletter = () => {
       >
         <div className='max-w-2xl w-full space-y-1.5'>
           <p className='nohemi-font font-semibold text-2xl'>
-            And also make sure to join our newsletter to remain updated about
-            the community.
+            {tc('newsletter.blurb')}
           </p>
           <motion.div
             variants={badgesStagger}
@@ -85,10 +86,10 @@ const Newsletter = () => {
             viewport={revealOnce}
             className='flex gap-3 justify-start items-center gap-x-2.5'
           >
-            <motion.div variants={fadeUp}><Badge>article</Badge></motion.div>
-            <motion.div variants={fadeUp}><Badge>projects</Badge></motion.div>
-            <motion.div variants={fadeUp}><Badge>tutorial</Badge></motion.div>
-            <motion.div variants={fadeUp}><Badge>news</Badge></motion.div>
+            <motion.div variants={fadeUp}><Badge>{tc('newsletter.badges.article')}</Badge></motion.div>
+            <motion.div variants={fadeUp}><Badge>{tc('newsletter.badges.projects')}</Badge></motion.div>
+            <motion.div variants={fadeUp}><Badge>{tc('newsletter.badges.tutorial')}</Badge></motion.div>
+            <motion.div variants={fadeUp}><Badge>{tc('newsletter.badges.news')}</Badge></motion.div>
           </motion.div>
         </div>
         <div className='max-w-xl w-full p-2.5 border-2 border-black rounded-[30px]'>
@@ -99,7 +100,7 @@ const Newsletter = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={submitState === 'loading'}
-            placeholder='Enter your email'
+            placeholder={tc('newsletter.emailPlaceholder')}
             className='w-4/5 h-5 bg-transparent focus:outline-none urbanist-font text-lg placeholder:text-base flex justify-center items-center disabled:opacity-60'
           />
           <motion.button

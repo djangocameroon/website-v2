@@ -1,0 +1,382 @@
+{
+  "Common": {
+    "joinCommunity": "Join the community",
+    "navigation": {
+      "home": "Home",
+      "about": "About",
+      "blog": "Blog",
+      "events": "Events",
+      "projects": "Projects",
+      "contact": "Contact",
+      "SignIn": "Sign In",
+      "SignOut": "Sign Out"
+    },
+    "notNowOrNever": "Not that it's now or never but don't miss such opportunity.",
+    "newsletter": {
+      "blurb": "And also make sure to join our newsletter to remain updated about the community.",
+      "emailPlaceholder": "Enter your email",
+      "badges": {
+        "article": "article",
+        "projects": "projects",
+        "tutorial": "tutorial",
+        "news": "news"
+      },
+      "toastSent": "Verification email sent!",
+      "toastFailed": "Failed to send verification email.",
+      "toastRateLimited": "Too many requests. Please try again later."
+    },
+    "search": "Search",
+    "clearSearch": "Clear search",
+    "readMore": "Read more",
+    "footer": {
+      "copyright": "© {yearRange} • Django Cameroon • All rights reserved",
+      "termsPrivacy": "Terms of use & Privacy Policy",
+      "credits": "Credits",
+      "faqs": "FAQs"
+    }
+  },
+  "HomePage": {
+    "header": {
+      "title": "The Django Ecosystem <br></br>in Cameroon",
+      "description": "Fueling Innovation, Forging Connections. We're a dynamic community of developers in Cameroon, passionate about Django! Empowering dreams and pioneer change through technology",
+      "getStarted": "Get Started",
+      "learnMore": "Learn more",
+      "facts": {
+        "1": { "title": "Fact #1", "description": "Small Description" },
+        "2": { "title": "Fact #2", "description": "Small Description" },
+        "3": { "title": "Fact #3", "description": "Small Description" },
+        "4": { "title": "Fact #4", "description": "Small Description" }
+      }
+    },
+    "becomeMember": {
+      "title": "Welcome to Django Cameroon,<br></br>Where Collaboration Fuels Success",
+      "description": "Django Cameroon isn't just a community; it's your go-to hub for collaboration, learning, and mutual growth. We're a passionate collective of developers in Cameroon, united by our love for Django. Here, we don't just code; we inspire, help, and elevate each other. Whether you're a novice or a pro, we're here to share knowledge, tackle challenges, and build a thriving Django ecosystem together. Join us in this supportive journey, where we celebrate the spirit of camaraderie in the world of coding.",
+      "cta": "Discover more about"
+    },
+    "collaboration": {
+      "title": "Start Your Journey of Collaboration and Innovation",
+      "description": "Embark on a dynamic collaborative journey with us, where knowledge blooms, skills soar, and innovation knows no limits. Together, let's shape a brighter future in web development!",
+      "quote": "🎩🐍 Tired of web development feeling like a medieval quest? Embrace Django, your code-sorcerer sidekick, and let the magic of ORM, admin panels, and security spells turn your web projects into enchanted experiences! ✨🪄"
+    },
+    "events": {
+      "intro": "Going through projects might be a bit confusing...",
+      "title": "You are welcome at our '{'next'}' events",
+      "viewAllEvents": "View all events",
+      "discoverMore": "Discover more events from the community",
+      "viewMore": "View More"
+    },
+    "projects": {
+      "intro": "Still confused?",
+      "title": "Latest Projects & Articles <br></br>From The Crew",
+      "viewAll": "View all",
+      "projectsLink": "projects",
+      "and": "&",
+      "articlesLink": "articles",
+      "empty": "Nothing to show here yet. Check back soon!",
+      "scrollLeft": "Scroll left",
+      "scrollRight": "Scroll right"
+    },
+    "youtube": {
+      "title": "Empowering Learning Through YouTube <br></br>Tutorials",
+      "description": "Our YouTube channel is your passport to Django expertise. Dive into a world of friendly tutorials that make web development a breeze. Whether you're starting fresh or leveling up, we're here to guide you every step of the way. Let's learn, create, and inspire together!",
+      "cta": "Consider getting started now",
+      "badges": {
+        "subscribers": "1.3k subscribers",
+        "videos": "20+ videos",
+        "views": "1M+ views",
+        "playlists": "10+ playlists",
+        "sourceCode": "Source code links",
+        "support": "7d/24h active support"
+      },
+      "whyJoinTitle": "Why Joining?",
+      "whyJoinText": "Join Django Cameroon to connect, learn, and grow with fellow passionate developers. Together, we empower dreams and make coding an inspiring journey!",
+      "connectTitle": "Connect & Learn",
+      "connectText": "Learn, grow, and code together with fellow passionate developers. Together, we empower dreams and make coding an inspiring journey!",
+      "doubtTitleDesktop": "Still doubting on where and how to get <br></br>started with Django? Doubt no more!",
+      "doubtTitleMobile": "Not sure where to begin with Django? Doubt no more!",
+      "viewAllTutorials": "View all Tutorials",
+      "viewCatalogue": "View videos catalogue"
+    },
+    "videoCard": {
+      "watchAria": "Watch \"{title}\" on YouTube",
+      "views": "{count} views",
+      "today": "Today"
+    },
+    "articleCard": {
+      "readTime": "{count} min read",
+      "readArticle": "Read article"
+    }
+  },
+  "AboutPage": {
+    "header": {
+      "eyebrow": "Welcome to the verse of",
+      "description": "We are a vibrant community of Django developers in Cameroon, united by our passion for building amazing web applications. Join us as we learn, share knowledge, and create innovative solutions together while fostering the next generation of tech talent in Africa.",
+      "cta": "Let's gooo!"
+    },
+    "whereItStarted": {
+      "eyebrow": "Every Journey Has a First Step",
+      "title": "When & where it all<br></br>started.",
+      "subtitle": "A small team with a simple idea",
+      "body": "It started with a few Django developers meeting up in Bamenda. We noticed something: there were talented people building things in isolation. No place to ask questions. No one to review code. No way to know what others were working on. So we created a space where Django developers in Cameroon could connect. First meetup had eight people. We talked about projects, shared solutions to problems we'd all hit, and realized we weren't alone. That feeling stuck. More people started showing up. Students learning Django for the first time. Mid-level developers building SaaS products. Senior engineers working at companies across Africa. Everyone had something to share and something to learn. We started organizing workshops. Created project teams where people could contribute to real applications. And we made it clear from day one: this isn't about being the best. It's about getting better together. Today, we're a community of developers across Cameroon. Some of us work remotely for international companies. Others are building startups. A few teach at universities. But we all share the same goal: make Cameroon a place where Django developers can grow, connect, and build things that matter."
+    },
+    "missionVision": {
+      "eyebrow": "Driven",
+      "title": "A vision, <br></br>A mission.",
+      "visionTitle": "A community with a <br></br><hash>#vision</hash>",
+      "visionBody": "We see a Cameroon where Django developers don't work in isolation. Where asking for help is normal. Where sharing knowledge is expected. Where junior developers get real guidance from people who've been there.<br></br>We want to build the kind of tech community we wished existed when we started. One that's practical, not performative. Where people collaborate on actual projects, not just talk about them. Where success means helping others succeed too.",
+      "missionTitle": "A community for the <br></br><hash>#missions</hash>",
+      "missionBody": "We run monthly meetups where people present what they're building. We organize workshops on Django best practices, testing, deployment, and scaling. We maintain open source projects where members can contribute and learn.<br></br>We connect experienced developers with those just starting out. We help people find jobs and freelance opportunities. And we keep building spaces where Cameroonian developers can grow their skills and their careers."
+    },
+    "organisers": {
+      "eyebrow": "The minds behind the magic",
+      "title": "A diversed team, yet, a common goal.",
+      "heading": "Just a bunch of nerds.",
+      "subheading": "meet our organizers"
+    },
+    "regionalImpact": {
+      "eyebrow": "From Local Actions to Global Impact",
+      "title": "Regional Impact",
+      "heading": "The impact of our <hash>#actions</hash> - nation wide.",
+      "body": "We started in one city. Now we have active chapters in Yaoundé, Douala, Buea, Bamenda, and Bafoussam. Each chapter runs its own meetups and workshops. Each has its own organizers and regular members. What works in Yaoundé might not work in Buea. So we let each chapter adapt to what their local developers need. Some focus on student outreach. Others on connecting freelancers with clients. A few run regular code review sessions. But they all share resources, speakers, and lessons learned. When someone in Bamenda solves a tricky deployment issue, developers in Douala benefit too. When a company in Yaoundé is hiring, we spread the word across all chapters. This network effect is real. People moving between cities stay connected. Remote workers in small towns can tap into opportunities in bigger cities. And when we organize national events, we can bring together Django developers from across Cameroon who might never have met otherwise."
+    },
+    "makingTheStory": {
+      "bannerAlt": "Making the Story Banner",
+      "eyebrow": "No worries",
+      "title": "The story doesn't ends here.",
+      "heading": "We are the ones making the story.",
+      "body": "This community isn't finished. We're still figuring things out. Still learning what works and what doesn't. But that's the point. We're building something together, and there's room for more people to help shape where it goes. If you write Django code in Cameroon, you belong here. Simple as that."
+    },
+    "joinUsNow": {
+      "title": "Join us and make the story <br></br>one to remember.",
+      "body": "Lorem ipsum dolor sit amet consectetur. Euismod sit porttitor amet sed ac faucibus. Tincidunt at in nulla feugiat massa sit nunc. Pretium eget amet fermentum diam fringilla elementum nunc cursus consequat. Hac fermentum nullam felis mauris rhoncus. Arcu facilisi aliquet mollis pretium tincidunt quam egestas in. Nulla sapien tempus in arcu diam sed nunc sed. Nulla faucibus pellentesque condimentum consequat diam."
+    }
+  },
+  "AuthPage": {
+    "common": {
+      "required": "This is required",
+      "invalidEmail": "Enter a valid email",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordWeak": "Your password is weak",
+      "passwordStrong": "Enter a password with numbers, letters and special characters",
+      "passwordMismatch": "Passwords do not match",
+      "onlyDigits": "Invalid input. Please enter only numeric digits.",
+      "pasteOnlyDigits": "Invalid input. Please paste only numeric digits.",
+      "enterAllOtpDigits": "Invalid OTP. Please enter all 6 digits.",
+      "invalidOtpCode": "Invalid OTP code.",
+      "failedToResendCode": "Failed to resend code.",
+      "tooManyRequests": "Too many requests. Please wait before trying again.",
+      "loginFailed": "Login failed",
+      "useEmailInstead": "Please use your email to log in and verify your account.",
+      "verificationEmailSent": "Verification email sent!",
+      "verificationEmailFailed": "Failed to send verification email."
+    },
+    "login": {
+      "title": "Welcome back, buddy!",
+      "subtitle": "It's been a while since we saw you.",
+      "emailLabel": "Hey, remind us of your email or username.",
+      "emailPlaceholder": "Your email address or username",
+      "passwordLabel": "And your password",
+      "passwordPlaceholder": "Your password",
+      "rememberMe": "Keep me logged in next time",
+      "forgotPassword": "Forgot password?",
+      "submit": "Log in"
+    },
+    "register": {
+      "title": "Good to have you here!",
+      "subtitle": "We are always ready to welcome a new member. Feel at home and safe.",
+      "nameLabel": "We'll need your first and last names",
+      "namePlaceholder": "Your names",
+      "emailLabel": "What's your email address?",
+      "emailPlaceholder": "Your email",
+      "usernameLabel": "Set up a username",
+      "usernamePlaceholder": "@your_username",
+      "passwordLabel": "Set up a password",
+      "passwordPlaceholder": "Your password",
+      "confirmPasswordLabel": "Confirm your password",
+      "confirmPasswordPlaceholder": "Re-enter password",
+      "submit": "Finish account registration"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Now you get a chance to reset your password. Keep it safe this time.",
+      "passwordLabel": "Set up a new password",
+      "passwordPlaceholder": "Enter new password",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "Enter the new password again",
+      "cancel": "Cancel",
+      "submit": "Reset Password"
+    },
+    "forgotPassword": {
+      "logoAlt": "Django Cameroon logo",
+      "lockAlt": "Forgot password illustration",
+      "emailTitle": "Forgot Password",
+      "resetTitle": "Reset Password",
+      "emailDescription": "We are very sorry you lost your password, but we've got your back.",
+      "resetDescription": "Enter the code sent to {email} and set your new password.",
+      "emailLabel": "Hey, remind us of your email",
+      "emailPlaceholder": "Your email address",
+      "verifyButton": "Verify Email",
+      "verifyingButton": "Verifying...",
+      "sendingStatus": "Sending verification code...",
+      "successStatus": "Code sent successfully!",
+      "errorStatus": "Verification failed",
+      "otpRequired": "Enter a code",
+      "otpInvalid": "The code is invalid",
+      "otpLabel": "Enter the verification code we sent to your email",
+      "otpPlaceholder": "XXXXXX",
+      "passwordLabel": "Set up a new password",
+      "passwordPlaceholder": "Your new password",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "resetButton": "Reset Password",
+      "resettingButton": "Resetting...",
+      "differentEmail": "← Use a different email",
+      "requestFailed": "An error occurred. Please try again.",
+      "resetSuccess": "Password reset successfully!",
+      "resetFailed": "An error occurred. Please try again."
+    },
+    "verifyEmail": {
+      "logoAlt": "Django Cameroon",
+      "title": "Verify your email",
+      "subtitle": "We've sent a 6-digit code to",
+      "verifyEmail": "Verify Email",
+      "didntReceiveCode": "Didn't receive the code?",
+      "checkSpamFolder": "Check your spam folder",
+      "sending": "Sending...",
+      "resendIn": "Resend in {time}",
+      "resendCode": "Resend Code",
+      "backToLogin": "Back to login",
+      "verifiedSuccessfully": "Email verified successfully!",
+      "otpSent": "OTP sent! A new verification code has been sent to your email.",
+      "verificationFailed": "Verification Failed: {message}",
+      "failedToResendOtp": "Failed to resend OTP: {message}"
+    },
+    "quote": {
+      "register": "I am amazed the Django Cameroon community didn't have a stigmatizing look regarding women in tech. Instead, I networked with many other girlies like me and it is just fun.",
+      "login": "Being part of this community for over 5 years already made me realised that knowledge is everywhere but opportunity isn't. So, we created an environment for each other's sake."
+    },
+    "tabs": {
+      "signIn": "Sign in",
+      "signUp": "Sign up"
+    }
+  },
+  "BlogPage": {
+    "header": {
+      "eyebrow": "Feed yourself with knowledge from experts",
+      "title": "Trending insights <muted>from our</muted> #Blog",
+      "description": "Explore real stories and insights from people building things. Learn from their experience, mistakes, and wins. Whether you're looking for tips on a specific problem or just want to see how others approach their work, you'll find something useful here. And if you've got knowledge worth sharing, we'd love to have your voice in the mix.",
+      "submitArticle": "Submit an article"
+    },
+    "card": {
+      "likes": "{count, plural, one {# like} other {# likes}}",
+      "views": "{count, plural, one {# view} other {# views}}",
+      "readTime": "{count} mins read",
+      "anonymous": "Anonymous"
+    },
+    "add": {
+      "backToBlog": "Back to blog",
+      "titlePlaceholder": "Article title...",
+      "cancel": "Cancel",
+      "publishing": "Publishing...",
+      "publish": "Publish Blog Post",
+      "contentLabel": "Content",
+      "imageConversionFailed": "Image conversion failed",
+      "imageProcessFailed": "Failed to process image",
+      "tagsLabel": "Tags",
+      "tagPlaceholder": "Add custom tag (use comma to validate)...",
+      "addTag": "Add",
+      "clickToUpload": "Click to upload {label}",
+      "imageConstraints": "PNG, JPG up to 10MB"
+    }
+  },
+  "EventsPage": {
+    "header": {
+      "inPerson": "In person",
+      "online": "Online",
+      "eyebrow": "Meet the community, in person and online",
+      "title": "Upcoming <accent>#Events</accent>",
+      "description": "Workshops, talks, and meetups from Django Cameroon and Django Girls Cameroon. Find something happening near you, or join online from anywhere.",
+      "browseEvents": "Browse events",
+      "scrollAria": "Scroll to the events list"
+    },
+    "filter": {
+      "searchPlaceholder": "Search events by title, tag, or location",
+      "typeLabel": "Type",
+      "whenLabel": "When",
+      "typeOptions": {
+        "All": "All",
+        "Online": "Online",
+        "In-person": "In-person",
+        "Hybrid": "Hybrid"
+      },
+      "dateOptions": {
+        "All": "All",
+        "Upcoming": "Upcoming",
+        "Ongoing": "Ongoing",
+        "Past": "Past"
+      }
+    },
+    "speakers": {
+      "title": "Speakers",
+      "socialAria": "{name} on {platform}"
+    },
+    "card": {
+      "online": "Online",
+      "locationTba": "Location TBA",
+      "viewEvent": "View Event"
+    },
+    "register": {
+      "loginRequired": "You need to be logged in to register for this event.",
+      "pleaseWait": "Please wait…",
+      "cancelRegistration": "Cancel Registration",
+      "register": "Register for Event"
+    },
+    "detail": {
+      "backToEvents": "Back to events",
+      "onlineLinkShared": "Online — link shared after registration",
+      "unpublishedNotice": "This event isn't published yet — it's only visible to you.",
+      "pastNotice": "This event has already taken place."
+    }
+  },
+  "ProjectsPage": {
+    "header": {
+      "eyebrow": "Get busy with us",
+      "title": "We build <grey>Open</grey><br></br><blue>Source </blue><hash>#Projects.</hash>",
+      "viewOrg": "View organization on GitHub",
+      "fallbackName": "This project's name #{number}"
+    },
+    "stats": {
+      "openSource": "Open Source Projects",
+      "stars": "GitHub Stars",
+      "contributors": "Active Contributors",
+      "contributions": "Total Contributions"
+    },
+    "card": {
+      "featured": "Featured",
+      "code": "Code",
+      "liveDemo": "Live demo",
+      "codeAria": "View {title} source code on GitHub",
+      "demoAria": "Open live demo for {title}"
+    },
+    "cta": {
+      "title": "Have a Django Project?",
+      "body": "Share your open-source Django project with the community. Let's build amazing things together and inspire others!",
+      "submit": "Submit Your Project"
+    },
+    "filter": {
+      "searchPlaceholder": "Search projects by name, description, or tag",
+      "tagsLabel": "Tags"
+    },
+    "searchBar": {
+      "placeholder": "Search projects..."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "loadMore": {
+      "showing": "Showing {from} - {to} of {total}",
+      "button": "Load more projects"
+    }
+  }
+}

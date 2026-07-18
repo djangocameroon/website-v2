@@ -2,6 +2,7 @@
 
 
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useTranslations } from 'next-intl';
 
 interface ImageUploadProps {
   label: string;
@@ -18,6 +19,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   onImageChange,
   id
 }) => {
+  const t = useTranslations('BlogPage.add');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -50,8 +52,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           ) : (
             <div className="py-8 urbanist-font">
               <AiOutlinePlus size={48} className="mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 font-semibold">Click to upload {label.toLowerCase()}</p>
-              <p className="text-gray-400 text-sm mt-2">PNG, JPG up to 10MB</p>
+              <p className="text-gray-600 font-semibold">{t('clickToUpload', { label: label.toLowerCase() })}</p>
+              <p className="text-gray-400 text-sm mt-2">{t('imageConstraints')}</p>
             </div>
           )}
         </label>

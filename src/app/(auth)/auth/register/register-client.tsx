@@ -10,36 +10,39 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthQuote from "@/components/pages/Auth-Page-Components/AuthQuote";
 import { useAuth } from "@/components/contexts/auth-context";
-
-const RegisterFormSchema = z
-	.object({
-		name: z.string().min(1, "This is required"),
-		username: z.string().min(1, "This is required"),
-		email: z
-			.string()
-			.min(1, "This is required")
-			.regex(
-				/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-				"Enter a valid email"
-			),
-		password: z
-			.string()
-			.min(1, "This is required")
-			.min(8, "Your password is weak")
-			.regex(
-				/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-				"Enter a password with numbers, letters and special characters"
-			),
-		passwordConfirmation: z.string().min(1, "This is required"),
-	})
-	.refine((values) => values.password === values.passwordConfirmation, {
-		message: "Passwords do not match",
-		path: ["passwordConfirmation"],
-	});
+import { useTranslations } from "next-intl";
 
 const RegisterClient = () => {
 	const router = useRouter();
-	const { signUp } = useAuth()
+	const { signUp } = useAuth();
+	const t = useTranslations("AuthPage.register");
+	const tc = useTranslations("AuthPage.common");
+
+	const registerFormSchema = z
+		.object({
+			name: z.string().min(1, tc("required")),
+			username: z.string().min(1, tc("required")),
+			email: z
+				.string()
+				.min(1, tc("required"))
+				.regex(
+					/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+					tc("invalidEmail")
+				),
+			password: z
+				.string()
+				.min(1, tc("required"))
+				.min(8, tc("passwordWeak"))
+				.regex(
+					/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, 
+					tc("passwordStrong")
+				),
+			passwordConfirmation: z.string().min(1, tc("required")),
+		})
+		.refine((values) => values.password === values.passwordConfirmation, {
+			message: tc("passwordMismatch"),
+			path: ["passwordConfirmation"],
+		});
 
 	const [showPassword, setShowPassword] = useState({
 		password1: false,
@@ -51,7 +54,7 @@ const RegisterClient = () => {
 		register,
 		formState: { errors, isSubmitting },
 	} = useForm<IRegisterForm>({
-		resolver: zodResolver(RegisterFormSchema),
+		resolver: zodResolver(registerFormSchema),
 	});
 
 	const onSubmit = async (data: IRegisterForm) => {
@@ -99,11 +102,10 @@ const RegisterClient = () => {
 						className="text-white text-center space-y-3 py-4 animate-[fadeIn_0.6s_ease-out_0.2s_both]"
 					>
 						<h3 className="text-2xl md:text-3xl font-semibold nohemi-font tracking-tight">
-							Good to have you here!
+							{t("title")}
 						</h3>
 						<p className="urbanist-font text-lg md:text-xl font-medium text-white/80 max-w-md mx-auto leading-relaxed">
-							We are always warmed up on welcoming a new member.
-							Feel home and safe.
+							{t("subtitle")}
 						</p>
 					</div>
 
@@ -115,12 +117,12 @@ const RegisterClient = () => {
 							style={getAnimationDelay(1)}
 						>
 							<label htmlFor="name" className={labelStyles}>
-								We&apos;ll need your first & last names
+								{t("nameLabel")}
 							</label>
 							<input
 								type="text"
 								id="name"
-								placeholder="Your names"
+								placeholder={t("namePlaceholder")}
 								className={inputBaseStyles}
 								{...register("name")}
 							/>
@@ -137,12 +139,12 @@ const RegisterClient = () => {
 							style={getAnimationDelay(2)}
 						>
 							<label htmlFor="email" className={labelStyles}>
-								What&apos;s your email address?
+								{t("emailLabel")}
 							</label>
 							<input
 								type="email"
 								id="email"
-								placeholder="Your email"
+								placeholder={t("emailPlaceholder")}
 								className={inputBaseStyles}
 								{...register("email")}
 							/>
@@ -159,12 +161,12 @@ const RegisterClient = () => {
 							style={getAnimationDelay(3)}
 						>
 							<label htmlFor="username" className={labelStyles}>
-								Set up a username
+								{t("usernameLabel")}
 							</label>
 							<input
 								type="text"
 								id="username"
-								placeholder="@your_username"
+								placeholder={t("usernamePlaceholder")}
 								className={inputBaseStyles}
 								{...register("username")}
 							/>
@@ -181,13 +183,13 @@ const RegisterClient = () => {
 							style={getAnimationDelay(4)}
 						>
 							<label htmlFor="password" className={labelStyles}>
-								Set up a password
+								{t("passwordLabel")}
 							</label>
 							<div className="relative group">
 								<input
 									type={showPassword.password1 ? "text" : "password"}
 									id="password"
-									placeholder="Your password"
+									placeholder={t("passwordPlaceholder")}
 									className={`${inputBaseStyles} pr-12`}
 									{...register("password")}
 								/>
@@ -211,7 +213,7 @@ const RegisterClient = () => {
 							{errors.password && (
 								<p
 									className={`mt-2 text-sm urbanist-font animate-[shake_0.4s_ease-in-out] ${
-										errors.password.message === "Your password is weak"
+										errors.password.message === tc("passwordWeak")
 											? "text-amber-400"
 											: "text-red-400"
 									}`}
@@ -227,13 +229,13 @@ const RegisterClient = () => {
 							style={getAnimationDelay(5)}
 						>
 							<label htmlFor="password2" className={labelStyles}>
-								Confirm your password
+								{t("confirmPasswordLabel")}
 							</label>
 							<div className="relative group md:max-w-[calc(50%-0.75rem)]">
 								<input
 									type={showPassword.password2 ? "text" : "password"}
 									id="password2"
-									placeholder="Re-enter password"
+									placeholder={t("confirmPasswordPlaceholder")}
 									className={`${inputBaseStyles} pr-12`}
 									{...register("passwordConfirmation")}
 								/>
@@ -279,7 +281,7 @@ const RegisterClient = () => {
 						disabled={isSubmitting}
 					>
 						<span className={`${isSubmitting ? 'opacity-0' : 'opacity-100'} transition-opacity`}>
-							Finish account registration
+								{t("submit")}
 						</span>
 						{isSubmitting && (
 							<span className="absolute inset-0 flex items-center justify-center">

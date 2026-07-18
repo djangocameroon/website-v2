@@ -5,9 +5,11 @@ import { IoLogoLinkedin } from "react-icons/io";
 import { AboutImages } from "@/assets";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 import AnimatedSection from './animated-section';
 
 const Organisers = () => {
+  const t = useTranslations("AboutPage.organisers");
 
   const OrganisersTeam = [
     {
@@ -93,20 +95,20 @@ const Organisers = () => {
       <div className='w-[35%] max-md:w-full'>
         <div className='md:pl-10 relative'>
           <span className='text-sm text-secondary urbanist-font mb-2 inline-block max-md:w-full max-md:text-center'>
-            The minds behind the magic
+            {t('eyebrow')}
           </span>
           <h3 className='timeline-title text-[1.625rem] leading-[1.875rem] font-semibold nohemi-font max-md:text-center'>
-            A diversed team, yet, a common goal.
+            {t('title')}
           </h3>
         </div>
       </div>
 
       <article className="w-full">
         <h2 className='font-bold text-center md:text-left nohemi-font text-[2rem] leading-[2.188rem]'>
-          Just a bunch of nerds.{' '}
+          {t('heading')}{' '}
         </h2>
         <p className='text-center sm:text-left text-text-color  nohemi-font text-3xl'>
-          meet our organizers
+          {t('subheading')}
         </p>
         <div className='flex max-sm:gap-y-8 gap-4 lg:gap-5 flex-wrap items-center w-full justify-center sm:justify-start mt-8'>
           {

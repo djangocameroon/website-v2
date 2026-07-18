@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { AboutImages, BlogImages } from '@/assets';
 import { cn } from '@/utils/constants';
 import Link from "next/link";
@@ -30,6 +31,7 @@ const RoundMarker = ({ className = "" }: { className?: string }) => {
 }
 
 const BlogHeader = () => {
+  const t = useTranslations("BlogPage.header");
   return (
     <section className='h-screen w-full relative'>
       <BlogHeaderImage />
@@ -63,14 +65,15 @@ const BlogHeader = () => {
       <div className='flex lg:hidden justify-center items-center w-full h-full '>
         <div className='w-full flex flex-col justify-center items-center'>
           <span className='text-xl text-secondary font-semibold urbanist-font text-center'>
-            Feed yourself with knowledge from experts
+            {t('eyebrow')}
           </span>
           <h2 className='text-4xl text-center pb-6 text-white my-4 font-bold nohemi-font'>
-            Trending insights <span className='text-[#808396] nohemi-font'>from our</span> #Blog
+            {t.rich('title', {
+              muted: (chunks) => <span className='text-[#808396] nohemi-font'>{chunks}</span>,
+            })}
           </h2>
           <p className='text-center px-10 text-white urbanist-font'>
-            Explore real stories and insights from people building things.
-            Learn from their experience, mistakes, and wins. Whether you're looking for tips on a specific problem or just want to see how others approach their work, you'll find something useful here. And if you've got knowledge worth sharing, we'd love to have your voice in the mix.
+            {t('description')}
           </p>
         </div>
       </div>
@@ -88,14 +91,15 @@ const BlogHeader = () => {
           <div className='pl-10 pt-12 border-gray-200'>
             <div className='w-[55%] space-y-[0.625rem]'>
               <span className='text-xl text-secondary font-bold urbanist-font'>
-                Feed yourself with knowledge from experts
+                {t('eyebrow')}
               </span>
               <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2' style={{ letterSpacing: '-0%' }}>
-                Trending insights <span className='text-[#808396] nohemi-font'>from our</span> #Blog
+                {t.rich('title', {
+                  muted: (chunks) => <span className='text-[#808396] nohemi-font'>{chunks}</span>,
+                })}
               </h2>
               <p className='text-white leading-7 urbanist-font'>
-                Explore real stories and insights from people building things.
-            Learn from their experience, mistakes, and wins. Whether you're looking for tips on a specific problem or just want to see how others approach their work, you'll find something useful here. And if you've got knowledge worth sharing, we'd love to have your voice in the mix.
+                {t('description')}
               </p>
             </div>
             <div className='mt-[3.125rem]'>
@@ -115,7 +119,7 @@ const BlogHeader = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Submit an article
+                  {t('submitArticle')}
                 </button>
               </Link>
             </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaPlay } from "react-icons/fa6";
 import { LuEye } from "react-icons/lu";
 import { AiOutlineLike } from "react-icons/ai";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/utils/constants";
 import { YoutubeVideo } from "@/types/youtube";
 
@@ -13,25 +14,27 @@ interface VideoCardProps {
   className?: string;
 }
 
-const compactNumberFormatter = new Intl.NumberFormat("en", { notation: "compact" });
-const relativeTimeFormatter = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-
-const formatRelativeTime = (dateString: string) => {
-  const diffDays = Math.round((new Date(dateString).getTime() - Date.now()) / 86_400_000);
-  if (Math.abs(diffDays) < 1) return "Today";
-  if (Math.abs(diffDays) < 30) return relativeTimeFormatter.format(diffDays, "day");
-  const diffMonths = Math.round(diffDays / 30);
-  if (Math.abs(diffMonths) < 12) return relativeTimeFormatter.format(diffMonths, "month");
-  return relativeTimeFormatter.format(Math.round(diffMonths / 12), "year");
-};
-
 const VideoCard = ({ video, accent = "secondary", className }: VideoCardProps) => {
+  const t = useTranslations("HomePage.videoCard");
+  const locale = useLocale();
+  const compactNumberFormatter = new Intl.NumberFormat(locale, { notation: "compact" });
+  const relativeTimeFormatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+
+  const formatRelativeTime = (dateString: string) => {
+    const diffDays = Math.round((new Date(dateString).getTime() - Date.now()) / 86_400_000);
+    if (Math.abs(diffDays) < 1) return t("today");
+    if (Math.abs(diffDays) < 30) return relativeTimeFormatter.format(diffDays, "day");
+    const diffMonths = Math.round(diffDays / 30);
+    if (Math.abs(diffMonths) < 12) return relativeTimeFormatter.format(diffMonths, "month");
+    return relativeTimeFormatter.format(Math.round(diffMonths / 12), "year");
+  };
+
   return (
     <a
       href={`https://www.youtube.com/watch?v=${video.videoId}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Watch "${video.title}" on YouTube`}
+      aria-label={t("watchAria", { title: video.title })}
       className={cn(
         "group relative flex h-[300px] w-full shrink-0 overflow-hidden rounded-[28px] border transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         accent === "secondary" ? "border-secondary focus-visible:ring-secondary" : "border-primary focus-visible:ring-primary",
@@ -65,7 +68,7 @@ const VideoCard = ({ video, accent = "secondary", className }: VideoCardProps) =
         <div className="flex flex-wrap items-center gap-4 text-xs text-white/80 urbanist-font">
           <span className="flex items-center gap-1.5">
             <LuEye className="size-4" aria-hidden="true" />
-            {compactNumberFormatter.format(video.views)} views
+            {t("views", { count: compactNumberFormatter.format(video.views) })}
           </span>
           <span className="flex items-center gap-1.5">
             <AiOutlineLike className="size-4" aria-hidden="true" />

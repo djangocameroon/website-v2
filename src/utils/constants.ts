@@ -37,7 +37,7 @@ export const navLinks = [
     label: "Blog",
     link: "/blog"
   },
-]
+] as const;
 
 export const socialLinks = {
   github: "https://github.com/djangocameroon",

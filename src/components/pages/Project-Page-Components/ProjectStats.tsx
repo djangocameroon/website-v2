@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { ProjectStats as ProjectStatsType } from "@/types/project";
 
 interface ProjectStatsProps {
@@ -7,22 +8,23 @@ interface ProjectStatsProps {
 }
 
 const ProjectStats = ({ stats }: ProjectStatsProps) => {
+  const t = useTranslations("ProjectsPage.stats");
   const statsData = [
     {
       value: `${stats.totalProjects}+`,
-      label: "Open Source Projects",
+      label: t("openSource"),
     },
     {
       value: `${(stats.totalStars / 1000).toFixed(1)}k+`,
-      label: "GitHub Stars",
+      label: t("stars"),
     },
     {
       value: `${stats.activeContributors}+`,
-      label: "Active Contributors",
+      label: t("contributors"),
     },
     {
       value: `${stats.totalContributions}+`,
-      label: "Total Contributions",
+      label: t("contributions"),
     },
   ];
 

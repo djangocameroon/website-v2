@@ -5,6 +5,8 @@ import Providers from "@/providers";
 import { readSession } from "@/lib/server/session";
 import { fontVariables } from "./fonts";
 import "./globals.css";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const SITE_URL = process.env.SITE_URL ?? "https://djangocameroon.org";
 const DESCRIPTION =
@@ -92,64 +94,71 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await readSession();
 
+  const messages = await getMessages();
+  const locale = await getLocale();
+
   return (
-    <html lang="en">
+    <html lang={locale} className="scroll-smooth">
       <body className={fontVariables}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
-        <Providers initialUser={session?.user ?? null}>
-          <div className="relative flex flex-col min-h-screen max-w-[4000px]">
-            <div className="flex-grow">{children}</div>
-            <div className="bg-transparent mt-auto">
-              <Footer />
+        <NextIntlClientProvider messages={messages}>
+          <Providers initialUser={session?.user ?? null}>
+            <div className="relative flex flex-col min-h-screen max-w-[4000px]">
+              <div className="flex-grow">{children}</div>
+              <div className="bg-transparent mt-auto">
+                <Footer />
+              </div>
             </div>
-          </div>
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              // Default styles for all toasts
-              style: {
-                background: "rgba(10, 14, 39, 0.95)",
-                color: "#fff",
-                border: "1px solid rgba(66, 133, 244, 0.3)",
-                borderRadius: "1rem",
-                fontFamily: "var(--font-urbanist), sans-serif",
-                backdropFilter: "blur(10px)",
-              },
-              duration: 4000,
-              success: {
-                duration: 2500,
-                style: {
-                  background: "rgba(16, 62, 46, 0.95)",
-                  border: "1px solid rgba(34, 197, 94, 0.5)",
-                },
-                iconTheme: {
-                  primary: "rgb(15, 157, 88)",
-                  secondary: "#fff",
-                },
-              },
-              error: {
-                duration: 5000,
-                style: {
-                  background: "rgba(39, 10, 10, 0.95)",
-                  border: "1px solid rgba(239, 68, 68, 0.5)",
-                },
-                iconTheme: {
-                  primary: "rgb(219, 68, 55)",
-                  secondary: "#fff",
-                },
-              },
-              loading: {
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                // Default styles for all toasts
                 style: {
                   background: "rgba(10, 14, 39, 0.95)",
-                  border: "1px solid rgba(66, 133, 244, 0.5)",
+                  color: "#fff",
+                  border: "1px solid rgba(66, 133, 244, 0.3)",
+                  borderRadius: "1rem",
+                  fontFamily: "var(--font-urbanist), sans-serif",
+                  backdropFilter: "blur(10px)",
                 },
-              },
-            }}
-          />
-        </Providers>
+                duration: 4000,
+                success: {
+                  duration: 2500,
+                  style: {
+                    background: "rgba(16, 62, 46, 0.95)",
+                    border: "1px solid rgba(34, 197, 94, 0.5)",
+                  },
+                  iconTheme: {
+                    primary: "rgb(15, 157, 88)",
+                    secondary: "#fff",
+                  },
+                },
+                error: {
+                  duration: 5000,
+                  style: {
+                    background: "rgba(39, 10, 10, 0.95)",
+                    border: "1px solid rgba(239, 68, 68, 0.5)",
+                  },
+                  iconTheme: {
+                    primary: "rgb(219, 68, 55)",
+                    secondary: "#fff",
+                  },
+                },
+                loading: {
+                  style: {
+                    background: "rgba(10, 14, 39, 0.95)",
+                    border: "1px solid rgba(66, 133, 244, 0.5)",
+                  },
+                },
+              }}
+            />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -5,34 +5,20 @@ import { Button } from "@/components/layout";
 import { HomeImages } from "@/assets";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { fadeUp, scaleIn, staggerContainer } from "./motion";
 
 const SCROLL_OFFSET = 150;
 const factsStagger = staggerContainer(0.1, 0.5);
+const FACT_NUMBERS = ["567", "78", "1.5k", "20+"];
 
 const Header = () => {
-	const FACTS = [
-		{
-			number: "567",
-			title: "Fact #1",
-			description: "Small Description",
-		},
-		{
-			number: "78",
-			title: "Fact #2",
-			description: "Small Description",
-		},
-		{
-			number: "1.5k",
-			title: "Fact #3",
-			description: "Small Description",
-		},
-		{
-			number: "20+",
-			title: "Fact #4",
-			description: "Small Description",
-		},
-	];
+	const t = useTranslations("HomePage.header");
+	const FACTS = FACT_NUMBERS.map((number, index) => ({
+		number,
+		title: t(`facts.${index + 1}.title`),
+		description: t(`facts.${index + 1}.description`),
+	}));
 	const router = useRouter();
 	const handleGetStartedClick = () => {
 		const section = document.getElementById("become-member");
@@ -52,8 +38,7 @@ const Header = () => {
 						variants={fadeUp}
 						className="leading-[1.15] text-primary nohemi-font overflow-hidden text-center text-3xl sm:text-[80px] font-extrabold"
 					>
-						The Django Ecosystem <br/>{" "}
-						in Cameroon
+						{t.rich("title", { br: () => <br /> })}
 					</motion.h1>
 					<motion.p
 						initial="hidden"
@@ -62,10 +47,7 @@ const Header = () => {
 						transition={{ delay: 0.15 }}
 						className="leading-normal text-center text-xl max-md:text-base urbanist-font tracking-wide mt-3 md:mt-6 w-full px-3 lg:px-0 overflow-hidden mx-auto text-text-color font-regular"
 					>
-						Fueling Innovation, Forging Connections. We're a dynamic
-						community of developers in Cameroon, passionate about
-						Django! Empowering dreams and pioneer change through
-						technology
+						{t("description")}
 					</motion.p>
 
 					<motion.div
@@ -76,9 +58,9 @@ const Header = () => {
 						className="flex justify-center items-center w-full mt-4 gap-10 max-md:gap-5"
 					>
 						<Button outline={false} backgroundColor="bg-primary" onClick={handleGetStartedClick}>
-							Get Started
+							{t("getStarted")}
 						</Button>
-						<Button outline={true} onClick={() => router.push('/about')}>Learn more</Button>
+						<Button outline={true} onClick={() => router.push('/about')}>{t("learnMore")}</Button>
 					</motion.div>
 				</div>
 			</div>

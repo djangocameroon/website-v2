@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineCodeBracket } from "react-icons/hi2";
+import { useTranslations } from "next-intl";
 import { ProjectItem } from "@/types/project";
 import { cn } from "@/utils/constants";
 
@@ -23,6 +24,7 @@ export const RoundMarker = ({ className = "" }: { className?: string }) => {
 };
 
 const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
+  const t = useTranslations("ProjectsPage.header");
   return (
     <div className="relative w-full pt-24 pb-12 overflow-visible max-lg:h-screen">
       {/* Dark navy background with stars */}
@@ -48,16 +50,17 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
             <div className="mb-10 ml-8">
               {/* Subtitle */}
               <p className="text-[#4A90E2] urbanist-font text-base md:text-lg xl:text-[20px] font-bold">
-                Get busy with us
+                {t('eyebrow')}
               </p>
 
               {/* Main Heading */}
-              <h1 className="nohemi-font max-w-[780px] text-3xl sm:text-4xl space-y-2 md:text-5xl lg:text-6xl xl:text-[80px] font-extrabold leading-tight">
-                <span className="text-white">We build </span>
-                <span className="text-gray-400">Open</span>
-                <br />
-                <span className="text-[#6B7FBF]">Source </span>
-                <span className="text-white">#Projects.</span>
+              <h1 className="nohemi-font max-w-[780px] text-3xl sm:text-4xl space-y-2 md:text-5xl lg:text-6xl xl:text-[80px] font-extrabold leading-tight text-white">
+                {t.rich('title', {
+                  grey: (chunks) => <span className="text-gray-400">{chunks}</span>,
+                  br: () => <br />,
+                  blue: (chunks) => <span className="text-[#6B7FBF]">{chunks}</span>,
+                  hash: (chunks) => <span className="text-white">{chunks}</span>,
+                })}
               </h1>
 
               {/* GitHub Button */}
@@ -69,7 +72,7 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
                   className="inline-flex items-center gap-3 bg-[#4A90E2] text-white urbanist-font font-semibold text-base md:text-lg px-6 py-3 rounded-lg hover:bg-[#357ABD] transition-all shadow-lg"
                 >
                   <FaGithub className="w-5 h-5" />
-                  View organization on GitHub
+                  {t('viewOrg')}
                 </a>
               </div>
             </div>
@@ -91,7 +94,7 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
                     >
                       {/* Top title bar */}
                       <div className="bg-[#4A90E2] px-4 py-3 text-white urbanist-font font-medium text-sm rounded-t-2xl line-clamp-1">
-                        {project.title || `This project's name #${index + 1}`}
+                        {project.title || t('fallbackName', { number: index + 1 })}
                       </div>
 
                       {/* Project Image */}
@@ -122,10 +125,15 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
       <div className='absolute inset-0 flex lg:hidden justify-center items-center w-full h-full z-10'>
         <div className='w-full flex flex-col justify-center items-center'>
           <span className='text-xl text-secondary font-semibold urbanist-font text-center'>
-            Get busy with us
+            {t('eyebrow')}
           </span>
           <h2 className='text-4xl text-center pb-6 text-white my-4 font-bold nohemi-font'>
-            We build <span className="text-gray-400">Open</span> Source <span className="text-[#808396]">#Projects</span>
+            {t.rich('title', {
+              grey: (chunks) => <span className="text-gray-400">{chunks}</span>,
+              br: () => <> </>,
+              blue: (chunks) => <>{chunks}</>,
+              hash: (chunks) => <span className="text-[#808396]">{chunks}</span>,
+            })}
           </h2>
           <div className="pt-2 md:mb-2">
             <a
@@ -135,7 +143,7 @@ const ProjectHeader = ({ featuredProjects = [] }: ProjectHeaderProps) => {
               className="inline-flex items-center gap-3 bg-[#4A90E2] text-white urbanist-font font-semibold text-base md:text-lg px-6 py-3 rounded-lg hover:bg-[#357ABD] transition-all shadow-lg"
             >
               <FaGithub className="w-5 h-5" />
-              View organization on GitHub
+              {t('viewOrg')}
             </a>
           </div>
         </div>
