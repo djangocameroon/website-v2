@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "postinstall": "npx patch-package",
     "lint": "eslint"
   },
   "dependencies": {

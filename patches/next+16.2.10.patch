@@ -1,0 +1,13 @@
+diff --git a/node_modules/next/dist/client/app-dir/link.js b/node_modules/next/dist/client/app-dir/link.js
+index e5fe74e..9c2a6ee 100644
+--- a/node_modules/next/dist/client/app-dir/link.js
++++ b/node_modules/next/dist/client/app-dir/link.js
+@@ -97,7 +97,7 @@ function LinkComponent(props) {
+     const [linkStatus, setOptimisticLinkStatus] = (0, _react.useOptimistic)(_links.IDLE_LINK_STATUS);
+     let children;
+     const linkInstanceRef = (0, _react.useRef)(null);
+-    const { href: hrefProp, as: asProp, children: childrenProp, prefetch: prefetchProp = null, passHref, replace, shallow, scroll, onClick, onMouseEnter: onMouseEnterProp, onTouchStart: onTouchStartProp, legacyBehavior = false, onNavigate, transitionTypes, ref: forwardedRef, unstable_dynamicOnHover, ...restProps } = props;
++    const { href: hrefProp, as: asProp, children: childrenProp, prefetch: prefetchProp = false, passHref, replace, shallow, scroll, onClick, onMouseEnter: onMouseEnterProp, onTouchStart: onTouchStartProp, legacyBehavior = false, onNavigate, transitionTypes, ref: forwardedRef, unstable_dynamicOnHover, ...restProps } = props;
+     children = childrenProp;
+     if (legacyBehavior && (typeof children === 'string' || typeof children === 'number')) {
+         children = /*#__PURE__*/ (0, _jsxruntime.jsx)("a", {
