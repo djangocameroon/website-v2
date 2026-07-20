@@ -13,17 +13,18 @@ const BecomeMember = () => {
   const { blueDjango, blueMap } = HomeImages;
   const router = useRouter();
   return (
-    <section id="become-member" className='relative md:mx-56'>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={revealOnce}
-        variants={slideInLeft}
-        transition={{ delay: 0.2 }}
-        className='absolute left-0 top-14 max-md:hidden'
-      >
-        <Image src={blueDjango} alt='' className='' />
-      </motion.div>
+    <section id="become-member" className='relative max-w-7xl mx-auto'>
+      <div className='absolute left-0 2xl:-translate-x-1/2 max-xl:hidden -z-10'>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealOnce}
+          variants={slideInLeft}
+          transition={{ delay: 0.2 }}
+        >
+          <Image src={blueDjango} alt='' className='' />
+        </motion.div>
+      </div>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -42,16 +43,17 @@ const BecomeMember = () => {
         </Button>
       </motion.div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={revealOnce}
-        variants={slideInRight}
-        transition={{ delay: 0.2 }}
-        className='absolute right-0 -bottom-4 max-md:hidden'
-      >
-        <Image src={blueMap} alt='' className='' />
-      </motion.div>
+      <div className='absolute right-0 2xl:translate-x-1/2 max-xl:hidden -z-10 -bottom-2'>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealOnce}
+          variants={slideInRight}
+          transition={{ delay: 0.2 }}
+        >
+          <Image src={blueMap} alt='' className='' />
+        </motion.div>
+      </div>
     </section>
   );
 };

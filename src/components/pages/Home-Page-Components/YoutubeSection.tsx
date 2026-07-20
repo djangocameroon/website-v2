@@ -32,7 +32,7 @@ const YoutubeSection = () => {
 	}
 	return (
 		<div className="space-y-10">
-			<div className="md:py-20 flex justify-center items-start max-md:flex-wrap md:gap-x-36">
+			<div className="flex justify-center items-start max-md:flex-wrap md:gap-x-36">
 				<motion.div
 					initial="hidden"
 					whileInView="visible"
