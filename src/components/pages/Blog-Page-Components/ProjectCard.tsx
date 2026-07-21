@@ -70,7 +70,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl max-md:text-lg font-semibold text-gray-900 mb-4 max-md:mb-3 leading-tight line-clamp-4 max-md:line-clamp-3 nohemi-font">
+        <h3 className="text-2xl max-md:text-lg font-semibold text-gray-900 dark:text-primary mb-4 max-md:mb-3 leading-tight line-clamp-4 max-md:line-clamp-3 nohemi-font">
           {title}
         </h3>
 
@@ -87,14 +87,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ slug, cover_image, tags, title, lik
               <LuTimer size={24} className="max-md:w-4 max-md:h-4" /> {t('readTime', { count: read_time })}
             </span>
           </div>
-          <span className="flex items-center gap-[0.5rem] ml-auto max-md:ml-0 text-gray-800 urbanist-font font-medium text-xl max-md:text-sm">
+          <span className="flex items-center gap-[0.5rem] ml-auto max-md:ml-0 text-gray-800 dark:text-primary urbanist-font font-medium text-xl max-md:text-sm">
             <VscAccount size={24} className="max-md:w-4 max-md:h-4" /> {author?.username || t('anonymous')}
           </span>
         </div>
 
         {/* Button */}
         <Link href={`/blog/${slug}`} className="mt-auto">
-          <button className="w-full bg-primary hover:bg-primary/90 active:scale-105 text-white py-5 max-md:py-3.5 rounded-xl max-md:rounded-lg flex items-center justify-between px-7 max-md:px-5 transition-all border-primary border-[1.5px]">
+          <button className="w-full bg-primary hover:bg-primary/90 active:scale-105 text-white dark:text-dark-primary py-5 max-md:py-3.5 rounded-xl max-md:rounded-lg flex items-center justify-between px-7 max-md:px-5 transition-all border-primary border-[1.5px]">
             <span className="inline-flex items-center mx-auto nohemi-font text-[18px] max-md:text-sm  font-medium">
               {tc('readMore')}
               <GoArrowUpRight size={24} className="max-md:size-4 ml-2.5" />

@@ -18,7 +18,7 @@ const fadeUp = {
 
 const EventHeaderScene = () => {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden bg-primary">
+    <div className="absolute inset-0 -z-10 overflow-hidden bg-primary dark:bg-primary-foreground">
       {/* dot-grid "map" pattern */}
       <div
         className="absolute inset-0 opacity-[0.12]"
@@ -27,11 +27,6 @@ const EventHeaderScene = () => {
           backgroundSize: '28px 28px',
         }}
       />
-      {/* ambient glows */}
-      <div className="absolute -top-24 right-[-10%] size-[26rem] rounded-full bg-secondary/25 blur-[110px] motion-safe:animate-pulse [animation-duration:6s]" />
-      <div className="absolute bottom-[-15%] left-[-10%] size-[24rem] rounded-full bg-dark-primary/20 blur-[110px] motion-safe:animate-pulse [animation-duration:8s]" />
-      {/* vignette so foreground text stays legible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/40" />
     </div>
   );
 };
@@ -47,7 +42,7 @@ const LocationMarker = ({
 }) => (
   <div className={cn('flex items-center gap-3', className)}>
     <div className="relative flex size-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
-      <Icon className="size-4 text-dark-primary" />
+      <Icon className="size-4 text-dark-primary dark:text-primary" />
     </div>
     <span className="text-sm font-medium text-white/70 urbanist-font whitespace-nowrap">
       {label}
@@ -63,7 +58,7 @@ const EventHeader = () => {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section className="relative flex min-h-dvh w-full flex-col overflow-hidden bg-primary">
+      <section className="relative flex min-h-dvh w-full flex-col overflow-hidden ">
         <EventHeaderScene />
 
         <div className="relative flex flex-1 items-center">
@@ -83,7 +78,7 @@ const EventHeader = () => {
                     initial="hidden"
                     animate="show"
                     custom={0}
-                    className="block text-lg font-semibold text-secondary-light urbanist-font max-md:text-base"
+                    className="block text-lg font-semibold text-secondary-light dark:text-secondary urbanist-font max-md:text-base"
                   >
                     {t('eyebrow')}
                   </motion.span>
@@ -96,7 +91,7 @@ const EventHeader = () => {
                     className="my-4 text-5xl font-bold leading-[1.05] text-white nohemi-font sm:text-6xl lg:text-7xl"
                   >
                     {t.rich('title', {
-                      accent: (chunks) => <span className="text-dark-primary">{chunks}</span>,
+                      accent: (chunks) => <span className="text-dark-primary dark:text-primary">{chunks}</span>,
                     })}
                   </motion.h1>
 
@@ -128,7 +123,7 @@ const EventHeader = () => {
                     animate="show"
                     custom={0.28}
                     onClick={scrollToEvents}
-                    className="mt-10 inline-flex items-center gap-2.5 rounded-2xl bg-dark-primary px-7 py-4 text-lg font-medium text-primary nohemi-font transition-all duration-300 hover:-translate-y-0.5 hover:bg-white active:translate-y-0"
+                    className="mt-10 inline-flex items-center gap-2.5 rounded-2xl bg-dark-primary dark:bg-primary dark:text-primary-foreground px-7 py-4 text-lg font-medium text-primary nohemi-font transition-all duration-300 hover:-translate-y-0.5 hover:bg-white active:translate-y-0"
                   >
                     {t('browseEvents')}
                     <HiOutlineChevronDown className="size-5" />

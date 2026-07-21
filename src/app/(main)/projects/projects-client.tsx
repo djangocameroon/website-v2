@@ -101,7 +101,7 @@ const ProjectsClient = () => {
       <ProjectHeader featuredProjects={featuredProjects} />
 
       {/* Main Content Area - White Background */}
-      <div className="bg-white pt-12 pb-20">
+      <div className="bg-background pt-12 pb-20">
         <div className="w-full md:w-[85%] mx-auto max-md:px-4 space-y-12">
           {loading ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

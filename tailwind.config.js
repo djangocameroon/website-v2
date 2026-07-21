@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -7,15 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': 'rgba(16, 62, 46, 1)',
-        'primary-light': 'rgba(16, 62, 46, 0.1)',
-        'primary-lighter': 'rgba(154, 176, 166, 1)',
-        'secondary': 'rgba(66, 133, 244, 1)',
-        'secondary-light': 'rgba(138, 180, 248, 1)',
-        'dark-primary': '#C6EADE',
-        'text-color': 'rgba(18, 18, 18, 1)',
-        'dark': 'rgba(18, 18, 18, 1)',
-        'grey': 'rgba(95, 99, 104, 1)'
+        'primary': 'rgb(var(--color-primary) / <alpha-value>)',
+        'primary-foreground': 'rgb(var(--color-primary-foreground) / <alpha-value>)',
+        'primary-light': 'var(--color-primary-light)',
+        'primary-lighter': 'rgb(var(--color-primary-lighter) / <alpha-value>)',
+        'secondary': 'rgb(var(--color-secondary) / <alpha-value>)',
+        'secondary-light': 'rgb(var(--color-secondary-light) / <alpha-value>)',
+        'dark-primary': 'rgb(var(--color-dark-primary) / <alpha-value>)',
+        'text-color': 'rgb(var(--color-text-color) / <alpha-value>)',
+        'dark': 'rgb(var(--color-dark) / <alpha-value>)',
+        'grey': 'rgb(var(--color-grey) / <alpha-value>)',
+        'background': 'rgb(var(--color-background) / <alpha-value>)',
+        'foreground': 'rgb(var(--color-foreground) / <alpha-value>)',
       },
       boxShadow: {
         'shadow-outline': '0 0 6px 10px rgba(0,0,0,0.3)',

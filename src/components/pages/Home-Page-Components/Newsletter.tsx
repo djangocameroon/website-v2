@@ -63,7 +63,7 @@ const Newsletter = () => {
         <div className='absolute inset-0 md:pr-[100px] max-md:px-2 flex justify-center md:justify-end items-center'>
           <div className='text-white w-full max-w-[750px] md:text-right text-center'>
             <h1 className='nohemi-font font-bold text-3xl md:text-5xl text-center md:text-right'>{tc('notNowOrNever')}</h1>
-            <Button className='w-fit bg-secondary mt-7 max-md:mt-4' spacing={false} onClick={handleJoinCommunityClick}>{tc('joinCommunity')}</Button>
+            <Button className='w-fit bg-secondary dark:bg-secondary-light mt-7 max-md:mt-4 !text-white' spacing={false} onClick={handleJoinCommunityClick}>{tc('joinCommunity')}</Button>
           </div>
 
         </div>

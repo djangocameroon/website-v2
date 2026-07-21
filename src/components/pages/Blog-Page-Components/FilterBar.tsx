@@ -66,9 +66,9 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
             <button
               key={filter.value}
               onClick={() => handleFilterClick(filter)}
-              className={`relative px-4 py-2.5 max-sm:px-3 max-sm:py-2 rounded-full transition-all duration-200 max-sm:text-sm ${activeFilter === filter
-                ? "text-primary"
-                : "text-gray-900 hover:text-black"
+              className={`relative px-4 py-2.5 max-sm:px-3 max-sm:py-2 rounded-full transition-all duration-200 max-sm:text-sm ${activeFilter?.value === filter.value
+                ? "text-primary dark:!text-primary-foreground"
+                : "text-gray-900 hover:text-black dark:text-primary dark:hover:text-white"
                 }`}
               style={{
                 transformStyle: "preserve-3d",
@@ -96,7 +96,7 @@ const FilterBar = <T extends string = string>({ onFilterChange, onSearchChange, 
 
         {/* Search bar */}
         <div
-          className={`flex items-center gap-2.5 bg-black text-white rounded-[6.25rem] px-4 py-2.5 max-sm:py-2 transition-all duration-300 max-sm:w-full ${searchExpanded ? "w-80 max-sm:w-full" : "w-28 max-sm:w-full"
+          className={`flex items-center gap-2.5 bg-black  rounded-[6.25rem] px-4 py-2.5 max-sm:py-2 transition-all duration-300 max-sm:w-full ${searchExpanded ? "w-80 max-sm:w-full" : "w-28 max-sm:w-full"
             }`}
         >
           <BiSearch className="size-[18px] flex-shrink-0" />

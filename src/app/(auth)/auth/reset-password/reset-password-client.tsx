@@ -49,7 +49,7 @@ const ResetPasswordClient = () => {
   return (
     <div className=' px-5 py-10 bg-no-repeat bg-cover h-screen bg-center flex flex-col justify-start items-center'>
       <Link href={'/'} className='pb-4 w-40'>
-        <Image src={HomeImages.Logo} alt='' />
+        <Image src={HomeImages.Logo} alt='' className="dark:invert dark:brightness-0" />
       </Link>
       <div>
         <h1 className='text-3xl font-bold text-center'>{t('title')}</h1>

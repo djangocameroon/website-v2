@@ -88,7 +88,7 @@ const Header = () => {
 				initial="hidden"
 				animate="visible"
 				variants={factsStagger}
-				className="bg-primary max-w-7xl h-56 w-full mx-auto rounded-[32px] relative max-sm:hidden -mt-2.5"
+				className="bg-primary dark:bg-primary-foreground max-w-7xl h-56 w-full mx-auto rounded-[32px] relative max-sm:hidden -mt-2.5"
 			>
 				<Image
 					src={HomeImages.curlyGrid}

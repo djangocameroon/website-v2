@@ -67,8 +67,8 @@ const Navbar = () => {
       <nav
         className={cn(
           isAuthRoute ? "hidden" : "block",
-          "h-20 transition-all",
-          navBg ? "bg-white md:shadow-lg" : "bg-white sm:bg-transparent",
+          "h-20 transition-all bg-background",
+          navBg ? "md:shadow-lg" : "sm:bg-transparent",
           {
             "max-sm:backdrop-blur-lg max-sm:bg-transparent":
               variant === "secondary" && !navBg && !open,
@@ -81,10 +81,14 @@ const Navbar = () => {
               <Image
                 src={HomeImages.Logo}
                 alt="logo"
-                className={cn("cursor-pointer h-[3.3rem] w-auto", {
-                  "invert brightness-0":
-                    variant === "secondary" && !navBg && !open,
-                })}
+                className={cn(
+                  "cursor-pointer h-[3.3rem] w-auto",
+                  "dark:invert dark:brightness-0",
+                  {
+                    "invert brightness-0":
+                      variant === "secondary" && !navBg && !open,
+                  },
+                )}
               />
             </Link>
             <div
@@ -125,7 +129,7 @@ const Navbar = () => {
                 <li
                   key={id}
                   className={cn(
-                    "hover:scale-105 hover:text-primary transition-all text-xl",
+                    "hover:scale-105 hover:text-primary transition-all text-xl text-foreground",
                     isActive ? "font-bold text-primary" : "font-medium",
                     {
                       "text-white": !navBg && variant === "secondary",
@@ -173,7 +177,7 @@ const Navbar = () => {
                   outline={false}
                   spacing={false}
                   className={cn(
-                    "duration-500 hover:scale-90 font-medium text-xl transition-all py-2.5 px-5 urbanist-font flex gap-x-2.5 items-center",
+                    "duration-500 hover:scale-90 font-medium text-xl transition-all py-2.5 px-5 urbanist-font flex gap-x-2.5 items-center dark:bg-secondary-light dark:text-white",
                     {
                       "bg-secondary text-white":
                         variant === "secondary" && !navBg,
@@ -185,6 +189,7 @@ const Navbar = () => {
                 </Button>
               </Link>
             )}
+            <ToggleSwitch />
           </div>
           {/* Mobile nav */}
           <ul

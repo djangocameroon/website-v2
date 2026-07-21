@@ -44,7 +44,7 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
         )}
 
         {project.is_featured && (
-          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-white urbanist-font shadow-md">
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-secondary dark:bg-secondary-light px-3 py-1 text-xs font-semibold text-white urbanist-font shadow-md">
             <HiOutlineStar className="size-3.5" />
             {t('featured')}
           </span>
@@ -81,7 +81,7 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t('codeAria', { title: project.title })}
-                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white urbanist-font transition-colors duration-200 hover:bg-primary/90"
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white dark:text-primary-foreground urbanist-font transition-colors duration-200 hover:bg-primary/90"
               >
                 <FaGithub className="size-4 shrink-0" />
                 {t('code')}
@@ -93,7 +93,7 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t('demoAria', { title: project.title })}
-                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border-[1.5px] border-primary px-4 py-3 text-sm font-semibold text-primary urbanist-font transition-colors duration-200 hover:bg-primary hover:text-white"
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border-[1.5px] border-primary px-4 py-3 text-sm font-semibold text-primary urbanist-font transition-colors duration-200 hover:bg-primary hover:text-white dark:hover:text-primary-foreground"
               >
                 {t('liveDemo')}
                 <GoArrowUpRight className="size-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

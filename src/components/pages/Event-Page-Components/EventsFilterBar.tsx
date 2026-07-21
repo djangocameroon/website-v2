@@ -36,7 +36,7 @@ function PillGroup<T extends string>({ label, options, value, onChange, layoutId
             aria-pressed={value === option}
             className={cn(
               'relative rounded-full px-4 py-2 text-sm font-medium urbanist-font transition-colors duration-200',
-              value === option ? 'text-white' : 'text-primary hover:text-primary/70'
+              value === option ? 'text-white dark:text-primary-foreground' : 'text-primary hover:text-primary/70'
             )}
           >
             {value === option && (
@@ -78,7 +78,7 @@ const EventsFilterBar = ({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="mb-10 flex flex-col gap-5 rounded-3xl border border-primary/10 bg-white p-5 shadow-sm sm:p-6 max-w-5xl mx-auto"
+      className="mb-10 flex flex-col gap-5 rounded-3xl border border-primary/10 bg-background p-5 shadow-sm sm:p-6 max-w-5xl mx-auto"
     >
       <div className="flex items-center gap-3 rounded-full border border-primary/15 bg-primary/5 px-4 py-3 transition-colors duration-200 focus-within:border-primary/40">
         <BiSearch className="size-5 shrink-0 text-primary/60" />

@@ -36,13 +36,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				//   outline === true ? 'btn-outline' : ''
 				// } capitalize py-5 my-4 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] leading-[18px] font-medium nohemi-font ${backgroundColor} `}
 				className={cn(
-					"py-5 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-white md:text-[1.125rem] max-md:text-base leading-[18px] font-medium nohemi-font disabled:bg-[#5F6368]",
+					"py-5 px-7 rounded-2xl whitespace-nowrap transition-all hover:-translate-y-2 text-primary-foreground md:text-[1.125rem] max-md:text-base leading-[18px] font-medium nohemi-font disabled:bg-[#5F6368]",
 					backgroundColor,
 					className,
 					{
 						"btn-outline": outline,
 						"my-4": spacing,
-						"capitalize": capitalize
+						"capitalize": capitalize,
+						"dark:text-dark": backgroundColor === "bg-secondary",
+						"dark:text-primary-foreground": backgroundColor === "bg-white",
 					}
 				)}
 				{...props}

@@ -22,7 +22,7 @@ const Footer = () => {
   return (
     <div className={`${isAuthRoute ? 'hidden' : 'block'} flex bg-transparent flex-col md:flex-row gap-2 py-4 justify-between items-center w-full lg:w-[85%] lg:mx-auto border-t-2 border-gray-800`}>
       <Link href='/' className='font-bold bg-transparent text-2xl cursor-pointer flex items-start gap-1'>
-        <Image src={HomeImages.Logo} alt='logo image' className='w-36 h-16' />
+        <Image src={HomeImages.Logo} alt='logo image' className='w-36 h-16 dark:invert dark:brightness-0' />
       </Link>
       <div className='text-lg md:text-base text-center md:text-left  text-opacity-80 urbanist-font'>
         <span className='urbanist-font'> {tc("footer.copyright", { yearRange })}</span>

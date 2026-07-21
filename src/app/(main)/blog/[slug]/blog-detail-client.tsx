@@ -50,7 +50,7 @@ const BlogDetailClient = ({ slug }: { slug: string }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
+      <div className="min-h-screen bg-background pt-40 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -58,7 +58,7 @@ const BlogDetailClient = ({ slug }: { slug: string }) => {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-white pt-40 text-center">
+      <div className="min-h-screen bg-background pt-40 text-center">
         <p className="text-red-500 font-semibold mb-4">Post not found</p>
         <p className="text-gray-600">{error}</p>
         <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
@@ -94,7 +94,7 @@ const BlogDetailClient = ({ slug }: { slug: string }) => {
   const handleOnLike = async () => {
     if (!isAuthenticated) {
       toast.custom((t) => (
-        <div className={`bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${t.visible ? 'animate-enter' : 'animate-leave'}`}>
+        <div className={`bg-background border border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-md flex items-center gap-2 ${t.visible ? 'animate-enter' : 'animate-leave'}`}>
           <span className="font-medium">You need to be logged in to like posts.</span>
           <a href={"/auth/login" + `?redirect=${encodeURIComponent(window.location.pathname)}`} className="text-blue-600 hover:underline font-semibold">
             Log in
@@ -108,12 +108,12 @@ const BlogDetailClient = ({ slug }: { slug: string }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background">
         <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
 
           {/* Back Link + Author Actions */}
           <div className="flex items-center justify-between mb-8">
-            <Link href="/blog" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors group">
+            <Link href="/blog" className="flex items-center gap-2 text-gray-500 dark:text-white hover:text-blue-600 transition-colors group">
               <AiOutlineArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
               <span className="text-sm font-bold">Back to blog</span>
             </Link>
@@ -163,12 +163,12 @@ const BlogDetailClient = ({ slug }: { slug: string }) => {
             ))}
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold nohemi-font text-gray-900 leading-tight mb-10">
+          <h1 className="text-3xl md:text-5xl font-bold nohemi-font text-gray-900 dark:text-primary leading-tight mb-10">
             {post.title}
           </h1>
 
           {/* Stats Bar */}
-          <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark mb-12 text-dark">
+          <div className="flex max-md:flex-col gap-x-8 max-md:gap-y-4 py-4 border-y border-dark dark:border-white mb-12 text-dark dark:text-white">
             <div className="flex items-center md:gap-8 max-md:justify-between urbanist-font font-medium text-lg">
               <span className="flex items-center gap-2">
                 {isBlogLiked && isAuthenticated ?

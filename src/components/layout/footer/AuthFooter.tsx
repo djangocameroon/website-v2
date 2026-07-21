@@ -24,7 +24,7 @@ const AuthFooter = () => {
       "text-white": showAuthComponent
     })}>
       <div className="font-bold bg-transparent text-2xl cursor-pointer flex items-start gap-1">
-        <Image src={Logo} alt="logo image" className={cn("w-36 h-16", {
+        <Image src={Logo} alt="logo image" className={cn("w-36 h-16 dark:invert dark:brightness-0", {
       "invert brightness-0": showAuthComponent
     })} />
       </div>

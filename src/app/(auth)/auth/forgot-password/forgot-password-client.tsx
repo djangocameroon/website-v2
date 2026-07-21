@@ -183,7 +183,7 @@ const ForgotPasswordClient = () => {
     return (
         <div className='bg-no-repeat bg-cover min-h-screen bg-center flex flex-col justify-start items-center w-[85%] mx-auto pb-10'>
             <Link href={'/'} className='pt-[3.125rem] pb-[3.9rem] w-40'>
-                <Image src={HomeImages.Logo} alt={t('logoAlt')} className='h-[3.66rem] w-auto mx-auto md:cursor-pointer' />
+                <Image src={HomeImages.Logo} alt={t('logoAlt')} className='h-[3.66rem] w-auto mx-auto md:cursor-pointer dark:invert dark:brightness-0' />
             </Link>
             <div className="flex flex-col flex-[1] w-full h-fit">
                 <div className=''>

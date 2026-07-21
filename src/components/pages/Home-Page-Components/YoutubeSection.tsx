@@ -162,10 +162,10 @@ const YoutubeSection = () => {
 					variants={fadeUp}
 					className="text-center mb-7"
 				>
-					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance max-md:hidden">
+					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance max-md:hidden dark:text-primary">
 						{t.rich("doubtTitleDesktop", { br: () => <br className="" /> })}
 					</h2>
-					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance md:hidden">
+					<h2 className="mx-auto w-fit nohemi-font font-bold text-3xl text-balance md:hidden dark:text-primary">
 						{t("doubtTitleMobile")}
 					</h2>
 					<Link
