@@ -61,7 +61,7 @@ const AboutHeader = () => {
   };
 
   return (
-    <section className='h-screen w-full relative blue-bg'>
+    <section className='min-h-screen w-full relative blue-bg'>
       <AboutHeaderImage />
 
       <div className='flex lg:hidden justify-center items-center w-full h-full '>
@@ -78,36 +78,32 @@ const AboutHeader = () => {
         </div>
       </div>
 
-      <div className='hidden lg:block absolute top-[13.375rem]  bottom-0'>
-        {/* <div className='hidden lg:block absolute top-[13.375rem] left-[7.3rem] bottom-0'> */}
-        <div className="mx-auto size-full md:w-[85%] relative">
-          <div className='absolute left-0 inset-y-0 flex flex-col'>
-            <RoundMarker className='-top-[0.5px]' />
-            <div className="flex justify-center flex-[1]">
-              <div className="w-0 border-l-[1px] bg-white"></div>
-            </div>
-
+      <div className='hidden lg:block mx-auto size-full md:w-[85%] relative pt-[13.375rem] pb-10'>
+        <div className='absolute left-0 top-[13.375rem] bottom-0 flex flex-col'>
+          <RoundMarker className='-top-[0.5px]' />
+          <div className="flex justify-center flex-[1]">
+            <div className="w-0 border-l-[1px] bg-white"></div>
           </div>
-          <div className='pl-10 pt-12 border-gray-200'>
-            <div className='w-[35%] space-y-[0.625rem]'>
-              <span className='text-xl text-secondary font-bold urbanist-font'>
-                {t('eyebrow')}
-              </span>
-              <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2 scramble' style={{ letterSpacing: '-0%' }}>
-                <span onMouseOver={onTitleMouseOver} data-text="Django">Django</span> <span onMouseOver={onTitleMouseOver} data-text="Cameroon">Cameroon</span>
-              </h2>
-              <p className='text-white leading-7 urbanist-font'>
-                {t('description')}
-              </p>
-            </div>
-            <div className='mt-[3.125rem]'>
-              <button
-                className="rounded-2xl text-white nohemi-font bg-secondary duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7"
-                onClick={handleLetsGoooClick}
-              >
-                {t('cta')}
-              </button>
-            </div>
+        </div>
+        <div className='pl-10 pt-12 border-gray-200'>
+          <div className='w-[35%] space-y-[0.625rem]'>
+            <span className='text-xl text-secondary font-bold urbanist-font'>
+              {t('eyebrow')}
+            </span>
+            <h2 className='text-[5rem] leading-[5.313rem] text-white font-extrabold nohemi-font line-clamp-2 scramble' style={{ letterSpacing: '-0%' }}>
+              <span onMouseOver={onTitleMouseOver} data-text="Django">Django</span> <span onMouseOver={onTitleMouseOver} data-text="Cameroon">Cameroon</span>
+            </h2>
+            <p className='text-white leading-7 urbanist-font'>
+              {t('description')}
+            </p>
+          </div>
+          <div className='mt-[3.125rem]'>
+            <button
+              className="rounded-2xl text-white nohemi-font bg-secondary duration-500 active:scale-105 font-medium text-xl transition-all py-5 px-7"
+              onClick={handleLetsGoooClick}
+            >
+              {t('cta')}
+            </button>
           </div>
         </div>
       </div>

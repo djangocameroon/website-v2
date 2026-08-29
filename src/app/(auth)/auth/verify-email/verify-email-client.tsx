@@ -21,12 +21,15 @@ const VerifyEmailClient = () => {
     const [otp, setOtp] = useState(["", "", "", "", "", ""])
     const [loading, setLoading] = useState(false)
     const [resendLoading, setResendLoading] = useState(false)
-    const [countdown, setCountdown] = useState(60)
+    const [countdown, setCountdown] = useState(0)
     const [email, setEmail] = useState("")
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null)
     const [isShaking, setIsShaking] = useState(false)
     const [successPulse, setSuccessPulse] = useState(false)
     const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+
+    const RESEND_COOLDOWN_SECONDS = 60
+    const RESEND_STORAGE_KEY = `otpResendDeadline:${email}`
 
     // Calculate filled count for progress indicator
     const filledCount = otp.filter(d => d !== "").length
@@ -41,6 +44,22 @@ const VerifyEmailClient = () => {
             router.replace("/auth/register")
         }
     }, [router, searchParams])
+
+    // Persist the resend deadline so a page reload doesn't reset the countdown.
+    useEffect(() => {
+        if (!email) return
+
+        const stored = window.localStorage.getItem(RESEND_STORAGE_KEY)
+        if (!stored) {
+            const deadline = Date.now() + RESEND_COOLDOWN_SECONDS * 1000
+            window.localStorage.setItem(RESEND_STORAGE_KEY, String(deadline))
+            setCountdown(RESEND_COOLDOWN_SECONDS)
+            return
+        }
+
+        const remaining = Math.max(0, Math.round((Number(stored) - Date.now()) / 1000))
+        setCountdown(remaining)
+    }, [email, RESEND_STORAGE_KEY])
 
     useEffect(() => {
         if (countdown > 0) {
@@ -150,7 +169,9 @@ const VerifyEmailClient = () => {
         try {
             await resendVerificationEmail(email)
             toast.success(t('otpSent'))
-            setCountdown(60)
+            const deadline = Date.now() + RESEND_COOLDOWN_SECONDS * 1000
+            window.localStorage.setItem(RESEND_STORAGE_KEY, String(deadline))
+            setCountdown(RESEND_COOLDOWN_SECONDS)
             setOtp(["", "", "", "", "", ""])
             inputRefs.current[0]?.focus()
         } catch (error) {

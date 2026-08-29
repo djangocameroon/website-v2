@@ -13,6 +13,12 @@ async function handler(
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   const { path } = await params;
+  if (!API_BASE) {
+    return NextResponse.json(
+      { status: false, message: "API_BASE is not configured", status_code: 500 },
+      { status: 500 }
+    );
+  }
   // Django endpoints all use trailing slashes.
   const url = new URL(`${API_BASE}/api/v1/${path.join("/")}/`);
   url.search = req.nextUrl.search;

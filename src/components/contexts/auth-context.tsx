@@ -8,6 +8,27 @@ import { useRouter } from 'next/navigation';
 import React, { createContext, useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
+const getApiErrorMessage = (err: unknown, fallback: string): string => {
+    if (err instanceof AxiosError) {
+        const data = err.response?.data as Record<string, unknown> | undefined;
+        if (data?.errors) {
+            const errors = data.errors;
+            if (Array.isArray(errors) && errors.length > 0) return String(errors[0]);
+            if (typeof errors === 'string' && errors) return errors;
+        }
+        if (typeof data?.message === 'string' && data.message) return data.message;
+        if (data) {
+            const firstFieldError = Object.values(data).find(
+                (value) => Array.isArray(value) && value.length > 0
+            );
+            if (firstFieldError && (firstFieldError as unknown[])[0]) {
+                return String((firstFieldError as unknown[])[0]);
+            }
+        }
+    }
+    return fallback;
+};
+
 interface AuthContextType {
     user: LoggedInUser | null;
     isLoading: boolean;
@@ -52,12 +73,7 @@ const AuthProvider = ({ children, initialUser = null }: {
             toast.success(response.message);
             return response;
         } catch (err) {
-            if (err instanceof AxiosError) {
-                const { data: { errors } } = err.response!
-                toast.error(errors[0] || "Registration failed");
-                return;
-            }
-            toast.error("Registration failed")
+            toast.error(getApiErrorMessage(err, "Registration failed"));
         }
     }
 
