@@ -388,7 +388,11 @@
     "webTeam": {
       "title": "Crafted by the community",
       "body": "This website is built and maintained by volunteers from Django Cameroon. See everyone who has contributed code on GitHub.",
-      "cta": "View contributors"
+      "cta": "View contributors",
+      "frontendRepo": "Frontend",
+      "frontendRepoHint": "website-v2",
+      "backendRepo": "Backend",
+      "backendRepoHint": "website_api"
     },
     "techStack": {
       "title": "Built with",

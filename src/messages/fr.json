@@ -382,7 +382,11 @@
     "webTeam": {
       "title": "Conçu par la communauté",
       "body": "Ce site est construit et maintenu par des bénévoles de Django Cameroon. Découvrez toutes les personnes ayant contribué au code sur GitHub.",
-      "cta": "Voir les contributeurs"
+      "cta": "Voir les contributeurs",
+      "frontendRepo": "Frontend",
+      "frontendRepoHint": "website-v2",
+      "backendRepo": "Backend",
+      "backendRepoHint": "website_api"
     },
     "techStack": {
       "title": "Construit avec",

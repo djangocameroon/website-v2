@@ -2,10 +2,12 @@
 
 import { cn } from "@/utils";
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
+import { type IconType } from "react-icons";
 import { LuMoon, LuSun } from "react-icons/lu";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+export type ThemeType = "light" | "dark";
 const themes = [
   // {
   //   key: "system",
@@ -22,12 +24,16 @@ const themes = [
     icon: LuMoon,
     label: "Dark theme",
   },
-] as const;
+] satisfies ReadonlyArray<{
+  key: ThemeType;
+  icon: IconType;
+  label: `${Capitalize<ThemeType>} theme`;
+}>;
 
 export type ThemeSwitcherProps = {
-  value?: "light" | "dark";
-  onChange?: (theme: "light" | "dark") => void;
-  defaultValue?: "light" | "dark";
+  value?: ThemeType;
+  onChange?: (theme: ThemeType) => void;
+  defaultValue?: ThemeType;
   className?: string;
 };
 
@@ -50,7 +56,7 @@ export const ThemeSwitcher = ({
     (themeKey: "light" | "dark") => {
       setTheme(themeKey);
     },
-    [setTheme]
+    [setTheme],
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -80,7 +86,7 @@ export const ThemeSwitcher = ({
       className={cn(
         "relative isolate flex h-8 rounded-full p-1 ring-1 ring-border transition-opacity",
         className,
-        { "opacity-50": !isHoveredOn }
+        { "opacity-50": !isHoveredOn },
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
